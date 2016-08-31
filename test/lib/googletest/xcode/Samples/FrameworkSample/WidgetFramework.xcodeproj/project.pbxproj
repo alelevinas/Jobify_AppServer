@@ -80,7 +80,7 @@
 		3B7EB1270E5AEE4600C7F239 /* widget_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = widget_test.cc; sourceTree = "<group>"; };
 		4024D183113D7D5500C7059E /* libgtest_main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgtest_main.a; path = /usr/local/lib/libgtest_main.a; sourceTree = "<absolute>"; };
 		4024D185113D7D5500C7059E /* libgtest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgtest.a; path = /usr/local/lib/libgtest.a; sourceTree = "<absolute>"; };
-		4024D1E2113D838200C7059E /* runtests.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = runtests.sh; sourceTree = "<group>"; };
+		4024D1E2113D838200C7059E /* run_tests.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = run_tests.sh; sourceTree = "<group>"; };
 		8D07F2C70486CC7A007CD1D0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D07F2C80486CC7A007CD1D0 /* Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -165,7 +165,7 @@
 		4024D1E1113D836C00C7059E /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				4024D1E2113D838200C7059E /* runtests.sh */,
+				4024D1E2113D838200C7059E /* run_tests.sh */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -274,7 +274,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/bash $SRCROOT/runtests.sh $BUILT_PRODUCTS_DIR/WidgetFrameworkTest\n";
+			shellScript = "/bin/bash $SRCROOT/run_tests.sh $BUILT_PRODUCTS_DIR/WidgetFrameworkTest\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

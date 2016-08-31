@@ -1,6 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
-
-project(foo)
+cmake_minimum_required(VERSION 2.8)
 
 set(HEADER_FILES Foo.h)
 set(SOURCE_FILES Foo.cpp)

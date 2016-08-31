@@ -140,7 +140,7 @@ EXTRA_DIST += \
   xcode/Config/StaticLibraryTarget.xcconfig \
   xcode/Config/TestTarget.xcconfig \
   xcode/Resources/Info.plist \
-  xcode/Scripts/runtests.sh \
+  xcode/Scripts/run_tests.sh \
   xcode/Scripts/versiongenerate.py \
   xcode/gtest.xcodeproj/project.pbxproj
 
@@ -148,7 +148,7 @@ EXTRA_DIST += \
 EXTRA_DIST += \
   xcode/Samples/FrameworkSample/Info.plist \
   xcode/Samples/FrameworkSample/WidgetFramework.xcodeproj/project.pbxproj \
-  xcode/Samples/FrameworkSample/runtests.sh \
+  xcode/Samples/FrameworkSample/run_tests.sh \
   xcode/Samples/FrameworkSample/widget.cc \
   xcode/Samples/FrameworkSample/widget.h \
   xcode/Samples/FrameworkSample/widget_test.cc
