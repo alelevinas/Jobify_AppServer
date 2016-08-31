@@ -5,7 +5,7 @@
 #include "gtest/gtest.h"
 
 TEST(basic_check, test_eq) {
-EXPECT_EQ(1, 0);
+EXPECT_EQ(1, 1);
 }
 
 TEST(basic_check, test_neq) {

@@ -19,7 +19,7 @@ script:
   - ./test/run_tests
 
 after_success:
-  - coveralls --root .. -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
+  - coveralls
 
 notifications:
   email: false
