@@ -19,7 +19,7 @@ script:
   - ./test/run_tests
 
 after_success:
-  - coveralls .. -i
+  - coveralls .. -i src
 
 #  -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
 
