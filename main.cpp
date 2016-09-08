@@ -1,4 +1,5 @@
 #include <iostream>
+#include <Server.h>
 #include "src/Foo.h"
 
 int main() {
@@ -6,5 +7,9 @@ int main() {
     Foo f;
 
     f.hola();
+
+
+    Server s;
+    s.start();
     return 0;
 }
