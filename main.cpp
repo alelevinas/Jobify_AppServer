@@ -6,5 +6,8 @@ int main() {
     Foo f;
 
     f.hola();
+
+
+
     return 0;
 }

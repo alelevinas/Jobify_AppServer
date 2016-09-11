@@ -19,9 +19,11 @@ script:
   - ./test/run_tests
 
 after_success:
-  - coveralls --root .. -i src
+  - coveralls --root .. -i src -E ".*CMakeFiles.*" -E ".*test/*/.*.cpp.*"
 
 #  -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
 
 notifications:
+  slack: 7552-tallerii:TduWD2Mt2Vjsf9Or2hwCqYmK
   email: false
+
