@@ -3,7 +3,7 @@ project(Jobify_AppServer)
 
 
 #if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused -DMG_ENABLE_THREADS -DMG_ENABLE_SSL -lssl -lcrypto -pthread")
+set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare  -Wwrite-strings -Wno-unused -DMG_ENABLE_THREADS -DMG_ENABLE_SSL -lssl -lcrypto -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11")
@@ -11,6 +11,40 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++1
 
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+#Compilo la libreria de mongoose-cpp
+set (MONGOOSE_CPP "${PROJECT_SOURCE_DIR}/src/mongoose-cpp")
+
+set (MONGOOSE_SOURCES
+        ${MONGOOSE_CPP}/mongoose.c
+        ${MONGOOSE_CPP}/Utils.cpp
+        ${MONGOOSE_CPP}/Controller.cpp
+        ${MONGOOSE_CPP}/Mutex.cpp
+        ${MONGOOSE_CPP}/Request.cpp
+        ${MONGOOSE_CPP}/Response.cpp
+        ${MONGOOSE_CPP}/Server.cpp
+        ${MONGOOSE_CPP}/Session.cpp
+        ${MONGOOSE_CPP}/Sessions.cpp
+        ${MONGOOSE_CPP}/StreamResponse.cpp
+        ${MONGOOSE_CPP}/UploadFile.cpp
+        ${MONGOOSE_CPP}/WebController.cpp
+        ${MONGOOSE_CPP}/JsonResponse.cpp
+        ${MONGOOSE_CPP}/JsonController.cpp
+        )
+
+include_directories ("${MONGOOSE_CPP}")
+
+# Compiling library
+add_library (mongoose ${MONGOOSE_SOURCES})
+target_link_libraries (mongoose ${EXTRA_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+
+#Compilo la libreria de json
+set (JSONCPP_DIR "${PROJECT_SOURCE_DIR}/src/jsoncpp")
+include_directories ("${JSONCPP_DIR}")
+
+add_library (json ${JSONCPP_DIR}/jsoncpp.cpp)
+target_link_libraries (mongoose json)
+
 
 set(HEADER_FILES src/Foo.h src/mongoose-cpp/mongoose.h)  #lsoslas
 set(SOURCE_FILES src/Foo.cpp src/mongoose-cpp/mongoose.c)
@@ -20,6 +54,7 @@ add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
 
 add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES})
+target_link_libraries (Jobify_AppServer mongoose json)
 
 include_directories(src)
 
