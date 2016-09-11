@@ -12,11 +12,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++1
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(HEADER_FILES src/Foo.h src/Server.h src/mongoose/mongoose.h src/Controlador.h src/ControladorPerfilUsuario.h)
-set(SOURCE_FILES src/Foo.cpp src/Server.cpp src/mongoose/mongoose.c src/Controlador.cpp src/ControladorPerfilUsuario.cpp)
+set(HEADER_FILES src/Foo.h src/mongoose-cpp/mongoose.h)  #lsoslas
+set(SOURCE_FILES src/Foo.cpp src/mongoose-cpp/mongoose.c)
 
 
-add_library(foo STATIC ${SOURCE_FILES} ${HEADER_FILES} )
+add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
 
 add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES})

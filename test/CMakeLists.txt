@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-set(SOURCE_FILES foo_tests/basic_check.cpp foo_tests/FooFixture.cpp ../src/Server.cpp ../src/Server.h)
+set(SOURCE_FILES foo_tests/basic_check.cpp foo_tests/FooFixture.cpp)
 
 add_executable(run_tests main.cpp ${SOURCE_FILES} )
 
