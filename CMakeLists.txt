@@ -2,12 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 project(Jobify_AppServer)
 
 
-#if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
 set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare  -Wwrite-strings -Wno-unused -DMG_ENABLE_THREADS -DMG_ENABLE_SSL -lssl -lcrypto -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11")
-#endif()
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11 -lleveldb -lpthread -lsnappy")
+
 
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -45,16 +44,22 @@ include_directories ("${JSONCPP_DIR}")
 add_library (json ${JSONCPP_DIR}/jsoncpp.cpp)
 target_link_libraries (mongoose json)
 
+#LevelDB
+#include_directories("/usr/include/leveldb")
 
-set(HEADER_FILES src/Foo.h src/mongoose-cpp/mongoose.h)  #lsoslas
-set(SOURCE_FILES src/Foo.cpp src/mongoose-cpp/mongoose.c)
+
+#set(HEADER_FILES src/Foo.h src/mongoose-cpp/mongoose.h)  #lsoslas
+set(SOURCE_FILES
+        src/Foo.cpp
+        src/DatabaseManager.cpp
+        src/UsersDB.cpp src/UsersDB.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
 
 add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES})
-target_link_libraries (Jobify_AppServer mongoose json)
+target_link_libraries (Jobify_AppServer mongoose json leveldb)
 
 include_directories(src)
 

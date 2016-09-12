@@ -10,6 +10,7 @@ compiler:
 
 install:
   - sudo pip install cpp-coveralls
+  - sudo apt-get install libsnappy-dev libleveldb1 libleveldb-dev
 
 script:
   - mkdir build
