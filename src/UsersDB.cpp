@@ -34,7 +34,7 @@ bool UsersDB::add_user(const string &username, Json::Value user) {
     leveldb::Status s = db->Get(leveldb::ReadOptions(), username, &value);
 
     if (!s.IsNotFound()){
-        return false;
+        return false; //levantar excepcion (?)
     }
 
     std::ostringstream valueStream;
@@ -44,5 +44,19 @@ bool UsersDB::add_user(const string &username, Json::Value user) {
     return s.ok();
 }
 
+Json::Value UsersDB::get_user(const string &username) {
+    std::string user;
+    leveldb::Status s = db->Get(leveldb::ReadOptions(), username, &user);
+
+    if (s.IsNotFound())
+        return NULL; //levantar excepcion (?)
+
+    // std::cout << user << std::endl;
+
+    Json::Reader reader;
+    Json::Value json_user;
+    bool parsingSuccessful = reader.parse( user, json_user);
+    return json_user;
+}
 
 

@@ -24,6 +24,7 @@ public:
 
     bool openDB();
     bool add_user(const string &username, Json::Value user);
+    Json::Value get_user(const string &username);
 
 
 

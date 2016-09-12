@@ -32,7 +32,7 @@ public:
         Json::Value user;
         user["username"] = username;
         user["name"] = "Alejandro Pablo Levinas";
-        user["gener"] = "male";
+        user["gender"] = "male";
         user["email"] = "lolo@gmail.com";
         user["dob"] = "1993-08-19";
         user["city"] = "CABA";
@@ -54,10 +54,10 @@ public:
         job1["description"] = "Desarrollador en lenguaje R para analizar......";
 
         Json::Value job2;
-        job1["years"] = "2010-actualidad";
-        job1["company"] = "UBA";
-        job1["position"] = "Docente";
-        job1["description"] = "Docente de la materia Taller 2";
+        job2["years"] = "2010-actualidad";
+        job2["company"] = "UBA";
+        job2["position"] = "Docente";
+        job2["description"] = "Docente de la materia Taller 2";
 
         exp.append(job1);
         exp.append(job2);
@@ -94,6 +94,11 @@ TEST_F(UsersDBFixture, test_get_user_alepox_in_populated_bd){
     Json::Value user = generate_user(username);
 
     EXPECT_TRUE(db->add_user(username, user));
+    Json::Value userFromBD = db->get_user(username);
+
+    //std::cout << userFromBD << std::endl;
+
+    EXPECT_TRUE(userFromBD["username"] == Json::Value(username));
 }
 
 
