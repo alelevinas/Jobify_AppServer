@@ -7,14 +7,15 @@
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Utils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/mongoose.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonResponse.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/mongoose.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Controller.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonController.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Mutex.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Request.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/UploadFile.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Sessions.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonResponse.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Session.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/mongoose.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Sessions.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/UploadFile.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Response.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Server.h" isTestSource="false" />
@@ -29,8 +30,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Controller.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Request.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonResponse.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ChatsDB.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DatabaseManager.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ChatsDB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DatabaseManager.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/UsersDB.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Foo.cpp" isTestSource="false" />

@@ -76,7 +76,7 @@ TEST_F(UsersDBFixture, test_open_bd_is_ok){
     EXPECT_TRUE(db->openDB());
 }
 
-TEST_F(UsersDBFixture, test_add_user_alepox_in_empty_bd){
+TEST_F(UsersDBFixture, test_add_user_alepox_in_empty_bd) {
     if (!db->openDB())
         EXPECT_TRUE(false);
 
@@ -98,8 +98,43 @@ TEST_F(UsersDBFixture, test_get_user_alepox_in_populated_bd){
 
     //std::cout << userFromBD << std::endl;
 
-    EXPECT_TRUE(userFromBD["username"] == Json::Value(username));
+    EXPECT_EQ(userFromBD["username"],Json::Value(username));
 }
 
 
+TEST_F(UsersDBFixture, test_delete_user_alepox_in_populated_bd) {
+    if (!db->openDB())
+        EXPECT_TRUE(false);
+
+    string username = "alepox";
+    Json::Value user = generate_user(username);
+
+    EXPECT_TRUE(db->add_user(username, user));
+
+    EXPECT_TRUE(db->delete_user(username));
+
+    EXPECT_EQ(db->get_user(username), Json::Value(""));
+
+
+
+}
+
+TEST_F(UsersDBFixture, test_edit_user_alepox_in_populated_bd) {
+    if (!db->openDB())
+        EXPECT_TRUE(false);
+
+    string username = "alepox";
+    Json::Value user = generate_user(username);
+    EXPECT_TRUE(db->add_user(username, user));
+
+    user["name"] = "marcelo";
+
+    EXPECT_TRUE(db->edit_user(username, user));
+
+    Json::Value userFromBD = db->get_user(username);
+
+    //std::cout << userFromBD << std::endl;
+
+    EXPECT_EQ(userFromBD["name"],Json::Value("marcelo"));
+}
 

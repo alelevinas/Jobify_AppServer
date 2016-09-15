@@ -25,9 +25,10 @@ public:
     bool openDB();
     bool add_user(const string &username, Json::Value user);
     Json::Value get_user(const string &username);
+    bool edit_user(const string &username, Json::Value userEdited);
 
 
-
+    bool delete_user(const string &username);
 };
 
 

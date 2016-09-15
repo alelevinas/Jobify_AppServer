@@ -52,7 +52,7 @@ target_link_libraries (mongoose json)
 set(SOURCE_FILES
         src/Foo.cpp
         src/DatabaseManager.cpp
-        src/UsersDB.cpp src/UsersDB.h)
+        src/UsersDB.cpp src/UsersDB.h src/ChatsDB.cpp src/ChatsDB.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )

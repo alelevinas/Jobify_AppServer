@@ -49,14 +49,31 @@ Json::Value UsersDB::get_user(const string &username) {
     leveldb::Status s = db->Get(leveldb::ReadOptions(), username, &user);
 
     if (s.IsNotFound())
-        return NULL; //levantar excepcion (?)
+        return Json::Value(""); //levantar excepcion (?)
 
     // std::cout << user << std::endl;
 
     Json::Reader reader;
     Json::Value json_user;
     bool parsingSuccessful = reader.parse( user, json_user);
+    if (!parsingSuccessful) {
+        return false; //levantar excepcion??
+    }
     return json_user;
 }
 
+bool UsersDB::edit_user(const string &username, Json::Value userEdited) {
+    if (!this->delete_user(username))
+        return false;
+    return this->add_user(username,userEdited);
+    //TODO: chequear que sea el mismo, aunque con el token bastaria
+}
+
+bool UsersDB::delete_user(const string &username) {
+    leveldb::Status s = db->Delete(leveldb::WriteOptions(),username);
+
+    if (s.IsNotFound())
+        return false; //levantar excepcion (?)
+    return s.ok();
+}
 
