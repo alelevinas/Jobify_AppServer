@@ -28,7 +28,7 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
 
 void ProfileController::setup() {
 
-    //putting all the urls into "/api"
+    // putting all the urls into "/api"
     setPrefix("/user");
 
     // Hello demo
