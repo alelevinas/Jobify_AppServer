@@ -29,6 +29,8 @@ set (MONGOOSE_SOURCES
         ${MONGOOSE_CPP}/WebController.cpp
         ${MONGOOSE_CPP}/JsonResponse.cpp
         ${MONGOOSE_CPP}/JsonController.cpp
+        ${MONGOOSE_CPP}/WebSocket.cpp
+        ${MONGOOSE_CPP}/WebSockets.cpp
         )
 
 include_directories ("${MONGOOSE_CPP}")
@@ -52,7 +54,7 @@ target_link_libraries (mongoose json)
 set(SOURCE_FILES
         src/Foo.cpp
         src/DatabaseManager.cpp
-        src/UsersDB.cpp src/UsersDB.h src/ChatsDB.cpp src/ChatsDB.h)
+        src/UsersDB.cpp src/UsersDB.h src/ChatsDB.cpp src/ChatsDB.h src/JobifyServer.cpp src/JobifyServer.h src/ProfileController.cpp src/ProfileController.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )

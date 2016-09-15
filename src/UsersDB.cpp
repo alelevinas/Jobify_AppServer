@@ -48,8 +48,11 @@ Json::Value UsersDB::get_user(const string &username) {
     std::string user;
     leveldb::Status s = db->Get(leveldb::ReadOptions(), username, &user);
 
-    if (s.IsNotFound())
-        return Json::Value(""); //levantar excepcion (?)
+    Json::Value response;
+    if (s.IsNotFound()) {
+        response["username"] = "";
+        return response;//levantar excepcion (?)
+    }
 
     // std::cout << user << std::endl;
 
