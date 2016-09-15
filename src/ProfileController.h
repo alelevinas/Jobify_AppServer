@@ -19,6 +19,7 @@ public:
 
     //Metodos
     void getUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void postUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
 };
 
 

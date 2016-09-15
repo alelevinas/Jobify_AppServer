@@ -25,6 +25,29 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
     response["response"] = user;
 }
 
+void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string username = request.get("username","");
+
+    std::string json_user = request.getData(); //el body
+
+    cerr << "POST USER: username=" << username;
+    cerr << "\nPOST DATA: " << json_user;
+
+    Json::Reader reader;
+    Json::Value user;
+    bool parsingSuccessful = reader.parse( json_user, user);
+    if (!parsingSuccessful) {
+        response["Error"] = "Hubo un error de parseo nro 435684"; //levantar excepcion??
+        return;
+    }
+
+    if (!db->add_user(username,user))
+        response["Error"] = "El usuario ya existe... o la bd no pudo guardarlo nro 435684";
+
+    response["response"] = "Ok";
+}
+
+
 
 void ProfileController::setup() {
 
@@ -33,6 +56,7 @@ void ProfileController::setup() {
 
     // Hello demo
     addRouteResponse("GET", "", ProfileController, getUserRequest, JsonResponse);
+    addRouteResponse("POST","",ProfileController,postUserRequest,JsonResponse);
 
 }
 

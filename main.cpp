@@ -24,12 +24,12 @@ int main() {
 
     f.hola();
 
-    DatabaseManager db("users","chats");
+    DatabaseManager db("userss", "chats");
 
-    std::string username("pepe");
-
-    Json::Value pepe = generate_user(username);
-    db.add_user("pepe",pepe);
+//    std::string username("pepe");
+//
+//    Json::Value pepe = generate_user(username);
+//    db.add_user("pepe",pepe);
 
     ProfileController pf(&db);
 
