@@ -42,8 +42,8 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
 
     std::string json_user = request.getData(); //el body
 
-    cerr << "\nPOST USER: username=" << username;
-    cerr << "\nPOST DATA: " << json_user;
+    cerr << "\nUSER: username=" << username;
+    cerr << "\nDATA: " << json_user;
 
     Json::Reader reader;
     Json::Value user;
@@ -62,8 +62,28 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
     } catch (UserAlreadyExistsException& e) {
             response["Error"] = "El usuario ya existe...";
     }
+}
 
+void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string username = htmlEntities(request.get("username",""));
+    std::string json_user = request.getData();
 
+    try {
+        Json::Value user = db->get_user(username);
+
+        Json::Reader reader;
+        Json::Value edited_user;
+        bool parsingSuccessful = reader.parse(json_user, edited_user);
+        if (!parsingSuccessful) {
+            response["Error"] = "Hubo un error de parseo del json nro 435684"; //levantar excepcion??
+            return;
+        }
+
+        db->edit_user(username, edited_user);
+    } catch (UserDoesntExistException& e) {
+            response["Error"] = "No existe tal usuario"; //MAL!!!
+            return;
+        }
 }
 
 
@@ -79,6 +99,7 @@ void ProfileController::setup() {
     // Hello demo
     addRouteResponse("GET", "", ProfileController, getUserRequest, JsonResponse);
     addRouteResponse("POST","",ProfileController,postUserRequest,JsonResponse);
+    addRouteResponse("UPDATE","",ProfileController,updateUserRequest,JsonResponse);
 
 }
 

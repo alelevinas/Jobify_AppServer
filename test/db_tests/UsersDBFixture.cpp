@@ -128,10 +128,8 @@ TEST_F(UsersDBFixture, test_delete_user_alepox_in_populated_bd) {
     EXPECT_TRUE(db->delete_user(username));
 
     EXPECT_THROW(db->get_user(username), UserDoesntExistException);
-
-
-
 }
+
 
 TEST_F(UsersDBFixture, test_edit_user_alepox_in_populated_bd) {
     if (!db->openDB())
