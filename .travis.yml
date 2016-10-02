@@ -20,7 +20,7 @@ script:
   - ./test/run_tests
 
 after_success:
-  - coveralls --root .. -i src -E ".*CMakeFiles.*" -E ".*test/*/.*.cpp.*" -E src/jsoncpp
+  - coveralls --root .. -i src -E ".*CMakeFiles.*" -E ".*test/*/.*.cpp.*" --exclude src/jsoncpp --exclude lib --exclude test
 
 #  -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
 
