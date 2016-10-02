@@ -1,9 +1,9 @@
 #include <iostream>
+#include <signal.h>
 #include <DatabaseManager.h>
 #include <ProfileController.h>
 #include <JobifyServer.h>
 #include <zconf.h>
-#include "src/Foo.h"
 
 
 Json::Value generate_user(string &username);
@@ -13,16 +13,18 @@ volatile static bool running = true;
 void handle_signal(int sig)
 {
     if (running) {
-        cout << "Exiting..." << endl;
+        cerr << "Exiting..." << endl;
         running = false;
     }
 }
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    Foo f;
+    //Foo f;
 
-    f.hola();
+    //f.hola();
+
+    signal(SIGTERM, handle_signal);
 
     DatabaseManager db("userss", "chats");
 
@@ -38,12 +40,13 @@ int main() {
     server.registerController(&pf);
 
     server.start();
+    server.printStats();
 
     cout << "Server started, routes:" << endl;
     pf.dumpRoutes();
 
     while (running) {
-        sleep(100);
+        sleep(1000);
     }
 
     server.stop();

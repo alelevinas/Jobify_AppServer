@@ -54,7 +54,12 @@ target_link_libraries (mongoose json)
 set(SOURCE_FILES
         src/Foo.cpp
         src/DatabaseManager.cpp
-        src/UsersDB.cpp src/UsersDB.h src/ChatsDB.cpp src/ChatsDB.h src/JobifyServer.cpp src/JobifyServer.h src/ProfileController.cpp src/ProfileController.h)
+        src/UsersDB.cpp src/UsersDB.h
+        src/ChatsDB.cpp src/ChatsDB.h
+        src/JobifyServer.cpp src/JobifyServer.h
+        src/ProfileController.cpp src/ProfileController.h
+        src/exceptions/UserDoesntExistException.h
+        src/exceptions/UserAlreadyExistsException.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
