@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include <UsersDB.h>
+#include <databases/UsersDB.h>
 #include <exceptions/UserDoesntExistException.h>
 #include <exceptions/UserAlreadyExistsException.h>
 

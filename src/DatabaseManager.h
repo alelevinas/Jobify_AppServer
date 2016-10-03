@@ -6,8 +6,8 @@
 #define JOBIFY_APPSERVER_DATABASEMANAGER_H
 
 
-#include "UsersDB.h"
-#include "ChatsDB.h"
+#include "databases/UsersDB.h"
+#include "databases/ChatsDB.h"
 
 class DatabaseManager {
 
