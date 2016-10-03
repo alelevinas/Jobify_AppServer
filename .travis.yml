@@ -11,6 +11,9 @@ compiler:
 install:
   - sudo pip install cpp-coveralls
   - sudo apt-get install libsnappy-dev libleveldb1 libleveldb-dev
+  #para jwtcpp
+  - sudo apt-get install libcrypto++9 libcrypto++9-dbg libcrypto++-dev
+  - sudo apt-get install libjansson4 libjansson-dev libjansson-dbg
 
 script:
   - mkdir build
