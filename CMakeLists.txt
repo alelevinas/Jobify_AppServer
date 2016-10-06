@@ -5,7 +5,7 @@ project(Jobify_AppServer)
 set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare  -Wwrite-strings -Wno-unused -DMG_ENABLE_THREADS -DMG_ENABLE_SSL -lssl -lcrypto -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11 -lleveldb -lpthread -lsnappy")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11 -lleveldb -lpthread -lsnappy -lcryptopp")
 
 
 
@@ -46,6 +46,10 @@ include_directories ("${JSONCPP_DIR}")
 add_library (json ${JSONCPP_DIR}/jsoncpp.cpp)
 target_link_libraries (mongoose json)
 
+
+#set (JWTCPP_DIR "${PROJECT_SOURCE_DIR}/src/jwt")
+#add_library (jwtcpp ${JWTCPP_DIR}/jwt.cpp ${JWTCPP_DIR}/utils.cpp)
+
 #LevelDB
 #include_directories("/usr/include/leveldb")
 
@@ -58,15 +62,18 @@ set(SOURCE_FILES
         src/databases/ChatsDB.cpp src/databases/ChatsDB.h
         src/JobifyServer.cpp src/JobifyServer.h
         src/ProfileController.cpp src/ProfileController.h
-        src/exceptions/UserDoesntExistException.h
-        src/exceptions/UserAlreadyExistsException.h src/databases/SessionsDB.cpp src/databases/SessionsDB.h src/databases/DB.cpp src/databases/DB.h)
+        src/exceptions/KeyDoesntExistException.h
+        src/exceptions/KeyAlreadyExistsException.h
+        src/databases/SessionsDB.cpp src/databases/SessionsDB.h
+        src/databases/DB.cpp src/databases/DB.h
+        src/databases/utils.cpp src/SessionManager.cpp src/SessionManager.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
 
 add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES})
-target_link_libraries (Jobify_AppServer mongoose json leveldb)
+target_link_libraries (Jobify_AppServer mongoose json leveldb cryptopp)
 
 include_directories(src)
 

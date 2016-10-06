@@ -30,5 +30,5 @@ public:
 
 
 TEST_F(FooFixture, mi_test){
-    EXPECT_EQ("Hola desde foo",f->hola());
+    EXPECT_EQ("Hola desde foo\n",f->hola());
 }

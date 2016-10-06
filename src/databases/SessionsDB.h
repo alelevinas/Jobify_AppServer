@@ -7,12 +7,26 @@
 
 
 #include <leveldb/db.h>
+#include <json/json.h>
+#include "DB.h"
 
-class SessionsDB {
 
-    leveldb::DB* db;
-    std::string db_name;
+/*For now, this DB will consist of a generated token and its username.
+ * Only the active ones will be on the DB
+ * {token: username}
+ *
+ * TODO: Add metadata and automatic logout (invalidate token) in a certain period of time
+ * */
+class SessionsDB: public DB {
+public:
+    virtual ~SessionsDB();
 
+    SessionsDB(const std::string &db_name);
+
+public:
+    bool add_session(const std::string &token, Json::Value session);
+    Json::Value get_session(const std::string &token);
+    bool delete_session(const std::string &token);
 };
 
 

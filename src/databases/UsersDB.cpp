@@ -4,9 +4,8 @@
 
 #include <iostream>
 #include <sstream>
-#include <exceptions/UserAlreadyExistsException.h>
 #include "UsersDB.h"
-#include "exceptions/UserDoesntExistException.h"
+#include "exceptions/KeyDoesntExistException.h"
 
 using std::cerr;
 using std::endl;
@@ -20,11 +19,13 @@ UsersDB::~UsersDB() {
 }
 
 bool UsersDB::add_user(const string &username, Json::Value user) {
-    std::string value;
+    return this->add(username,user);
+
+    /*std::string value;
     leveldb::Status s = db->Get(leveldb::ReadOptions(), username, &value);
 
     if (!s.IsNotFound()){
-        throw UserAlreadyExistsException();
+        throw KeyAlreadyExistsException();
         //  return false; //  levantar excepcion (?)
     }
 
@@ -32,7 +33,7 @@ bool UsersDB::add_user(const string &username, Json::Value user) {
     valueStream << user;
 
     s = db->Put(leveldb::WriteOptions(), username, valueStream.str());
-    return s.ok();
+    return s.ok();*/
 }
 
 Json::Value UsersDB::get_user(const string &username) {
@@ -40,7 +41,7 @@ Json::Value UsersDB::get_user(const string &username) {
     leveldb::Status s = db->Get(leveldb::ReadOptions(), username, &user);
 
     if (s.IsNotFound()) {
-        throw UserDoesntExistException();
+        throw KeyDoesntExistException();
     }
         //return Json::Value(""); //levantar excepcion (?)
 

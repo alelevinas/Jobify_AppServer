@@ -7,6 +7,7 @@
 
 
 #include <leveldb/db.h>
+#include <json/json.h>
 
 class DB {
 
@@ -20,6 +21,7 @@ public:
     DB(const std::string &db_name);
 
     bool openDB();
+    bool add(const std::string &key, Json::Value value);
 
 };
 
