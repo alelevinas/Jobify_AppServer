@@ -7,6 +7,8 @@
 #include <SessionManager.h>
 #include <exceptions/TokenDoesntExistException.h>
 
+#define ONE_HOUR 3600
+
 class SessionManagerFixture : public ::testing::Test {
 
 protected:
@@ -17,7 +19,7 @@ protected:
 
     virtual void SetUp() {
         databaseManager = new DatabaseManager("testing_users","testing_sessions","testing_chats");
-        sessions_manager = new SessionManager(databaseManager);
+        sessions_manager = new SessionManager(databaseManager,ONE_HOUR);
     }
 
 public:
@@ -102,7 +104,7 @@ TEST_F(SessionManagerFixture, test_add_username_password) {
     EXPECT_TRUE(true);
 }
 
-TEST_F(SessionManagerFixture, test_add_username_password_twice) {
+TEST_F(SessionManagerFixture, test_get_with_token) {
     EXPECT_TRUE(databaseManager->openDBs());
 
     string username = "alepox";
@@ -113,6 +115,47 @@ TEST_F(SessionManagerFixture, test_add_username_password_twice) {
     string savedUsername = sessions_manager->get_username(token);
 
     EXPECT_EQ(username,savedUsername);
+}
+
+TEST_F(SessionManagerFixture, test_timestamp_with_invalid_token) {
+    EXPECT_TRUE(databaseManager->openDBs());
+
+    string invalid_token = "lalala";
+
+    EXPECT_THROW(sessions_manager->has_expired(invalid_token),TokenDoesntExistException);
+}
+
+TEST_F(SessionManagerFixture, test_timestamp_not_expired) {
+    EXPECT_TRUE(databaseManager->openDBs());
+
+    string username = "alepox";
+    string password = "not123456";
+
+    string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
+
+    string savedUsername = sessions_manager->get_username(token);
+
+    EXPECT_EQ(username,savedUsername);
+
+    EXPECT_TRUE(!sessions_manager->has_expired(token));
+}
+
+TEST_F(SessionManagerFixture, test_timestamp_expired) {
+    EXPECT_TRUE(databaseManager->openDBs());
+
+    string username = "alepox";
+    string password = "not123456";
+
+    sessions_manager->set_token_duration(0); //tokens are "instatnly" invalid
+
+    string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
+
+    string savedUsername = sessions_manager->get_username(token);
+
+    EXPECT_EQ(username,savedUsername);
+
+    sleep(1); //not that instantly...
+    EXPECT_TRUE(sessions_manager->has_expired(token));
 }
 
 
