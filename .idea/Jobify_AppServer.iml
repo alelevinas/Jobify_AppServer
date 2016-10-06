@@ -63,7 +63,6 @@
       <sourceFolder url="file://$MODULE_DIR$/test/lib/googletest/src/gtest-all.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/lib/googletest/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/lib/googletest/cmake/internal_utils.cmake" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/db_tests/SessionManagerFixture.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/db_tests/SessionsDBFixture.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/db_tests/SessionManagerFixture.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/db_tests/UsersDBFixture.cpp" isTestSource="false" />
