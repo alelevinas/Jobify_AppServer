@@ -35,5 +35,12 @@ Json::Value SessionsDB::get_session(const std::string &token) {
         return false; //levantar excepcion??
     }
     return json_session;
+}
 
+bool SessionsDB::delete_session(const std::string &token) {
+    leveldb::Status s = db->Delete(leveldb::WriteOptions(),token);
+
+    if (s.IsNotFound())
+        return false; //levantar excepcion (?)
+    return s.ok();
 }

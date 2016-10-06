@@ -66,7 +66,7 @@ set(SOURCE_FILES
         src/exceptions/KeyAlreadyExistsException.h
         src/databases/SessionsDB.cpp src/databases/SessionsDB.h
         src/databases/DB.cpp src/databases/DB.h
-        src/databases/utils.cpp src/SessionManager.cpp src/SessionManager.h)
+        src/databases/utils.cpp src/SessionManager.cpp src/SessionManager.h src/exceptions/TokenDoesntExistException.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )

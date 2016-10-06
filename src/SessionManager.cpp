@@ -7,14 +7,18 @@
 #include <sstream>
 #include <exceptions/KeyDoesntExistException.h>
 #include <exceptions/KeyAlreadyExistsException.h>
+#include <exceptions/TokenDoesntExistException.h>
 #include "SessionManager.h"
 #include "cryptopp/base64.h"
 #include "cryptopp/md5.h"
 #include "cryptopp/hex.h"
 
-SessionManager::SessionManager(SessionsDB *db) : db(db) {}
 
-SessionManager::~SessionManager() {}
+SessionManager::SessionManager(DatabaseManager *dbManager) : dbManager(dbManager) {}
+
+SessionManager::~SessionManager() {
+
+}
 
 std::string SessionManager::get_timestamp_now() {
     time_t rawtime;
@@ -27,8 +31,8 @@ std::string SessionManager::get_timestamp_now() {
 
 }
 
-std::string SessionManager::get_hashed_usr_pass(std::string &username, std::string &password) {
-    std::string usr_pass = username + ":" + password;
+std::string SessionManager::get_hashed_usr_pass(std::string &username, std::string &password, std::string &timestamp) {
+    std::string usr_pass = username + ":" + password + ":" + timestamp ;
 
     using namespace CryptoPP;
     std::string encodedUsrNPass;
@@ -47,18 +51,20 @@ std::string SessionManager::get_hashed_usr_pass(std::string &username, std::stri
 std::string SessionManager::add_session(std::string &username, std::string &password) {
 
 
-    std::string hashed = get_hashed_usr_pass(username, password);
+
 
     /*fijarse si ya esta, si esta renovar el timestamp, si no esta agregar*/
 
     std::string timestamp = get_timestamp_now();
+
+    std::string hashed = get_hashed_usr_pass(username, password,timestamp);
 
     Json::Value user_timestamp;
     user_timestamp["username"] = username;
     user_timestamp["timestamp"] = timestamp;
 
     try {
-        db->add(hashed, user_timestamp);
+        dbManager->add_session(hashed, user_timestamp);
     } catch (KeyAlreadyExistsException e) {
         //return "";
         throw e;
@@ -67,9 +73,9 @@ std::string SessionManager::add_session(std::string &username, std::string &pass
     return hashed;
 }
 
-bool SessionManager::has_expired(std::string token) {
+bool SessionManager::has_expired(std::string &token) {
     try {
-        Json::Value session = db->get_session(token);
+        Json::Value session = dbManager->get_session(token);
         std::string timestamp = session["timestamp"].asString();
 
         return this->timestamp_has_expired(timestamp);
@@ -105,4 +111,13 @@ bool SessionManager::timestamp_has_expired(std::string &timestamp) {
     double diff = difftime(now, mktime(&_then));
 
     return diff > 3600; //2h
+}
+
+std::string SessionManager::get_username(std::string &token) {
+    try {
+        Json::Value session = dbManager->get_session(token);
+        return session["username"].asString();
+    } catch (KeyDoesntExistException e) {
+        throw TokenDoesntExistException();
+    }
 }

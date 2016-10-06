@@ -88,6 +88,17 @@ TEST_F(UsersDBFixture, test_add_user_alepox_in_empty_bd) {
     EXPECT_TRUE(db->add_user(username, user));
 }
 
+TEST_F(UsersDBFixture, test_get_user_alepox_in_empty_bd) {
+    if (!db->openDB())
+        EXPECT_TRUE(false);
+
+    string username = "alepox";
+
+    EXPECT_THROW(db->get_user(username), KeyDoesntExistException);
+}
+
+
+
 TEST_F(UsersDBFixture, test_add_user_alepox_twice_in_empty_bd) {
     if (!db->openDB())
         EXPECT_TRUE(false);

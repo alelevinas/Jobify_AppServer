@@ -1,34 +1,38 @@
 //
-// Created by ale on 3/10/16.
+// Created by ale on 6/10/16.
 //
-#define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1
 
 #include <gtest/gtest.h>
 #include <databases/UsersDB.h>
-#include <databases/SessionsDB.h>
+#include <SessionManager.h>
+#include <exceptions/TokenDoesntExistException.h>
 
-class SessionsDBFixture : public ::testing::Test {
+class SessionManagerFixture : public ::testing::Test {
 
 protected:
     virtual void TearDown() {
-        delete db;
+        delete databaseManager;
+        delete sessions_manager;
     }
 
     virtual void SetUp() {
-        db = new SessionsDB(db_name);
+        databaseManager = new DatabaseManager("testing_users","testing_sessions","testing_chats");
+        sessions_manager = new SessionManager(databaseManager);
     }
 
 public:
-    SessionsDBFixture() : Test() {
+    SessionManagerFixture() : Test() {
 
     }
 
-    virtual ~SessionsDBFixture() {
+    virtual ~SessionManagerFixture() {
+        system("rm -r testing_users");
         system("rm -r testing_sessions");
+        system("rm -r testing_chats");
     }
 
-    SessionsDB *db;
-    string db_name = "testing_sessions";
+    DatabaseManager* databaseManager;
+    SessionManager *sessions_manager;
 
     Json::Value generate_user(string &username) {
         Json::Value user;
@@ -75,33 +79,40 @@ public:
 };
 
 
-TEST_F(SessionsDBFixture, test_open_bd_is_ok) {
-    EXPECT_TRUE(db->openDB());
+TEST_F(SessionManagerFixture, test_open_bds_are_ok) {
+    databaseManager->openDBs();
+    EXPECT_TRUE(true);
 }
 
+TEST_F(SessionManagerFixture, test_get_token_raises_exception) {
+    EXPECT_TRUE(databaseManager->openDBs());
 
-TEST_F(SessionsDBFixture, test_add_token) {
-    if (!db->openDB())
-        EXPECT_TRUE(false);
+    string username = "lalala";
+
+    EXPECT_THROW(sessions_manager->get_username(username),TokenDoesntExistException);
+}
+
+TEST_F(SessionManagerFixture, test_add_username_password) {
+    EXPECT_TRUE(databaseManager->openDBs());
 
     string username = "alepox";
-    string password = "123456";
-/*    string usr_pass = username + ":" + password;
-    Json::Value user = generate_user(username);
+    string password = "not123456";
 
-    using namespace CryptoPP;
-    string encodedUsrNPass;
-    StringSource(usr_pass, true, new Base64Encoder(new StringSink(encodedUsrNPass)));
-
-    std::cout << "Base64: " << encodedUsrNPass << std::endl;
-
-    CryptoPP::Weak::MD5 hash;
-    string digest;
-
-    StringSource s(encodedUsrNPass, true, new HashFilter(hash, new HexEncoder(new StringSink(digest))));
-
-    std::cout << "MD5: " << digest << std::endl;*/
-
-
-    EXPECT_TRUE(db->add_session(username, password));
+    string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
+    EXPECT_TRUE(true);
 }
+
+TEST_F(SessionManagerFixture, test_add_username_password_twice) {
+    EXPECT_TRUE(databaseManager->openDBs());
+
+    string username = "alepox";
+    string password = "not123456";
+
+    string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
+
+    string savedUsername = sessions_manager->get_username(token);
+
+    EXPECT_EQ(username,savedUsername);
+}
+
+

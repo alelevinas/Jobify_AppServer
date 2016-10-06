@@ -14,6 +14,7 @@ class DB {
 protected:
     leveldb::DB* db;
     std::string db_name;
+    bool add(const std::string &key, Json::Value value);
 
 
 public:
@@ -21,8 +22,6 @@ public:
     DB(const std::string &db_name);
 
     bool openDB();
-    bool add(const std::string &key, Json::Value value);
-
 };
 
 
