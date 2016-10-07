@@ -4,6 +4,6 @@
 
 #include "ChatsDB.h"
 
-ChatsDB::ChatsDB(std::string dbName) : name(dbName) {
+ChatsDB::ChatsDB(std::string& dbName) : DB(dbName) {
 
 }

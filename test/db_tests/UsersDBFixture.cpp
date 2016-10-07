@@ -3,9 +3,9 @@
 //
 
 #include <gtest/gtest.h>
-#include <UsersDB.h>
-#include <exceptions/UserDoesntExistException.h>
-#include <exceptions/UserAlreadyExistsException.h>
+#include <databases/UsersDB.h>
+#include <exceptions/KeyDoesntExistException.h>
+#include <exceptions/KeyAlreadyExistsException.h>
 
 class UsersDBFixture : public ::testing::Test {
 
@@ -88,6 +88,17 @@ TEST_F(UsersDBFixture, test_add_user_alepox_in_empty_bd) {
     EXPECT_TRUE(db->add_user(username, user));
 }
 
+TEST_F(UsersDBFixture, test_get_user_alepox_in_empty_bd) {
+    if (!db->openDB())
+        EXPECT_TRUE(false);
+
+    string username = "alepox";
+
+    EXPECT_THROW(db->get_user(username), KeyDoesntExistException);
+}
+
+
+
 TEST_F(UsersDBFixture, test_add_user_alepox_twice_in_empty_bd) {
     if (!db->openDB())
         EXPECT_TRUE(false);
@@ -97,7 +108,7 @@ TEST_F(UsersDBFixture, test_add_user_alepox_twice_in_empty_bd) {
 
     EXPECT_TRUE(db->add_user(username, user));
 
-    EXPECT_THROW(db->add_user(username, user), UserAlreadyExistsException);
+    EXPECT_THROW(db->add_user(username, user), KeyAlreadyExistsException);
 }
 
 TEST_F(UsersDBFixture, test_get_user_alepox_in_populated_bd){
@@ -127,7 +138,7 @@ TEST_F(UsersDBFixture, test_delete_user_alepox_in_populated_bd) {
 
     EXPECT_TRUE(db->delete_user(username));
 
-    EXPECT_THROW(db->get_user(username), UserDoesntExistException);
+    EXPECT_THROW(db->get_user(username), KeyDoesntExistException);
 }
 
 

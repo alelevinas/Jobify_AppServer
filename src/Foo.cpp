@@ -3,13 +3,12 @@
 //
 
 #include <iostream>
-#include <string>
 #include "Foo.h"
 
 using std::string;
 
 std::string Foo::hola() {
-    std::cout << "Hola desde foo" << std::endl;
-    string a = "Hola desde foo";
+    string a = "Hola desde foo\n";
+    std::cout << a << std::endl;
     return a;
 }

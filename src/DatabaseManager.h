@@ -6,26 +6,35 @@
 #define JOBIFY_APPSERVER_DATABASEMANAGER_H
 
 
-#include "UsersDB.h"
-#include "ChatsDB.h"
+#include <databases/SessionsDB.h>
+#include "databases/UsersDB.h"
+#include "databases/ChatsDB.h"
 
 class DatabaseManager {
 
 //    static DatabaseManager* instance;
 
     UsersDB* users;
+    SessionsDB* sessions;
     ChatsDB* chats;
 
 public:
-    DatabaseManager(std::string usersDbName, std::string chatsDbName);
+    DatabaseManager(std::string usersDbName, std::string sessionsDbName, std::string chatsDbName);
 
     virtual ~DatabaseManager();
+
+    bool openDBs();
 
     //UsersDB
     bool add_user(const string &username, Json::Value user);
     Json::Value get_user(const string &username);
     bool edit_user(const string &username, Json::Value userEdited);
     bool delete_user(const string &username);
+
+    //SessionsDB
+    bool add_session(const std::string &token, Json::Value session);
+    Json::Value get_session(const std::string &token);
+    bool delete_session(const std::string &token);
 
 
 };

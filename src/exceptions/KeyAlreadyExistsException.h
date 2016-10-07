@@ -7,10 +7,10 @@
 
 #include <exception>
 
-class UserAlreadyExistsException: public std::exception {
+class KeyAlreadyExistsException: public std::exception {
 
 virtual const char* what() const throw() {
-    return "There is ALREADY an user with that username in the database";
+    return "There is ALREADY a key with that name in the database";
 }
 };
 

@@ -8,10 +8,10 @@
 #include <iostream>
 #include <exception>
 
-class UserDoesntExistException: public std::exception {
+class KeyDoesntExistException: public std::exception {
 
   virtual const char* what() const throw() {
-    return "There is NO user with that username in the database";
+    return "There is NO key with that name in the database";
   }
 };
 

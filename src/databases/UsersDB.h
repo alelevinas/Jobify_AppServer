@@ -9,20 +9,21 @@
 
 #include <json/json.h>
 #include "leveldb/db.h"
+#include "DB.h"
 
 using std::string;
 
-class UsersDB {
+class UsersDB: public DB {
 
-    leveldb::DB* db;
-    string db_name;
+//    leveldb::DB* db;
+//    string db_name;
 
 
 public:
     virtual ~UsersDB();
     UsersDB(const string &db_name);
 
-    bool openDB();
+//    bool openDB();
     bool add_user(const string &username, Json::Value user);
     Json::Value get_user(const string &username);
     bool edit_user(const string &username, Json::Value userEdited);

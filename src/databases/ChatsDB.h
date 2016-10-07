@@ -8,14 +8,12 @@
 
 #include <string>
 #include <leveldb/db.h>
+#include "DB.h"
 
-class ChatsDB {
-
-    std::string name;
-//    leveldb::DB* db;
+class ChatsDB: public DB{
 
 public:
-    ChatsDB(std::string dbName);
+    ChatsDB(std::string& dbName);
 };
 
 

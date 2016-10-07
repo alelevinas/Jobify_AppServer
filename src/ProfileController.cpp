@@ -2,22 +2,22 @@
 // Created by ale on 15/09/16.
 //
 #include <json/json.h>
-#include <exceptions/UserAlreadyExistsException.h>
+#include <exceptions/KeyAlreadyExistsException.h>
 
 #include "ProfileController.h"
-#include "exceptions/UserDoesntExistException.h"
+#include "exceptions/KeyDoesntExistException.h"
 
 using Json::Value;
 using namespace Mongoose;
 
 
-ProfileController::ProfileController(DatabaseManager* db) : db(db) {
+ProfileController::ProfileController(DatabaseManager *db) : db(db) {
 
 }
 
 
 void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    std::string username = htmlEntities(request.get("username",""));
+    std::string username = htmlEntities(request.get("username", ""));
 
     try {
         Json::Value user = db->get_user(username);
@@ -31,14 +31,14 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
         }
 
         response["response"] = user;
-    }catch (UserDoesntExistException& e) {
+    } catch (KeyDoesntExistException &e) {
         response["Error"] = "No existe tal usuario"; //MAL!!!
         return;
     }
 }
 
 void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    std::string username = request.get("username","");
+    std::string username = request.get("username", "");
 
     std::string json_user = request.getData(); //el body
 
@@ -47,7 +47,7 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
 
     Json::Reader reader;
     Json::Value user;
-    bool parsingSuccessful = reader.parse( json_user, user);
+    bool parsingSuccessful = reader.parse(json_user, user);
     if (!parsingSuccessful) {
         response["Error"] = "Hubo un error de parseo del json nro 435684"; //levantar excepcion??
         return;
@@ -59,13 +59,13 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
 
         response["response"] = "Ok";
 
-    } catch (UserAlreadyExistsException& e) {
-            response["Error"] = "El usuario ya existe...";
+    } catch (KeyAlreadyExistsException &e) {
+        response["Error"] = "El usuario ya existe...";
     }
 }
 
 void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    std::string username = htmlEntities(request.get("username",""));
+    std::string username = htmlEntities(request.get("username", ""));
     std::string json_user = request.getData();
 
     try {
@@ -80,26 +80,25 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
         }
 
         db->edit_user(username, edited_user);
-    } catch (UserDoesntExistException& e) {
-            response["Error"] = "No existe tal usuario"; //MAL!!!
-            return;
-        }
+    } catch (KeyDoesntExistException &e) {
+        response["Error"] = "No existe tal usuario"; //MAL!!!
+        return;
+    }
 }
-
 
 
 void ProfileController::setup() {
 
     // putting all the urls into "/api"
     setPrefix("/users"); //para el GET users/username para uno
-                        // para el GET users/ para devolver todos
-                        // para el POST users/ para postear
+    // para el GET users/ para devolver todos
+    // para el POST users/ para postear
 
 
     // Hello demo
     addRouteResponse("GET", "", ProfileController, getUserRequest, JsonResponse);
-    addRouteResponse("POST","",ProfileController,postUserRequest,JsonResponse);
-    addRouteResponse("UPDATE","",ProfileController,updateUserRequest,JsonResponse);
+    addRouteResponse("POST", "", ProfileController, postUserRequest, JsonResponse);
+    addRouteResponse("UPDATE", "", ProfileController, updateUserRequest, JsonResponse);
 
 }
 
