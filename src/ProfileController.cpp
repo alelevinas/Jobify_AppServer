@@ -57,13 +57,28 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
             return;
         }
 
-        response["response"] = user;
+        response["user"] = user;
     } catch (TokenInvalidException &e) {
         response["Error"] = "token invalido"; //MAL!!!
         return;
     } catch (KeyDoesntExistException &e) {
         response["Error"] = "No existe tal usuario"; //MAL!!!
         return;
+    }
+}
+
+void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+    cerr << "\ntoken recibido " << token;
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+        cerr << " es del usuario: " << username;
+
+        response["users"] = db->get_users();
+    } catch (TokenInvalidException &e) {
+        response["Error"] = "token invalido"; //MAL token!!!
     }
 }
 
@@ -118,6 +133,7 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
         }
 
         db->edit_user(username, edited_user);
+        response["response"] = "ok";
     } catch (KeyDoesntExistException &e) {
         response["Error"] = "No existe tal usuario"; //MAL!!!
         return;
@@ -148,13 +164,13 @@ void ProfileController::setup() {
     // para el GET users/ para devolver todos
     // para el POST users/ para postear
 
-
     // rutasss
     addRouteResponse("POST", "/signup", ProfileController, postUserRequest, JsonResponse);
     addRouteResponse("GET","/login",ProfileController,getLogin,JsonResponse);
 
-    addRouteResponse("GET", "/users", ProfileController, getUserRequest, JsonResponse);
-    addRouteResponse("UPDATE", "/users", ProfileController, updateUserRequest, JsonResponse);
+    addRouteResponse("GET", "/users", ProfileController, getUsersRequest, JsonResponse);
+    addRouteResponse("GET", "/users/me", ProfileController, getUserRequest, JsonResponse);
+    addRouteResponse("UPDATE", "/users/me", ProfileController, updateUserRequest, JsonResponse);
 
 
 }

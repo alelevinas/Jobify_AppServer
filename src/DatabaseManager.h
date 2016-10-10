@@ -33,6 +33,7 @@ public:
     Json::Value get_user(const string &username);
     bool edit_user(const string &username, Json::Value userEdited);
     bool delete_user(const string &username);
+    std::string get_users();
 
     //SessionsDB
     bool add_session(const std::string &token, Json::Value session);

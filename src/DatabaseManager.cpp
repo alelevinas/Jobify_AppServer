@@ -39,6 +39,10 @@ bool DatabaseManager::edit_user(const string &username, Json::Value userEdited) 
     return users->edit_user(username,userEdited);
 }
 
+std::string DatabaseManager::get_users() {
+    return users->get_users();
+}
+
 bool DatabaseManager::add_session(const std::string &token, Json::Value session) {
     return sessions->add_session(token,session);
 }

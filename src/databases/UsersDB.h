@@ -28,6 +28,8 @@ public:
     Json::Value get_user(const string &username);
     bool edit_user(const string &username, Json::Value userEdited);
     bool delete_user(const string &username);
+
+    string get_users();
 };
 
 
