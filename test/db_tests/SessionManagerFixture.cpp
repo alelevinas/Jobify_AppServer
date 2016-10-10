@@ -5,8 +5,7 @@
 #include <gtest/gtest.h>
 #include <databases/UsersDB.h>
 #include <SessionManager.h>
-
-#define ONE_HOUR 3600
+#include <exceptions/TokenInvalidException.h>
 
 class SessionManagerFixture : public ::testing::Test {
 
@@ -35,7 +34,7 @@ public:
     DatabaseManager* databaseManager;
     SessionManager *sessions_manager;
 
-    Json::Value generate_user(string &username) {
+    Json::Value generate_user(const string &username) {
         Json::Value user;
         user["username"] = username;
         user["name"] = "Alejandro Pablo Levinas";
@@ -90,7 +89,7 @@ TEST_F(SessionManagerFixture, test_get_token_raises_exception) {
 
     string username = "lalala";
 
-    EXPECT_THROW(sessions_manager->get_username(username),TokenDoesntExistException);
+    EXPECT_THROW(sessions_manager->get_username(username),TokenInvalidException);
 }
 
 TEST_F(SessionManagerFixture, test_add_username_password) {
@@ -121,7 +120,7 @@ TEST_F(SessionManagerFixture, test_timestamp_with_invalid_token) {
 
     string invalid_token = "lalala";
 
-    EXPECT_THROW(sessions_manager->has_expired(invalid_token),TokenDoesntExistException);
+    EXPECT_THROW(sessions_manager->has_expired(invalid_token),TokenInvalidException);
 }
 
 TEST_F(SessionManagerFixture, test_timestamp_not_expired) {
