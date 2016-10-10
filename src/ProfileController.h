@@ -8,12 +8,14 @@
 
 #include <JsonController.h>
 #include "DatabaseManager.h"
+#include "SessionManager.h"
 
 class ProfileController : public Mongoose::JsonController{
 
     DatabaseManager* db;
+    SessionManager* sessionManager;
 public:
-    ProfileController(DatabaseManager* db);
+    ProfileController(DatabaseManager *db, SessionManager *sessionManager);
 
     void setup();
 
@@ -21,6 +23,12 @@ public:
     void getUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
     void postUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
     void updateUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void getUsersRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+    void getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+private:
+    void decodeAuth(std::string &b64_auth, std::string &usr, std::string &pass);
 };
 
 

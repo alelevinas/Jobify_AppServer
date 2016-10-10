@@ -72,3 +72,16 @@ bool UsersDB::delete_user(const string &username) {
     return s.ok();
 }
 
+string UsersDB::get_users() {
+    std::stringstream ss;
+    leveldb::Iterator *it = db->NewIterator(leveldb::ReadOptions());
+    for (it->SeekToFirst(); it->Valid(); it->Next()) {
+        ss << it->value().ToString() << endl;
+    }
+
+    if (!it->status().ok()) {
+        delete it;
+        return "";// Check for any errors found during the scan
+    }
+    return ss.str();
+}

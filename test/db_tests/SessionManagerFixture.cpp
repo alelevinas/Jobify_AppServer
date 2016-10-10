@@ -5,9 +5,7 @@
 #include <gtest/gtest.h>
 #include <databases/UsersDB.h>
 #include <SessionManager.h>
-#include <exceptions/TokenDoesntExistException.h>
-
-#define ONE_HOUR 3600
+#include <exceptions/TokenInvalidException.h>
 
 class SessionManagerFixture : public ::testing::Test {
 
@@ -18,7 +16,7 @@ protected:
     }
 
     virtual void SetUp() {
-        databaseManager = new DatabaseManager("testing_users","testing_sessions","testing_chats");
+        databaseManager = new DatabaseManager("testing_accounts","testing_users","testing_sessions","testing_chats");
         sessions_manager = new SessionManager(databaseManager,ONE_HOUR);
     }
 
@@ -36,7 +34,7 @@ public:
     DatabaseManager* databaseManager;
     SessionManager *sessions_manager;
 
-    Json::Value generate_user(string &username) {
+    Json::Value generate_user(const string &username) {
         Json::Value user;
         user["username"] = username;
         user["name"] = "Alejandro Pablo Levinas";
@@ -91,7 +89,7 @@ TEST_F(SessionManagerFixture, test_get_token_raises_exception) {
 
     string username = "lalala";
 
-    EXPECT_THROW(sessions_manager->get_username(username),TokenDoesntExistException);
+    EXPECT_THROW(sessions_manager->get_username(username),TokenInvalidException);
 }
 
 TEST_F(SessionManagerFixture, test_add_username_password) {
@@ -100,7 +98,7 @@ TEST_F(SessionManagerFixture, test_add_username_password) {
     string username = "alepox";
     string password = "not123456";
 
-    string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
+    sessions_manager->add_session(username,password); //falla si salta una excepcion
     EXPECT_TRUE(true);
 }
 
@@ -122,7 +120,7 @@ TEST_F(SessionManagerFixture, test_timestamp_with_invalid_token) {
 
     string invalid_token = "lalala";
 
-    EXPECT_THROW(sessions_manager->has_expired(invalid_token),TokenDoesntExistException);
+    EXPECT_THROW(sessions_manager->has_expired(invalid_token),TokenInvalidException);
 }
 
 TEST_F(SessionManagerFixture, test_timestamp_not_expired) {
@@ -146,7 +144,7 @@ TEST_F(SessionManagerFixture, test_timestamp_expired) {
     string username = "alepox";
     string password = "not123456";
 
-    sessions_manager->set_token_duration(0); //tokens are "instatnly" invalid
+    sessions_manager->set_token_duration(0); //tokens are "instantly" invalid
 
     string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
 

@@ -26,14 +26,18 @@ int main() {
 
     signal(SIGTERM, handle_signal);
 
-    DatabaseManager db("userss", "sessions", "chats");
+    DatabaseManager db("accounts","userss", "sessions", "chats");
+    if (!db.openDBs())
+        return -1;
 
 //    std::string username("pepe");
 //
 //    Json::Value pepe = generate_user(username);
 //    db.add_user("pepe",pepe);
 
-    ProfileController pf(&db);
+    SessionManager sessionManager(&db,ONE_HOUR/12);  //5 mins
+
+    ProfileController pf(&db, &sessionManager);
 
     JobifyServer server(8080);
 
