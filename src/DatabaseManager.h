@@ -39,8 +39,9 @@ public:
     Json::Value get_session(const std::string &token);
     bool delete_session(const std::string &token);
 
-
+    //accounts
     bool add_account(string username, string password);
+    bool is_correct(std::string username, std::string password);
 };
 
 

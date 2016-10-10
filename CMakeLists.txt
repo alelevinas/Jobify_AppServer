@@ -68,7 +68,7 @@ set(SOURCE_FILES
         src/databases/DB.cpp src/databases/DB.h
         src/databases/utils.cpp
         src/SessionManager.cpp src/SessionManager.h
-        src/exceptions/TokenDoesntExistException.h src/databases/AccountsDB.cpp src/databases/AccountsDB.h)
+        src/exceptions/TokenInvalidException.h src/databases/AccountsDB.cpp src/databases/AccountsDB.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )

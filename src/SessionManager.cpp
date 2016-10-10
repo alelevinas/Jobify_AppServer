@@ -7,11 +7,13 @@
 #include <sstream>
 #include <exceptions/KeyDoesntExistException.h>
 #include <exceptions/KeyAlreadyExistsException.h>
-#include <exceptions/TokenDoesntExistException.h>
+#include <exceptions/TokenInvalidException.h>
 #include "SessionManager.h"
 #include "cryptopp/base64.h"
 #include "cryptopp/md5.h"
 #include "cryptopp/hex.h"
+
+
 
 enum months {
     Jan = 1, FEeb, Mar, Apr, May, Jun,
@@ -75,12 +77,11 @@ std::string SessionManager::add_session(std::string &username, std::string &pass
 
     try {
         dbManager->add_session(hashed, user_timestamp);
+        return hashed;
     } catch (KeyAlreadyExistsException e) {
         //return "";
         throw e;
     }
-
-    return hashed;
 }
 
 bool SessionManager::has_expired(std::string &token) {
@@ -90,7 +91,7 @@ bool SessionManager::has_expired(std::string &token) {
 
         return this->timestamp_has_expired(timestamp);
     } catch (KeyDoesntExistException e) {
-        throw TokenDoesntExistException();
+        throw TokenInvalidException();
         //LOG e.what()
         return false;
     }
@@ -142,9 +143,12 @@ bool SessionManager::timestamp_has_expired(std::string &timestamp) {
 std::string SessionManager::get_username(std::string &token) {
     try {
         Json::Value session = dbManager->get_session(token);
+        std::string timestamp = session["timestamp"].asString();
+        if (timestamp_has_expired(timestamp))
+            throw TokenInvalidException();
         return session["username"].asString();
     } catch (KeyDoesntExistException e) {
-        throw TokenDoesntExistException();
+        throw TokenInvalidException();
     }
 }
 

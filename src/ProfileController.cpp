@@ -4,6 +4,7 @@
 #include <json/json.h>
 #include <exceptions/KeyAlreadyExistsException.h>
 #include <cryptopp/base64.h>
+#include <exceptions/TokenInvalidException.h>
 
 #include "ProfileController.h"
 #include "exceptions/KeyDoesntExistException.h"
@@ -12,7 +13,8 @@ using Json::Value;
 using namespace Mongoose;
 
 
-ProfileController::ProfileController(DatabaseManager *db) : db(db) { }
+ProfileController::ProfileController(DatabaseManager *db, SessionManager *sessionManager)
+        : db(db), sessionManager(sessionManager) { }
 
 void ProfileController::decodeAuth(std::string &usr_pass_b64, std::string &usr, std::string &pass) {
     cerr << "\nAuthorization: " << usr_pass_b64 << std::endl;
@@ -37,9 +39,14 @@ void ProfileController::decodeAuth(std::string &usr_pass_b64, std::string &usr, 
 
 
 void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    std::string username = htmlEntities(request.get("username", ""));
+    std::string token = request.getHeaderKeyValue("Token");
+    cerr << "\ntoken recibido " << token;
 
     try {
+        std::string username = sessionManager->get_username(token);
+
+        cerr << " es del usuario: " << username;
+
         Json::Value user = db->get_user(username);
 
         cerr << "\nGET USER: username=" << username;
@@ -51,6 +58,9 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
         }
 
         response["response"] = user;
+    } catch (TokenInvalidException &e) {
+        response["Error"] = "token invalido"; //MAL!!!
+        return;
     } catch (KeyDoesntExistException &e) {
         response["Error"] = "No existe tal usuario"; //MAL!!!
         return;
@@ -85,7 +95,7 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
         if (!db->add_user(usr, user))
             response["Error"] = "Server error 435684: db error";
 
-        response["response"] = "Ok";
+        response["token"] = sessionManager->add_session(usr,pass);
 
     } catch (KeyAlreadyExistsException &e) {
         response["Error"] = "El username ya existe...";
@@ -115,7 +125,19 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
 }
 
 void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
 
+    std::string usr, pass;
+    this->decodeAuth(usr_pass_b64,usr,pass);
+
+    try {
+        if (db->is_correct(usr, pass))
+            response["token"] = sessionManager->add_session(usr, pass);
+    } catch (KeyAlreadyExistsException &e) {
+        response["Error"] = "Ya esta logeado...";
+    } catch (KeyDoesntExistException &e) {
+        response["Error"] = "No existe tal usuario";
+    }
 }
 
 

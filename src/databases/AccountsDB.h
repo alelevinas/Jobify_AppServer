@@ -16,6 +16,10 @@ public:
     AccountsDB(const std::string &db_name);
 
     bool add_account(std::string username, std::string password);
+    bool is_correct(std::string username, std::string password);
+
+private:
+    std::string md5(std::string password);
 };
 
 

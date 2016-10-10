@@ -54,3 +54,7 @@ bool DatabaseManager::delete_session(const std::string &token) {
 bool DatabaseManager::add_account(string username, string password) {
     return accounts->add_account(username,password);
 }
+
+bool DatabaseManager::is_correct(std::string username, std::string password) {
+    return accounts->is_correct(username,password);
+}

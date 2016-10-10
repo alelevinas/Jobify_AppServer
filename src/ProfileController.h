@@ -8,12 +8,14 @@
 
 #include <JsonController.h>
 #include "DatabaseManager.h"
+#include "SessionManager.h"
 
 class ProfileController : public Mongoose::JsonController{
 
     DatabaseManager* db;
+    SessionManager* sessionManager;
 public:
-    ProfileController(DatabaseManager* db);
+    ProfileController(DatabaseManager *db, SessionManager *sessionManager);
 
     void setup();
 

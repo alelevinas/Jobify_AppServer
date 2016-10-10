@@ -5,6 +5,7 @@
 #ifndef JOBIFY_APPSERVER_SESSIONMANAGER_H
 #define JOBIFY_APPSERVER_SESSIONMANAGER_H
 
+#define ONE_HOUR 3600
 
 #include <databases/SessionsDB.h>
 #include "DatabaseManager.h"

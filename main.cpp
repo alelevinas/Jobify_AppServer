@@ -35,7 +35,9 @@ int main() {
 //    Json::Value pepe = generate_user(username);
 //    db.add_user("pepe",pepe);
 
-    ProfileController pf(&db);
+    SessionManager sessionManager(&db,ONE_HOUR/12);  //5 mins
+
+    ProfileController pf(&db, &sessionManager);
 
     JobifyServer server(8080);
 

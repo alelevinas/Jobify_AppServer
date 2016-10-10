@@ -5,7 +5,6 @@
 #include <gtest/gtest.h>
 #include <databases/UsersDB.h>
 #include <SessionManager.h>
-#include <exceptions/TokenDoesntExistException.h>
 
 #define ONE_HOUR 3600
 
@@ -18,7 +17,7 @@ protected:
     }
 
     virtual void SetUp() {
-        databaseManager = new DatabaseManager("testing_users","testing_sessions","testing_chats");
+        databaseManager = new DatabaseManager("testing_accounts","testing_users","testing_sessions","testing_chats");
         sessions_manager = new SessionManager(databaseManager,ONE_HOUR);
     }
 
