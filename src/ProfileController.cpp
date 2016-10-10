@@ -14,7 +14,7 @@ using namespace Mongoose;
 
 
 ProfileController::ProfileController(DatabaseManager *db, SessionManager *sessionManager)
-        : db(db), sessionManager(sessionManager) { }
+        : db(db), sessionManager(sessionManager) {}
 
 void ProfileController::decodeAuth(std::string &usr_pass_b64, std::string &usr, std::string &pass) {
     cerr << "\nAuthorization: " << usr_pass_b64 << std::endl;
@@ -57,7 +57,7 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
             return;
         }
 
-        response["user"] = user;
+        response.swap(user);
     } catch (TokenInvalidException &e) {
         response["Error"] = "token invalido"; //MAL!!!
         return;
@@ -86,7 +86,7 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
     std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
 
     std::string usr, pass;
-    this->decodeAuth(usr_pass_b64,usr,pass);
+    this->decodeAuth(usr_pass_b64, usr, pass);
 
     cerr << "\nauth_username: " << usr
          << "\nauth_pass: " << pass << std::endl;
@@ -104,13 +104,13 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
     }
 
     try {
-        if (!db->add_account(usr,pass))
+        if (!db->add_account(usr, pass))
             response["Error"] = "Server error 435684: db error";
 
         if (!db->add_user(usr, user))
             response["Error"] = "Server error 435684: db error";
 
-        response["token"] = sessionManager->add_session(usr,pass);
+        response["token"] = sessionManager->add_session(usr, pass);
 
     } catch (KeyAlreadyExistsException &e) {
         response["Error"] = "El username ya existe...";
@@ -118,17 +118,22 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
 }
 
 void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    std::string username = htmlEntities(request.get("username", ""));
-    std::string json_user = request.getData();
+    std::string token = request.getHeaderKeyValue("Token");
+    cerr << "\ntoken recibido " << token;
 
     try {
+        std::string username = sessionManager->get_username(token);
+
+        cerr << " es del usuario: " << username;
         db->get_user(username);
+
+        std::string json_user = request.getData(); //el body
 
         Json::Reader reader;
         Json::Value edited_user;
         bool parsingSuccessful = reader.parse(json_user, edited_user);
         if (!parsingSuccessful) {
-            response["Error"] = "Hubo un error de parseo del json nro 435684"; //levantar excepcion??
+            response["Error"] = "Hubo un error de parseo del json nro 435684";  //levantar excepcion??
             return;
         }
 
@@ -137,6 +142,8 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
     } catch (KeyDoesntExistException &e) {
         response["Error"] = "No existe tal usuario"; //MAL!!!
         return;
+    } catch (TokenInvalidException &e) {
+        response["Error"] = "token invalido"; //MAL token!!!
     }
 }
 
@@ -144,7 +151,7 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
     std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
 
     std::string usr, pass;
-    this->decodeAuth(usr_pass_b64,usr,pass);
+    this->decodeAuth(usr_pass_b64, usr, pass);
 
     try {
         if (db->is_correct(usr, pass))
@@ -166,11 +173,11 @@ void ProfileController::setup() {
 
     // rutasss
     addRouteResponse("POST", "/signup", ProfileController, postUserRequest, JsonResponse);
-    addRouteResponse("GET","/login",ProfileController,getLogin,JsonResponse);
+    addRouteResponse("GET", "/login", ProfileController, getLogin, JsonResponse);
 
     addRouteResponse("GET", "/users", ProfileController, getUsersRequest, JsonResponse);
     addRouteResponse("GET", "/users/me", ProfileController, getUserRequest, JsonResponse);
-    addRouteResponse("UPDATE", "/users/me", ProfileController, updateUserRequest, JsonResponse);
+    addRouteResponse("POST", "/users/me", ProfileController, updateUserRequest, JsonResponse);
 
 
 }
