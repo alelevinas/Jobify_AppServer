@@ -100,7 +100,7 @@ TEST_F(SessionManagerFixture, test_add_username_password) {
     string username = "alepox";
     string password = "not123456";
 
-    string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
+    sessions_manager->add_session(username,password); //falla si salta una excepcion
     EXPECT_TRUE(true);
 }
 
@@ -146,7 +146,7 @@ TEST_F(SessionManagerFixture, test_timestamp_expired) {
     string username = "alepox";
     string password = "not123456";
 
-    sessions_manager->set_token_duration(0); //tokens are "instatnly" invalid
+    sessions_manager->set_token_duration(0); //tokens are "instantly" invalid
 
     string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
 

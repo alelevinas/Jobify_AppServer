@@ -44,7 +44,7 @@ set (JSONCPP_DIR "${PROJECT_SOURCE_DIR}/src/jsoncpp")
 include_directories ("${JSONCPP_DIR}")
 
 add_library (json ${JSONCPP_DIR}/jsoncpp.cpp)
-target_link_libraries (mongoose json)
+target_link_libraries (mongoose json leveldb)
 
 
 #set (JWTCPP_DIR "${PROJECT_SOURCE_DIR}/src/jwt")
@@ -68,14 +68,14 @@ set(SOURCE_FILES
         src/databases/DB.cpp src/databases/DB.h
         src/databases/utils.cpp
         src/SessionManager.cpp src/SessionManager.h
-        src/exceptions/TokenDoesntExistException.h)
+        src/exceptions/TokenDoesntExistException.h src/databases/AccountsDB.cpp src/databases/AccountsDB.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
 
 add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES})
-target_link_libraries (Jobify_AppServer mongoose json leveldb cryptopp)
+target_link_libraries (Jobify_AppServer leveldb mongoose json  cryptopp)
 
 include_directories(src)
 

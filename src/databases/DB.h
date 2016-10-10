@@ -15,6 +15,7 @@ protected:
     leveldb::DB* db;
     std::string db_name;
     bool add(const std::string &key, Json::Value value);
+    Json::Value get(const std::string &key);
 
 
 public:

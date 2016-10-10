@@ -5,20 +5,22 @@
 #include "DatabaseManager.h"
 
 DatabaseManager::DatabaseManager(std::string usersDbName, std::string sessionsDBname,
-                                 std::string chatsDbName) {
+                                 std::string chatsDbName, std::string accountsDbName) {
+    accounts = new AccountsDB(accountsDbName);
     users = new UsersDB(usersDbName);
     sessions = new SessionsDB(sessionsDBname);
     chats = new ChatsDB(chatsDbName);
 }
 
 DatabaseManager::~DatabaseManager() {
+    delete accounts;
     delete users;
     delete sessions;
     delete chats;
 }
 
 bool DatabaseManager::openDBs() {
-    return users->openDB() and sessions->openDB() and chats->openDB();
+    return accounts->openDB() and users->openDB() and sessions->openDB() and chats->openDB();
 }
 
 Json::Value DatabaseManager::get_user(const string &username) {
@@ -47,4 +49,8 @@ Json::Value DatabaseManager::get_session(const std::string &token) {
 
 bool DatabaseManager::delete_session(const std::string &token) {
     return sessions->delete_session(token);
+}
+
+bool DatabaseManager::add_account(string username, string password) {
+    return accounts->add_account(username,password);
 }

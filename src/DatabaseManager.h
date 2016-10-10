@@ -7,6 +7,7 @@
 
 
 #include <databases/SessionsDB.h>
+#include <databases/AccountsDB.h>
 #include "databases/UsersDB.h"
 #include "databases/ChatsDB.h"
 
@@ -14,12 +15,14 @@ class DatabaseManager {
 
 //    static DatabaseManager* instance;
 
+    AccountsDB* accounts;
     UsersDB* users;
     SessionsDB* sessions;
     ChatsDB* chats;
 
 public:
-    DatabaseManager(std::string usersDbName, std::string sessionsDbName, std::string chatsDbName);
+    DatabaseManager(std::string usersDbName, std::string sessionsDbName, std::string chatsDbName,
+                    std::string accountsDbName);
 
     virtual ~DatabaseManager();
 
@@ -37,6 +40,7 @@ public:
     bool delete_session(const std::string &token);
 
 
+    bool add_account(string username, string password);
 };
 
 

@@ -3,6 +3,7 @@
 //
 #include <json/json.h>
 #include <exceptions/KeyAlreadyExistsException.h>
+#include <cryptopp/base64.h>
 
 #include "ProfileController.h"
 #include "exceptions/KeyDoesntExistException.h"
@@ -11,8 +12,27 @@ using Json::Value;
 using namespace Mongoose;
 
 
-ProfileController::ProfileController(DatabaseManager *db) : db(db) {
+ProfileController::ProfileController(DatabaseManager *db) : db(db) { }
 
+void ProfileController::decodeAuth(std::string &usr_pass_b64, std::string &usr, std::string &pass) {
+    cerr << "\nAuthorization: " << usr_pass_b64 << std::endl;
+    std::stringstream ss(usr_pass_b64);
+    ss >> usr_pass_b64; //"=Basic" chunck
+    ss >> usr_pass_b64; //base64
+    cerr << "\nBasic Authorization: (just b64)" << usr_pass_b64 << std::endl;
+
+    using namespace CryptoPP;
+    string decodedUsrNPass;
+    StringSource(usr_pass_b64, true, new Base64Decoder(new StringSink(decodedUsrNPass)));
+
+    std::cerr << "\ndecoded Base64: " << decodedUsrNPass << std::endl;
+
+    ss.flush();
+
+
+    std::stringstream ss2(decodedUsrNPass);
+    std::getline(ss2, usr, ':');
+    ss2 >> pass;
 }
 
 
@@ -38,11 +58,16 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
 }
 
 void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    std::string username = request.get("username", "");
+    std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
+
+    std::string usr, pass;
+    this->decodeAuth(usr_pass_b64,usr,pass);
+
+    cerr << "\nauth_username: " << usr
+         << "\nauth_pass: " << pass << std::endl;
 
     std::string json_user = request.getData(); //el body
 
-    cerr << "\nUSER: username=" << username;
     cerr << "\nDATA: " << json_user;
 
     Json::Reader reader;
@@ -54,13 +79,16 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
     }
 
     try {
-        if (!db->add_user(username, user))
-            response["Error"] = "Server error 435684";
+        if (!db->add_account(usr,pass))
+            response["Error"] = "Server error 435684: db error";
+
+        if (!db->add_user(usr, user))
+            response["Error"] = "Server error 435684: db error";
 
         response["response"] = "Ok";
 
     } catch (KeyAlreadyExistsException &e) {
-        response["Error"] = "El usuario ya existe...";
+        response["Error"] = "El username ya existe...";
     }
 }
 
@@ -69,7 +97,7 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
     std::string json_user = request.getData();
 
     try {
-        Json::Value user = db->get_user(username);
+        db->get_user(username);
 
         Json::Reader reader;
         Json::Value edited_user;
@@ -86,19 +114,26 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
     }
 }
 
+void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+
+}
+
 
 void ProfileController::setup() {
 
     // putting all the urls into "/api"
-    setPrefix("/users"); //para el GET users/username para uno
+    //setPrefix("/users"); //para el GET users/username para uno
     // para el GET users/ para devolver todos
     // para el POST users/ para postear
 
 
-    // Hello demo
-    addRouteResponse("GET", "", ProfileController, getUserRequest, JsonResponse);
-    addRouteResponse("POST", "", ProfileController, postUserRequest, JsonResponse);
-    addRouteResponse("UPDATE", "", ProfileController, updateUserRequest, JsonResponse);
+    // rutasss
+    addRouteResponse("POST", "/signup", ProfileController, postUserRequest, JsonResponse);
+    addRouteResponse("GET","/login",ProfileController,getLogin,JsonResponse);
+
+    addRouteResponse("GET", "/users", ProfileController, getUserRequest, JsonResponse);
+    addRouteResponse("UPDATE", "/users", ProfileController, updateUserRequest, JsonResponse);
+
 
 }
 

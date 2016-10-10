@@ -26,7 +26,9 @@ int main() {
 
     signal(SIGTERM, handle_signal);
 
-    DatabaseManager db("userss", "sessions", "chats");
+    DatabaseManager db("accounts","userss", "sessions", "chats");
+    if (!db.openDBs())
+        return -1;
 
 //    std::string username("pepe");
 //
