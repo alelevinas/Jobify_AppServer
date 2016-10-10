@@ -23,6 +23,9 @@ public:
     void getUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
     void postUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
     void updateUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void deleteUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+
     void getUsersRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
     void getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response);

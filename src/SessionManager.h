@@ -14,11 +14,12 @@ class SessionManager {
     DatabaseManager* dbManager;
     double token_duration;
 
+    //TODO: limpiar las sesiones expiradas
+
 public:
     SessionManager(DatabaseManager *dbManager, double token_duration);
     virtual ~SessionManager();
 
-    double& get_token_duration();
     void set_token_duration(double new_duratio);
 
     std::string add_session(std::string &username, std::string &password);

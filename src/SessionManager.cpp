@@ -27,10 +27,6 @@ SessionManager::~SessionManager() {
 
 }
 
-double &SessionManager::get_token_duration() {
-    return this->token_duration;
-}
-
 void SessionManager::set_token_duration(double new_duration) {
     this->token_duration = new_duration;
 }
@@ -65,7 +61,7 @@ std::string SessionManager::get_hashed_usr_pass(std::string &username, std::stri
 
 std::string SessionManager::add_session(std::string &username, std::string &password) {
 
-    /*fijarse si ya esta, si esta renovar el timestamp, si no esta agregar*/
+    /*si ya esta, lo pisa, si no esta agregar*/
 
     std::string timestamp = get_timestamp_now();
 
@@ -144,8 +140,10 @@ std::string SessionManager::get_username(std::string &token) {
     try {
         Json::Value session = dbManager->get_session(token);
         std::string timestamp = session["timestamp"].asString();
-        if (timestamp_has_expired(timestamp))
+        if (timestamp_has_expired(timestamp)) {
+            dbManager->delete_session(token);
             throw TokenInvalidException();
+        }
         return session["username"].asString();
     } catch (KeyDoesntExistException e) {
         throw TokenInvalidException();

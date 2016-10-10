@@ -147,6 +147,28 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
     }
 }
 
+void ProfileController::deleteUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+    cerr << "\ntoken recibido " << token;
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+        cerr << " es del usuario: " << username;
+
+        if (!db->delete_user(username))
+            response["response"] = "Error en la db";
+
+        db->delete_session(token);
+        response["response"] = "ok";
+    } catch (KeyDoesntExistException &e) {
+        response["Error"] = "No existe tal usuario"; //MAL!!!
+        return;
+    } catch (TokenInvalidException &e) {
+        response["Error"] = "token invalido"; //MAL token!!!
+    }
+}
+
 void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
 
@@ -178,6 +200,7 @@ void ProfileController::setup() {
     addRouteResponse("GET", "/users", ProfileController, getUsersRequest, JsonResponse);
     addRouteResponse("GET", "/users/me", ProfileController, getUserRequest, JsonResponse);
     addRouteResponse("POST", "/users/me", ProfileController, updateUserRequest, JsonResponse);
+    addRouteResponse("DELETE", "/users/me", ProfileController, deleteUserRequest, JsonResponse);
 
 
 }

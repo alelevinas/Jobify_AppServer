@@ -68,7 +68,7 @@ bool UsersDB::delete_user(const string &username) {
     leveldb::Status s = db->Delete(leveldb::WriteOptions(),username);
 
     if (s.IsNotFound())
-        return false; //levantar excepcion (?)
+        throw KeyDoesntExistException();
     return s.ok();
 }
 

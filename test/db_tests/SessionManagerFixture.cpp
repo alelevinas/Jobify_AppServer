@@ -29,6 +29,7 @@ public:
         system("rm -r testing_users");
         system("rm -r testing_sessions");
         system("rm -r testing_chats");
+        system("rm -r testing_accounts");
     }
 
     DatabaseManager* databaseManager;
