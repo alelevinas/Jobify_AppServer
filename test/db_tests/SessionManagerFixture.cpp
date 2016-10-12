@@ -6,6 +6,8 @@
 #include <databases/UsersDB.h>
 #include <SessionManager.h>
 #include <exceptions/TokenInvalidException.h>
+#include <exceptions/InvalidUsernamePasswordException.h>
+#include <exceptions/KeyDoesntExistException.h>
 
 class SessionManagerFixture : public ::testing::Test {
 
@@ -81,9 +83,13 @@ public:
 
 
 TEST_F(SessionManagerFixture, test_open_bds_are_ok) {
-    databaseManager->openDBs();
-    EXPECT_TRUE(true);
+    EXPECT_TRUE(databaseManager->openDBs());
 }
+
+/*TEST_F(SessionManagerFixture, test_open_bds_twice_is_false) {
+    EXPECT_TRUE(databaseManager->openDBs());
+    EXPECT_FALSE(databaseManager->openDBs());
+}*/
 
 TEST_F(SessionManagerFixture, test_get_token_raises_exception) {
     EXPECT_TRUE(databaseManager->openDBs());
@@ -93,15 +99,45 @@ TEST_F(SessionManagerFixture, test_get_token_raises_exception) {
     EXPECT_THROW(sessions_manager->get_username(username),TokenInvalidException);
 }
 
+TEST_F(SessionManagerFixture, test_add_session_of_inexistent_account_throws_exception) {
+    EXPECT_TRUE(databaseManager->openDBs());
+
+    string username = "alepox";
+    string password = "not123456";
+
+    EXPECT_THROW(sessions_manager->add_session(username,password),KeyDoesntExistException);
+}
+
+TEST_F(SessionManagerFixture, test_add_session_wrong_password) {
+    EXPECT_TRUE(databaseManager->openDBs());
+
+    string username = "alepox";
+    string password = "not123456";
+
+    databaseManager->add_account(username,password);
+
+    EXPECT_TRUE(databaseManager->is_correct(username,password));
+
+    string wrong_password = "456";
+
+    EXPECT_FALSE(databaseManager->is_correct(username,wrong_password));
+
+    EXPECT_THROW(sessions_manager->add_session(username,wrong_password),InvalidUsernamePasswordException);
+}
+
 TEST_F(SessionManagerFixture, test_add_username_password) {
     EXPECT_TRUE(databaseManager->openDBs());
 
     string username = "alepox";
     string password = "not123456";
 
+    databaseManager->add_account(username,password);
     sessions_manager->add_session(username,password); //falla si salta una excepcion
     EXPECT_TRUE(true);
 }
+
+
+
 
 TEST_F(SessionManagerFixture, test_get_with_token) {
     EXPECT_TRUE(databaseManager->openDBs());
@@ -109,6 +145,7 @@ TEST_F(SessionManagerFixture, test_get_with_token) {
     string username = "alepox";
     string password = "not123456";
 
+    databaseManager->add_account(username,password);
     string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
 
     string savedUsername = sessions_manager->get_username(token);
@@ -130,6 +167,7 @@ TEST_F(SessionManagerFixture, test_timestamp_not_expired) {
     string username = "alepox";
     string password = "not123456";
 
+    databaseManager->add_account(username,password);
     string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
 
     string savedUsername = sessions_manager->get_username(token);
@@ -147,6 +185,7 @@ TEST_F(SessionManagerFixture, test_timestamp_expired) {
 
     sessions_manager->set_token_duration(0); //tokens are "instantly" invalid
 
+    databaseManager->add_account(username,password);
     string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
 
     string savedUsername = sessions_manager->get_username(token);
@@ -156,5 +195,36 @@ TEST_F(SessionManagerFixture, test_timestamp_expired) {
     sleep(1); //not that instantly...
     EXPECT_TRUE(sessions_manager->has_expired(token));
 }
+
+TEST_F(SessionManagerFixture, test_delete_invalid_session) {
+    EXPECT_TRUE(databaseManager->openDBs());
+
+    string token = "asdasd321654asd";
+
+    EXPECT_TRUE(sessions_manager->delete_session(token));
+}
+
+TEST_F(SessionManagerFixture, test_timestamp_expired_n_delete_session) {
+    EXPECT_TRUE(databaseManager->openDBs());
+
+    string username = "alepox";
+    string password = "not123456";
+
+    sessions_manager->set_token_duration(0); //tokens are "instantly" invalid
+
+    databaseManager->add_account(username,password);
+    string token = sessions_manager->add_session(username,password); //falla si salta una excepcion
+
+    string savedUsername = sessions_manager->get_username(token);
+
+    EXPECT_EQ(username,savedUsername);
+
+    sleep(1); //not that instantly...
+    EXPECT_TRUE(sessions_manager->has_expired(token));
+
+    EXPECT_TRUE(sessions_manager->delete_session(token));
+}
+
+
 
 

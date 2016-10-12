@@ -6,7 +6,6 @@
 #include <sys/timeb.h>
 #endif
 #include <string>
-#include <string.h>
 #include <iostream>
 #include "Server.h"
 #include "Utils.h"
@@ -126,6 +125,7 @@ namespace Mongoose
         unsigned int current_timer = 0;
 #endif
         while (!stopped) {
+            sleep(0.25);
             mg_poll_server(server, 1000);
 #ifndef NO_WEBSOCKET
             mg_iterate_over_connections(server, iterate_callback, &current_timer);

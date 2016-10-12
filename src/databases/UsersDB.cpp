@@ -5,7 +5,6 @@
 #include <iostream>
 #include <sstream>
 #include "UsersDB.h"
-#include "exceptions/KeyDoesntExistException.h"
 
 using std::cerr;
 using std::endl;
@@ -20,68 +19,41 @@ UsersDB::~UsersDB() {
 
 bool UsersDB::add_user(const string &username, Json::Value user) {
     return this->add(username,user);
-
-    /*std::string value;
-    leveldb::Status s = db->Get(leveldb::ReadOptions(), username, &value);
-
-    if (!s.IsNotFound()){
-        throw KeyAlreadyExistsException();
-        //  return false; //  levantar excepcion (?)
-    }
-
-    std::ostringstream valueStream;
-    valueStream << user;
-
-    s = db->Put(leveldb::WriteOptions(), username, valueStream.str());
-    return s.ok();*/
 }
 
 Json::Value UsersDB::get_user(const string &username) {
-    std::string user;
-    leveldb::Status s = db->Get(leveldb::ReadOptions(), username, &user);
-
-    if (s.IsNotFound()) {
-        throw KeyDoesntExistException();
-    }
-        //return Json::Value(""); //levantar excepcion (?)
-
-    // std::cout << user << std::endl;
-
-    Json::Reader reader;
-    Json::Value json_user;
-    bool parsingSuccessful = reader.parse( user, json_user);
-    if (!parsingSuccessful) {
-        cerr << reader.getFormattedErrorMessages();
-        return false; //levantar excepcion??
-    }
-    return json_user;
+    return this->get(username);
 }
 
 bool UsersDB::edit_user(const string &username, Json::Value userEdited) {
     if (!this->delete_user(username))
         return false;
     return this->add_user(username,userEdited);
-    //TODO: chequear que sea el mismo, aunque con el token bastaria
 }
 
 bool UsersDB::delete_user(const string &username) {
-    leveldb::Status s = db->Delete(leveldb::WriteOptions(),username);
-
-    if (s.IsNotFound())
-        throw KeyDoesntExistException();
-    return s.ok();
+    return this->delete_key(username);
 }
 
 string UsersDB::get_users() {
     std::stringstream ss;
+
+    ss << "[";
+
+    std::string separator = "";
+
     leveldb::Iterator *it = db->NewIterator(leveldb::ReadOptions());
     for (it->SeekToFirst(); it->Valid(); it->Next()) {
-        ss << it->value().ToString() << endl;
+        ss << separator << it->value().ToString();
+        separator = ",";
     }
+
+    ss << "]";
 
     if (!it->status().ok()) {
         delete it;
         return "";// Check for any errors found during the scan
     }
+    delete it;
     return ss.str();
 }

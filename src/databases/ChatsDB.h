@@ -14,6 +14,8 @@ class ChatsDB: public DB{
 
 public:
     ChatsDB(std::string& dbName);
+
+    virtual ~ChatsDB();
 };
 
 

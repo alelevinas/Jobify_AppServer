@@ -171,6 +171,11 @@ void ProfileController::deleteUserRequest(Mongoose::Request &request, Mongoose::
 
 void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
+    if (usr_pass_b64==""){
+        response["Error"] = "No existe tal usuario";
+        return;
+    }
+
 
     std::string usr, pass;
     this->decodeAuth(usr_pass_b64, usr, pass);

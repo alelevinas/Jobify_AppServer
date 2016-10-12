@@ -58,6 +58,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/databases/UsersDB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/KeyDoesntExistException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/TokenInvalidException.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/exceptions/InvalidUsernamePasswordException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/KeyAlreadyExistsException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />

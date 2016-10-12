@@ -25,6 +25,7 @@ public:
     std::string add_session(std::string &username, std::string &password);
     std::string get_username(std::string &token);
     bool has_expired(std::string &token);
+    bool delete_session(std::string &token);
 
 private:
     std::string get_timestamp_now();

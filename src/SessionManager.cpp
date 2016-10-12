@@ -8,6 +8,7 @@
 #include <exceptions/KeyDoesntExistException.h>
 #include <exceptions/KeyAlreadyExistsException.h>
 #include <exceptions/TokenInvalidException.h>
+#include <exceptions/InvalidUsernamePasswordException.h>
 #include "SessionManager.h"
 #include "cryptopp/base64.h"
 #include "cryptopp/md5.h"
@@ -63,6 +64,9 @@ std::string SessionManager::add_session(std::string &username, std::string &pass
 
     /*si ya esta, lo pisa, si no esta agregar*/
 
+    if(!dbManager->is_correct(username,password)) //si no existe esa cuenta
+        throw InvalidUsernamePasswordException();
+
     std::string timestamp = get_timestamp_now();
 
     std::string hashed = get_hashed_usr_pass(username, password, timestamp);
@@ -78,6 +82,10 @@ std::string SessionManager::add_session(std::string &username, std::string &pass
         //return "";
         throw e;
     }
+}
+
+bool SessionManager::delete_session(std::string &token) {
+    return dbManager->delete_session(token);
 }
 
 bool SessionManager::has_expired(std::string &token) {

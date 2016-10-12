@@ -16,6 +16,7 @@ protected:
     std::string db_name;
     bool add(const std::string &key, Json::Value value);
     Json::Value get(const std::string &key);
+    bool delete_key(const std::string &key);
 
 
 public:

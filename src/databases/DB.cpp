@@ -34,7 +34,6 @@ bool DB::add(const std::string &key, Json::Value value) {
 
     if (!s.IsNotFound()){
         throw KeyAlreadyExistsException();
-        //  return false; //  levantar excepcion (?)
     }
 
     std::ostringstream valueStream;
@@ -51,9 +50,6 @@ Json::Value DB::get(const std::string &key) {
     if (s.IsNotFound()) {
         throw KeyDoesntExistException();
     }
-    //return Json::Value(""); //levantar excepcion (?)
-
-    // std::cout << value << std::endl;
 
     Json::Reader reader;
     Json::Value json_value;
@@ -63,4 +59,10 @@ Json::Value DB::get(const std::string &key) {
         return false; //levantar excepcion??
     }
     return json_value;
+}
+
+//It is not an error if "key" did not exist in the database. De la doc de leveldb
+bool DB::delete_key(const std::string &key) {
+    leveldb::Status s = db->Delete(leveldb::WriteOptions(),key);
+    return s.ok();
 }
