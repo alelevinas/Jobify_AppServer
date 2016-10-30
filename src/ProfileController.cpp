@@ -68,15 +68,17 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
 }
 
 void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    std::string token = request.getHeaderKeyValue("Token");
-    cerr << "\ntoken recibido " << token;
+    //std::string token = request.getHeaderKeyValue("Token");
+    //cerr << "\ntoken recibido " << token;
 
     try {
-        std::string username = sessionManager->get_username(token);
+        //std::string username = sessionManager->get_username(token);
 
-        cerr << " es del usuario: " << username;
+        //cerr << " es del usuario: " << username;
 
-        response["users"] = db->get_users();
+        std::string users = db->get_users();
+        std::cerr << users;
+        response["users"] = users;
     } catch (TokenInvalidException &e) {
         response["Error"] = "token invalido"; //MAL token!!!
     }

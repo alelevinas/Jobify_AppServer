@@ -10,6 +10,7 @@ DatabaseManager::DatabaseManager(std::string accountsDbName, std::string usersDb
     users = new UsersDB(usersDbName);
     sessions = new SessionsDB(sessionsDBname);
     chats = new ChatsDB(chatsDbName);
+
 }
 
 DatabaseManager::~DatabaseManager() {

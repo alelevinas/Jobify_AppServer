@@ -40,7 +40,7 @@ int main() {
 //    Json::Value pepe = generate_user(username);
 //    db.add_user("pepe",pepe);
 
-    SessionManager sessionManager(&db,ONE_HOUR/12);  //5 mins
+    SessionManager sessionManager(&db,ONE_HOUR);  //5 mins
 
     ProfileController pf(&db, &sessionManager);
 
