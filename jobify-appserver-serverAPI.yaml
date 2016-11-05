@@ -1,0 +1,484 @@
+
+swagger: '2.0'
+info:
+  title: Jobify - AppServer Server API
+  description: API para el shared server de Jobify
+  version: "1.0.0"
+host: github.com/alelevinas/Jobify_AppServer
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /job_positions:
+    get:
+      summary: Listado de puestos
+      description: |
+        El *JobPosition* endpoint devuelve toda la información acerca
+        de todas los puestos existentes. La respuesta incluye el
+        nombre y categoría de cada puesto.
+      responses:
+        200:
+          description: Todas los puestos existentes
+          schema:
+            properties:
+              job_positions:
+                type: array
+                items:
+                  $ref: '#/definitions/JobPosition'
+              metadata:
+                $ref: '#/definitions/Metadata'
+          examples:
+            application/json:
+              job_positions:
+                - name: developer
+                  category: software
+                  description: Desarrollador
+                - name: project manager
+                  category: software
+                  description: Persona encargada de manejar el proyecto
+                - name: dj
+                  category: music
+                  description: Persona que selecciona y mezcla música
+              metadata:
+                version: 0.1
+                count: 3
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /job_positions/categories/{category}:
+    parameters:
+      - description: Categoría
+        in: path
+        name: category
+        required: true
+        type: string
+    get:
+      summary: Listado de puestos por categoría
+      description: |
+        El *JobPosition* endpoint devuelve toda la información acerca
+        de todas los puestos de una determinada categoría. La respuesta
+        incluye el nombre y categoría de cada puesto.
+      responses:
+        200:
+          description: Todas los puestos de la categoría
+          schema:
+            properties:
+              job_positions:
+                type: array
+                items:
+                  $ref: '#/definitions/JobPosition'
+              metadata:
+                $ref: '#/definitions/Metadata'
+          examples:
+            application/json:
+              job_positions:
+                - name: developer
+                  category: software
+                  description: Desarrollador
+                - name: project manager
+                  category: software
+                  description: Persona encargada de manejar el proyecto
+              metadata:
+                version: 0.1
+                count: 2
+        404:
+          description: Categoría inexistente
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Alta de puestos
+      description: |
+        Endpoint para dar de alta un puesto de una categoría determinada
+      parameters:
+        - description: Puesto a dar de alta
+          in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+      responses:
+        201:
+          description: Alta correcta
+          schema:
+            $ref: '#/definitions/JobPosition'
+          examples:
+            application/json:
+              name: developer
+              category: software
+              description: Desarrollador
+        400:
+          description: Incumplimiento de precondiciones (parámetros faltantes)
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Categoría inexistente
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /job_positions/categories/{category}/{name}:
+    parameters:
+      - description: Categoría
+        in: path
+        name: category
+        required: true
+        type: string
+      - description: Nombre del puesto
+        in: path
+        name: name
+        required: true
+        type: string
+    put:
+      summary: Modificación de puestos
+      description: |
+        Endpoint para modificar un puesto
+      parameters:
+        - description: Datos nuevos del puesto
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/JobPosition'
+      responses:
+        200:
+          description: Modificación correcta
+          schema:
+            $ref: '#/definitions/JobPosition'
+        400:
+          description: Incumplimiento de precondiciones (parámetros faltantes)
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: No existe el recurso solicitado
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Baja de puestos
+      description: |
+        Endpoint para dar de baja un puesto
+      responses:
+        204:
+          description: Baja correcta
+        404:
+          description: No existe el recurso solicitado
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /skills:
+    get:
+      summary: Listado de habilidades
+      description: |
+        El *Skill* endpoint devuelve toda la información acerca
+        de todas las habilidades existentes. La respuesta incluye el
+        nombre y categoría de cada habilidad.
+      responses:
+        200:
+          description: Todas las habilidades existentes
+          schema:
+            properties:
+              skills:
+                type: array
+                items:
+                  $ref: '#/definitions/Skill'
+              metadata:
+                $ref: '#/definitions/Metadata'
+          examples:
+            application/json:
+              skills:
+                - name: c
+                  category: software
+                  description: Lenguaje de programación C
+                - name: Java
+                  category: software
+                  description: Lenguaje de programación Java
+              metadata:
+                version: '0.1'
+                count: 2
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /skills/categories/{category}:
+    parameters:
+      - description: Categoría
+        in: path
+        name: category
+        required: true
+        type: string
+    post:
+      summary: Alta de habilidades
+      description: |
+        Endpoint para dar de alta una habilidad
+      parameters:
+        - description: Habilidad a dar de alta
+          in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+              name:
+                type: string
+      responses:
+        201:
+          description: Alta correcta
+          schema:
+            $ref: '#/definitions/Skill'
+          examples:
+            application/json:
+              name: java
+              category: software
+              description: Lenguaje de programación Java
+        400:
+          description: Incumplimiento de precondiciones (parámetros faltantes)
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Categoría inexistente
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /skills/categories/{category}/{name}:
+    parameters:
+      - description: Categoría
+        in: path
+        name: category
+        required: true
+        type: string
+      - description: Nombre de la habilidad
+        in: path
+        name: name
+        required: true
+        type: string
+    put:
+      summary: Modificación de habilidad
+      description: |
+        Endpoint para modificar una habilidad
+      parameters:
+        - description: Datos nuevos de la habilidad
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Skill'
+      responses:
+        200:
+          description: Modificación correcta
+          schema:
+            $ref: '#/definitions/Skill'
+        400:
+          description: Incumplimiento de precondiciones (parámetros faltantes)
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: No existe el recurso solicitado
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Baja de habilidad
+      description: |
+        Endpoint para dar de baja una habilidad
+      responses:
+        204:
+          description: Baja correcta
+        404:
+          description: No existe el recurso solicitado
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /categories:
+    get:
+      summary: Listado de categorías
+      description: |
+        El *Category* endpoint devuelve toda la información acerca
+        de todas las categorías existentes. La respuesta incluye el
+        nombre de cada una.
+      responses:
+        200:
+          description: Todas las categorías existentes
+          schema:
+            properties:
+              skills:
+                type: array
+                items:
+                  $ref: '#/definitions/Category'
+              metadata:
+                $ref: '#/definitions/Metadata'
+          examples:
+            application/json:
+              categories:
+                - name: software
+                  description: Categoría relacionada con software
+                - name: music
+                  description: Categoría relacionada con la música
+              metadata:
+                version: '0.1'
+                count: 2
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Alta de categorías
+      description: |
+        Endpoint para dar de alta una categoría
+      parameters:
+        - description: Categoría a dar de alta
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Category'
+      responses:
+        201:
+          description: Alta correcta
+          schema:
+            $ref: '#/definitions/Category'
+          examples:
+            application/json:
+              name: sport
+              description: Categoría relacionada con los deportes
+        400:
+          description: Incumplimiento de precondiciones (parámetros faltantes)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /categories/{name}:
+    parameters:
+      - description: Nombre de la categoría
+        in: path
+        name: name
+        required: true
+        type: string
+    put:
+      summary: Modificación de categoría
+      description: |
+        Endpoint para modificar una categória
+      parameters:
+        - description: Datos nuevos de la categoría
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Category'
+      responses:
+        200:
+          description: Modificación correcta
+          schema:
+            $ref: '#/definitions/Category'
+        400:
+          description: Incumplimiento de precondiciones (parámetros faltantes)
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: No existe el recurso solicitado
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Baja de categoría
+      description: |
+        Endpoint para dar de baja una categoría
+      responses:
+        204:
+          description: Baja correcta
+        404:
+          description: No existe el recurso solicitado
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  JobPosition:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Nombre
+      category:
+        type: string
+        description: Categoría
+      description:
+        type: string
+        description: Descripción
+  Skill:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Nombre
+      category:
+        type: string
+        description: Categoría
+      description:
+        type: string
+        description: Descripción
+  Category:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Nombre
+      description:
+        description: Descripción
+        type: string
+  Metadata:
+    type: object
+    properties:
+      version:
+        type: string
+        description: Versión de la api
+      count:
+        type: integer
+        description: Cantidad de elementos en la respuesta
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
