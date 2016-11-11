@@ -178,7 +178,7 @@ TEST_F(UsersDBFixture, test_get_users_in_populated_bd) {
 
     string users = db->get_users();
 
-    std::cerr << users;
+    std::cerr << users << std::endl;
 
     Json::Reader reader;
     Json::Value json_users;

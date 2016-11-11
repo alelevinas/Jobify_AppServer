@@ -71,7 +71,8 @@ set(SOURCE_FILES
         src/exceptions/TokenInvalidException.h
         src/databases/AccountsDB.cpp src/databases/AccountsDB.h
         src/exceptions/InvalidUsernamePasswordException.h
-        src/log/easylogging++.h)
+        src/log/easylogging++.h
+        src/ApiError.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )

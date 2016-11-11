@@ -9,14 +9,14 @@
 
 #include "ProfileController.h"
 #include "exceptions/KeyDoesntExistException.h"
-
+#include "ApiError.h"
 using Json::Value;
 using namespace Mongoose;
 
-#define STATUS "status"
-#define SUCCES "succes"
-#define ERROR "Error"
-#define DATA "data"
+// #define STATUS "status"
+// #define SUCCES "succes"
+// #define ERROR "error"
+// #define DATA "data"
 
 
 ProfileController::ProfileController(DatabaseManager *db, SessionManager *sessionManager)
@@ -25,7 +25,7 @@ ProfileController::ProfileController(DatabaseManager *db, SessionManager *sessio
 void ProfileController::decodeAuth(std::string &usr_pass_b64, std::string &usr, std::string &pass) {
     // cerr << "\nAuthorization: " << usr_pass_b64 << std::endl;
     std::stringstream ss(usr_pass_b64);
-    ss >> usr_pass_b64; //"=Basic" chunck
+    ss >> usr_pass_b64;  // "=Basic" chunck
     ss >> usr_pass_b64; //base64
     //cerr << "\nBasic Authorization: (just b64)" << usr_pass_b64 << std::endl;
 
@@ -65,26 +65,19 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
         cerr << "\nJSON user: " << user;
 
         if (user["username"] != username) {
-            response["Error"] = "Hubo un error nro 435684";
-            return;
+            ApiError::setError(response,500,"Internal server error");
+        } else {
+            response[STATUS] = SUCCES;
+            response[DATA] = user;
         }
 
-        response[STATUS] = SUCCES;
-        response[DATA] = user;
-
     } catch (TokenInvalidException &e) {
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "token invalido"; //MAL!!!
-        return;
+        ApiError::setError(response,501,"token invalido");
     } catch (KeyDoesntExistException &e) {
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "No existe tal usuario"; //MAL!!!
-        return;
+        ApiError::setError(response,500,"Internal server error");
     }
     LOG(INFO) << "USER GET RESPONSE:\n"
-              << "\t\tUser: " << username
+              << "\t\tUser: " << username << "\n"
               << "\t\tResponse: " << response
               << std::endl;
 }
@@ -98,27 +91,36 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
 
         //cerr << " es del usuario: " << username;
 
-        LOG(INFO) << "USER GET REQUEST:\n"
+        LOG(INFO) << "USERS GET REQUEST:\n"
                   //<< "\t\tHeader Token: " << token << "\n"
                   //<< "\t\tUser: " << username
                   << std::endl;
 
-        std::string users = db->get_users();
-        std::cerr << users;
+        std::string json_users = db->get_users();
+        std::cerr << json_users;
+
+        Json::Reader reader;
+        Json::Value users;
+        bool ok = true;
+        bool parsingSuccessful = reader.parse(json_users, users);
+        if (!parsingSuccessful) {
+            ok = false;
+            ApiError::setError(response,500,"Internal server error");
+        }
+
         response[STATUS] = SUCCES;
         response[DATA] = users;
 
 
     } catch (TokenInvalidException &e) {
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "token invalido"; //MAL token!!!
+        ApiError::setError(response,501,"token invalido");
     }
     LOG(INFO) << "USERS RESPONSE:\n"
               << "\t\tResponse: " << response
               << std::endl;
 }
 
+//signup
 void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
     std::string usr, pass;
@@ -129,39 +131,47 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
 
     LOG(INFO) << "SIGNUP REQUEST:\n"
               << "\t\tHeader Authorization: " << usr_pass_b64 << "\n"
-              << "\t\tUser: " << usr << " Password: " << pass
+              << "\t\tUser: " << usr << " Password: " << pass << "\n"
               << "\t\tData: " << json_user
               << std::endl;
 
     Json::Reader reader;
     Json::Value user;
+    bool ok = true;
     bool parsingSuccessful = reader.parse(json_user, user);
     if (!parsingSuccessful) {
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "Hubo un error de parseo del json nro 435684"; //levantar excepcion??
-        return;
+        ok = false;
+        ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
     }
-
+    user["username"] = usr;
+    if(user["chats"].empty())
+        user["chats"] = Json::Value(Json::arrayValue);
+    if(user["contacts"].empty())
+        user["contacts"] = Json::Value(Json::arrayValue);
+    if(user["recommended_by"].empty())
+        user["recommended_by"] = Json::Value(Json::arrayValue);
     try {
-        if (!db->add_account(usr, pass))
-            response.setCode(500);
-        response["Error"] = "Internal server error";
-
-        if (!db->add_user(usr, user))
-            //remove_account
-            response.setCode(500);
-        response["Error"] = "Internal server error";
-
-        response[STATUS] = SUCCES;
-        //response[DATA] =
-        response[DATA]["token"] = sessionManager->add_session(usr, pass);
-
+        if (ok && !db->add_account(usr, pass)) {
+            ok = false;
+            ApiError::setError(response,500,"Internal server error");
+        }
+        if (ok && !db->add_user(usr, user)) {
+            ok = false;
+            //TODO remove_account que nisiquiera existe
+            ApiError::setError(response,500,"Internal server error");
+        }
+        if (ok) {
+            std::string token = sessionManager->add_session(usr, pass);;
+            if (token == "") {
+                //TODO remove account and user
+                ApiError::setError(response,500,"Internal server error");
+            } else {
+                response[STATUS] = SUCCES;
+                response[DATA]["token"] = token;
+            }
+        }
     } catch (KeyAlreadyExistsException &e) {
-        response.setCode(202);
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "El email ya existe...";
+        ApiError::setError(response,409,"Email already in use");
     }
     LOG(INFO) << "SIGNUP RESPONSE:\n"
               << "\t\t" << response
@@ -176,38 +186,37 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
         std::string username = sessionManager->get_username(token);
 
 
-
         cerr << " es del usuario: " << username;
-        db->get_user(username);
 
         std::string json_user = request.getData(); //el body
 
         LOG(INFO) << "UPDATE USER REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
-                  << "\t\tUser: " << username
+                  << "\t\tUser: " << username << "\n"
                   << "\t\tData: " << json_user
                   << std::endl;
 
+        db->get_user(username); //solo para ver si salta la exception
+
+        bool ok = true;
         Json::Reader reader;
         Json::Value edited_user;
         bool parsingSuccessful = reader.parse(json_user, edited_user);
         if (!parsingSuccessful) {
-            response["Error"] = "Hubo un error de parseo del json nro 435684";  //levantar excepcion??
-            return;
+            ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
+            ok = false;
         }
-
-        db->edit_user(username, edited_user);
-        response[STATUS] = SUCCES;
-        response[DATA] = "ok";
+        if (ok && db->edit_user(username, edited_user)) {
+            response[STATUS] = SUCCES;
+            response[DATA] = "ok";
+        } else {
+            ApiError::setError(response,500,"Internal server error");
+        }
     } catch (KeyDoesntExistException &e) {
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "No existe tal usuario"; //MAL!!!
+        ApiError::setError(response,500,"Internal server error");
         return;
     } catch (TokenInvalidException &e) {
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "token invalido"; //MAL token!!!
+        ApiError::setError(response,501,"token invalido");
     }
     LOG(INFO) << "UPDATE USER RESPONSE:\n"
               << "\t\tResponse: " << response
@@ -227,31 +236,35 @@ void ProfileController::deleteUserRequest(Mongoose::Request &request, Mongoose::
 
         cerr << " es del usuario: " << username;
 
-        if (!db->delete_user(username))
-            response["response"] = "Error en la db";
-
-        db->delete_session(token);
-        response[STATUS] = SUCCES;
-        response[DATA] = "ok";
+        bool ok = true;
+        if (!db->delete_user(username)) {
+            ApiError::setError(response,500,"Internal server error");
+            ok = false;
+        }
+        if (!db->delete_session(token)) {
+            // volver a poner el usuario?
+            ApiError::setError(response,500,"Internal server error");
+            ok = false;
+        } //todo delete account
+        if (ok) {
+            response[STATUS] = SUCCES;
+            response[DATA] = "ok";
+        }
     } catch (KeyDoesntExistException &e) {
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "No existe tal usuario"; //MAL!!!
-        return;
+        ApiError::setError(response,500,"Internal server error");
     } catch (TokenInvalidException &e) {
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "token invalido"; //MAL token!!!
+        ApiError::setError(response,501,"token invalido");
     }
     LOG(INFO) << "DELETE USER RESPONSE:\n"
-              << "\t\tResponse: " << response << std::endl;
+              << "\t\tResponse: " << response
+              << std::endl;
 }
 
 void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
     if (usr_pass_b64 == "") {
-        response["Error"] = "No existe tal usuario";
-        LOG(INFO) << "LOGIN: \t\t No se recibio header Authorization";
+        ApiError::setError(response,401,"Invalid password or user");
+        LOG(INFO) << "GET LOGIN: \t\t No se recibio header Authorization";
         return;
     }
 
@@ -263,23 +276,24 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
               << "\t\tUser: " << usr << " Password: " << pass << std::endl;
 
     try {
-        if (db->is_correct(usr, pass)) {
-            response[STATUS] = SUCCES;
-            response[DATA]["token"] = sessionManager->add_session(usr, pass);
+        if (db->is_correct(usr, pass)) {  // si matchea la contrasena
+
+            std::string token = sessionManager->add_session(usr, pass);;
+            if (token == "") {
+                ApiError::setError(response,500,"Internal server error");
+            } else {
+                response[STATUS] = SUCCES;
+                response[DATA]["token"] = token;
+            }
         } else {
-            response.setCode(201);
-            response[STATUS] = ERROR;
-            response[DATA] = "";
-            response[ERROR] = "Invalid password or user";
+            ApiError::setError(response,401,"Invalid password or user");
         }
     } catch (KeyDoesntExistException &e) {
-        response.setCode(201);
-        response[STATUS] = ERROR;
-        response[DATA] = "";
-        response[ERROR] = "Invalid password or user";
+        ApiError::setError(response,401,"Invalid password or user");
     }
     LOG(INFO) << "LOGIN RESPONSE:\n"
-              << "\t\t" << response << std::endl;
+              << "\t\t" << response
+              << std::endl;
 }
 
 
@@ -289,7 +303,6 @@ void ProfileController::setup() {
     //setPrefix("/users"); //para el GET users/username para uno
     // para el GET users/ para devolver todos
     // para el POST users/ para postear
-
     // rutasss
     addRouteResponse("POST", "/signup", ProfileController, postUserRequest, JsonResponse);
     addRouteResponse("GET", "/login", ProfileController, getLogin, JsonResponse);

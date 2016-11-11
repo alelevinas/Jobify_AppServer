@@ -38,17 +38,17 @@ bool UsersDB::delete_user(const string &username) {
 string UsersDB::get_users() {
     std::stringstream ss;
 
-    ss << "[";
+    ss << "{ \"users\": [";
 
     std::string separator = "";
 
     leveldb::Iterator *it = db->NewIterator(leveldb::ReadOptions());
     for (it->SeekToFirst(); it->Valid(); it->Next()) {
-        ss << separator << it->value().data();//ToString();
+        ss << separator << it->value().ToString();
         separator = ",";
     }
 
-    ss << "]";
+    ss << "]}";
 
     if (!it->status().ok()) {
         delete it;
