@@ -26,4 +26,13 @@ namespace Mongoose
     {
         humanReadable = human;
     }
+
+    void JsonResponse::setStatusError() {
+        (*this)["status"] = "Error";
+    }
+
+
+    void JsonResponse::setStatusSucces() {
+        (*this)["status"] = "Succes";
+    }
 }

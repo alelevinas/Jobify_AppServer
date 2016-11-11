@@ -44,7 +44,7 @@ int main() {
 
     ProfileController pf(&db, &sessionManager);
 
-    JobifyServer server(8080);
+    JobifyServer server(8000);
 
     server.registerController(&pf);
 

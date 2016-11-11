@@ -1,0 +1,33 @@
+{
+	"chats" : [],
+	"city" : "Rosario",
+	"contacts" : [],
+	"dob" : "1993-08-19",
+	"gender" : "male",
+	"name" : "Alejandro Pablo Levinas",
+	"nationality" : "argentino",
+	"previous_exp" :
+	[
+		{
+			"company" : "NASA",
+			"description" : "Desarrollador en lenguaje R para analizar......",
+			"position" : "Desarrollador",
+			"years" : "2006-2009"
+		},
+		{
+			"company" : "UBA",
+			"description" : "Docente de la materia Taller 2",
+			"position" : "Docente",
+			"years" : "2010-actualidad"
+		}
+	],
+	"profile" : "Soy un estudiante de ingenieria en informatica que se propone............blabllbla...........",
+	"recomendations" : [],
+	"skills" :
+	[
+		"C",
+		"C++",
+		"GoogleTest"
+	],
+	"email" : "alelevinas@gmail.com"
+}

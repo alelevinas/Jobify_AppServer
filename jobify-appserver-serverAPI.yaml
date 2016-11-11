@@ -1,437 +1,460 @@
-
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
 swagger: '2.0'
 info:
   title: Jobify - AppServer Server API
   description: API para el shared server de Jobify
   version: "1.0.0"
-host: github.com/alelevinas/Jobify_AppServer
-basePath: /
+host: localhost:8080
+# array of all schemes that your API supports
 schemes:
-  - http
+  - https
+# will be prefixed to all paths
+basePath: /
 consumes:
   - application/json
 produces:
   - application/json
 paths:
-  /job_positions:
+  /login:
     get:
-      summary: Listado de puestos
+      summary: User log in. Basic authorization through header.
       description: |
-        El *JobPosition* endpoint devuelve toda la información acerca
-        de todas los puestos existentes. La respuesta incluye el
-        nombre y categoría de cada puesto.
-      responses:
-        200:
-          description: Todas los puestos existentes
-          schema:
-            properties:
-              job_positions:
-                type: array
-                items:
-                  $ref: '#/definitions/JobPosition'
-              metadata:
-                $ref: '#/definitions/Metadata'
-          examples:
-            application/json:
-              job_positions:
-                - name: developer
-                  category: software
-                  description: Desarrollador
-                - name: project manager
-                  category: software
-                  description: Persona encargada de manejar el proyecto
-                - name: dj
-                  category: music
-                  description: Persona que selecciona y mezcla música
-              metadata:
-                version: 0.1
-                count: 3
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /job_positions/categories/{category}:
-    parameters:
-      - description: Categoría
-        in: path
-        name: category
-        required: true
-        type: string
-    get:
-      summary: Listado de puestos por categoría
-      description: |
-        El *JobPosition* endpoint devuelve toda la información acerca
-        de todas los puestos de una determinada categoría. La respuesta
-        incluye el nombre y categoría de cada puesto.
-      responses:
-        200:
-          description: Todas los puestos de la categoría
-          schema:
-            properties:
-              job_positions:
-                type: array
-                items:
-                  $ref: '#/definitions/JobPosition'
-              metadata:
-                $ref: '#/definitions/Metadata'
-          examples:
-            application/json:
-              job_positions:
-                - name: developer
-                  category: software
-                  description: Desarrollador
-                - name: project manager
-                  category: software
-                  description: Persona encargada de manejar el proyecto
-              metadata:
-                version: 0.1
-                count: 2
-        404:
-          description: Categoría inexistente
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    post:
-      summary: Alta de puestos
-      description: |
-        Endpoint para dar de alta un puesto de una categoría determinada
+        El *login* endpoint devuelve un token para poder acceder al resto de la API.
       parameters:
-        - description: Puesto a dar de alta
-          in: body
-          name: body
+        - name: token
+          in: header
+          description: Basic Authorization
           required: true
+          type: string
+      tags:
+        - Acces
+      responses:
+        200:
+          description: Un token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                $ref: '#/definitions/Token'
+          examples:
+            application/json:
+              status: succes
+              data:
+                token: "67E72E2FB07E8D4427FCBA609525ED57"
+        401:
+          description: "Invalid password or user"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 401
+                message: "Invalid password or user"
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+  /signup:
+    post:
+      summary: Register a new user
+      description: |
+        El *signup* endpoint recibe un user con sus datos. Los únicos obligatorios son email y password en Basic Authorization (header). El resto son optativos. Devuelve un *token* para seguir utilizando la API o un código de *error*.
+      parameters:
+        - name: Auth
+          in: header
+          description: Basic Authorization email:password in b64
+          required: true
+          type: string
+
+        - name: user
+          description: Usuario a dar de alta
+          in: body
           schema:
             type: object
             properties:
               name:
                 type: string
-              description:
+                description: First and last name of the user.
+              gender:
                 type: string
-      responses:
-        201:
-          description: Alta correcta
-          schema:
-            $ref: '#/definitions/JobPosition'
-          examples:
-            application/json:
-              name: developer
-              category: software
-              description: Desarrollador
-        400:
-          description: Incumplimiento de precondiciones (parámetros faltantes)
-          schema:
-            $ref: '#/definitions/Error'
-        404:
-          description: Categoría inexistente
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /job_positions/categories/{category}/{name}:
-    parameters:
-      - description: Categoría
-        in: path
-        name: category
-        required: true
-        type: string
-      - description: Nombre del puesto
-        in: path
-        name: name
-        required: true
-        type: string
-    put:
-      summary: Modificación de puestos
-      description: |
-        Endpoint para modificar un puesto
-      parameters:
-        - description: Datos nuevos del puesto
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/JobPosition'
+                description: Gender of the user
+              dob:
+                type: string
+                description: Date of birht of the user
+              nationality:
+                type: string
+                description: Nationality of the user
+              city:
+                type: string
+                description: Vity of the user
+              profile:
+                type: string
+                description: Breve resumen of the user
+              picture:
+                type: string
+                description: Image URL of the user.
+
+      tags:
+        - Acces
       responses:
         200:
-          description: Modificación correcta
-          schema:
-            $ref: '#/definitions/JobPosition'
-        400:
-          description: Incumplimiento de precondiciones (parámetros faltantes)
-          schema:
-            $ref: '#/definitions/Error'
-        404:
-          description: No existe el recurso solicitado
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    delete:
-      summary: Baja de puestos
-      description: |
-        Endpoint para dar de baja un puesto
-      responses:
-        204:
-          description: Baja correcta
-        404:
-          description: No existe el recurso solicitado
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /skills:
-    get:
-      summary: Listado de habilidades
-      description: |
-        El *Skill* endpoint devuelve toda la información acerca
-        de todas las habilidades existentes. La respuesta incluye el
-        nombre y categoría de cada habilidad.
-      responses:
-        200:
-          description: Todas las habilidades existentes
-          schema:
-            properties:
-              skills:
-                type: array
-                items:
-                  $ref: '#/definitions/Skill'
-              metadata:
-                $ref: '#/definitions/Metadata'
-          examples:
-            application/json:
-              skills:
-                - name: c
-                  category: software
-                  description: Lenguaje de programación C
-                - name: Java
-                  category: software
-                  description: Lenguaje de programación Java
-              metadata:
-                version: '0.1'
-                count: 2
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /skills/categories/{category}:
-    parameters:
-      - description: Categoría
-        in: path
-        name: category
-        required: true
-        type: string
-    post:
-      summary: Alta de habilidades
-      description: |
-        Endpoint para dar de alta una habilidad
-      parameters:
-        - description: Habilidad a dar de alta
-          in: body
-          name: body
-          required: true
+          description: A new token for that User
           schema:
             type: object
             properties:
-              description:
+              status:
                 type: string
-              name:
-                type: string
-      responses:
-        201:
-          description: Alta correcta
-          schema:
-            $ref: '#/definitions/Skill'
+              data:
+                $ref: '#/definitions/Token'
           examples:
             application/json:
-              name: java
-              category: software
-              description: Lenguaje de programación Java
-        400:
-          description: Incumplimiento de precondiciones (parámetros faltantes)
+              token: "67E72E2FB07E8D4427FCBA609525ED57"
+        409:
+          description: Email already in use
           schema:
-            $ref: '#/definitions/Error'
-        404:
-          description: Categoría inexistente
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /skills/categories/{category}/{name}:
-    parameters:
-      - description: Categoría
-        in: path
-        name: category
-        required: true
-        type: string
-      - description: Nombre de la habilidad
-        in: path
-        name: name
-        required: true
-        type: string
-    put:
-      summary: Modificación de habilidad
-      description: |
-        Endpoint para modificar una habilidad
-      parameters:
-        - description: Datos nuevos de la habilidad
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Skill'
-      responses:
-        200:
-          description: Modificación correcta
-          schema:
-            $ref: '#/definitions/Skill'
-        400:
-          description: Incumplimiento de precondiciones (parámetros faltantes)
-          schema:
-            $ref: '#/definitions/Error'
-        404:
-          description: No existe el recurso solicitado
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    delete:
-      summary: Baja de habilidad
-      description: |
-        Endpoint para dar de baja una habilidad
-      responses:
-        204:
-          description: Baja correcta
-        404:
-          description: No existe el recurso solicitado
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /categories:
-    get:
-      summary: Listado de categorías
-      description: |
-        El *Category* endpoint devuelve toda la información acerca
-        de todas las categorías existentes. La respuesta incluye el
-        nombre de cada una.
-      responses:
-        200:
-          description: Todas las categorías existentes
-          schema:
+            type: object
             properties:
-              skills:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 409
+                message: "Email already in use"
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+
+  /users:
+    get:
+      summary: Users Profiles
+      description: The *users* Profile endpoint returns information about all the users within the application.
+      parameters:
+        - name: Auth
+          in: header
+          description: Basic Authorization email:password in b64
+          required: true
+          type: string
+
+      tags:
+        - User
+      responses:
+        200:
+          description: Profile information for every user
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
                 type: array
                 items:
-                  $ref: '#/definitions/Category'
-              metadata:
-                $ref: '#/definitions/Metadata'
+                  $ref: '#/definitions/User'
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
           examples:
             application/json:
-              categories:
-                - name: software
-                  description: Categoría relacionada con software
-                - name: music
-                  description: Categoría relacionada con la música
-              metadata:
-                version: '0.1'
-                count: 2
-        500:
-          description: Unexpected error
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+        501:
+          description: Invalid Token
           schema:
-            $ref: '#/definitions/Error'
-    post:
-      summary: Alta de categorías
-      description: |
-        Endpoint para dar de alta una categoría
-      parameters:
-        - description: Categoría a dar de alta
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Category'
-      responses:
-        201:
-          description: Alta correcta
-          schema:
-            $ref: '#/definitions/Category'
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
           examples:
             application/json:
-              name: sport
-              description: Categoría relacionada con los deportes
-        400:
-          description: Incumplimiento de precondiciones (parámetros faltantes)
-          schema:
-            $ref: '#/definitions/Error'
-        500:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /categories/{name}:
-    parameters:
-      - description: Nombre de la categoría
-        in: path
-        name: name
-        required: true
-        type: string
-    put:
-      summary: Modificación de categoría
-      description: |
-        Endpoint para modificar una categória
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+
+
+  /users/me:
+    get:
+      summary: User Profile
+      description: The *user/me* Profile endpoint returns information about the user with authorization in the application.
       parameters:
-        - description: Datos nuevos de la categoría
-          in: body
-          name: body
+        - name: Auth
+          in: header
+          description: Basic Authorization email:password in b64
           required: true
-          schema:
-            $ref: '#/definitions/Category'
+          type: string
+      tags:
+        - User
       responses:
         200:
-          description: Modificación correcta
+          description: Profile information for every user
           schema:
-            $ref: '#/definitions/Category'
-        400:
-          description: Incumplimiento de precondiciones (parámetros faltantes)
-          schema:
-            $ref: '#/definitions/Error'
-        404:
-          description: No existe el recurso solicitado
-          schema:
-            $ref: '#/definitions/Error'
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                $ref: '#/definitions/User'
         500:
-          description: Unexpected error
+          description: "Internal server error"
           schema:
-            $ref: '#/definitions/Error'
-    delete:
-      summary: Baja de categoría
-      description: |
-        Endpoint para dar de baja una categoría
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+    post:
+      summary: Update user
+      description: The *users/me* Profile POST endopoint updates the authorized users information
+      parameters:
+        - name: Auth
+          in: header
+          description: Basic Authorization email:password in b64
+          required: true
+          type: string
+
+        - name: user
+          description: Usuario a actualizar
+          in: body
+          schema:
+            $ref: '#/definitions/User'
       responses:
-        204:
-          description: Baja correcta
-        404:
-          description: No existe el recurso solicitado
+        200:
+          description: OK
           schema:
-            $ref: '#/definitions/Error'
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    description: ok
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
         500:
-          description: Unexpected error
+          description: "Internal server error"
           schema:
-            $ref: '#/definitions/Error'
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+    delete:
+      summary: Delete User Profile
+      description: The *user/me* Profile DELETE endpoint deletes the user with authorization in the application.
+      parameters:
+        - name: Auth
+          in: header
+          description: Basic Authorization email:password in b64
+          required: true
+          type: string
+      tags:
+        - User
+      responses:
+        200:
+          description: Profile deleted
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    description: ok
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+
+
 definitions:
+  Token:
+    type: object
+    properties:
+      token:
+        type: string
+        description: Eg. "67E72E2FB07E8D4427FCBA609525ED57"
+  User:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Email address of the user
+      name:
+        type: string
+        description: First and last name of the user.
+      gender:
+        type: string
+        description: Gender of the user
+      dob:
+        type: string
+        description: Date of birht of the user
+      nationality:
+        type: string
+        description: Nationality of the user
+      city:
+        type: string
+        description: Vity of the user
+      profile:
+        type: string
+        description: Breve resumen of the user
+      picture:
+        type: string
+        description: Image URL of the user.
+      contacts:
+        type: array
+        items:
+          type: object
+          properties:
+            email:
+              type: string
+      recommended_by:
+        type: array
+        items:
+          type: object
+          properties:
+            email:
+              type: string
+      skills:
+        type: array
+        items:
+          $ref: '#/definitions/Skill'
+      previous_exp:
+        type: array
+        items:
+          $ref: '#/definitions/Job'
+  Job:
+    type: object
+    properties:
+      company:
+        type: string
+        description: Company
+      description:
+        type: string
+        description: Descripción
+      position:
+        $ref: '#/definitions/JobPosition'
+      years:
+        type: string
+        description: Interval of that job
   JobPosition:
     type: object
     properties:
@@ -465,15 +488,7 @@ definitions:
       description:
         description: Descripción
         type: string
-  Metadata:
-    type: object
-    properties:
-      version:
-        type: string
-        description: Versión de la api
-      count:
-        type: integer
-        description: Cantidad de elementos en la respuesta
+
   Error:
     type: object
     properties:

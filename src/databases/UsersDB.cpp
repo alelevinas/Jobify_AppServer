@@ -44,7 +44,7 @@ string UsersDB::get_users() {
 
     leveldb::Iterator *it = db->NewIterator(leveldb::ReadOptions());
     for (it->SeekToFirst(); it->Valid(); it->Next()) {
-        ss << separator << it->value().ToString();
+        ss << separator << it->value().data();//ToString();
         separator = ",";
     }
 
