@@ -4,12 +4,13 @@
 
 #include "DatabaseManager.h"
 
-DatabaseManager::DatabaseManager(std::string usersDbName, std::string sessionsDBname,
-                                 std::string chatsDbName, std::string accountsDbName) {
+DatabaseManager::DatabaseManager(std::string accountsDbName, std::string usersDbName, std::string sessionsDBname,
+                                 std::string chatsDbName) {
     accounts = new AccountsDB(accountsDbName);
     users = new UsersDB(usersDbName);
     sessions = new SessionsDB(sessionsDBname);
     chats = new ChatsDB(chatsDbName);
+
 }
 
 DatabaseManager::~DatabaseManager() {

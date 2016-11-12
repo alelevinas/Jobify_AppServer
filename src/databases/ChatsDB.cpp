@@ -7,3 +7,7 @@
 ChatsDB::ChatsDB(std::string& dbName) : DB(dbName) {
 
 }
+
+ChatsDB::~ChatsDB() {
+
+}

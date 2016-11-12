@@ -4,6 +4,11 @@
 #include <ProfileController.h>
 #include <JobifyServer.h>
 #include <zconf.h>
+#include <log/easylogging++.h>
+
+
+INITIALIZE_EASYLOGGINGPP
+#define ELPP_THREAD_SAFE
 
 
 Json::Value generate_user(string &username);
@@ -35,16 +40,17 @@ int main() {
 //    Json::Value pepe = generate_user(username);
 //    db.add_user("pepe",pepe);
 
-    SessionManager sessionManager(&db,ONE_HOUR/12);  //5 mins
+    SessionManager sessionManager(&db,ONE_HOUR);  //5 mins
 
     ProfileController pf(&db, &sessionManager);
 
-    JobifyServer server(8080);
+    JobifyServer server(8000);
 
     server.registerController(&pf);
 
     server.start();
-    server.printStats();
+    //server.printStats();
+    LOG(INFO) << "Iniciando Servidor";
 
     cout << "Server started, routes:" << endl;
     pf.dumpRoutes();

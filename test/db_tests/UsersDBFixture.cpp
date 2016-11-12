@@ -6,6 +6,7 @@
 #include <databases/UsersDB.h>
 #include <exceptions/KeyDoesntExistException.h>
 #include <exceptions/KeyAlreadyExistsException.h>
+#include <DatabaseManager.h>
 
 class UsersDBFixture : public ::testing::Test {
 
@@ -15,7 +16,7 @@ protected:
     }
 
     virtual void SetUp() {
-        db = new UsersDB(db_name);
+        db = new DatabaseManager("testing_accounts","testing_users","testing_sessions","testing_chats");
     }
 
 public:
@@ -24,11 +25,13 @@ public:
     }
 
     virtual ~UsersDBFixture() {
-        system("rm -r testing");
+        system("rm -r testing_users");
+        system("rm -r testing_sessions");
+        system("rm -r testing_chats");
+        system("rm -r testing_accounts");
     }
 
-    UsersDB *db;
-    string db_name = "testing";
+    DatabaseManager* db;
 
     Json::Value generate_user(string &username) {
         Json::Value user;
@@ -75,12 +78,11 @@ public:
 };
 
 TEST_F(UsersDBFixture, test_open_bd_is_ok){
-    EXPECT_TRUE(db->openDB());
+    EXPECT_TRUE(db->openDBs());
 }
 
 TEST_F(UsersDBFixture, test_add_user_alepox_in_empty_bd) {
-    if (!db->openDB())
-        EXPECT_TRUE(false);
+    EXPECT_TRUE(db->openDBs());
 
     string username = "alepox";
     Json::Value user = generate_user(username);
@@ -89,8 +91,7 @@ TEST_F(UsersDBFixture, test_add_user_alepox_in_empty_bd) {
 }
 
 TEST_F(UsersDBFixture, test_get_user_alepox_in_empty_bd) {
-    if (!db->openDB())
-        EXPECT_TRUE(false);
+    EXPECT_TRUE(db->openDBs());
 
     string username = "alepox";
 
@@ -100,8 +101,7 @@ TEST_F(UsersDBFixture, test_get_user_alepox_in_empty_bd) {
 
 
 TEST_F(UsersDBFixture, test_add_user_alepox_twice_in_empty_bd) {
-    if (!db->openDB())
-        EXPECT_TRUE(false);
+    EXPECT_TRUE(db->openDBs());
 
     string username = "alepox";
     Json::Value user = generate_user(username);
@@ -112,8 +112,7 @@ TEST_F(UsersDBFixture, test_add_user_alepox_twice_in_empty_bd) {
 }
 
 TEST_F(UsersDBFixture, test_get_user_alepox_in_populated_bd){
-    if (!db->openDB())
-        EXPECT_TRUE(false);
+    EXPECT_TRUE(db->openDBs());
 
     string username = "alepox";
     Json::Value user = generate_user(username);
@@ -121,15 +120,19 @@ TEST_F(UsersDBFixture, test_get_user_alepox_in_populated_bd){
     EXPECT_TRUE(db->add_user(username, user));
     Json::Value userFromBD = db->get_user(username);
 
-    //std::cout << userFromBD << std::endl;
-
     EXPECT_EQ(userFromBD["username"],Json::Value(username));
+}
+
+TEST_F(UsersDBFixture, test_delete_invalid_user) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username = "invalid_alepox";
+    EXPECT_TRUE(db->delete_user(username));
 }
 
 
 TEST_F(UsersDBFixture, test_delete_user_alepox_in_populated_bd) {
-    if (!db->openDB())
-        EXPECT_TRUE(false);
+    EXPECT_TRUE(db->openDBs());
 
     string username = "alepox";
     Json::Value user = generate_user(username);
@@ -143,8 +146,7 @@ TEST_F(UsersDBFixture, test_delete_user_alepox_in_populated_bd) {
 
 
 TEST_F(UsersDBFixture, test_edit_user_alepox_in_populated_bd) {
-    if (!db->openDB())
-        EXPECT_TRUE(false);
+    EXPECT_TRUE(db->openDBs());
 
     string username = "alepox";
     Json::Value user = generate_user(username);
@@ -159,5 +161,34 @@ TEST_F(UsersDBFixture, test_edit_user_alepox_in_populated_bd) {
     //std::cout << userFromBD << std::endl;
 
     EXPECT_EQ(userFromBD["name"],Json::Value("marcelo"));
+}
+
+TEST_F(UsersDBFixture, test_get_users_in_populated_bd) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username = "alepox";
+    Json::Value user = generate_user(username);
+
+    EXPECT_TRUE(db->add_user(username, user));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    string users = db->get_users();
+
+    std::cerr << users << std::endl;
+
+    Json::Reader reader;
+    Json::Value json_users;
+    bool parsingSuccessful = reader.parse( users, json_users);
+    if (!parsingSuccessful) {
+        std::cerr << reader.getFormattedErrorMessages();
+        EXPECT_TRUE(false);
+    }
+
+    EXPECT_EQ(json_users["users"][0]["username"],username); //no necesariamente deberia mantener el orden...
+    EXPECT_EQ(json_users["users"][1]["username"],username2);
 }
 

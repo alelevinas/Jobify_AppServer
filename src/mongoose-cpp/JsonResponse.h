@@ -34,6 +34,10 @@ namespace Mongoose
              */
             void setHuman(bool human);
 
+
+            void setStatusSucces();
+            void setStatusError();
+
         protected:
             bool humanReadable;
     };

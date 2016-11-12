@@ -8,11 +8,11 @@
 #include <exceptions/KeyDoesntExistException.h>
 #include <exceptions/KeyAlreadyExistsException.h>
 #include <exceptions/TokenInvalidException.h>
+#include <exceptions/InvalidUsernamePasswordException.h>
 #include "SessionManager.h"
 #include "cryptopp/base64.h"
 #include "cryptopp/md5.h"
 #include "cryptopp/hex.h"
-
 
 
 enum months {
@@ -25,10 +25,6 @@ SessionManager::SessionManager(DatabaseManager *dbManager, double token_douratio
 
 SessionManager::~SessionManager() {
 
-}
-
-double &SessionManager::get_token_duration() {
-    return this->token_duration;
 }
 
 void SessionManager::set_token_duration(double new_duration) {
@@ -65,7 +61,10 @@ std::string SessionManager::get_hashed_usr_pass(std::string &username, std::stri
 
 std::string SessionManager::add_session(std::string &username, std::string &password) {
 
-    /*fijarse si ya esta, si esta renovar el timestamp, si no esta agregar*/
+    /*si ya esta, lo pisa, si no esta agregar*/
+
+    if (!dbManager->is_correct(username, password)) // si no existe esa cuenta
+        throw InvalidUsernamePasswordException();
 
     std::string timestamp = get_timestamp_now();
 
@@ -76,12 +75,18 @@ std::string SessionManager::add_session(std::string &username, std::string &pass
     user_timestamp["timestamp"] = timestamp;
 
     try {
-        dbManager->add_session(hashed, user_timestamp);
-        return hashed;
+        if (dbManager->add_session(hashed, user_timestamp))
+            return hashed;
+        else
+            return "";
     } catch (KeyAlreadyExistsException e) {
         //return "";
         throw e;
     }
+}
+
+bool SessionManager::delete_session(std::string &token) {
+    return dbManager->delete_session(token);
 }
 
 bool SessionManager::has_expired(std::string &token) {
@@ -111,8 +116,8 @@ bool SessionManager::timestamp_has_expired(std::string &timestamp) {
     ss >> seg;
     ss >> year;
 
-  /*  std::cerr << "\nyear: " << year;
-    std::cerr << "\nstoiyear: " << stoi(year);*/
+    /*  std::cerr << "\nyear: " << year;
+      std::cerr << "\nstoiyear: " << stoi(year);*/
 
     struct tm _then = {0};
     _then.tm_hour = stoi(hour);
@@ -120,7 +125,7 @@ bool SessionManager::timestamp_has_expired(std::string &timestamp) {
     _then.tm_sec = stoi(seg);
     _then.tm_mon = get_month_index(month);
     _then.tm_mday = stoi(mday);
-    _then.tm_year = stoi(year)-1900;
+    _then.tm_year = stoi(year) - 1900;
 
     time_t now = time(NULL);
 
@@ -144,8 +149,10 @@ std::string SessionManager::get_username(std::string &token) {
     try {
         Json::Value session = dbManager->get_session(token);
         std::string timestamp = session["timestamp"].asString();
-        if (timestamp_has_expired(timestamp))
+        if (timestamp_has_expired(timestamp)) {
+            dbManager->delete_session(token);
             throw TokenInvalidException();
+        }
         return session["username"].asString();
     } catch (KeyDoesntExistException e) {
         throw TokenInvalidException();

@@ -272,7 +272,7 @@ namespace Mongoose
     }
 
     string Request::getHeaderKeyValue(const std::string& header_key) {
-      string output;
+      string output("");
       for (int i=0; i<connection->num_headers; i++) {
         const struct mg_connection::mg_header *header = &connection->http_headers[i];
         if (strcmp(header->name, header_key.c_str()) == 0) {
