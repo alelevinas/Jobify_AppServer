@@ -188,7 +188,7 @@ TEST_F(UsersDBFixture, test_get_users_in_populated_bd) {
         EXPECT_TRUE(false);
     }
 
-    EXPECT_EQ(json_users[0]["username"],username); //no necesariamente deberia mantener el orden...
-    EXPECT_EQ(json_users[1]["username"],username2);
+    EXPECT_EQ(json_users["users"][0]["username"],username); //no necesariamente deberia mantener el orden...
+    EXPECT_EQ(json_users["users"][1]["username"],username2);
 }
 
