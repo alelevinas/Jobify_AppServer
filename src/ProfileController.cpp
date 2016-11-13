@@ -214,7 +214,6 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
         }
     } catch (KeyDoesntExistException &e) {
         ApiError::setError(response,500,"Internal server error");
-        return;
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"token invalido");
     }
@@ -307,7 +306,7 @@ void ProfileController::postRecommend(Mongoose::Request &request, Mongoose::Json
 
         std::string recommendTo = request.getData(); //el body
 
-        LOG(INFO) << "UPDATE USER REQUEST:\n"
+        LOG(INFO) << "RECOMMEND USER REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
                   << "\t\tUser: " << username << "\n"
                   << "\t\tData: " << recommendTo
@@ -315,15 +314,19 @@ void ProfileController::postRecommend(Mongoose::Request &request, Mongoose::Json
 
         db->get_user(username); //solo para ver si salta la exception
 
-        bool ok = true;
         Json::Reader reader;
         Json::Value userToRecomend;
         bool parsingSuccessful = reader.parse(recommendTo, userToRecomend);
         if (!parsingSuccessful) {
             ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
-            ok = false;
+            LOG(INFO) << "RECOMMEND USER RESPONSE:\n"
+                      << "\t\tResponse: " << response
+                      << std::endl;
+            return;
         }
-        if (ok && db->recommend_user(username, userToRecomend["username"].asString())) {
+
+
+        if (db->recommend_user(username, userToRecomend["username"].asString())) {
             response[STATUS] = SUCCES;
             response[DATA] = "ok";
         } else {
@@ -331,11 +334,54 @@ void ProfileController::postRecommend(Mongoose::Request &request, Mongoose::Json
         }
     } catch (KeyDoesntExistException &e) {
         ApiError::setError(response,500,"Internal server error");
-        return;
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"invalid token");
     }
-    LOG(INFO) << "UPDATE USER RESPONSE:\n"
+    LOG(INFO) << "RECOMMEND USER RESPONSE:\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
+
+void ProfileController::postDeRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+    cerr << "\ntoken recibido " << token;
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+        cerr << " es del usuario: " << username;
+
+        std::string deRecommendTo = request.getData(); //el body
+
+        LOG(INFO) << "DERECOMMEND USER REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << "\n"
+                  << "\t\tData: " << deRecommendTo
+                  << std::endl;
+
+        db->get_user(username); //solo para ver si salta la exception
+
+        Json::Reader reader;
+        Json::Value userToRecomend;
+        bool parsingSuccessful = reader.parse(deRecommendTo, userToRecomend);
+        if (!parsingSuccessful) {
+            ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
+            LOG(INFO) << "DERECOMMEND USER RESPONSE:\n"
+                      << "\t\tResponse: " << response
+                      << std::endl;
+        }
+        if (db->deRecommend_user(username, userToRecomend["username"].asString())) {
+            response[STATUS] = SUCCES;
+            response[DATA] = "ok";
+        } else {
+            ApiError::setError(response,420,"User was not recommended before");
+        }
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Internal server error");
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"invalid token");
+    }
+    LOG(INFO) << "DERECOMMEND USER RESPONSE:\n"
               << "\t\tResponse: " << response
               << std::endl;
 }
@@ -356,7 +402,8 @@ void ProfileController::setup() {
     addRouteResponse("POST", "/users/me", ProfileController, updateUserRequest, JsonResponse);
     addRouteResponse("DELETE", "/users/me", ProfileController, deleteUserRequest, JsonResponse);
 
-
+    addRouteResponse("POST", "/users/recommend", ProfileController, postRecommend, JsonResponse);
+    addRouteResponse("DELETE", "/users/recommend", ProfileController, postDeRecommend, JsonResponse);
 }
 
 /*

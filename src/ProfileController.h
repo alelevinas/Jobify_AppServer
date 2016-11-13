@@ -32,6 +32,7 @@ public:
 
 
     void postRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void postDeRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
 private:
     void decodeAuth(std::string &b64_auth, std::string &usr, std::string &pass);

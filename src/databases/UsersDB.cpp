@@ -91,7 +91,6 @@ bool UsersDB::deRecommend_user(const string &usernameFrom, const string &usernam
         if (recommended_by[i].asString() == usernameFrom) {
             destUser["recommended_by"].removeIndex(i, &aux);
             LOG(DEBUG) << ss.str() << destUser["recommended_by"];
-            LOG(DEBUG) << destUser;
             return this->edit_user(usernameTo,destUser);
         }
     }
