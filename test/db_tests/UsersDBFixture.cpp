@@ -214,6 +214,36 @@ TEST_F(UsersDBFixture, test_recommend_user) {
     EXPECT_EQ(user2["recommended_by"][0].asString(), username1);
 }
 
+TEST_F(UsersDBFixture, test_recommend_user_twice) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->recommend_user(username1, username2));
+
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user2["recommended_by"][0].asString(), username1);
+
+    EXPECT_TRUE(db->recommend_user(username1, username2));
+
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user2["recommended_by"][0].asString(), username1);
+
+    //size is still 1
+    EXPECT_EQ(user2["recommended_by"].size(),1);
+
+}
+
 TEST_F(UsersDBFixture, test_deRecommend_user) {
     EXPECT_TRUE(db->openDBs());
 
@@ -237,8 +267,26 @@ TEST_F(UsersDBFixture, test_deRecommend_user) {
 
     EXPECT_TRUE(db->deRecommend_user(username1,username2));
 
-    std::cerr << user2;
+    user2 = db->get_user(username2);
     EXPECT_EQ(user2["recommended_by"].size(),0);
+}
+
+TEST_F(UsersDBFixture, test_deRecommend_user_that_wasnt_recommended) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_EQ(user2["recommended_by"].size(),0);
+
+    EXPECT_FALSE(db->deRecommend_user(username1,username2));
 }
 
 

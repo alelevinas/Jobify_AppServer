@@ -65,8 +65,10 @@ bool UsersDB::recommend_user(const string &usernameFrom, const string &usernameT
     //std::cerr << destUser;
     Json::Value recommended_by = destUser["recommended_by"];//.append(usernameFrom); //listo???
     for (const Json::Value& username : recommended_by) {
-        if (username.asString() == usernameFrom)
+        if (username.asString() == usernameFrom) {
+            LOG(DEBUG) << " user:" << usernameTo << " ya estaba recommendado por " << usernameFrom;
             return true;
+        }
     }
 
     destUser["recommended_by"].append(usernameFrom);
@@ -89,10 +91,10 @@ bool UsersDB::deRecommend_user(const string &usernameFrom, const string &usernam
         if (recommended_by[i].asString() == usernameFrom) {
             destUser["recommended_by"].removeIndex(i, &aux);
             LOG(DEBUG) << ss.str() << destUser["recommended_by"];
+            LOG(DEBUG) << destUser;
             return this->edit_user(usernameTo,destUser);
         }
     }
-    LOG(DEBUG) << ss.str() << destUser["recommended_by"];
-
+    LOG(DEBUG) << ss.str() << destUser["recommended_by"] << " NO ESTABA RECOMENDADO, NO LO SACA";
     return false;
 }
