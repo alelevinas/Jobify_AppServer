@@ -34,6 +34,8 @@ public:
     bool edit_user(const string &username, Json::Value userEdited);
     bool delete_user(const string &username);
     std::string get_users();
+    bool recommend_user(const string &usernameFrom, const string &usernameTo);
+    bool deRecommend_user(const string &usernameFrom, const string &usernameTo);
 
     //SessionsDB
     bool add_session(const std::string &token, Json::Value session);

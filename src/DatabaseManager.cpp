@@ -44,6 +44,14 @@ std::string DatabaseManager::get_users() {
     return users->get_users();
 }
 
+bool DatabaseManager::recommend_user(const string &usernameFrom, const string &usernameTo) {
+    return users->recommend_user(usernameFrom,usernameTo);
+}
+
+bool DatabaseManager::deRecommend_user(const string &usernameFrom, const string &usernameTo) {
+    return users->deRecommend_user(usernameFrom,usernameTo);
+}
+
 bool DatabaseManager::add_session(const std::string &token, Json::Value session) {
     return sessions->add_session(token,session);
 }
@@ -63,3 +71,4 @@ bool DatabaseManager::add_account(string username, string password) {
 bool DatabaseManager::is_correct(std::string username, std::string password) {
     return accounts->is_correct(username,password);
 }
+

@@ -30,6 +30,9 @@ public:
     bool delete_user(const string &username);
 
     string get_users();
+
+    bool recommend_user(const string &usernameFrom, const string &usernameTo);
+    bool deRecommend_user(const string &usernameFrom, const string &usernameTo);
 };
 
 
