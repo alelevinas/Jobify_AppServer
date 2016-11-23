@@ -30,6 +30,17 @@ public:
 
     void getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
+
+    void postRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void deleteDeRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+    void postAddContact(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void deleteRemoveContact(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+    void getMostPopularContacts(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+
+
 private:
     void decodeAuth(std::string &b64_auth, std::string &usr, std::string &pass);
 };
