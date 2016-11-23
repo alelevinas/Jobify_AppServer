@@ -29,7 +29,7 @@ Json::Value DatabaseManager::get_user(const string &username) {
 }
 
 bool DatabaseManager::add_user(const string &username, Json::Value user) {
-    return users->add_user(username,user);
+    return users->add_user(username, user);
 }
 
 bool DatabaseManager::delete_user(const string &username) {
@@ -37,7 +37,7 @@ bool DatabaseManager::delete_user(const string &username) {
 }
 
 bool DatabaseManager::edit_user(const string &username, Json::Value userEdited) {
-    return users->edit_user(username,userEdited);
+    return users->edit_user(username, userEdited);
 }
 
 std::string DatabaseManager::get_users() {
@@ -45,15 +45,23 @@ std::string DatabaseManager::get_users() {
 }
 
 bool DatabaseManager::recommend_user(const string &usernameFrom, const string &usernameTo) {
-    return users->recommend_user(usernameFrom,usernameTo);
+    return users->recommend_user(usernameFrom, usernameTo);
 }
 
 bool DatabaseManager::deRecommend_user(const string &usernameFrom, const string &usernameTo) {
-    return users->deRecommend_user(usernameFrom,usernameTo);
+    return users->deRecommend_user(usernameFrom, usernameTo);
+}
+
+bool DatabaseManager::addContact(const string &usernameFrom, const string &usernameTo) {
+    return users->addContact(usernameFrom, usernameTo);
+}
+
+bool DatabaseManager::removeContact(const string &usernameFrom, const string &usernameTo) {
+    return users->removeContact(usernameFrom, usernameTo);
 }
 
 bool DatabaseManager::add_session(const std::string &token, Json::Value session) {
-    return sessions->add_session(token,session);
+    return sessions->add_session(token, session);
 }
 
 Json::Value DatabaseManager::get_session(const std::string &token) {
@@ -65,10 +73,10 @@ bool DatabaseManager::delete_session(const std::string &token) {
 }
 
 bool DatabaseManager::add_account(string username, string password) {
-    return accounts->add_account(username,password);
+    return accounts->add_account(username, password);
 }
 
 bool DatabaseManager::is_correct(std::string username, std::string password) {
-    return accounts->is_correct(username,password);
+    return accounts->is_correct(username, password);
 }
 

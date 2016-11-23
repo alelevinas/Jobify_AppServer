@@ -289,5 +289,87 @@ TEST_F(UsersDBFixture, test_deRecommend_user_that_wasnt_recommended) {
     EXPECT_FALSE(db->deRecommend_user(username1,username2));
 }
 
+TEST_F(UsersDBFixture, test_add_contact) {
+    EXPECT_TRUE(db->openDBs());
 
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
 
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->addContact(username1, username2));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"][0].asString(), username2);
+    EXPECT_EQ(user2["contacts"][0].asString(), username1);
+}
+
+TEST_F(UsersDBFixture, test_add_contact_twice) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->addContact(username1, username2));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"][0].asString(), username2);
+    EXPECT_EQ(user2["contacts"][0].asString(), username1);
+
+    EXPECT_TRUE(db->addContact(username2, username1));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"][0].asString(), username2);
+    EXPECT_EQ(user2["contacts"][0].asString(), username1);
+
+    EXPECT_EQ(user1["contacts"].size(), 1);
+    EXPECT_EQ(user2["contacts"].size(), 1);
+}
+
+TEST_F(UsersDBFixture, test_remove_contact) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->addContact(username1, username2));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"][0].asString(), username2);
+    EXPECT_EQ(user2["contacts"][0].asString(), username1);
+
+    EXPECT_TRUE(db->removeContact(username1,username2));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"].size(), 0);
+    EXPECT_EQ(user2["contacts"].size(), 0);
+}
