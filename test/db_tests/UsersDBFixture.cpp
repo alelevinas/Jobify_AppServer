@@ -369,3 +369,21 @@ TEST_F(UsersDBFixture, test_remove_contact) {
     EXPECT_EQ(user1["contacts"].size(), 0);
     EXPECT_EQ(user2["contacts"].size(), 0);
 }
+
+TEST_F(UsersDBFixture, test_get_top_10_recommended) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+
+    Json::Value users;
+    db->get_users_by("recommended",10,"","",users);
+}

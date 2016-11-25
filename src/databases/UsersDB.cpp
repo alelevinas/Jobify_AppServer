@@ -161,16 +161,28 @@ bool UsersDB::removeContact(const string &usernameFrom, const string &usernameTo
     return false;
 }
 
-bool UsersDB::get_users_by(string sort_by, string nFilter, string job, string skill, Json::Value& result) {
-    if(!get_users(result))
-        return false;
-
-
-}
-
 bool UsersDB::parse_json_array(std::string body, Json::Value& result) {
     Json::Reader reader;
     bool ok = true;
     bool parsingSuccessful = reader.parse(body, result);
     return parsingSuccessful;
 }
+
+bool UsersDB::get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result) {
+    Json::Value users;
+
+    if(!get_users(users))
+        return false;
+
+    for( Json::ValueConstIterator itr = users["users"].begin() ; itr != users["users"].end() ; itr++ ) {
+        Json::Value user = *itr;
+        std::cerr << "----------USER " << user["username"] << " (" << itr.index() << ")--------\n" << std::endl;
+        std::cerr << "\nSKILLS --> " << user["skills"];
+
+        std::cerr << "\nPREVIOUS EXP --> " << user["previous_exp"];
+    }
+
+    return true;
+}
+
+

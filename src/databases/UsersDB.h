@@ -40,7 +40,7 @@ public:
     bool addContact(const string &usernameFrom, const string &usernameTo);
     bool removeContact(const string &usernameFrom, const string &usernameTo);
 
-    bool get_users_by(string sort_by, string nFilter, string job, string skill, Json::Value& result);
+    bool get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result);
 
     bool parse_json_array(std::string body, Json::Value& result);
 };

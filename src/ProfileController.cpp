@@ -488,6 +488,8 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
         std::string qFilter = request.get("filter","");
         std::string qJob = request.get("job_position","");
         std::string qSkill = request.get("skill","");
+
+        int nFilter = stoi(qFilter);
         /*
          * REALIZAR CONSULTAS CON LAS BASES DE DATOS
          *
@@ -498,7 +500,7 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
          */
 
         Json::Value users;
-        Json::Value result = db->get_users_by(qSort,qFilter,qJob,qSkill, users);
+        Json::Value result = db->get_users_by(qSort,nFilter,qJob,qSkill, users);
 
 
     } catch (TokenInvalidException &e) {
