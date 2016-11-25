@@ -176,20 +176,16 @@ TEST_F(UsersDBFixture, test_get_users_in_populated_bd) {
 
     EXPECT_TRUE(db->add_user(username2, user2));
 
-    string users = db->get_users();
+    Json::Value users;
+    bool status = db->get_users(users);
 
-    std::cerr << users << std::endl;
-
-    Json::Reader reader;
-    Json::Value json_users;
-    bool parsingSuccessful = reader.parse( users, json_users);
-    if (!parsingSuccessful) {
-        std::cerr << reader.getFormattedErrorMessages();
+    if (!status) {
+        std::cerr << "Parser error";
         EXPECT_TRUE(false);
     }
 
-    EXPECT_EQ(json_users["users"][0]["username"],username); //no necesariamente deberia mantener el orden...
-    EXPECT_EQ(json_users["users"][1]["username"],username2);
+    EXPECT_EQ(users["users"][0]["username"],username); //no necesariamente deberia mantener el orden...
+    EXPECT_EQ(users["users"][1]["username"],username2);
 }
 
 TEST_F(UsersDBFixture, test_recommend_user) {

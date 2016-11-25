@@ -33,7 +33,7 @@ public:
     Json::Value get_user(const string &username);
     bool edit_user(const string &username, Json::Value userEdited);
     bool delete_user(const string &username);
-    std::string get_users();
+    bool get_users(Json::Value& result);
     bool recommend_user(const string &usernameFrom, const string &usernameTo);
     bool deRecommend_user(const string &usernameFrom, const string &usernameTo);
     bool addContact(const string &usernameFrom, const string &usernameTo);
@@ -46,6 +46,8 @@ public:
     //accounts
     bool add_account(string username, string password);
     bool is_correct(std::string username, std::string password);
+
+    Json::Value get_users_by(string sort_by, string nFilter, string job, string skill, Json::Value &result);
 };
 
 

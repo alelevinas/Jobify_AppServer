@@ -37,7 +37,7 @@ public:
     void postAddContact(Mongoose::Request &request, Mongoose::JsonResponse &response);
     void deleteRemoveContact(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
-    void getMostPopularContacts(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void getFilteredUsers(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
 
 
