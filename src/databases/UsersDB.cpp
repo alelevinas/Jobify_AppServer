@@ -36,7 +36,7 @@ bool UsersDB::delete_user(const string &username) {
     return this->delete_key(username);
 }
 
-string UsersDB::get_users() {
+bool UsersDB::get_users(Json::Value& result) {
     std::stringstream ss;
 
     ss << "{ \"users\": [";
@@ -56,7 +56,7 @@ string UsersDB::get_users() {
         return "";// Check for any errors found during the scan
     }
     delete it;
-    return ss.str();
+    return parse_json_array(ss.str(), result);
 }
 
 // si el usernameTo ya estaba recomendado por usernameFrom no hace nada y devuelve true
@@ -161,7 +161,16 @@ bool UsersDB::removeContact(const string &usernameFrom, const string &usernameTo
     return false;
 }
 
-Json::Value UsersDB::get_popular_users() {
-    std::string users = get_users();
+bool UsersDB::get_users_by(string sort_by, string nFilter, string job, string skill, Json::Value& result) {
+    if(!get_users(result))
+        return false;
 
+
+}
+
+bool UsersDB::parse_json_array(std::string body, Json::Value& result) {
+    Json::Reader reader;
+    bool ok = true;
+    bool parsingSuccessful = reader.parse(body, result);
+    return parsingSuccessful;
 }

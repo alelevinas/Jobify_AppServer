@@ -92,7 +92,6 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
     //std::string body = request.getData();
     try {
         std::string token = request.getHeaderKeyValue("Token");
-        std::string username = sessionManager->get_username(token);
 
         //cerr << " es del usuario: " << username;
 
@@ -101,19 +100,12 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
                   //<< "\t\tUser: " << username
                   << std::endl;
 
-        std::string json_users = db->get_users();
-//        std::cerr << json_users;
+        response[STATUS] = SUCCES;
 
-        Json::Reader reader;
         Json::Value users;
-        bool ok = true;
-        bool parsingSuccessful = reader.parse(json_users, users);
-        if (!parsingSuccessful) {
-            ok = false;
+        if(!db->get_users(users)) {
             ApiError::setError(response,500,"Internal server error");
         }
-       // response["ale"] = Json::Value(1234);
-        response[STATUS] = SUCCES;
         response[DATA] = users;
 
 
@@ -482,16 +474,31 @@ void ProfileController::deleteRemoveContact(Mongoose::Request &request, Mongoose
               << std::endl;
 }
 
-void ProfileController::getMostPopularContacts(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
+
 //    cerr << "\ntoken recibido " << token;
+
+
 
     try {
         std::string username = sessionManager->get_username(token);
 
+        std::string qSort = request.get("sort","");
+        std::string qFilter = request.get("filter","");
+        std::string qJob = request.get("job_position","");
+        std::string qSkill = request.get("skill","");
         /*
          * REALIZAR CONSULTAS CON LAS BASES DE DATOS
+         *
+         * url: /users?sort=qSort&filter=qFilter&job_position=qJob&skill=qSkill
+         *
+         * example: /users?sort=recommended&filter=10&job_position=developer&skill=java
+         *
          */
+
+        Json::Value users;
+        Json::Value result = db->get_users_by(qSort,qFilter,qJob,qSkill, users);
 
 
     } catch (TokenInvalidException &e) {
@@ -522,7 +529,7 @@ void ProfileController::setup() {
     addRouteResponse("POST", "/users/contacts", ProfileController, postAddContact, JsonResponse);
     addRouteResponse("DELETE", "/users/contacts", ProfileController, deleteRemoveContact, JsonResponse);
 
-    addRouteResponse("GET", "/users/populars", ProfileController, getMostPopularContacts, JsonResponse);
+    addRouteResponse("GET", "/users/search", ProfileController, getFilteredUsers, JsonResponse);
 }
 
 /*

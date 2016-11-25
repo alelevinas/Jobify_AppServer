@@ -40,8 +40,8 @@ bool DatabaseManager::edit_user(const string &username, Json::Value userEdited) 
     return users->edit_user(username, userEdited);
 }
 
-std::string DatabaseManager::get_users() {
-    return users->get_users();
+bool DatabaseManager::get_users(Json::Value& result) {
+    return users->get_users(result);
 }
 
 bool DatabaseManager::recommend_user(const string &usernameFrom, const string &usernameTo) {
@@ -78,5 +78,9 @@ bool DatabaseManager::add_account(string username, string password) {
 
 bool DatabaseManager::is_correct(std::string username, std::string password) {
     return accounts->is_correct(username, password);
+}
+
+Json::Value DatabaseManager::get_users_by(string sort_by, string nFilter, string job, string skill, Json::Value &result) {
+    return users->get_users_by(sort_by, nFilter, job, skill, result);
 }
 
