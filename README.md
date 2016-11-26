@@ -27,5 +27,5 @@ cd build
 ./Jobify_AppServer
 
 
-Documentación API: [link](http://rebilly.github.io/ReDoc/?url=https://gist.githubusercontent.com/alelevinas/ecb5b029a8775f12c9099d16ece77451/raw/jobify-appserver-api.yaml)
+Documentación API: [link](http://rebilly.github.io/ReDoc/?url=https://raw.githubusercontent.com/alelevinas/Jobify_AppServer/master/jobify-appserver-serverAPI.yaml)
 
