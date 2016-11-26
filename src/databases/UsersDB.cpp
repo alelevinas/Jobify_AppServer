@@ -174,13 +174,7 @@ bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill
     if(!get_users(users))
         return false;
 
-    for( Json::ValueConstIterator itr = users["users"].begin() ; itr != users["users"].end() ; itr++ ) {
-        Json::Value user = *itr;
-        std::cerr << "----------USER " << user["username"] << " (" << itr.index() << ")--------\n" << std::endl;
-        std::cerr << "\nSKILLS --> " << user["skills"];
-        std::cerr << "\nPREVIOUS EXP --> " << user["previous_exp"];
-        result.append(user);
-    }
+    result = users["users"];
 
     filter_job(result,job);
     filter_skill(result,skill);
@@ -191,16 +185,15 @@ bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill
 }
 
 void UsersDB::filter_job(Json::Value &result, string job) {
-    Json::Value aux_result(Json::arrayValue);
-
     if (job.empty())
         return;
+    Json::Value aux_result(Json::arrayValue);
 
     for( Json::ValueConstIterator itr = result.begin() ; itr != result.end() ; itr++ ) {
         Json::Value user = *itr;
 
-        std::cerr << "\nBUSCANDO " << job;
-        std::cerr << "\nPREVIOUS EXP --> " << user["previous_exp"];
+//        std::cerr << "\nBUSCANDO " << job;
+//        std::cerr << "\nPREVIOUS EXP --> " << user["previous_exp"];
         Json::Value job_exp(Json::arrayValue);
         job_exp = user["previous_exp"];
 
@@ -219,9 +212,26 @@ void UsersDB::filter_job(Json::Value &result, string job) {
 void UsersDB::filter_skill(Json::Value &result, string skill) {
     if (skill.empty())
         return;
+    Json::Value aux_result(Json::arrayValue);
 
+    for( Json::ValueConstIterator itr = result.begin() ; itr != result.end() ; itr++ ) {
+        Json::Value user = *itr;
 
+        std::cerr << "\nBUSCANDO " << skill;
+        std::cerr << "\nSKILLS --> " << user["skills"];
+        Json::Value skills(Json::arrayValue);
+        skills = user["skills"];
 
+        for( Json::ValueConstIterator jobItr = skills.begin() ; jobItr != skills.end() ; jobItr++ ) {
+            Json::Value json_skill = (*jobItr)["position"];
+
+            if (json_skill["name"].asString() == skill) {
+                aux_result.append(user);
+                break;
+            }
+        }
+    }
+    result.swapPayload(aux_result);
 }
 
 void UsersDB::sort_by(Json::Value &result, string sorting) {

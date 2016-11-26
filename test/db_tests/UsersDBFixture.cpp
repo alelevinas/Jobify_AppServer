@@ -33,12 +33,23 @@ public:
 
     DatabaseManager* db;
 
-    Json::Value generate_job_position(const char* name, const char* description, const char* category) {
+    Json::Value add_job_exp(Json::Value &user, const char* years, const char* company, const char* description,
+                            const char* pos_name, const char* pos_description, const char* pos_category) {
+
         Json::Value job;
-        job["name"] = name;
+        job["years"] = years;
+        job["company"] = company;
         job["description"] = description;
-        job["category"] = category;
-        return job;
+
+        Json::Value pos;
+        pos["name"] = pos_name;
+        pos["description"] = pos_description;
+        pos["category"] = pos_category;
+
+        job["position"] = pos;
+
+        user["previous_exp"].append(job);
+        return user;
     }
 
     Json::Value generate_user(string &username) {
@@ -60,22 +71,27 @@ public:
         user["skills"] = skills;
 
         Json::Value exp(Json::arrayValue);
+        user["previous_exp"] = exp;
+        add_job_exp(user, "2006-2009", "NASA", "Desarrollador en lenguaje R para analizar......", "Docente", "Profesor dicta clases, etc.", "Education");
+        add_job_exp(user, "2010-actualidad", "UBA", "Docente de la materia Taller 2", "Docente", "Profesor dicta clases, etc.", "Education");
+
+        /*
         Json::Value job1;
         job1["years"] = "2006-2009";
         job1["company"] = "NASA";
-        job1["position"] = generate_job_position("developer", "Software dev....", "Software");
+        job1["position"] = add_job_position(user, "developer", "Software dev....", "Software");
         job1["description"] = "Desarrollador en lenguaje R para analizar......";
 
         Json::Value job2;
         job2["years"] = "2010-actualidad";
         job2["company"] = "UBA";
-        job2["position"] = generate_job_position("Docente", "Profesor dicta clases, etc.", "Education");
+        job2["position"] = add_job_position(user, "Docente", "Profesor dicta clases, etc.", "Education");
         job2["description"] = "Docente de la materia Taller 2";
 
         exp.append(job1);
         exp.append(job2);
         user["previous_exp"] = exp;
-
+*/
         Json::Value cont(Json::arrayValue);
         user["contacts"] = cont;
         user["recommended_by"] = cont;
@@ -384,6 +400,8 @@ TEST_F(UsersDBFixture, test_get_top_10_recommended) {
     string username1 = "alepox";
     Json::Value user1 = generate_user(username1);
 
+    add_job_exp(user1, "2006-2009", "NASA", "Desarrollador en lenguaje R para analizar......", "Carpintero", "Profesor dicta clases, etc.", "Education");
+
     EXPECT_TRUE(db->add_user(username1, user1));
 
     string username2 = "marcelo";
@@ -391,7 +409,11 @@ TEST_F(UsersDBFixture, test_get_top_10_recommended) {
 
     EXPECT_TRUE(db->add_user(username2, user2));
 
-
     Json::Value users;
-    db->get_users_by("recommended",10,"Docente","",users);
+    db->get_users_by("recommended",10,"Carpintero","",users);
+
+    std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
+         << users;
+
+    EXPECT_EQ(users[0], user1);
 }
