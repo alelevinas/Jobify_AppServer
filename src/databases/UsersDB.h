@@ -43,6 +43,13 @@ public:
     bool get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result);
 
     bool parse_json_array(std::string body, Json::Value& result);
+
+    void filter_job(Json::Value &result, string job);
+
+    void filter_skill(Json::Value &result, string skill);
+    void sort_by(Json::Value &result, string sorting);
+
+    void top_k(Json::Value &result, int n);
 };
 
 

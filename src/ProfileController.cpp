@@ -499,8 +499,12 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
          *
          */
 
-        Json::Value users;
+        Json::Value root;
+        Json::Value users(Json::arrayValue);
+        root["users"] = users;
         Json::Value result = db->get_users_by(qSort,nFilter,qJob,qSkill, users);
+
+        response[DATA] = root;
 
 
     } catch (TokenInvalidException &e) {

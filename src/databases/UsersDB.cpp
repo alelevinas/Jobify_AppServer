@@ -168,7 +168,7 @@ bool UsersDB::parse_json_array(std::string body, Json::Value& result) {
     return parsingSuccessful;
 }
 
-bool UsersDB::get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result) {
+bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill, Json::Value &result) {
     Json::Value users;
 
     if(!get_users(users))
@@ -178,11 +178,61 @@ bool UsersDB::get_users_by(string sort_by, int nFilter, string job, string skill
         Json::Value user = *itr;
         std::cerr << "----------USER " << user["username"] << " (" << itr.index() << ")--------\n" << std::endl;
         std::cerr << "\nSKILLS --> " << user["skills"];
-
         std::cerr << "\nPREVIOUS EXP --> " << user["previous_exp"];
+        result.append(user);
     }
+
+    filter_job(result,job);
+    filter_skill(result,skill);
+    sort_by(result,sorting);
+    top_k(result,nFilter);
 
     return true;
 }
+
+void UsersDB::filter_job(Json::Value &result, string job) {
+    Json::Value aux_result(Json::arrayValue);
+
+    if (job.empty())
+        return;
+
+    for( Json::ValueConstIterator itr = result.begin() ; itr != result.end() ; itr++ ) {
+        Json::Value user = *itr;
+
+        std::cerr << "\nBUSCANDO " << job;
+        std::cerr << "\nPREVIOUS EXP --> " << user["previous_exp"];
+        Json::Value job_exp(Json::arrayValue);
+        job_exp = user["previous_exp"];
+
+        for( Json::ValueConstIterator jobItr = job_exp.begin() ; jobItr != job_exp.end() ; jobItr++ ) {
+            Json::Value position = (*jobItr)["position"];
+
+            if (position["name"].asString() == job) {
+                aux_result.append(user);
+                break;
+            }
+        }
+    }
+    result.swapPayload(aux_result);
+}
+
+void UsersDB::filter_skill(Json::Value &result, string skill) {
+    if (skill.empty())
+        return;
+
+
+
+}
+
+void UsersDB::sort_by(Json::Value &result, string sorting) {
+    if (sorting.empty())
+        return;
+}
+
+void UsersDB::top_k(Json::Value &result, int n) {
+    if (n == 0)
+        n = 10;
+}
+
 
 

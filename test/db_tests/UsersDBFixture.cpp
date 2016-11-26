@@ -33,6 +33,14 @@ public:
 
     DatabaseManager* db;
 
+    Json::Value generate_job_position(const char* name, const char* description, const char* category) {
+        Json::Value job;
+        job["name"] = name;
+        job["description"] = description;
+        job["category"] = category;
+        return job;
+    }
+
     Json::Value generate_user(string &username) {
         Json::Value user;
         user["username"] = username;
@@ -55,13 +63,13 @@ public:
         Json::Value job1;
         job1["years"] = "2006-2009";
         job1["company"] = "NASA";
-        job1["position"] = "Desarrollador";
+        job1["position"] = generate_job_position("developer", "Software dev....", "Software");
         job1["description"] = "Desarrollador en lenguaje R para analizar......";
 
         Json::Value job2;
         job2["years"] = "2010-actualidad";
         job2["company"] = "UBA";
-        job2["position"] = "Docente";
+        job2["position"] = generate_job_position("Docente", "Profesor dicta clases, etc.", "Education");
         job2["description"] = "Docente de la materia Taller 2";
 
         exp.append(job1);
@@ -385,5 +393,5 @@ TEST_F(UsersDBFixture, test_get_top_10_recommended) {
 
 
     Json::Value users;
-    db->get_users_by("recommended",10,"","",users);
+    db->get_users_by("recommended",10,"Docente","",users);
 }
