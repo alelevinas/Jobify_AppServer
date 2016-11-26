@@ -5,6 +5,7 @@
 #include <JobifyServer.h>
 #include <zconf.h>
 #include <log/easylogging++.h>
+#include "ChatController.h"
 
 
 INITIALIZE_EASYLOGGINGPP
@@ -43,6 +44,7 @@ int main() {
     SessionManager sessionManager(&db,ONE_HOUR);  //5 mins
 
     ProfileController pf(&db, &sessionManager);
+    ChatController ch(&db, &sessionManager);
 
     JobifyServer server(8000);
 
