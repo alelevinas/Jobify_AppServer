@@ -5,6 +5,7 @@
 #include <iostream>
 #include <exceptions/KeyAlreadyExistsException.h>
 #include <exceptions/KeyDoesntExistException.h>
+#include <log/easylogging++.h>
 #include "DB.h"
 
 DB::DB(const std::string &db_name) : db_name(db_name) {
@@ -38,6 +39,8 @@ bool DB::add(const std::string &key, Json::Value value) {
 
     std::ostringstream valueStream;
     valueStream << value;
+
+//    LOG(DEBUG) << "Adding " << value;
 
     s = db->Put(leveldb::WriteOptions(), key, valueStream.str());
     return s.ok();

@@ -70,7 +70,7 @@ public:
 
         Json::Value cont(Json::arrayValue);
         user["contacts"] = cont;
-        user["recomendations"] = cont;
+        user["recommended_by"] = cont;
         user["chats"] = cont;
 
         return user;
@@ -176,19 +176,196 @@ TEST_F(UsersDBFixture, test_get_users_in_populated_bd) {
 
     EXPECT_TRUE(db->add_user(username2, user2));
 
-    string users = db->get_users();
+    Json::Value users;
+    bool status = db->get_users(users);
 
-    std::cerr << users << std::endl;
-
-    Json::Reader reader;
-    Json::Value json_users;
-    bool parsingSuccessful = reader.parse( users, json_users);
-    if (!parsingSuccessful) {
-        std::cerr << reader.getFormattedErrorMessages();
+    if (!status) {
+        std::cerr << "Parser error";
         EXPECT_TRUE(false);
     }
 
-    EXPECT_EQ(json_users["users"][0]["username"],username); //no necesariamente deberia mantener el orden...
-    EXPECT_EQ(json_users["users"][1]["username"],username2);
+    EXPECT_EQ(users["users"][0]["username"],username); //no necesariamente deberia mantener el orden...
+    EXPECT_EQ(users["users"][1]["username"],username2);
 }
 
+TEST_F(UsersDBFixture, test_recommend_user) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->recommend_user(username1, username2));
+
+    user2 = db->get_user(username2);
+
+    //std::cerr << user2;
+
+    EXPECT_EQ(user2["recommended_by"][0].asString(), username1);
+}
+
+TEST_F(UsersDBFixture, test_recommend_user_twice) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->recommend_user(username1, username2));
+
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user2["recommended_by"][0].asString(), username1);
+
+    EXPECT_TRUE(db->recommend_user(username1, username2));
+
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user2["recommended_by"][0].asString(), username1);
+
+    //size is still 1
+    EXPECT_EQ(user2["recommended_by"].size(),1);
+
+}
+
+TEST_F(UsersDBFixture, test_deRecommend_user) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->recommend_user(username1, username2));
+
+    user2 = db->get_user(username2);
+
+    std::cerr << user2;
+
+    EXPECT_EQ(user2["recommended_by"][0].asString(), username1);
+
+    EXPECT_TRUE(db->deRecommend_user(username1,username2));
+
+    user2 = db->get_user(username2);
+    EXPECT_EQ(user2["recommended_by"].size(),0);
+}
+
+TEST_F(UsersDBFixture, test_deRecommend_user_that_wasnt_recommended) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_EQ(user2["recommended_by"].size(),0);
+
+    EXPECT_FALSE(db->deRecommend_user(username1,username2));
+}
+
+TEST_F(UsersDBFixture, test_add_contact) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->addContact(username1, username2));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"][0].asString(), username2);
+    EXPECT_EQ(user2["contacts"][0].asString(), username1);
+}
+
+TEST_F(UsersDBFixture, test_add_contact_twice) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->addContact(username1, username2));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"][0].asString(), username2);
+    EXPECT_EQ(user2["contacts"][0].asString(), username1);
+
+    EXPECT_TRUE(db->addContact(username2, username1));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"][0].asString(), username2);
+    EXPECT_EQ(user2["contacts"][0].asString(), username1);
+
+    EXPECT_EQ(user1["contacts"].size(), 1);
+    EXPECT_EQ(user2["contacts"].size(), 1);
+}
+
+TEST_F(UsersDBFixture, test_remove_contact) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    EXPECT_TRUE(db->addContact(username1, username2));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"][0].asString(), username2);
+    EXPECT_EQ(user2["contacts"][0].asString(), username1);
+
+    EXPECT_TRUE(db->removeContact(username1,username2));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+
+    EXPECT_EQ(user1["contacts"].size(), 0);
+    EXPECT_EQ(user2["contacts"].size(), 0);
+}

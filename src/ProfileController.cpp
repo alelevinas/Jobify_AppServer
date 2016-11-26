@@ -17,6 +17,7 @@ using namespace Mongoose;
 // #define SUCCES "succes"
 // #define ERROR "error"
 // #define DATA "data"
+#include <unistd.h>
 
 
 ProfileController::ProfileController(DatabaseManager *db, SessionManager *sessionManager)
@@ -46,23 +47,25 @@ void ProfileController::decodeAuth(std::string &usr_pass_b64, std::string &usr, 
 
 void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
-    cerr << "\ntoken recibido " << token;
+//    cerr << "\ntoken recibido " << token;
 
     std::string username;
     try {
         username = sessionManager->get_username(token);
+
+        ::sleep(10);
 
         LOG(INFO) << "USER GET REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
                   << "\t\tUser: " << username
                   << std::endl;
 
-        cerr << " es del usuario: " << username;
+//        cerr << " es del usuario: " << username;
 
         Json::Value user = db->get_user(username);
 
-        cerr << "\nGET USER: username=" << username;
-        cerr << "\nJSON user: " << user;
+//        cerr << "\nGET USER: username=" << username;
+//        cerr << "\nJSON user: " << user;
 
         if (user["username"] != username) {
             ApiError::setError(response,500,"Internal server error");
@@ -83,11 +86,12 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
 }
 
 void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    //std::string token = request.getHeaderKeyValue("Token");
-    //cerr << "\ntoken recibido " << token;
 
+    //cerr << "\ntoken recibido " << token;
+    //std::string paramQ = request.get("q","hola");
+    //std::string body = request.getData();
     try {
-        //std::string username = sessionManager->get_username(token);
+        std::string token = request.getHeaderKeyValue("Token");
 
         //cerr << " es del usuario: " << username;
 
@@ -96,19 +100,12 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
                   //<< "\t\tUser: " << username
                   << std::endl;
 
-        std::string json_users = db->get_users();
-        std::cerr << json_users;
+        response[STATUS] = SUCCES;
 
-        Json::Reader reader;
         Json::Value users;
-        bool ok = true;
-        bool parsingSuccessful = reader.parse(json_users, users);
-        if (!parsingSuccessful) {
-            ok = false;
+        if(!db->get_users(users)) {
             ApiError::setError(response,500,"Internal server error");
         }
-
-        response[STATUS] = SUCCES;
         response[DATA] = users;
 
 
@@ -180,13 +177,13 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
 
 void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
-    cerr << "\ntoken recibido " << token;
+//    cerr << "\ntoken recibido " << token;
 
     try {
         std::string username = sessionManager->get_username(token);
 
 
-        cerr << " es del usuario: " << username;
+//        cerr << " es del usuario: " << username;
 
         std::string json_user = request.getData(); //el body
 
@@ -214,7 +211,6 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
         }
     } catch (KeyDoesntExistException &e) {
         ApiError::setError(response,500,"Internal server error");
-        return;
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"token invalido");
     }
@@ -225,7 +221,7 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
 
 void ProfileController::deleteUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
-    cerr << "\ntoken recibido " << token;
+//    cerr << "\ntoken recibido " << token;
 
     try {
         std::string username = sessionManager->get_username(token);
@@ -234,7 +230,7 @@ void ProfileController::deleteUserRequest(Mongoose::Request &request, Mongoose::
                   << "\t\tHeader Token: " << token << "\n"
                   << "\t\tUser: " << username;
 
-        cerr << " es del usuario: " << username;
+//        cerr << " es del usuario: " << username;
 
         bool ok = true;
         if (!db->delete_user(username)) {
@@ -296,6 +292,222 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
               << std::endl;
 }
 
+void ProfileController::postRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+//    cerr << "\ntoken recibido " << token;
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+//        cerr << " es del usuario: " << username;
+
+        std::string recommendTo = request.getData(); //el body
+
+        LOG(INFO) << "RECOMMEND USER REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << "\n"
+                  << "\t\tData: " << recommendTo
+                  << std::endl;
+
+        db->get_user(username); //solo para ver si salta la exception
+
+        Json::Reader reader;
+        Json::Value userToRecomend;
+        bool parsingSuccessful = reader.parse(recommendTo, userToRecomend);
+        if (!parsingSuccessful) {
+            ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
+            LOG(INFO) << "RECOMMEND USER RESPONSE:\n"
+                      << "\t\tResponse: " << response
+                      << std::endl;
+            return;
+        }
+
+
+        if (db->recommend_user(username, userToRecomend["username"].asString())) {
+            response[STATUS] = SUCCES;
+            response[DATA] = "ok";
+        } else {
+            ApiError::setError(response,500,"Internal server error");
+        }
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Internal server error");
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"invalid token");
+    }
+    LOG(INFO) << "RECOMMEND USER RESPONSE:\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
+
+void ProfileController::deleteDeRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+//    cerr << "\ntoken recibido " << token;
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+//        cerr << " es del usuario: " << username;
+
+        std::string deRecommendTo = request.getData(); //el body
+
+        LOG(INFO) << "DERECOMMEND USER REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << "\n"
+                  << "\t\tData: " << deRecommendTo
+                  << std::endl;
+
+        db->get_user(username); //solo para ver si salta la exception
+
+        Json::Reader reader;
+        Json::Value userToRecomend;
+        bool parsingSuccessful = reader.parse(deRecommendTo, userToRecomend);
+        if (!parsingSuccessful) {
+            ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
+            LOG(INFO) << "DERECOMMEND USER RESPONSE:\n"
+                      << "\t\tResponse: " << response
+                      << std::endl;
+        }
+        if (db->deRecommend_user(username, userToRecomend["username"].asString())) {
+            response[STATUS] = SUCCES;
+            response[DATA] = "ok";
+        } else {
+            ApiError::setError(response,420,"User was not recommended before");
+        }
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Internal server error");
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"invalid token");
+    }
+    LOG(INFO) << "DERECOMMEND USER RESPONSE:\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
+
+void ProfileController::postAddContact(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+//    cerr << "\ntoken recibido " << token;
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+//        cerr << " es del usuario: " << username;
+
+        std::string contactToAdd = request.getData(); //el body
+
+        LOG(INFO) << "ADD CONTACT USER REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << "\n"
+                  << "\t\tData: " << contactToAdd
+                  << std::endl;
+
+        db->get_user(username); //solo para ver si salta la exception
+
+        Json::Reader reader;
+        Json::Value userToAdd;
+        bool parsingSuccessful = reader.parse(contactToAdd, userToAdd);
+        if (!parsingSuccessful) {
+            ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
+            LOG(INFO) << "ADD CONTACT USER RESPONSE:\n"
+                      << "\t\tResponse: " << response
+                      << std::endl;
+            return;
+        }
+
+
+        if (db->addContact(username, userToAdd["username"].asString())) {
+            response[STATUS] = SUCCES;
+            response[DATA] = "ok";
+        } else {
+            ApiError::setError(response,500,"Internal server error");
+        }
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Internal server error");
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"invalid token");
+    }
+    LOG(INFO) << "ADD CONTACT USER RESPONSE:\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
+
+void ProfileController::deleteRemoveContact(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+//    cerr << "\ntoken recibido " << token;
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+//        cerr << " es del usuario: " << username;
+
+        std::string contactToRemove = request.getData(); //el body
+
+        LOG(INFO) << "REMOVE CONTACT USER REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << "\n"
+                  << "\t\tData: " << contactToRemove
+                  << std::endl;
+
+        db->get_user(username); //solo para ver si salta la exception
+
+        Json::Reader reader;
+        Json::Value userToRemove;
+        bool parsingSuccessful = reader.parse(contactToRemove, userToRemove);
+        if (!parsingSuccessful) {
+            ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
+            LOG(INFO) << "DERECOMMEND USER RESPONSE:\n"
+                      << "\t\tResponse: " << response
+                      << std::endl;
+        }
+        if (db->removeContact(username, userToRemove["username"].asString())) {
+            response[STATUS] = SUCCES;
+            response[DATA] = "ok";
+        } else {
+            ApiError::setError(response,420,"User was not a contact before");
+        }
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Internal server error");
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"invalid token");
+    }
+    LOG(INFO) << "REMOVE CONTACT USER RESPONSE:\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
+
+void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+
+//    cerr << "\ntoken recibido " << token;
+
+
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+        std::string qSort = request.get("sort","");
+        std::string qFilter = request.get("filter","");
+        std::string qJob = request.get("job_position","");
+        std::string qSkill = request.get("skill","");
+        /*
+         * REALIZAR CONSULTAS CON LAS BASES DE DATOS
+         *
+         * url: /users?sort=qSort&filter=qFilter&job_position=qJob&skill=qSkill
+         *
+         * example: /users?sort=recommended&filter=10&job_position=developer&skill=java
+         *
+         */
+
+        Json::Value users;
+        Json::Value result = db->get_users_by(qSort,qFilter,qJob,qSkill, users);
+
+
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"invalid token");
+    }
+    LOG(INFO) << "MOST POUPULAR USERS RESPONSE:\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
 
 void ProfileController::setup() {
 
@@ -312,7 +524,12 @@ void ProfileController::setup() {
     addRouteResponse("POST", "/users/me", ProfileController, updateUserRequest, JsonResponse);
     addRouteResponse("DELETE", "/users/me", ProfileController, deleteUserRequest, JsonResponse);
 
+    addRouteResponse("POST", "/users/recommend", ProfileController, postRecommend, JsonResponse);
+    addRouteResponse("DELETE", "/users/recommend", ProfileController, deleteDeRecommend, JsonResponse);
+    addRouteResponse("POST", "/users/contacts", ProfileController, postAddContact, JsonResponse);
+    addRouteResponse("DELETE", "/users/contacts", ProfileController, deleteRemoveContact, JsonResponse);
 
+    addRouteResponse("GET", "/users/search", ProfileController, getFilteredUsers, JsonResponse);
 }
 
 /*

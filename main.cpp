@@ -26,9 +26,7 @@ void handle_signal(int sig)
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    //Foo f;
 
-    //f.hola();
 
     signal(SIGTERM, handle_signal);
 
@@ -36,22 +34,18 @@ int main() {
     if (!db.openDBs())
         return -1;
 
-//    std::string username("pepe");
-//
-//    Json::Value pepe = generate_user(username);
-//    db.add_user("pepe",pepe);
-
     SessionManager sessionManager(&db,ONE_HOUR);  //5 mins
 
     ProfileController pf(&db, &sessionManager);
+    //ChatsController cf(asddas);
     ChatController ch(&db, &sessionManager);
 
     JobifyServer server(8000);
 
     server.registerController(&pf);
+    //server.registerController(&cf);
 
     server.start();
-    //server.printStats();
     LOG(INFO) << "Iniciando Servidor";
 
     cout << "Server started, routes:" << endl;
