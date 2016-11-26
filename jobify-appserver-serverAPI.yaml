@@ -516,6 +516,292 @@ paths:
               error:
                 code: 500
                 message: Internal server error
+  /chats:
+    get:
+      summary: Get all profiles of users currently chatting with
+      description: It returns a list of the profiles of the users that have a chat with the user that makes the request
+      parameters:
+        - name: Token
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
+          
+      tags:
+        - Chats
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+  /chats?username=userid:
+    get:
+      summary: Get the chat with the userid especified
+      description: It returns the messages of the Conversation beetween the user that makes the request and the userid especified
+      parameters:
+        - name: Token
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
+        - name: username
+          in: url
+          description: username received in the url parameter
+          required: true
+          type: string
+          
+      tags:
+        - Chats
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Messages'
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+    post:
+      summary: Send a message from userid to another user
+      description: It sends a message from the user that makes the request to the user especified in the url parameter
+      parameters:
+        - name: Token
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
+        - name: username
+          in: url
+          description: username received in the url parameter
+          required: true
+          type: string
+          
+      tags:
+        - Chats
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+    delete:
+      summary: Delete Chats with user especified
+      description: The */chats* DELETE endpoint deletes the user especified in the url parameter
+      parameters:
+        - name: Token
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
+        - name: username
+          in: url
+          description: username received in the url parameter
+          required: true
+          type: string
+      tags:
+        - Chats
+      responses:
+        200:
+          description: Conversation deleted
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    description: ok
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+  /messages:
+    delete:
+      summary: Deletes an only message
+      description: Deletes a simple message especified by the id. That message has to be in a conversation of the user that makes the request.
+      parameters:
+        - name: Token
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
+        - name: messageID
+          in: body
+          description: id of the message
+          required: true
+          type: string
+          
+      tags:
+        - Messages
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
 
 definitions:
   Token:
@@ -619,6 +905,19 @@ definitions:
         description: Nombre
       description:
         description: Descripción
+        type: string
+
+  Messages:
+    type: object
+    properties:
+      id:
+        type: int
+        description: Identifier
+      text:
+        description: Text
+        type: string
+      author:
+        description: Author of message
         type: string
 
   Error:
