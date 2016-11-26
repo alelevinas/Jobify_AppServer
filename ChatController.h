@@ -18,8 +18,13 @@ public:
 
     void setup();
 
-    void getUserChatRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
     void postUserChatRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+    void getUserChatsRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+    void deleteConversationRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+    void deleteMessageRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
 };
 
 

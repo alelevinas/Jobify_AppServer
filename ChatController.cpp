@@ -1,25 +1,83 @@
 //
 // Created by nicolas on 26/11/16.
 //
+// TOKEN mocca@gmail.com = bW9jY2FAZ21haWwuY29tOjEyMzQ=
+
+#include <exceptions/TokenInvalidException.h>
+#include <log/easylogging++.h>
 
 #include "ChatController.h"
+#include "exceptions/KeyDoesntExistException.h"
+#include "ApiError.h"
 
 using Json::Value;
 using namespace Mongoose;
 
+#include <unistd.h>
 
-ChatController::ChatController(DatabaseManager *pManager, SessionManager *pSessionManager)
+
+ChatController::ChatController(DatabaseManager *db, SessionManager *sessionManager)
         : db(db), sessionManager(sessionManager) {}
 
 void ChatController::setup() {
-    addRouteResponse("POST", "/chat", ChatController, postUserChatRequest, JsonResponse);
-    addRouteResponse("GET", "/chat", ChatController, getUserChatRequest, JsonResponse);
+    addRouteResponse("GET", "/chats", ChatController, getUserChatsRequest, JsonResponse);
+    addRouteResponse("POST", "/chats", ChatController, postUserChatRequest, JsonResponse);
+    addRouteResponse("DELETE", "/chats", ChatController, deleteConversationRequest, JsonResponse);
+    addRouteResponse("DELETE", "/messages", ChatController, deleteMessageRequest, JsonResponse);
 }
+
+void ChatController::getUserChatsRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {}
 
 void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+    std::string username;
 
+    std::string data;
+
+    try {
+        username = sessionManager->get_username(token);
+
+        data = request.getData();
+        Json::Reader reader;
+        Json::Value content;
+        bool ok = true;
+        bool parsingSuccessful = reader.parse(data, content);
+        if (!parsingSuccessful) {
+            ok = false;
+            ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
+        }
+        std::string msgTo = request.get("user","");
+        std::string message = content.get("msg","").toStyledString();
+
+        ::sleep(10);
+
+        LOG(INFO) << "USER CHAT POST REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username
+                <<"\t\tMensaje a: " << msgTo
+                <<"\t\tMensaje: " << message
+                  << std::endl;
+
+        Json::Value user = db->get_user(username);
+        Json::Value user2 = db->get_user(msgTo);
+
+        if ((user["username"] != username) || (user2["username"] != msgTo)){
+            ApiError::setError(response,500,"Internal server error");
+        } else {
+            response[STATUS] = SUCCES;
+            //response[DATA] = user;
+        }
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"token invalido");
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Internal server error");
+    }
+    LOG(INFO) << "USER CHAT POST RESPONSE:\n"
+              << "\t\tUser: " << username << "\n"
+              << "\t\tResponse: " << response
+              << std::endl;
 }
 
-void ChatController::getUserChatRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+void ChatController::deleteConversationRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {}
 
-}
+void ChatController::deleteMessageRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {}
