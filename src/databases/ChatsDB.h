@@ -16,6 +16,10 @@ public:
     ChatsDB(std::string& dbName);
 
     virtual ~ChatsDB();
+
+    bool add_msg(std::string basic_string, std::string basicString, std::string basic_string1);
+
+    bool updateMessages(std::string, Json::Value);
 };
 
 

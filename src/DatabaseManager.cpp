@@ -84,3 +84,7 @@ Json::Value DatabaseManager::get_users_by(string sort_by, string nFilter, string
     return users->get_users_by(sort_by, nFilter, job, skill, result);
 }
 
+bool DatabaseManager::add_msg(string user_from, string user_to, string message) {
+    return chats->add_msg(user_from, user_to, message);
+}
+

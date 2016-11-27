@@ -40,14 +40,12 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
         data = request.getData();
         Json::Reader reader;
         Json::Value content;
-        bool ok = true;
         bool parsingSuccessful = reader.parse(data, content);
         if (!parsingSuccessful) {
-            ok = false;
             ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
         }
         std::string msgTo = request.get("user","");
-        std::string message = content.get("msg","").toStyledString();
+        std::string message = content.get("msg","").asString();
 
         ::sleep(10);
 
@@ -55,8 +53,7 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
                   << "\t\tHeader Token: " << token << "\n"
                   << "\t\tUser: " << username
                 <<"\t\tMensaje a: " << msgTo
-                <<"\t\tMensaje: " << message
-                  << std::endl;
+                <<"\t\tMensaje: " << message << "-------" << std::endl;
 
         Json::Value user = db->get_user(username);
         Json::Value user2 = db->get_user(msgTo);
@@ -64,13 +61,16 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
         if ((user["username"] != username) || (user2["username"] != msgTo)){
             ApiError::setError(response,500,"Internal server error");
         } else {
-            response[STATUS] = SUCCES;
-            //response[DATA] = user;
+            if (!db->add_msg(username, msgTo, message)) {
+                ApiError::setError(response,500,"Internal server error");
+            } else {
+                response[STATUS] = SUCCES;
+            }
         }
     } catch (TokenInvalidException &e) {
-        ApiError::setError(response,501,"token invalido");
+        ApiError::setError(response,501,"Token invalido");
     } catch (KeyDoesntExistException &e) {
-        ApiError::setError(response,500,"Internal server error");
+        ApiError::setError(response,500,"Usuario inexistente");
     }
     LOG(INFO) << "USER CHAT POST RESPONSE:\n"
               << "\t\tUser: " << username << "\n"

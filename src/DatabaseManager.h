@@ -48,6 +48,8 @@ public:
     bool is_correct(std::string username, std::string password);
 
     Json::Value get_users_by(string sort_by, string nFilter, string job, string skill, Json::Value &result);
+
+    bool add_msg(string basic_string, string basicString, string basic_string1);
 };
 
 
