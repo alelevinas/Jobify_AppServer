@@ -22,6 +22,9 @@ private:
     bool addContact(Json::Value &user, const string &usernameToAdd);
     bool removeContact(Json::Value &user, const string &usernameToRemove);
 
+    static bool sort_json_array(std::pair <int, Json::Value&> a, std::pair <int, Json::Value&> b);
+    //bool sort_json_array(Json::Value& a, Json::Value& b, string sorting);
+
 
 public:
     virtual ~UsersDB();

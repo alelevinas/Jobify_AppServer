@@ -107,9 +107,16 @@ public:
         user["previous_exp"] = exp;
 */
         Json::Value cont(Json::arrayValue);
+        Json::Value recc(Json::arrayValue);
+        Json::Value chats(Json::arrayValue);
         user["contacts"] = cont;
-        user["recommended_by"] = cont;
-        user["chats"] = cont;
+
+        recc.append("ale");
+        recc.append("peter");
+        user["recommended_by"] = recc;
+
+
+        user["chats"] = chats;
 
         return user;
     }
@@ -424,7 +431,7 @@ TEST_F(UsersDBFixture, test_get_users_job_docentes) {
     EXPECT_TRUE(db->add_user(username2, user2));
 
     Json::Value users;
-    db->get_users_by("recommended",10,"Carpintero","",users);
+    db->get_users_by("recommended_by",10,"Carpintero","",users);
 
     std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
          << users;
@@ -448,7 +455,7 @@ TEST_F(UsersDBFixture, test_get_users_skill_Gtest) {
     EXPECT_TRUE(db->add_user(username2, user2));
 
     Json::Value users;
-    db->get_users_by("recommended",10,"","Google Test",users);
+    db->get_users_by("recommended_by",10,"","Google Test",users);
 
     std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
               << users;

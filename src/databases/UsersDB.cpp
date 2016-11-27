@@ -36,7 +36,7 @@ bool UsersDB::delete_user(const string &username) {
     return this->delete_key(username);
 }
 
-bool UsersDB::get_users(Json::Value& result) {
+bool UsersDB::get_users(Json::Value &result) {
     std::stringstream ss;
 
     ss << "{ \"users\": [";
@@ -161,7 +161,7 @@ bool UsersDB::removeContact(const string &usernameFrom, const string &usernameTo
     return false;
 }
 
-bool UsersDB::parse_json_array(std::string body, Json::Value& result) {
+bool UsersDB::parse_json_array(std::string body, Json::Value &result) {
     Json::Reader reader;
     bool ok = true;
     bool parsingSuccessful = reader.parse(body, result);
@@ -171,15 +171,15 @@ bool UsersDB::parse_json_array(std::string body, Json::Value& result) {
 bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill, Json::Value &result) {
     Json::Value users;
 
-    if(!get_users(users))
+    if (!get_users(users))
         return false;
 
     result = users["users"];
 
-    filter_job(result,job);
-    filter_skill(result,skill);
-    sort_by(result,sorting);
-    top_k(result,nFilter);
+    filter_job(result, job);
+    filter_skill(result, skill);
+    sort_by(result, sorting);
+    top_k(result, nFilter);
 
     return true;
 }
@@ -189,7 +189,7 @@ void UsersDB::filter_job(Json::Value &result, string job) {
         return;
     Json::Value aux_result(Json::arrayValue);
 
-    for( Json::ValueConstIterator itr = result.begin() ; itr != result.end() ; itr++ ) {
+    for (Json::ValueConstIterator itr = result.begin(); itr != result.end(); itr++) {
         Json::Value user = *itr;
 
 //        std::cerr << "\nBUSCANDO " << job;
@@ -197,7 +197,7 @@ void UsersDB::filter_job(Json::Value &result, string job) {
         Json::Value job_exp(Json::arrayValue);
         job_exp = user["previous_exp"];
 
-        for( Json::ValueConstIterator jobItr = job_exp.begin() ; jobItr != job_exp.end() ; jobItr++ ) {
+        for (Json::ValueConstIterator jobItr = job_exp.begin(); jobItr != job_exp.end(); jobItr++) {
             Json::Value position = (*jobItr)["position"];
 
             if (position["name"].asString() == job) {
@@ -214,7 +214,7 @@ void UsersDB::filter_skill(Json::Value &result, string skill) {
         return;
     Json::Value aux_result(Json::arrayValue);
 
-    for( Json::ValueConstIterator itr = result.begin() ; itr != result.end() ; itr++ ) {
+    for (Json::ValueConstIterator itr = result.begin(); itr != result.end(); itr++) {
         Json::Value user = *itr;
 
         std::cerr << "\nBUSCANDO " << skill;
@@ -222,7 +222,7 @@ void UsersDB::filter_skill(Json::Value &result, string skill) {
         Json::Value skills(Json::arrayValue);
         skills = user["skills"];
 
-        for( Json::ValueConstIterator jobItr = skills.begin() ; jobItr != skills.end() ; jobItr++ ) {
+        for (Json::ValueConstIterator jobItr = skills.begin(); jobItr != skills.end(); jobItr++) {
             Json::Value json_skill = (*jobItr);
 
             if (json_skill["name"].asString() == skill) {
@@ -234,14 +234,53 @@ void UsersDB::filter_skill(Json::Value &result, string skill) {
     result.swapPayload(aux_result);
 }
 
+bool UsersDB::sort_json_array(std::pair<int, Json::Value &> a, std::pair<int, Json::Value &> b) {
+    return a.first > b.first;
+}
+
+/*
+bool UsersDB::sort_json_array(Json::Value& a, Json::Value& b, string sorting) {
+    return a[sorting].size > b[sorting].size;
+}
+*/
 void UsersDB::sort_by(Json::Value &result, string sorting) {
     if (sorting.empty())
         return;
+
+    Json::Value aux_result(Json::arrayValue);
+    std::vector<std::pair<int, Json::Value> > ordered;
+
+    for (Json::ValueConstIterator itr = result.begin(); itr != result.end(); itr++) {
+        Json::Value user = *itr;
+
+        std::cerr << "\nORDENANDO";
+        std::cerr << "\n" << sorting << " --> " << user[sorting];
+
+        int cant = user[sorting].size();
+        std::pair<int, Json::Value> pair = std::make_pair(cant, user);
+        ordered.push_back(pair);
+    }
+
+    std::sort(ordered.begin(), ordered.end(),
+              [](const std::pair<int, Json::Value> &left, const std::pair<int, Json::Value> &right) {
+                  return left.first < right.first;
+              });
+
+    for (std::pair<int, const Json::Value &> aux : ordered) {
+        aux_result.append(aux.second);
+    }
+
+    result = aux_result;
 }
 
 void UsersDB::top_k(Json::Value &result, int n) {
     if (n == 0)
         n = 10;
+
+    if (result.size() < n)
+        return;
+
+    result.resize(n);
 }
 
 
