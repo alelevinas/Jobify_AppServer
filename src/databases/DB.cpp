@@ -46,6 +46,14 @@ bool DB::add(const std::string &key, Json::Value value) {
     return s.ok();
 }
 
+bool DB::update(const std::string &key, Json::Value value) {
+    std::ostringstream valueStream;
+    valueStream << value;
+
+    leveldb::Status s = db->Put(leveldb::WriteOptions(), key, valueStream.str());
+    return s.ok();
+}
+
 Json::Value DB::get(const std::string &key) {
     std::string value;
     leveldb::Status s = db->Get(leveldb::ReadOptions(), key, &value);
