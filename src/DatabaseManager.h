@@ -52,6 +52,8 @@ public:
     bool add_msg(string basic_string, string basicString, string basic_string1);
 
     bool get_conv(string username, string username2, Json::Value *conversation);
+
+    bool get_convs(string username, Json::Value *conversations);
 };
 
 

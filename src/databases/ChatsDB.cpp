@@ -66,3 +66,34 @@ bool ChatsDB::get_conv(std::string username, std::string username2, Json::Value 
     *conversation = this->get(sKey);
     return true;
 }
+
+bool ChatsDB::get_convs(std::string username, Json::Value *conversations) {
+    std::stringstream ss;
+
+    ss << "{ \"chats\": [";
+
+    leveldb::Iterator *it = db->NewIterator(leveldb::ReadOptions());
+
+    std::string separator = "";
+
+    for (it->SeekToFirst(); it->Valid(); it->Next()) {
+        if (strncmp(it->key().ToString().c_str(),username.c_str(),username.size()) == 0) {
+            std::string user2 = it->key().ToString().substr(username.size()+1);
+            ss << separator << "{ \"" << user2 << "\":";
+            ss << it->value().ToString();
+            ss << "}";
+            separator = ",";
+        }
+    }
+
+    ss << "]}";
+
+    if (!it->status().ok()) {
+        delete it;
+        return false;
+    }
+    delete it;
+
+    Json::Reader reader;
+    return reader.parse(ss.str(), *conversations);
+}

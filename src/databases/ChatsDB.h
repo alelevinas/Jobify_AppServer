@@ -22,6 +22,8 @@ public:
     bool updateMessages(std::string, Json::Value);
 
     bool get_conv(std::string username, std::string username2, Json::Value *conversation);
+
+    bool get_convs(std::string username, Json::Value *conversations);
 };
 
 

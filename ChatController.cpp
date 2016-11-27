@@ -42,13 +42,23 @@ void ChatController::getUserChatsRequest(Mongoose::Request &request, Mongoose::J
                   <<"\t\tConversacion con: " << username2 << std::endl;
 
         Json::Value user = db->get_user(username);
-        Json::Value user2 = db->get_user(username2);
         Json::Value conversation;
 
-        if ((user["username"] != username) || (user2["username"] != username2)){
+        if (user["username"] != username) {
             ApiError::setError(response,500,"Internal server error");
         } else {
-            if (!db->get_conv(username, username2, &conversation)) {
+            bool ok;
+            if (username2 == "") {
+                ok = db->get_convs(username, &conversation);
+            } else {
+                Json::Value user2 = db->get_user(username2);
+                if (user2["username"] != username2) {
+                    ApiError::setError(response, 500, "Internal server error");
+                } else {
+                    ok = db->get_conv(username, username2, &conversation);
+                }
+            }
+            if (!ok) {
                 ApiError::setError(response,500,"Internal server error");
             } else {
                 response[STATUS] = SUCCES;

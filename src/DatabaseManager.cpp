@@ -92,3 +92,7 @@ bool DatabaseManager::get_conv(string username, string username2, Json::Value *c
     return chats->get_conv(username, username2, conversation);
 }
 
+bool DatabaseManager::get_convs(string username, Json::Value *conversations) {
+    return chats->get_convs(username, conversations);
+}
+
