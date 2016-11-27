@@ -26,7 +26,45 @@ void ChatController::setup() {
     addRouteResponse("DELETE", "/messages", ChatController, deleteMessageRequest, JsonResponse);
 }
 
-void ChatController::getUserChatsRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {}
+void ChatController::getUserChatsRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+    std::string username;
+
+
+    try {
+        username = sessionManager->get_username(token);
+
+        std::string username2 = request.get("user","");
+
+        LOG(INFO) << "USER CHAT GET REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username
+                  <<"\t\tConversacion con: " << username2 << std::endl;
+
+        Json::Value user = db->get_user(username);
+        Json::Value user2 = db->get_user(username2);
+        Json::Value conversation;
+
+        if ((user["username"] != username) || (user2["username"] != username2)){
+            ApiError::setError(response,500,"Internal server error");
+        } else {
+            if (!db->get_conv(username, username2, &conversation)) {
+                ApiError::setError(response,500,"Internal server error");
+            } else {
+                response[STATUS] = SUCCES;
+                response[DATA] = conversation;
+            }
+        }
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"Token invalido");
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Usuario inexistente");
+    }
+    LOG(INFO) << "USER CHAT GET RESPONSE:\n"
+              << "\t\tUser: " << username << "\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
 
 void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
@@ -46,8 +84,6 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
         }
         std::string msgTo = request.get("user","");
         std::string message = content.get("msg","").asString();
-
-        ::sleep(10);
 
         LOG(INFO) << "USER CHAT POST REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"

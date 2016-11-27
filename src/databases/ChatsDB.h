@@ -20,6 +20,8 @@ public:
     bool add_msg(std::string basic_string, std::string basicString, std::string basic_string1);
 
     bool updateMessages(std::string, Json::Value);
+
+    bool get_conv(std::string username, std::string username2, Json::Value *conversation);
 };
 
 

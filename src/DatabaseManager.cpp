@@ -88,3 +88,7 @@ bool DatabaseManager::add_msg(string user_from, string user_to, string message) 
     return chats->add_msg(user_from, user_to, message);
 }
 
+bool DatabaseManager::get_conv(string username, string username2, Json::Value *conversation) {
+    return chats->get_conv(username, username2, conversation);
+}
+

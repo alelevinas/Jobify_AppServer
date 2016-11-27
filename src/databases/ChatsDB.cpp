@@ -60,3 +60,9 @@ bool ChatsDB::updateMessages(std::string sKey, Json::Value messageValue) {
     msgAux.append(messageValue);
     return this->update(sKey,msgAux);
 }
+
+bool ChatsDB::get_conv(std::string username, std::string username2, Json::Value *conversation) {
+    std::string sKey = username + '_' + username2;
+    *conversation = this->get(sKey);
+    return true;
+}
