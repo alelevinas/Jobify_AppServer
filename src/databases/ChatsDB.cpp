@@ -20,6 +20,7 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
     Json::Value messageValue;
     messageValue["msg"] = message;
     messageValue["auth"] = user_from;
+    messageValue["id"] = 0;
 
     time_t t = time(0);   // get time now
     struct tm * now = localtime(&t);
@@ -29,6 +30,10 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
 
     std::string sKey1 = user_from + '_' + user_to;
     std::string sKey2 = user_to + '_' + user_from;
+
+    //Para borrar la conversacion
+    //this->delete_key(sKey1);
+    //this->delete_key(sKey2);
 
     std::string aux;
     leveldb::Status s1 = db->Get(leveldb::ReadOptions(), sKey1, &aux);
@@ -42,7 +47,9 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
         return false;
     }
     if (s1.IsNotFound()) {
-        return (this->add(sKey1, messageValue) && this->add(sKey2, messageValue));
+        Json::Value newValue(Json::arrayValue);
+        newValue.append(messageValue);
+        return (this->add(sKey1, newValue) && this->add(sKey2, newValue));
     } else {
         return (this->updateMessages(sKey1,messageValue) && this->updateMessages(sKey2,messageValue));
     }
@@ -50,9 +57,6 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
 
 bool ChatsDB::updateMessages(std::string sKey, Json::Value messageValue) {
     Json::Value msgAux = this->get(sKey);
-    std::stringstream ss;
-    ss << msgAux << "," << messageValue;
-    std::string stringAux = ss.str();
-    Json::Value newMsg(stringAux);
-    return this->update(sKey,newMsg);
+    msgAux.append(messageValue);
+    return this->update(sKey,msgAux);
 }
