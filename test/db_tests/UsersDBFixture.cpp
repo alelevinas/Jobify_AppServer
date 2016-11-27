@@ -111,8 +111,8 @@ public:
         Json::Value chats(Json::arrayValue);
         user["contacts"] = cont;
 
-        recc.append("ale");
-        recc.append("peter");
+      //  recc.append("ale");
+       // recc.append("peter");
         user["recommended_by"] = recc;
 
 
@@ -421,6 +421,8 @@ TEST_F(UsersDBFixture, test_get_users_job_docentes) {
     string username1 = "alepox";
     Json::Value user1 = generate_user(username1);
 
+    user1["recommended_by"].append("ale");
+    user1["recommended_by"].append("gabi");
     add_job_exp(user1, "2006-2009", "NASA", "Desarrollador en lenguaje R para analizar......", "Carpintero", "Profesor dicta clases, etc.", "Education");
 
     EXPECT_TRUE(db->add_user(username1, user1));
@@ -428,6 +430,7 @@ TEST_F(UsersDBFixture, test_get_users_job_docentes) {
     string username2 = "marcelo";
     Json::Value user2 = generate_user(username2);
 
+    user2["recommended_by"].append("pepe");
     EXPECT_TRUE(db->add_user(username2, user2));
 
     Json::Value users;
