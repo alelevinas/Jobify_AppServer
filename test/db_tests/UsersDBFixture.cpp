@@ -52,6 +52,16 @@ public:
         return user;
     }
 
+    Json::Value add_skill(Json::Value &user, const char* name, const char* description, const char* category) {
+        Json::Value skill;
+        skill["name"] = name;
+        skill["description"] = description;
+        skill["category"] = category;
+
+        user["skills"].append(skill);
+        return skill;
+    }
+
     Json::Value generate_user(string &username) {
         Json::Value user;
         user["username"] = username;
@@ -65,10 +75,14 @@ public:
                 "se propone............blabllbla...........";
 
         Json::Value skills(Json::arrayValue);
-        skills.append(Json::Value("C"));
-        skills.append(Json::Value("C++"));
-        skills.append(Json::Value("GoogleTest"));
+//        skills.append(Json::Value("C"));
+//        skills.append(Json::Value("C++"));
+//        skills.append(Json::Value("GoogleTest"));
         user["skills"] = skills;
+        add_skill(user, "C","C programming language","Software");
+        add_skill(user, "C++","C++ programming language","Software");
+        add_skill(user, "R","R programming language","Software");
+
 
         Json::Value exp(Json::arrayValue);
         user["previous_exp"] = exp;
@@ -394,7 +408,7 @@ TEST_F(UsersDBFixture, test_remove_contact) {
     EXPECT_EQ(user2["contacts"].size(), 0);
 }
 
-TEST_F(UsersDBFixture, test_get_top_10_recommended) {
+TEST_F(UsersDBFixture, test_get_users_job_docentes) {
     EXPECT_TRUE(db->openDBs());
 
     string username1 = "alepox";
@@ -414,6 +428,30 @@ TEST_F(UsersDBFixture, test_get_top_10_recommended) {
 
     std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
          << users;
+
+    EXPECT_EQ(users[0], user1);
+}
+
+TEST_F(UsersDBFixture, test_get_users_skill_Gtest) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    add_skill(user1, "Google Test","Testing framework for C/C++","Software");
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    Json::Value users;
+    db->get_users_by("recommended",10,"","Google Test",users);
+
+    std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
+              << users;
 
     EXPECT_EQ(users[0], user1);
 }

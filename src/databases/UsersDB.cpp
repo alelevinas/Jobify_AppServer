@@ -223,7 +223,7 @@ void UsersDB::filter_skill(Json::Value &result, string skill) {
         skills = user["skills"];
 
         for( Json::ValueConstIterator jobItr = skills.begin() ; jobItr != skills.end() ; jobItr++ ) {
-            Json::Value json_skill = (*jobItr)["position"];
+            Json::Value json_skill = (*jobItr);
 
             if (json_skill["name"].asString() == skill) {
                 aux_result.append(user);
