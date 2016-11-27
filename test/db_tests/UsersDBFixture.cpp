@@ -33,6 +33,35 @@ public:
 
     DatabaseManager* db;
 
+    Json::Value add_job_exp(Json::Value &user, const char* years, const char* company, const char* description,
+                            const char* pos_name, const char* pos_description, const char* pos_category) {
+
+        Json::Value job;
+        job["years"] = years;
+        job["company"] = company;
+        job["description"] = description;
+
+        Json::Value pos;
+        pos["name"] = pos_name;
+        pos["description"] = pos_description;
+        pos["category"] = pos_category;
+
+        job["position"] = pos;
+
+        user["previous_exp"].append(job);
+        return user;
+    }
+
+    Json::Value add_skill(Json::Value &user, const char* name, const char* description, const char* category) {
+        Json::Value skill;
+        skill["name"] = name;
+        skill["description"] = description;
+        skill["category"] = category;
+
+        user["skills"].append(skill);
+        return skill;
+    }
+
     Json::Value generate_user(string &username) {
         Json::Value user;
         user["username"] = username;
@@ -46,32 +75,48 @@ public:
                 "se propone............blabllbla...........";
 
         Json::Value skills(Json::arrayValue);
-        skills.append(Json::Value("C"));
-        skills.append(Json::Value("C++"));
-        skills.append(Json::Value("GoogleTest"));
+//        skills.append(Json::Value("C"));
+//        skills.append(Json::Value("C++"));
+//        skills.append(Json::Value("GoogleTest"));
         user["skills"] = skills;
+        add_skill(user, "C","C programming language","Software");
+        add_skill(user, "C++","C++ programming language","Software");
+        add_skill(user, "R","R programming language","Software");
+
 
         Json::Value exp(Json::arrayValue);
+        user["previous_exp"] = exp;
+        add_job_exp(user, "2006-2009", "NASA", "Desarrollador en lenguaje R para analizar......", "Docente", "Profesor dicta clases, etc.", "Education");
+        add_job_exp(user, "2010-actualidad", "UBA", "Docente de la materia Taller 2", "Docente", "Profesor dicta clases, etc.", "Education");
+
+        /*
         Json::Value job1;
         job1["years"] = "2006-2009";
         job1["company"] = "NASA";
-        job1["position"] = "Desarrollador";
+        job1["position"] = add_job_position(user, "developer", "Software dev....", "Software");
         job1["description"] = "Desarrollador en lenguaje R para analizar......";
 
         Json::Value job2;
         job2["years"] = "2010-actualidad";
         job2["company"] = "UBA";
-        job2["position"] = "Docente";
+        job2["position"] = add_job_position(user, "Docente", "Profesor dicta clases, etc.", "Education");
         job2["description"] = "Docente de la materia Taller 2";
 
         exp.append(job1);
         exp.append(job2);
         user["previous_exp"] = exp;
-
+*/
         Json::Value cont(Json::arrayValue);
+        Json::Value recc(Json::arrayValue);
+        Json::Value chats(Json::arrayValue);
         user["contacts"] = cont;
-        user["recommended_by"] = cont;
-        user["chats"] = cont;
+
+      //  recc.append("ale");
+       // recc.append("peter");
+        user["recommended_by"] = recc;
+
+
+        user["chats"] = chats;
 
         return user;
     }
@@ -368,4 +413,55 @@ TEST_F(UsersDBFixture, test_remove_contact) {
 
     EXPECT_EQ(user1["contacts"].size(), 0);
     EXPECT_EQ(user2["contacts"].size(), 0);
+}
+
+TEST_F(UsersDBFixture, test_get_users_job_docentes) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    user1["recommended_by"].append("ale");
+    user1["recommended_by"].append("gabi");
+    add_job_exp(user1, "2006-2009", "NASA", "Desarrollador en lenguaje R para analizar......", "Carpintero", "Profesor dicta clases, etc.", "Education");
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    user2["recommended_by"].append("pepe");
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    Json::Value users;
+    db->get_users_by("recommended_by",10,"Carpintero","",users);
+
+    std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
+         << users;
+
+    EXPECT_EQ(users[0], user1);
+}
+
+TEST_F(UsersDBFixture, test_get_users_skill_Gtest) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    add_skill(user1, "Google Test","Testing framework for C/C++","Software");
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    Json::Value users;
+    db->get_users_by("recommended_by",10,"","Google Test",users);
+
+    std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
+              << users;
+
+    EXPECT_EQ(users[0], user1);
 }
