@@ -415,7 +415,7 @@ TEST_F(UsersDBFixture, test_remove_contact) {
     EXPECT_EQ(user2["contacts"].size(), 0);
 }
 
-TEST_F(UsersDBFixture, test_get_users_job_docentes) {
+TEST_F(UsersDBFixture, test_get_users_job_carpintero) {
     EXPECT_TRUE(db->openDBs());
 
     string username1 = "alepox";

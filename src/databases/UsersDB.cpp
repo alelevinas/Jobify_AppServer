@@ -263,7 +263,7 @@ void UsersDB::sort_by(Json::Value &result, string sorting) {
 
     std::sort(ordered.begin(), ordered.end(),
               [](const std::pair<int, Json::Value> &left, const std::pair<int, Json::Value> &right) {
-                  return left.first < right.first;
+                  return left.first > right.first;
               });
 
     for (std::pair<int, const Json::Value &> aux : ordered) {
