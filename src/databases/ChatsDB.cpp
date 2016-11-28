@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <ctime>
+#include <exceptions/KeyDoesntExistException.h>
 #include "ChatsDB.h"
 
 ChatsDB::ChatsDB(std::string& dbName) : DB(dbName) {
@@ -60,14 +61,17 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
 bool ChatsDB::updateMessages(std::string sKey, Json::Value messageValue) {
     Json::Value msgAux = this->get(sKey);
     msgAux.append(messageValue);
-    std::cout << "---------------update---------------------" << std::endl;
 
     return this->update(sKey,msgAux);
 }
 
 bool ChatsDB::get_conv(std::string username, std::string username2, Json::Value *conversation) {
     std::string sKey = username + '_' + username2;
-    *conversation = this->get(sKey);
+    try {
+        *conversation = this->get(sKey);
+    } catch (KeyDoesntExistException &e) {
+        *conversation = "";
+    }
     return true;
 }
 
