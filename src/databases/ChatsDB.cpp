@@ -21,7 +21,6 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
     Json::Value messageValue;
     messageValue["msg"] = message;
     messageValue["auth"] = user_from;
-    messageValue["id"] = 0;
 
     time_t t = time(0);   // get time now
     struct tm * now = localtime(&t);
@@ -42,6 +41,7 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
 
     bool ok = true;
     if (s1.IsNotFound()) {
+        messageValue["id"] = 0;
         Json::Value newValue(Json::arrayValue);
         newValue.append(messageValue);
         ok = this->add(sKey1, newValue) && ok;
@@ -49,6 +49,7 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
         ok = this->updateMessages(sKey1,messageValue) && ok;
     }
     if (s2.IsNotFound()) {
+        messageValue["id"] = 0;
         Json::Value newValue(Json::arrayValue);
         newValue.append(messageValue);
         ok = this->add(sKey2, newValue) && ok;
@@ -60,6 +61,7 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
 
 bool ChatsDB::updateMessages(std::string sKey, Json::Value messageValue) {
     Json::Value msgAux = this->get(sKey);
+    messageValue["id"] = msgAux.size();
     msgAux.append(messageValue);
 
     return this->update(sKey,msgAux);
