@@ -100,3 +100,7 @@ bool DatabaseManager::delete_conv(string username, string username2) {
     return chats->delete_conv(username, username2);
 }
 
+bool DatabaseManager::delete_msg(string username1, string username2, string idMensaje) {
+    return chats->delete_message(username1, username2, idMensaje);
+}
+

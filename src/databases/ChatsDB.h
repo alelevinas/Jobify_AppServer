@@ -26,6 +26,8 @@ public:
     bool get_convs(std::string username, Json::Value *conversations);
 
     bool delete_conv(std::string username, std::string username2);
+
+    bool delete_message(std::string username1, std::string username2, std::string idMensaje);
 };
 
 

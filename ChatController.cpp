@@ -162,4 +162,50 @@ void ChatController::deleteConversationRequest(Mongoose::Request &request, Mongo
               << std::endl;
 }
 
-void ChatController::deleteMessageRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {}
+void ChatController::deleteMessageRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+    std::string username;
+
+    std::string data;
+
+    try {
+        username = sessionManager->get_username(token);
+
+        data = request.getData();
+        Json::Reader reader;
+        Json::Value content;
+        bool parsingSuccessful = reader.parse(data, content);
+        if (!parsingSuccessful) {
+            ApiError::setError(response,410,"Wrong JSON");
+        }
+        std::string username2 = request.get("user","");
+        std::string idMessage = content.get("id","").asString();
+
+        LOG(INFO) << "USER MESSAGE DELETE REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username
+                  <<"\t\tConversacion con: " << username2
+                  <<"\t\tMensaje ID: " << idMessage << "-------" << std::endl;
+
+        Json::Value user = db->get_user(username);
+        Json::Value user2 = db->get_user(username2);
+
+        if ((user["username"] != username) || (user2["username"] != username2)){
+            ApiError::setError(response,500,"Internal server error");
+        } else {
+            if (!db->delete_msg(username, username2, idMessage)) {
+                ApiError::setError(response,500,"Mensaje no encontrado");
+            } else {
+                response[STATUS] = SUCCES;
+            }
+        }
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"Token invalido");
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Usuario inexistente");
+    }
+    LOG(INFO) << "USER MESSAGE DELETE RESPONSE:\n"
+              << "\t\tUser: " << username << "\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}

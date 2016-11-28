@@ -16,8 +16,6 @@ ChatsDB::~ChatsDB() {
 }
 
 bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string message) {
-    //std::cout << "Mensaje recibido ---" << message << "----" << std::endl;
-
     Json::Value messageValue;
     messageValue["msg"] = message;
     messageValue["auth"] = user_from;
@@ -111,4 +109,24 @@ bool ChatsDB::get_convs(std::string username, Json::Value *conversations) {
 bool ChatsDB::delete_conv(std::string username, std::string username2) {
     std::string sKey1 = username + '_' + username2;
     return this->delete_key(sKey1);
+}
+
+bool ChatsDB::delete_message(std::string username1, std::string username2, std::string idMensaje) {
+    std::string sKey = username1 + '_' + username2;
+    Json::Value conversation = this->get(sKey);
+    Json::Value newValue(Json::arrayValue);
+
+    bool deleted = false;
+    for (const Json::Value& message : conversation) {
+        if (message["id"].asString() == idMensaje) {
+            deleted = true;
+        } else {
+            Json::Value newMessage = message;
+            newMessage["id"] = newValue.size();
+            newValue.append(newMessage);
+        }
+    }
+
+    this->update(sKey, newValue);
+    return deleted;
 }

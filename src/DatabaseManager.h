@@ -56,6 +56,8 @@ public:
     bool get_convs(string username, Json::Value *conversations);
 
     bool delete_conv(string username, string username2);
+
+    bool delete_msg(string username1, string username2, string idMensaje);
 };
 
 
