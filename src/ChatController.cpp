@@ -30,10 +30,8 @@ void ChatController::getUserChatsRequest(Mongoose::Request &request, Mongoose::J
     std::string token = request.getHeaderKeyValue("Token");
     std::string username;
 
-
     try {
         username = sessionManager->get_username(token);
-
         std::string username2 = request.get("user","");
 
         LOG(INFO) << "USER CHAT GET REQUEST:\n"
@@ -79,7 +77,6 @@ void ChatController::getUserChatsRequest(Mongoose::Request &request, Mongoose::J
 void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
     std::string username;
-
     std::string data;
 
     try {
@@ -128,7 +125,6 @@ void ChatController::deleteConversationRequest(Mongoose::Request &request, Mongo
     std::string token = request.getHeaderKeyValue("Token");
     std::string username;
 
-
     try {
         username = sessionManager->get_username(token);
 
@@ -165,7 +161,6 @@ void ChatController::deleteConversationRequest(Mongoose::Request &request, Mongo
 void ChatController::deleteMessageRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
     std::string username;
-
     std::string data;
 
     try {
