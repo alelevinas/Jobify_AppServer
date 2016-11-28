@@ -124,6 +124,42 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
               << std::endl;
 }
 
-void ChatController::deleteConversationRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {}
+void ChatController::deleteConversationRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+    std::string username;
+
+
+    try {
+        username = sessionManager->get_username(token);
+
+        std::string username2 = request.get("user","");
+
+        LOG(INFO) << "USER CHAT DELETE REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username
+                  <<"\t\tConversacion con: " << username2 << std::endl;
+
+        Json::Value user = db->get_user(username);
+        Json::Value user2 = db->get_user(username2);
+
+        if ((user["username"] != username) || (user2["username"] != username2)) {
+            ApiError::setError(response,500,"Internal server error");
+        } else {
+            if (!db->delete_conv(username, username2)) {
+                ApiError::setError(response, 500, "Internal server error");
+            } else {
+                response[STATUS] = SUCCES;
+            }
+        }
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"Token invalido");
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Usuario inexistente");
+    }
+    LOG(INFO) << "USER CHAT DELETE RESPONSE:\n"
+              << "\t\tUser: " << username << "\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
 
 void ChatController::deleteMessageRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {}

@@ -97,3 +97,8 @@ bool ChatsDB::get_convs(std::string username, Json::Value *conversations) {
     Json::Reader reader;
     return reader.parse(ss.str(), *conversations);
 }
+
+bool ChatsDB::delete_conv(std::string username, std::string username2) {
+    std::string sKey1 = username + '_' + username2;
+    return this->delete_key(sKey1);
+}
