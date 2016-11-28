@@ -31,10 +31,6 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
     std::string sKey1 = user_from + '_' + user_to;
     std::string sKey2 = user_to + '_' + user_from;
 
-    //Para borrar la conversacion
-    //this->delete_key(sKey1);
-    //this->delete_key(sKey2);
-
     std::string aux;
     leveldb::Status s1 = db->Get(leveldb::ReadOptions(), sKey1, &aux);
     leveldb::Status s2 = db->Get(leveldb::ReadOptions(), sKey2, &aux);
@@ -43,21 +39,29 @@ bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string me
     ss << messageValue;
     std::cout << "-- Valor a agregar: " << ss.str() << " en claves: " << sKey1 << ", " << sKey2 <<"----"<< std::endl;
 
-    if (s1.IsNotFound() != s2.IsNotFound()) {
-        return false;
-    }
+    bool ok = true;
     if (s1.IsNotFound()) {
         Json::Value newValue(Json::arrayValue);
         newValue.append(messageValue);
-        return (this->add(sKey1, newValue) && this->add(sKey2, newValue));
+        ok = this->add(sKey1, newValue) && ok;
     } else {
-        return (this->updateMessages(sKey1,messageValue) && this->updateMessages(sKey2,messageValue));
+        ok = this->updateMessages(sKey1,messageValue) && ok;
     }
+    if (s2.IsNotFound()) {
+        Json::Value newValue(Json::arrayValue);
+        newValue.append(messageValue);
+        ok = this->add(sKey2, newValue) && ok;
+    } else {
+        ok = this->updateMessages(sKey2,messageValue) && ok;
+    }
+    return ok;
 }
 
 bool ChatsDB::updateMessages(std::string sKey, Json::Value messageValue) {
     Json::Value msgAux = this->get(sKey);
     msgAux.append(messageValue);
+    std::cout << "---------------update---------------------" << std::endl;
+
     return this->update(sKey,msgAux);
 }
 
