@@ -47,6 +47,16 @@ public:
     bool add_account(string username, string password);
     bool is_correct(std::string username, std::string password);
 
+    bool add_msg(string basic_string, string basicString, string basic_string1);
+
+    bool get_conv(string username, string username2, Json::Value *conversation);
+
+    bool get_convs(string username, Json::Value *conversations);
+
+    bool delete_conv(string username, string username2);
+
+    bool delete_msg(string username1, string username2, string idMensaje);
+
     bool get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result);
 };
 

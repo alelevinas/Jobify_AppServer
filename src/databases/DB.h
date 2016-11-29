@@ -24,6 +24,8 @@ public:
     DB(const std::string &db_name);
 
     bool openDB();
+
+    bool update(const std::string &key, Json::Value value);
 };
 
 

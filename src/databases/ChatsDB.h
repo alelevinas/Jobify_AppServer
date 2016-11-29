@@ -9,6 +9,7 @@
 #include <string>
 #include <leveldb/db.h>
 #include "DB.h"
+#include "UsersDB.h"
 
 class ChatsDB: public DB{
 
@@ -16,6 +17,18 @@ public:
     ChatsDB(std::string& dbName);
 
     virtual ~ChatsDB();
+
+    bool add_msg(std::string basic_string, std::string basicString, std::string basic_string1);
+
+    bool updateMessages(std::string, Json::Value);
+
+    bool get_conv(std::string username, std::string username2, Json::Value *conversation);
+
+    bool get_convs(std::string username, Json::Value *conversations, UsersDB *pDB);
+
+    bool delete_conv(std::string username, std::string username2);
+
+    bool delete_message(std::string username1, std::string username2, std::string idMensaje);
 };
 
 

@@ -84,3 +84,23 @@ bool DatabaseManager::get_users_by(string sort_by, int nFilter, string job, stri
     return users->get_users_by(sort_by, nFilter, job, skill, result);
 }
 
+bool DatabaseManager::add_msg(string user_from, string user_to, string message) {
+    return chats->add_msg(user_from, user_to, message);
+}
+
+bool DatabaseManager::get_conv(string username, string username2, Json::Value *conversation) {
+    return chats->get_conv(username, username2, conversation);
+}
+
+bool DatabaseManager::get_convs(string username, Json::Value *conversations) {
+    return chats->get_convs(username, conversations, users);
+}
+
+bool DatabaseManager::delete_conv(string username, string username2) {
+    return chats->delete_conv(username, username2);
+}
+
+bool DatabaseManager::delete_msg(string username1, string username2, string idMensaje) {
+    return chats->delete_message(username1, username2, idMensaje);
+}
+
