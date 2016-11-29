@@ -756,12 +756,6 @@ paths:
           description: token received in login or signup
           required: true
           type: string
-        - name: messageID
-          in: body
-          description: id of the message
-          required: true
-          type: string
-          
       tags:
         - Messages
       responses:
@@ -910,13 +904,16 @@ definitions:
   Messages:
     type: object
     properties:
-      id:
+    schema:
+      -id:
         type: int
         description: Identifier
-      text:
+        
+      -text:
         description: Text
         type: string
-      author:
+        
+      -author:
         description: Author of message
         type: string
 
