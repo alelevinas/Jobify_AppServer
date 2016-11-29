@@ -5,6 +5,7 @@
 #include <JobifyServer.h>
 #include <zconf.h>
 #include <log/easylogging++.h>
+#include "ChatController.h"
 
 
 INITIALIZE_EASYLOGGINGPP
@@ -36,18 +37,19 @@ int main() {
     SessionManager sessionManager(&db,ONE_HOUR);  //5 mins
 
     ProfileController pf(&db, &sessionManager);
-    //ChatsController cf(asddas);
+    ChatController ch(&db, &sessionManager);
 
     JobifyServer server(8000);
 
     server.registerController(&pf);
-    //server.registerController(&cf);
+    server.registerController(&ch);
 
     server.start();
     LOG(INFO) << "Iniciando Servidor";
 
     cout << "Server started, routes:" << endl;
     pf.dumpRoutes();
+    ch.dumpRoutes();
 
     while (running) {
         sleep(1000);

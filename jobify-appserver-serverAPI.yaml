@@ -3,7 +3,7 @@
 swagger: '2.0'
 info:
   title: Jobify - AppServer Server API
-  description: API para el App server de Jobify
+  description: API para el shared server de Jobify
   version: "1.0.0"
 host: localhost:8080
 # array of all schemes that your API supports
@@ -78,14 +78,14 @@ paths:
     post:
       summary: Register a new user
       description: |
-        El *signup* endpoint recibe un user con sus datos. Los únicos obligatorios son email y password en Basic Authorization (header). El resto son optativos. Devuelve un *token* para seguir utilizando la API o un código de *error*. 
+        El *signup* endpoint recibe un user con sus datos. Los únicos obligatorios son email y password en Basic Authorization (header). El resto son optativos. Devuelve un *token* para seguir utilizando la API o un código de *error*.
       parameters:
         - name: Auth
           in: header
           description: Basic Authorization email:password in b64
           required: true
           type: string
-          
+
         - name: user
           description: Usuario a dar de alta
           in: body
@@ -113,7 +113,7 @@ paths:
               picture:
                 type: string
                 description: Image URL of the user.
-      
+
       tags:
         - Acces
       responses:
@@ -128,9 +128,7 @@ paths:
                 $ref: '#/definitions/Token'
           examples:
             application/json:
-              status: succes
-              data:
-                token: "67E72E2FB07E8D4427FCBA609525ED57"
+              token: "67E72E2FB07E8D4427FCBA609525ED57"
         409:
           description: Email already in use
           schema:
@@ -161,18 +159,18 @@ paths:
               error:
                 code: 500
                 message: Internal server error
-  
+
   /users:
     get:
       summary: Users Profiles
       description: The *users* Profile endpoint returns information about all the users within the application.
       parameters:
-        - name: Token
-          in: header
-          description: token received in login or signup
-          required: true
-          type: string
-          
+        - name: token
+        in: header
+        description: token received in login or signup
+        required: true
+        type: string
+
       tags:
         - User
       responses:
@@ -217,16 +215,16 @@ paths:
               error:
                 code: 501
                 message: Invalid Token
-  
-  
+
+
   /users/me:
     get:
       summary: User Profile
       description: The *user/me* Profile endpoint returns information about the user with authorization in the application.
       parameters:
-        - name: Token
+        - name: Auth
           in: header
-          description: token received in login or signup
+          description: Basic Authorization email:password in b64
           required: true
           type: string
       tags:
@@ -275,19 +273,17 @@ paths:
       summary: Update user
       description: The *users/me* Profile POST endopoint updates the authorized users information
       parameters:
-        - name: Token
+        - name: Auth
           in: header
-          description: token received in login or signup
+          description: Basic Authorization email:password in b64
           required: true
           type: string
-          
+
         - name: user
           description: Usuario a actualizar
           in: body
           schema:
             $ref: '#/definitions/User'
-      tags:
-        - User
       responses:
         200:
           description: OK
@@ -336,9 +332,9 @@ paths:
       summary: Delete User Profile
       description: The *user/me* Profile DELETE endpoint deletes the user with authorization in the application.
       parameters:
-        - name: Token
+        - name: Auth
           in: header
-          description: token received in login or signup
+          description: Basic Authorization email:password in b64
           required: true
           type: string
       tags:
@@ -397,7 +393,7 @@ paths:
           description: token received in login or signup
           required: true
           type: string
-          
+
         - name: username
           description: User to recommend
           in: body
@@ -461,7 +457,7 @@ paths:
           description: token received in login or signup
           required: true
           type: string
-          
+
         - name: username
           description: User to recommend
           in: body
@@ -525,7 +521,7 @@ paths:
           in: header
           description: token received in login or signup
           required: true
-          type: string          
+          type: string
       tags:
         - Chats
       responses:
@@ -587,7 +583,7 @@ paths:
           in: header
           description: token received in login or signup
           required: true
-          type: string          
+          type: string
       tags:
         - Chats
       responses:
@@ -622,7 +618,7 @@ paths:
                             author:
                               description: Author of message
                               type: string
-                        
+
         501:
           description: Invalid Token
           schema:
@@ -662,7 +658,7 @@ paths:
           description: token received in login or signup
           required: true
           type: string
-        
+
         - name: Mensaje
           description: Mensaje a enviar
           in: body
@@ -925,6 +921,7 @@ definitions:
       description:
         description: Descripción
         type: string
+
   Error:
     type: object
     properties:
