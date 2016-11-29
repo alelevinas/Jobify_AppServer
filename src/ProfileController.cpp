@@ -591,7 +591,7 @@ void ProfileController::postUserImage(Mongoose::Request &request, Mongoose::Json
         }
 
 
-        if (db->)) {
+        if (db->add_image(username, image)) {
             response[STATUS] = SUCCES;
             response[DATA] = "ok";
         } else {
@@ -602,7 +602,39 @@ void ProfileController::postUserImage(Mongoose::Request &request, Mongoose::Json
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"invalid token");
     }
-    LOG(INFO) << "RECOMMEND USER RESPONSE:\n"
+    LOG(INFO) << "POST IMAGE USER RESPONSE:\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
+
+void ProfileController::deleteUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+//    cerr << "\ntoken recibido " << token;
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+//        cerr << " es del usuario: " << username;
+
+        LOG(INFO) << "REMOVE IMAGE USER REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << "\n"
+                  << std::endl;
+
+        db->get_user(username); //solo para ver si salta la exception
+
+        if (db->delete_image(username)) {
+            response[STATUS] = SUCCES;
+            response[DATA] = "ok";
+        } else {
+            ApiError::setError(response,500,"Internal server error");
+        }
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Internal server error");
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"invalid token");
+    }
+    LOG(INFO) << "REMOVE IMAGE USER RESPONSE:\n"
               << "\t\tResponse: " << response
               << std::endl;
 }
@@ -632,5 +664,5 @@ void ProfileController::setup() {
     addRouteResponse("GET", "/users/image", ProfileController, getUserImage, JsonResponse);
     addRouteResponse("POST", "/users/image", ProfileController, postUserImage, JsonResponse);
     addRouteResponse("DELETE", "/users/image", ProfileController, deleteUserImage, JsonResponse);
-    addRouteResponse("PATCH", "/users/image", ProfileController, updateUserImage, JsonResponse);
+//    addRouteResponse("PATCH", "/users/image", ProfileController, updateUserImage, JsonResponse);
 }

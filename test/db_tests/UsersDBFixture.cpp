@@ -16,7 +16,7 @@ protected:
     }
 
     virtual void SetUp() {
-        db = new DatabaseManager("testing_accounts","testing_users","testing_sessions","testing_chats");
+        db = new DatabaseManager("testing_accounts","testing_users","testing_sessions","testing_chats", "testing_images");
     }
 
 public:
@@ -29,6 +29,7 @@ public:
         system("rm -r testing_sessions");
         system("rm -r testing_chats");
         system("rm -r testing_accounts");
+        system("rm -r testing_images");
     }
 
     DatabaseManager* db;
@@ -558,3 +559,6 @@ TEST_F(UsersDBFixture, test_get_top_ten_users_ordered_by_recommendations) {
     EXPECT_EQ(users_ordered_by_rec[1], user3);
     EXPECT_EQ(users_ordered_by_rec[2], user1);
 }
+
+
+

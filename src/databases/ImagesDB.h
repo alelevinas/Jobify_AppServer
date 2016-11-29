@@ -22,7 +22,7 @@ public:
 };
 
 
-};
+
 
 
 #endif //JOBIFY_APPSERVER_IMAGESDB_H
