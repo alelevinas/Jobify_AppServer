@@ -5,12 +5,12 @@
 #include "DatabaseManager.h"
 
 DatabaseManager::DatabaseManager(std::string accountsDbName, std::string usersDbName, std::string sessionsDBname,
-                                 std::string chatsDbName) {
+                                 std::string chatsDbName, std::string imagesDbName) {
     accounts = new AccountsDB(accountsDbName);
     users = new UsersDB(usersDbName);
     sessions = new SessionsDB(sessionsDBname);
     chats = new ChatsDB(chatsDbName);
-
+    images = new ImagesDB(imagesDbName);
 }
 
 DatabaseManager::~DatabaseManager() {
@@ -18,6 +18,7 @@ DatabaseManager::~DatabaseManager() {
     delete users;
     delete sessions;
     delete chats;
+    delete images;
 }
 
 bool DatabaseManager::openDBs() {
@@ -104,3 +105,14 @@ bool DatabaseManager::delete_msg(string username1, string username2, string idMe
     return chats->delete_message(username1, username2, idMensaje);
 }
 
+Json::Value DatabaseManager::get_image(string username) {
+    return images->get_image(username);
+}
+
+bool DatabaseManager::add_image(const std::string &username, Json::Value &image) {
+    return images->add_image(username,image);
+}
+
+bool DatabaseManager::delete_image(const std::string &username) {
+    return images->delete_image(username);
+}

@@ -30,7 +30,7 @@ int main() {
 
     signal(SIGTERM, handle_signal);
 
-    DatabaseManager db("accounts","userss", "sessions", "chats");
+    DatabaseManager db("accounts","userss", "sessions", "chats", "images");
     if (!db.openDBs())
         return -1;
 

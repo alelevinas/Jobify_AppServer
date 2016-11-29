@@ -23,7 +23,6 @@ public:
 
     SessionsDB(const std::string &db_name);
 
-public:
     bool add_session(const std::string &token, Json::Value session);
     Json::Value get_session(const std::string &token);
     bool delete_session(const std::string &token);

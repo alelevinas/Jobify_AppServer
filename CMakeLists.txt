@@ -72,7 +72,7 @@ set(SOURCE_FILES
         src/databases/AccountsDB.cpp src/databases/AccountsDB.h
         src/exceptions/InvalidUsernamePasswordException.h
         src/log/easylogging++.h
-        src/ApiError.h)
+        src/ApiError.h src/databases/ImagesDB.cpp src/databases/ImagesDB.h)
 
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
