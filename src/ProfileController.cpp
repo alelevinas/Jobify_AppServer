@@ -102,11 +102,11 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
 
         response[STATUS] = SUCCES;
 
-        Json::Value users;
+        Json::Value users(Json::arrayValue);
         if(!db->get_users(users)) {
             ApiError::setError(response,500,"Internal server error");
         }
-        response[DATA] = users;
+        response[DATA] = users["users"]; //le agrego esto a pedido
 
 
     } catch (TokenInvalidException &e) {
@@ -518,7 +518,7 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
         if(!db->get_users_by(qSort,nFilter,qJob,qSkill, users))
             ApiError::setError(response,500,"Internal server error");
         else
-            response[DATA]["users"] = users;
+            response[DATA] = users;
 
 
     } catch (TokenInvalidException &e) {

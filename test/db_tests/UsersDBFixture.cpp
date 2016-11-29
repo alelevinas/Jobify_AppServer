@@ -221,7 +221,8 @@ TEST_F(UsersDBFixture, test_get_users_in_populated_bd) {
 
     EXPECT_TRUE(db->add_user(username2, user2));
 
-    Json::Value users;
+    Json::Value users(Json::arrayValue);
+
     bool status = db->get_users(users);
 
     if (!status) {
