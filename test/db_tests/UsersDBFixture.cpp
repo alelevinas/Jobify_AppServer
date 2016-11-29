@@ -434,7 +434,7 @@ TEST_F(UsersDBFixture, test_get_users_job_carpintero) {
     EXPECT_TRUE(db->add_user(username2, user2));
 
     Json::Value users;
-    db->get_users_by("recommended_by",10,"Carpintero","",users);
+    db->get_users_by("",10,"Carpintero","",users);
 
     std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
          << users;
@@ -458,10 +458,103 @@ TEST_F(UsersDBFixture, test_get_users_skill_Gtest) {
     EXPECT_TRUE(db->add_user(username2, user2));
 
     Json::Value users;
-    db->get_users_by("recommended_by",10,"","Google Test",users);
+    db->get_users_by("",10,"","Google Test",users);
 
     std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
               << users;
 
     EXPECT_EQ(users[0], user1);
+}
+
+TEST_F(UsersDBFixture, test_get_users_ordered_by_recommendations) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+
+    add_job_exp(user1, "2006-2009", "NASA", "Desarrollador en lenguaje R para analizar......", "Carpintero", "Profesor dicta clases, etc.", "Education");
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    user2["recommended_by"].append("pepe");
+    user2["recommended_by"].append("ale");
+    user2["recommended_by"].append("gabi");
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    string username3 = "gabi";
+    Json::Value user3 = generate_user(username3);
+    user3["recommended_by"].append("ale");
+
+    EXPECT_TRUE(db->add_user(username3, user3));
+
+    Json::Value users_ordered_by_rec;
+    db->get_users_by("recommended_by",10,"","",users_ordered_by_rec);
+
+    std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
+              << users_ordered_by_rec;
+
+    EXPECT_EQ(users_ordered_by_rec[0], user2);
+    EXPECT_EQ(users_ordered_by_rec[1], user3);
+    EXPECT_EQ(users_ordered_by_rec[2], user1);
+}
+
+TEST_F(UsersDBFixture, test_get_top_ten_users_ordered_by_recommendations) {
+    EXPECT_TRUE(db->openDBs());
+
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+    user1["recommended_by"].append("ale");
+    user1["recommended_by"].append("ale");
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    user2["recommended_by"].append("pepe");
+    user2["recommended_by"].append("ale");
+    user2["recommended_by"].append("gabi");
+    user2["recommended_by"].append("ale");
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    string username3 = "gabi";
+    Json::Value user3 = generate_user(username3);
+    user3["recommended_by"].append("ale");
+    user3["recommended_by"].append("ale");
+    user3["recommended_by"].append("ale");
+
+
+    EXPECT_TRUE(db->add_user(username3, user3));
+
+
+    std::vector <Json::Value> users;
+    users.push_back(user1);
+    users.push_back(user2);
+    users.push_back(user3);
+
+    for (int i=0; i<20; i++) {
+        string username = "juan_" + std::to_string(i);
+        Json::Value user = generate_user(username);
+        users.push_back(user);
+        EXPECT_TRUE(db->add_user(username, user));
+    }
+
+    EXPECT_EQ(23, users.size());
+
+
+    Json::Value users_ordered_by_rec;
+    db->get_users_by("recommended_by",10,"","",users_ordered_by_rec);
+
+    std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
+              << users_ordered_by_rec;
+
+    EXPECT_EQ(10, users_ordered_by_rec.size());
+    EXPECT_EQ(users_ordered_by_rec[0], user2);
+    EXPECT_EQ(users_ordered_by_rec[1], user3);
+    EXPECT_EQ(users_ordered_by_rec[2], user1);
 }
