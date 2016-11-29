@@ -6,6 +6,7 @@
 #include <ctime>
 #include <exceptions/KeyDoesntExistException.h>
 #include "ChatsDB.h"
+#include "UsersDB.h"
 
 ChatsDB::ChatsDB(std::string& dbName) : DB(dbName) {
 
@@ -75,7 +76,7 @@ bool ChatsDB::get_conv(std::string username, std::string username2, Json::Value 
     return true;
 }
 
-bool ChatsDB::get_convs(std::string username, Json::Value *conversations) {
+bool ChatsDB::get_convs(std::string username, Json::Value *conversations, UsersDB *usersDB) {
     std::stringstream ss;
 
     ss << "{ \"chats\": [";
@@ -88,7 +89,8 @@ bool ChatsDB::get_convs(std::string username, Json::Value *conversations) {
         if (strncmp(it->key().ToString().c_str(),username.c_str(),username.size()) == 0) {
             std::string user2 = it->key().ToString().substr(username.size()+1);
             ss << separator << "{ \"" << user2 << "\":";
-            ss << it->value().ToString();
+            //ss << it->value().ToString();
+            ss << usersDB->get_user(user2);
             ss << "}";
             separator = ",";
         }

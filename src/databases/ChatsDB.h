@@ -9,6 +9,7 @@
 #include <string>
 #include <leveldb/db.h>
 #include "DB.h"
+#include "UsersDB.h"
 
 class ChatsDB: public DB{
 
@@ -23,7 +24,7 @@ public:
 
     bool get_conv(std::string username, std::string username2, Json::Value *conversation);
 
-    bool get_convs(std::string username, Json::Value *conversations);
+    bool get_convs(std::string username, Json::Value *conversations, UsersDB *pDB);
 
     bool delete_conv(std::string username, std::string username2);
 
