@@ -58,6 +58,7 @@ public:
     bool delete_conv(string username, string username2);
 
     bool delete_msg(string username1, string username2, string idMensaje);
+    Json::Value get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result);
 };
 
 

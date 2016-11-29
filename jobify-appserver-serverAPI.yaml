@@ -3,7 +3,7 @@
 swagger: '2.0'
 info:
   title: Jobify - AppServer Server API
-  description: API para el App server de Jobify
+  description: API para el shared server de Jobify
   version: "1.0.0"
 host: localhost:8080
 # array of all schemes that your API supports
@@ -78,14 +78,14 @@ paths:
     post:
       summary: Register a new user
       description: |
-        El *signup* endpoint recibe un user con sus datos. Los únicos obligatorios son email y password en Basic Authorization (header). El resto son optativos. Devuelve un *token* para seguir utilizando la API o un código de *error*. 
+        El *signup* endpoint recibe un user con sus datos. Los únicos obligatorios son email y password en Basic Authorization (header). El resto son optativos. Devuelve un *token* para seguir utilizando la API o un código de *error*.
       parameters:
         - name: Auth
           in: header
           description: Basic Authorization email:password in b64
           required: true
           type: string
-          
+
         - name: user
           description: Usuario a dar de alta
           in: body
@@ -113,7 +113,7 @@ paths:
               picture:
                 type: string
                 description: Image URL of the user.
-      
+
       tags:
         - Acces
       responses:
@@ -128,9 +128,7 @@ paths:
                 $ref: '#/definitions/Token'
           examples:
             application/json:
-              status: succes
-              data:
-                token: "67E72E2FB07E8D4427FCBA609525ED57"
+              token: "67E72E2FB07E8D4427FCBA609525ED57"
         409:
           description: Email already in use
           schema:
@@ -161,18 +159,18 @@ paths:
               error:
                 code: 500
                 message: Internal server error
-  
+
   /users:
     get:
       summary: Users Profiles
       description: The *users* Profile endpoint returns information about all the users within the application.
       parameters:
-        - name: Token
+        - name: Auth
           in: header
-          description: token received in login or signup
+          description: Basic Authorization email:password in b64
           required: true
           type: string
-          
+
       tags:
         - User
       responses:
@@ -217,16 +215,16 @@ paths:
               error:
                 code: 501
                 message: Invalid Token
-  
-  
+
+
   /users/me:
     get:
       summary: User Profile
       description: The *user/me* Profile endpoint returns information about the user with authorization in the application.
       parameters:
-        - name: Token
+        - name: Auth
           in: header
-          description: token received in login or signup
+          description: Basic Authorization email:password in b64
           required: true
           type: string
       tags:
@@ -275,19 +273,17 @@ paths:
       summary: Update user
       description: The *users/me* Profile POST endopoint updates the authorized users information
       parameters:
-        - name: Token
+        - name: Auth
           in: header
-          description: token received in login or signup
+          description: Basic Authorization email:password in b64
           required: true
           type: string
-          
+
         - name: user
           description: Usuario a actualizar
           in: body
           schema:
             $ref: '#/definitions/User'
-      tags:
-        - User
       responses:
         200:
           description: OK
@@ -336,9 +332,9 @@ paths:
       summary: Delete User Profile
       description: The *user/me* Profile DELETE endpoint deletes the user with authorization in the application.
       parameters:
-        - name: Token
+        - name: Auth
           in: header
-          description: token received in login or signup
+          description: Basic Authorization email:password in b64
           required: true
           type: string
       tags:
@@ -397,7 +393,7 @@ paths:
           description: token received in login or signup
           required: true
           type: string
-          
+
         - name: username
           description: User to recommend
           in: body
@@ -461,7 +457,7 @@ paths:
           description: token received in login or signup
           required: true
           type: string
-          
+
         - name: username
           description: User to recommend
           in: body
@@ -518,15 +514,14 @@ paths:
                 message: Internal server error
   /chats:
     get:
-      summary: Get all profiles of users currently chatting with
-      description: It returns a list of the profiles of the users that have a chat with the user that makes the request
+      summary: GET de conversaciones
+      description: El *GET* endpoint devuelve una lista de todos los perfiles de los usuarios con los que se tiene una conversación
       parameters:
         - name: Token
           in: header
           description: token received in login or signup
           required: true
           type: string
-          
       tags:
         - Chats
       responses:
@@ -538,9 +533,17 @@ paths:
               status:
                 type: string
               data:
-                type: array
-                items:
-                  $ref: '#/definitions/User'
+                schema:
+                type: object
+                properties:
+                  chats:
+                    schema:
+                    type: array
+                    items:
+                      properties:
+                        username:
+                          type: object
+                          $ref: '#/definitions/User'
         501:
           description: Invalid Token
           schema:
@@ -571,22 +574,16 @@ paths:
               error:
                 code: 500
                 message: Internal server error
-  /chats?username=userid:
+  /chats?user=username:
     get:
-      summary: Get the chat with the userid especified
-      description: It returns the messages of the Conversation beetween the user that makes the request and the userid especified
+      summary: GET conversacion especifica
+      description: El *GET* específicando el destinatario en parametro devuelve una lista de los mensajes de la conversación específica entre ambos usuarios
       parameters:
         - name: Token
           in: header
           description: token received in login or signup
           required: true
           type: string
-        - name: username
-          in: url
-          description: username received in the url parameter
-          required: true
-          type: string
-          
       tags:
         - Chats
       responses:
@@ -597,10 +594,31 @@ paths:
             properties:
               status:
                 type: string
+                description: "success"
               data:
-                type: array
-                items:
-                  $ref: '#/definitions/Messages'
+                schema:
+                type: object
+                properties:
+                  chats:
+                    type: array
+                    items:
+                      properties:
+                        username:
+                          type: object
+                        mensajes:
+                          type: array
+                          items:
+                            properties:
+                            id:
+                              type: int
+                              description: Identifier
+                            text:
+                              description: Text
+                              type: string
+                            author:
+                              description: Author of message
+                              type: string
+
         501:
           description: Invalid Token
           schema:
@@ -632,20 +650,23 @@ paths:
                 code: 500
                 message: Internal server error
     post:
-      summary: Send a message from userid to another user
-      description: It sends a message from the user that makes the request to the user especified in the url parameter
+      summary: POST de chats
+      description: Permite hacer el envio de un mensaje hacia el destinatario
       parameters:
         - name: Token
           in: header
           description: token received in login or signup
           required: true
           type: string
-        - name: username
-          in: url
-          description: username received in the url parameter
-          required: true
-          type: string
-          
+
+        - name: Mensaje
+          description: Mensaje a enviar
+          in: body
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
       tags:
         - Chats
       responses:
@@ -656,6 +677,7 @@ paths:
             properties:
               status:
                 type: string
+                description: "success"
         501:
           description: Invalid Token
           schema:
@@ -687,17 +709,12 @@ paths:
                 code: 500
                 message: Internal server error
     delete:
-      summary: Delete Chats with user especified
-      description: The */chats* DELETE endpoint deletes the user especified in the url parameter
+      summary: DELETE Conversacion con usuario específico
+      description: Elimina la conversacion establecida con el usuario indicado en la url
       parameters:
         - name: Token
           in: header
           description: token received in login or signup
-          required: true
-          type: string
-        - name: username
-          in: url
-          description: username received in the url parameter
           required: true
           type: string
       tags:
@@ -710,12 +727,7 @@ paths:
             properties:
               status:
                 type: string
-              data:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    description: ok
+                description: "success"
         500:
           description: "Internal server error"
           schema:
@@ -746,22 +758,24 @@ paths:
               error:
                 code: 501
                 message: Invalid Token
-  /messages:
+  /messages?user=username:
     delete:
-      summary: Deletes an only message
-      description: Deletes a simple message especified by the id. That message has to be in a conversation of the user that makes the request.
+      summary: DELETE de mensaje
+      description: Elimina el mensaje con id en la conversacion correspondiente
       parameters:
         - name: Token
           in: header
           description: token received in login or signup
           required: true
           type: string
-        - name: messageID
+        - name: ID Mensaje
+          description: ID de mensaje
           in: body
-          description: id of the message
-          required: true
-          type: string
-          
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
       tags:
         - Messages
       responses:
@@ -772,6 +786,7 @@ paths:
             properties:
               status:
                 type: string
+                description: "success"
         501:
           description: Invalid Token
           schema:
@@ -905,19 +920,6 @@ definitions:
         description: Nombre
       description:
         description: Descripción
-        type: string
-
-  Messages:
-    type: object
-    properties:
-      id:
-        type: int
-        description: Identifier
-      text:
-        description: Text
-        type: string
-      author:
-        description: Author of message
         type: string
 
   Error:
