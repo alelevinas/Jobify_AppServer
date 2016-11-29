@@ -165,11 +165,11 @@ paths:
       summary: Users Profiles
       description: The *users* Profile endpoint returns information about all the users within the application.
       parameters:
-        - name: Auth
-          in: header
-          description: Basic Authorization email:password in b64
-          required: true
-          type: string
+        - name: token
+        in: header
+        description: token received in login or signup
+        required: true
+        type: string
 
       tags:
         - User

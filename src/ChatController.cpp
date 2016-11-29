@@ -13,8 +13,6 @@
 using Json::Value;
 using namespace Mongoose;
 
-#include <unistd.h>
-
 
 ChatController::ChatController(DatabaseManager *db, SessionManager *sessionManager)
         : db(db), sessionManager(sessionManager) {}
@@ -45,7 +43,7 @@ void ChatController::getUserChatsRequest(Mongoose::Request &request, Mongoose::J
         if (user["username"] != username) {
             ApiError::setError(response,500,"Internal server error");
         } else {
-            bool ok;
+            bool ok = false;
             if (username2 == "") {
                 ok = db->get_convs(username, &conversation);
             } else {
@@ -108,6 +106,7 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
                 ApiError::setError(response,500,"Internal server error");
             } else {
                 response[STATUS] = SUCCES;
+                response[DATA] = OK;
             }
         }
     } catch (TokenInvalidException &e) {
@@ -145,6 +144,7 @@ void ChatController::deleteConversationRequest(Mongoose::Request &request, Mongo
                 ApiError::setError(response, 500, "Internal server error");
             } else {
                 response[STATUS] = SUCCES;
+                response[DATA] = OK;
             }
         }
     } catch (TokenInvalidException &e) {
@@ -192,6 +192,7 @@ void ChatController::deleteMessageRequest(Mongoose::Request &request, Mongoose::
                 ApiError::setError(response,500,"Mensaje no encontrado");
             } else {
                 response[STATUS] = SUCCES;
+                response[DATA] = OK;
             }
         }
     } catch (TokenInvalidException &e) {

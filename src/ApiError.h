@@ -10,6 +10,7 @@
 
 #define STATUS "status"
 #define SUCCES "succes"
+#define OK "OK"
 #define ERROR "error"
 #define DATA "data"
 
