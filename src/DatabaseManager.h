@@ -47,7 +47,7 @@ public:
     bool add_account(string username, string password);
     bool is_correct(std::string username, std::string password);
 
-    Json::Value get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result);
+    bool get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result);
 };
 
 
