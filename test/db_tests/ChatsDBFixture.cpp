@@ -4,6 +4,7 @@
 
 #include <gtest/gtest.h>
 #include <DatabaseManager.h>
+#include <exceptions/KeyDoesntExistException.h>
 
 class ChatsDBFixture : public ::testing::Test {
 
@@ -61,6 +62,8 @@ TEST_F(ChatsDBFixture, test_get_msgs) {
 
     Json::Value conversation;
     EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario2@correo2.com", "nuevo mensaje"));
-    EXPECT_TRUE(db->get_convs("usuario1@correo1.com", &conversation));
     EXPECT_TRUE(db->get_conv("usuario1@correo1.com", "usuario2@correo2.com", &conversation));
+
+    Json::Value userNotReal;
+    EXPECT_THROW(db->get_convs("usuario1@correo1.com", &userNotReal), KeyDoesntExistException);
 }
