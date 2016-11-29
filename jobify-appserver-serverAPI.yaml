@@ -600,11 +600,29 @@ paths:
                 type: string
                 description: "success"
               data:
+                schema:
+                type: object
                 properties:
                   chats:
                     type: array
                     items:
-                      $ref: '#/definitions/Messages'
+                      properties:
+                        username:
+                          type: object
+                        mensajes:
+                          type: array
+                          items:
+                            properties:
+                            id:
+                              type: int
+                              description: Identifier
+                            text:
+                              description: Text
+                              type: string
+                            author:
+                              description: Author of message
+                              type: string
+                        
         501:
           description: Invalid Token
           schema:
@@ -695,7 +713,7 @@ paths:
                 code: 500
                 message: Internal server error
     delete:
-      summary: DELETE Conversation con usuario específico
+      summary: DELETE Conversacion con usuario específico
       description: Elimina la conversacion establecida con el usuario indicado en la url
       parameters:
         - name: Token
@@ -907,23 +925,6 @@ definitions:
       description:
         description: Descripción
         type: string
-
-  Messages:
-    type: object
-    properties:
-    schema:
-      -id:
-        type: int
-        description: Identifier
-        
-      -text:
-        description: Text
-        type: string
-        
-      -author:
-        description: Author of message
-        type: string
-
   Error:
     type: object
     properties:
