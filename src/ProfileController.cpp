@@ -489,28 +489,42 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
         std::string qJob = request.get("job_position","");
         std::string qSkill = request.get("skill","");
 
-        int nFilter = stoi(qFilter);
+        LOG(INFO) << "GET SEARCH USERS REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << "\n"
+                  << "\t\tQuery: "
+                  << "\t\t\t\t sorting " << qSort
+                  << "\t\t\t\t filter_by " << qFilter
+                  << "\t\t\t\t job_position " << qJob
+                  << "\t\t\t\t skill " << qSkill
+                  << std::endl;
+
+        int nFilter;
+        if(!qFilter.empty())
+            nFilter = stoi(qFilter);
+        else
+            nFilter = 10;
         /*
          * REALIZAR CONSULTAS CON LAS BASES DE DATOS
          *
-         * url: /users?sort=qSort&filter=qFilter&job_position=qJob&skill=qSkill
+         * url: /users/search?sort=qSort&filter=qFilter&job_position=qJob&skill=qSkill
          *
-         * example: /users?sort=recommended&filter=10&job_position=developer&skill=java
+         * example: /users/search?sort=recommended&filter=10&job_position=developer&skill=java
          *
          */
-
-        Json::Value root;
+        response[STATUS] = SUCCES;
+//        Json::Value root;
         Json::Value users(Json::arrayValue);
-        root["users"] = users;
-        Json::Value result = db->get_users_by(qSort,nFilter,qJob,qSkill, users);
-
-        response[DATA] = root;
+        if(!db->get_users_by(qSort,nFilter,qJob,qSkill, users))
+            ApiError::setError(response,500,"Internal server error");
+        else
+            response[DATA]["users"] = users;
 
 
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"invalid token");
     }
-    LOG(INFO) << "MOST POUPULAR USERS RESPONSE:\n"
+    LOG(INFO) << "GET SEARCH USERS RESPONSE:\n"
               << "\t\tResponse: " << response
               << std::endl;
 }

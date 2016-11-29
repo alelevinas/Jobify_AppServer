@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Controller.h"
-#include "StreamResponse.h"
 
 using namespace std;
 
@@ -64,7 +63,7 @@ namespace Mongoose
             response = routes[key]->process(request);
         }
 #endif
-        
+
         return response;
     }
             

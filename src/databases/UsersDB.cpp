@@ -174,13 +174,19 @@ bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill
     if (!get_users(users))
         return false;
 
-    result = users["users"];
+    result.swapPayload(users["users"]);
 
     filter_job(result, job);
-    filter_skill(result, skill);
-    sort_by(result, sorting);
-    top_k(result, nFilter);
+    LOG(DEBUG) << "FILTRADO EL JOB \n" << result << std::endl;
 
+    filter_skill(result, skill);
+    LOG(DEBUG) << "FILTRADO EL SKILL \n" << result << std::endl;
+
+    sort_by(result, sorting);
+    LOG(DEBUG) << "ORDENANDO \n" << result << std::endl;
+
+    top_k(result, nFilter);
+    LOG(DEBUG) << "TOP K \n" << result << std::endl;
     return true;
 }
 
@@ -217,8 +223,8 @@ void UsersDB::filter_skill(Json::Value &result, string skill) {
     for (Json::ValueConstIterator itr = result.begin(); itr != result.end(); itr++) {
         Json::Value user = *itr;
 
-        std::cerr << "\nBUSCANDO " << skill;
-        std::cerr << "\nSKILLS --> " << user["skills"];
+//        std::cerr << "\nBUSCANDO " << skill;
+//        std::cerr << "\nSKILLS --> " << user["skills"];
         Json::Value skills(Json::arrayValue);
         skills = user["skills"];
 
@@ -234,15 +240,6 @@ void UsersDB::filter_skill(Json::Value &result, string skill) {
     result.swapPayload(aux_result);
 }
 
-bool UsersDB::sort_json_array(std::pair<int, Json::Value &> a, std::pair<int, Json::Value &> b) {
-    return a.first > b.first;
-}
-
-/*
-bool UsersDB::sort_json_array(Json::Value& a, Json::Value& b, string sorting) {
-    return a[sorting].size > b[sorting].size;
-}
-*/
 void UsersDB::sort_by(Json::Value &result, string sorting) {
     if (sorting.empty())
         return;
@@ -253,8 +250,8 @@ void UsersDB::sort_by(Json::Value &result, string sorting) {
     for (Json::ValueConstIterator itr = result.begin(); itr != result.end(); itr++) {
         Json::Value user = *itr;
 
-        std::cerr << "\nORDENANDO";
-        std::cerr << "\n" << sorting << " --> " << user[sorting];
+//        std::cerr << "\nORDENANDO";
+//        std::cerr << "\n" << sorting << " --> " << user[sorting];
 
         int cant = user[sorting].size();
         std::pair<int, Json::Value> pair = std::make_pair(cant, user);
@@ -263,14 +260,14 @@ void UsersDB::sort_by(Json::Value &result, string sorting) {
 
     std::sort(ordered.begin(), ordered.end(),
               [](const std::pair<int, Json::Value> &left, const std::pair<int, Json::Value> &right) {
-                  return left.first < right.first;
+                  return left.first > right.first;
               });
 
     for (std::pair<int, const Json::Value &> aux : ordered) {
         aux_result.append(aux.second);
     }
 
-    result = aux_result;
+    result.swapPayload(aux_result);
 }
 
 void UsersDB::top_k(Json::Value &result, int n) {

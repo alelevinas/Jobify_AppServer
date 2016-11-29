@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <mongoose.h>
+#include <log/easylogging++.h>
 #include "Request.h"
 
 using namespace std;

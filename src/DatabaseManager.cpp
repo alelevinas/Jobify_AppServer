@@ -80,7 +80,7 @@ bool DatabaseManager::is_correct(std::string username, std::string password) {
     return accounts->is_correct(username, password);
 }
 
-Json::Value DatabaseManager::get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result) {
+bool DatabaseManager::get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result) {
     return users->get_users_by(sort_by, nFilter, job, skill, result);
 }
 
