@@ -22,7 +22,7 @@ DatabaseManager::~DatabaseManager() {
 }
 
 bool DatabaseManager::openDBs() {
-    return accounts->openDB() and users->openDB() and sessions->openDB() and chats->openDB();
+    return accounts->openDB() and users->openDB() and sessions->openDB() and chats->openDB() and images->openDB();
 }
 
 Json::Value DatabaseManager::get_user(const string &username) {
