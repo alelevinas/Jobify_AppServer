@@ -39,6 +39,11 @@ public:
 
     void getFilteredUsers(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
+    void getUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void postUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void deleteUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void updateUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
 
 
 private:

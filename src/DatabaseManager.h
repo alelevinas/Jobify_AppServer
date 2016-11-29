@@ -8,6 +8,7 @@
 
 #include <databases/SessionsDB.h>
 #include <databases/AccountsDB.h>
+#include <databases/ImagesDB.h>
 #include "databases/UsersDB.h"
 #include "databases/ChatsDB.h"
 
@@ -19,10 +20,11 @@ class DatabaseManager {
     UsersDB* users;
     SessionsDB* sessions;
     ChatsDB* chats;
+    ImagesDB* images;
 
 public:
     DatabaseManager(std::string usersDbName, std::string sessionsDbName, std::string chatsDbName,
-                    std::string accountsDbName);
+                    std::string accountsDbName, std::string imagesDbName);
 
     virtual ~DatabaseManager();
 
@@ -58,6 +60,12 @@ public:
     bool delete_msg(string username1, string username2, string idMensaje);
 
     bool get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result);
+
+    Json::Value get_image(string username);
+
+    bool add_image(const std::string &username, Json::Value &image);
+
+    bool delete_image(const std::string &username);
 };
 
 

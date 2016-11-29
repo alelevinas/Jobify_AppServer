@@ -87,7 +87,7 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
 
 void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
 
-    //cerr << "\ntoken recibido " << token;
+//    cerr << "\ntoken recibido " << token;
     //std::string paramQ = request.get("q","hola");
     //std::string body = request.getData();
     try {
@@ -95,9 +95,11 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
 
         //cerr << " es del usuario: " << username;
 
+        std::string username = sessionManager->get_username(token);
+
         LOG(INFO) << "USERS GET REQUEST:\n"
-                  //<< "\t\tHeader Token: " << token << "\n"
-                  //<< "\t\tUser: " << username
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username
                   << std::endl;
 
         response[STATUS] = SUCCES;
@@ -478,9 +480,6 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
     std::string token = request.getHeaderKeyValue("Token");
 
 //    cerr << "\ntoken recibido " << token;
-
-
-
     try {
         std::string username = sessionManager->get_username(token);
 
@@ -529,6 +528,85 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
               << std::endl;
 }
 
+
+void ProfileController::getUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    try {
+        std::string token = request.getHeaderKeyValue("Token");
+
+        //cerr << " es del usuario: " << username;
+
+        std::string username = sessionManager->get_username(token);
+
+        LOG(INFO) << "USER IMAGE GET REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username
+                  << std::endl;
+
+        response[STATUS] = SUCCES;
+
+        Json::Value image = db->get_image(username);
+
+        if (image.empty())
+            ApiError::setError(response,500,"Internal server error");
+        else
+            response[DATA] = image;
+
+
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"token invalido");
+    }
+    LOG(INFO) << "GET USER IMAGE RESPONSE:\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
+
+void ProfileController::postUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+//    cerr << "\ntoken recibido " << token;
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+//        cerr << " es del usuario: " << username;
+
+        std::string b64_image = request.getData(); //el body
+
+        LOG(INFO) << "POST USER IMAGE REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << "\n"
+                  << "\t\tData: b64 image"
+                  << std::endl;
+
+        db->get_user(username); //solo para ver si salta la exception
+
+        Json::Reader reader;
+        Json::Value image;
+        bool parsingSuccessful = reader.parse(b64_image, image);
+        if (!parsingSuccessful) {
+            ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
+            LOG(INFO) << "POST IMAGE USER RESPONSE:\n"
+                      << "\t\tResponse: " << response
+                      << std::endl;
+            return;
+        }
+
+
+        if (db->)) {
+            response[STATUS] = SUCCES;
+            response[DATA] = "ok";
+        } else {
+            ApiError::setError(response,500,"Internal server error");
+        }
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response,500,"Internal server error");
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"invalid token");
+    }
+    LOG(INFO) << "RECOMMEND USER RESPONSE:\n"
+              << "\t\tResponse: " << response
+              << std::endl;
+}
+
 void ProfileController::setup() {
 
     // putting all the urls into "/api"
@@ -550,15 +628,9 @@ void ProfileController::setup() {
     addRouteResponse("DELETE", "/users/contacts", ProfileController, deleteRemoveContact, JsonResponse);
 
     addRouteResponse("GET", "/users/search", ProfileController, getFilteredUsers, JsonResponse);
-}
 
-/*
- * pa'l checkpoint 2:
- * la documentacion: usar el que nos dieron ellos para el API REST
- * un diagrama de como funciona el programa a grandes rasgos
- * pruebas en python a la API REST
- * modelo de datos de leveldb --> el json
- * TEST+DOCUMENTACION+FUNCIONALIDAD --> clave!
- *
- *
- */
+    addRouteResponse("GET", "/users/image", ProfileController, getUserImage, JsonResponse);
+    addRouteResponse("POST", "/users/image", ProfileController, postUserImage, JsonResponse);
+    addRouteResponse("DELETE", "/users/image", ProfileController, deleteUserImage, JsonResponse);
+    addRouteResponse("PATCH", "/users/image", ProfileController, updateUserImage, JsonResponse);
+}
