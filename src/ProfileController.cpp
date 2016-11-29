@@ -17,7 +17,6 @@ using namespace Mongoose;
 // #define SUCCES "succes"
 // #define ERROR "error"
 // #define DATA "data"
-#include <unistd.h>
 
 
 ProfileController::ProfileController(DatabaseManager *db, SessionManager *sessionManager)
@@ -52,8 +51,6 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
     std::string username;
     try {
         username = sessionManager->get_username(token);
-
-        ::sleep(10);
 
         LOG(INFO) << "USER GET REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
@@ -102,7 +99,7 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
 
         response[STATUS] = SUCCES;
 
-        Json::Value users(Json::arrayValue);
+        Json::Value users;
         if(!db->get_users(users)) {
             ApiError::setError(response,500,"Internal server error");
         }
