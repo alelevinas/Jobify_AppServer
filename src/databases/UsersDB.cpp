@@ -286,7 +286,7 @@ void UsersDB::top_k(Json::Value &result, int n) {
     result.resize(n);
 }
 
-void UsersDB::sort_by_distance(Json::Value &result) { //recibir las coordenadas del usuario <double,double> o string o lo que sea
+void UsersDB::sort_by_distance(Json::Value &result) { //recibir la maxDist y las coordenadas del usuario <double,double> o string o lo que sea
     Json::Value aux_result(Json::arrayValue);
     std::vector<std::pair<int, Json::Value> > ordered;
 
@@ -297,6 +297,9 @@ void UsersDB::sort_by_distance(Json::Value &result) { //recibir las coordenadas 
 //        std::cerr << "\n" << sorting << " --> " << user[sorting];
 
         //int dist = calcularDistancia(user["coordenates"],caller_coordenates);
+
+        if (dist > maxDist)
+            continune;
 
         std::pair<int, Json::Value> pair = std::make_pair(dist, user);
         ordered.push_back(pair);
