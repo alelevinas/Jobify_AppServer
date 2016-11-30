@@ -72,14 +72,14 @@ set(SOURCE_FILES
         src/databases/AccountsDB.cpp src/databases/AccountsDB.h
         src/exceptions/InvalidUsernamePasswordException.h
         src/log/easylogging++.h
-        src/ApiError.h src/databases/ImagesDB.cpp src/databases/ImagesDB.h)
-
+        src/ApiError.h src/databases/ImagesDB.cpp src/databases/ImagesDB.h
+        src/ClientSharedServer.cpp)
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
 
-add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES} src/ChatController.cpp src/ChatController.h)
-target_link_libraries (Jobify_AppServer leveldb mongoose json  cryptopp)
+add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES} src/ChatController.cpp src/ChatController.h src/ClientSharedServer.cpp src/ClientSharedServer.h)
+target_link_libraries (Jobify_AppServer leveldb mongoose json cryptopp restclient-cpp)
 
 include_directories(src)
 
