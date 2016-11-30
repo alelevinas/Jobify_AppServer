@@ -10,9 +10,17 @@ Application Server para el proyecto de Taller de Programación II
 
 Instalación:
 
-La única librería que usamos y no compilamos directamente es leveldb, por lo que es necesario ejecutar el comando
+Las únicas librería que usamos y no compilamos directamente son leveldb y restclient-cpp, por lo que es necesario ejecutar los comandos
 
 sudo apt-get install libsnappy-dev libleveldb1 libleveldb-dev
+sudo apt-get install autoconf libtool git
+git clone https://github.com/mrtazz/restclient-cpp.git
+cd restclient-cpp
+./autogen.sh
+./configure
+sudo make install
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+cd ..
 
 luego a compilar...
 

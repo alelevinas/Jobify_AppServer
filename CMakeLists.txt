@@ -5,7 +5,7 @@ project(Jobify_AppServer)
 set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare  -Wwrite-strings -Wno-unused -DMG_ENABLE_THREADS -DMG_ENABLE_SSL -lssl -lcrypto -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11 -lleveldb -lpthread -lsnappy -lcryptopp")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11 -lleveldb -lpthread -lsnappy -lcryptopp -LLIBDIR")
 
 
 
@@ -72,14 +72,14 @@ set(SOURCE_FILES
         src/databases/AccountsDB.cpp src/databases/AccountsDB.h
         src/exceptions/InvalidUsernamePasswordException.h
         src/log/easylogging++.h
-        src/ApiError.h src/databases/ImagesDB.cpp src/databases/ImagesDB.h)
-
+        src/ApiError.h src/databases/ImagesDB.cpp src/databases/ImagesDB.h
+        src/ClientSharedServer.cpp)
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
 
-add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES} src/ChatController.cpp src/ChatController.h)
-target_link_libraries (Jobify_AppServer leveldb mongoose json  cryptopp)
+add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES} src/ChatController.cpp src/ChatController.h src/ClientSharedServer.cpp src/ClientSharedServer.h src/SharedServerController.cpp src/SharedServerController.h)
+target_link_libraries (Jobify_AppServer leveldb mongoose json cryptopp restclient-cpp)
 
 include_directories(src)
 
