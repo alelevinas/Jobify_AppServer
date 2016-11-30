@@ -73,7 +73,7 @@ set(SOURCE_FILES
         src/exceptions/InvalidUsernamePasswordException.h
         src/log/easylogging++.h
         src/ApiError.h src/databases/ImagesDB.cpp src/databases/ImagesDB.h
-        src/ClientSharedServer.cpp)
+        src/ClientSharedServer.cpp src/NotificationSender.cpp src/NotificationSender.h)
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
