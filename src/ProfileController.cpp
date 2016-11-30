@@ -122,6 +122,8 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
     std::string usr, pass;
     this->decodeAuth(usr_pass_b64, usr, pass);
 
+    std::string firebase_reg_token = request.getHeaderKeyValue("FirebaseToken");
+
 
     std::string json_user = request.getData(); //el body
 
@@ -131,15 +133,22 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
               << "\t\tData: " << json_user
               << std::endl;
 
+    bool ok = true;
+    if(usr_pass_b64.empty()) {
+        ok = false;
+        ApiError::setError(response,400,"Wrong CREDENTIALS");
+    }
+
     Json::Reader reader;
     Json::Value user;
-    bool ok = true;
+
     bool parsingSuccessful = reader.parse(json_user, user);
-    if (!parsingSuccessful) {
+    if (ok && !parsingSuccessful) {
         ok = false;
         ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
     }
     user["username"] = usr;
+    user["firebase_token"] = firebase_reg_token;
     if(user["chats"].empty())
         user["chats"] = Json::Value(Json::arrayValue);
     if(user["contacts"].empty())
@@ -257,11 +266,12 @@ void ProfileController::deleteUserRequest(Mongoose::Request &request, Mongoose::
 
 void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
-    if (usr_pass_b64 == "") {
+    if (usr_pass_b64.empty()) {
         ApiError::setError(response,401,"Invalid password or user");
         LOG(INFO) << "GET LOGIN: \t\t No se recibio header Authorization";
         return;
     }
+    std::string firebase_reg_token = request.getHeaderKeyValue("FirebaseToken");
 
     std::string usr, pass;
     this->decodeAuth(usr_pass_b64, usr, pass);
@@ -273,7 +283,11 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
     try {
         if (db->is_correct(usr, pass)) {  // si matchea la contrasena
 
-            std::string token = sessionManager->add_session(usr, pass);;
+            // actualizo el token de notificaciones
+            Json::Value user = db->get_user(usr);
+            user["firebase_token"] = firebase_reg_token;
+
+            std::string token = sessionManager->add_session(usr, pass);
             if (token == "") {
                 ApiError::setError(response,500,"Internal server error");
             } else {
