@@ -3,9 +3,7 @@
 //
 
 #include "ClientSharedServer.h"
-#include <sstream>
 #include <iostream>
-#include <json/json.h>
 
 ClientSharedServer::ClientSharedServer(std::string url, int port) {
     std::stringstream ss;
@@ -20,7 +18,7 @@ std::string ClientSharedServer::getJobPositions() {
     return r.body;
 }
 
-Json::Value ClientSharedServer::getNamesJobPositions() {
+bool ClientSharedServer::getNamesJobPositions(Json::Value *names) {
     std::string sUrlJobPos = this->url + "/" + JOB_POSITIONS;
     RestClient::Response r;
     r = RestClient::get(sUrlJobPos);
@@ -37,10 +35,11 @@ Json::Value ClientSharedServer::getNamesJobPositions() {
         newArrayValue.append(jobposition["name"]);
     }
 
-    return newArrayValue;
+    *names = newArrayValue;
+    return true;
 }
 
-Json::Value ClientSharedServer::getNamesSkills() {
+bool ClientSharedServer::getNamesSkills(Json::Value *names) {
     std::string sUrlSkills = this->url + "/" + SKILLS;
     RestClient::Response r;
     r = RestClient::get(sUrlSkills);
@@ -57,10 +56,11 @@ Json::Value ClientSharedServer::getNamesSkills() {
         newArrayValue.append(skill["name"]);
     }
 
-    return newArrayValue;
+    *names = newArrayValue;
+    return true;
 }
 
-Json::Value ClientSharedServer::getNamesCategories() {
+bool ClientSharedServer::getNamesCategories(Json::Value *names) {
     std::string sUrlCategories = this->url + "/" + CATEGORIES;
     RestClient::Response r;
     r = RestClient::get(sUrlCategories);
@@ -77,5 +77,6 @@ Json::Value ClientSharedServer::getNamesCategories() {
         newArrayValue.append(skill["name"]);
     }
 
-    return newArrayValue;
+    *names = newArrayValue;
+    return true;
 }

@@ -30,11 +30,11 @@ public:
     ClientSharedServer(std::string url, int port);
     std::string getJobPositions();
 
-    Json::Value getNamesJobPositions();
+    bool getNamesJobPositions(Json::Value *names);
 
-    Json::Value getNamesSkills();
+    bool getNamesSkills(Json::Value *names);
 
-    Json::Value getNamesCategories();
+    bool getNamesCategories(Json::Value *names);
 };
 
 
