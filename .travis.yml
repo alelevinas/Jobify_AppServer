@@ -23,7 +23,7 @@ script:
   - ./test/run_tests
 
 after_success:
-  - coveralls --root .. -i src -E ".*CMakeFiles.*" -E ".*test/*/.*.cpp.*" --exclude src/jsoncpp --exclude src/log/easylogging++.h --exclude test
+  - coveralls --root .. -i src -E ".*CMakeFiles.*" -E ".*test/*/.*.cpp.*" --exclude src/jsoncpp --exclude src/log/* --exclude test
 
 notifications:
   slack: 7552-tallerii:TduWD2Mt2Vjsf9Or2hwCqYmK
