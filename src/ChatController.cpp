@@ -106,7 +106,7 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
                 ApiError::setError(response,500,"Internal server error");
             } else {
                 response[STATUS] = SUCCES;
-                response[DATA] = OK;
+                response[DATA] = OKK;
             }
         }
     } catch (TokenInvalidException &e) {
@@ -144,7 +144,7 @@ void ChatController::deleteConversationRequest(Mongoose::Request &request, Mongo
                 ApiError::setError(response, 500, "Internal server error");
             } else {
                 response[STATUS] = SUCCES;
-                response[DATA] = OK;
+                response[DATA] = OKK;
             }
         }
     } catch (TokenInvalidException &e) {
@@ -192,7 +192,7 @@ void ChatController::deleteMessageRequest(Mongoose::Request &request, Mongoose::
                 ApiError::setError(response,500,"Mensaje no encontrado");
             } else {
                 response[STATUS] = SUCCES;
-                response[DATA] = OK;
+                response[DATA] = OKK;
             }
         }
     } catch (TokenInvalidException &e) {
