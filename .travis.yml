@@ -20,6 +20,7 @@ install:
   - ./autogen.sh
   - ./configure
   - sudo make install
+  - export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
   - cd ..
 
 script:
