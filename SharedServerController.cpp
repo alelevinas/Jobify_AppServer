@@ -49,9 +49,55 @@ void SharedServerController::getJobPosRequest(Mongoose::Request &request, Mongoo
 }
 
 void SharedServerController::getSkillsRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+    std::string username;
 
+    try {
+        username = sessionManager->get_username(token);
+
+        LOG(INFO) << "SKILLs GET REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << std::endl;
+
+        Json::Value skills;
+        if(client->getNamesSkills(&skills)) {
+            response[STATUS] = SUCCES;
+            response[DATA] = skills;
+        } else {
+            ApiError::setError(response,500,"Internal server error");
+        }
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"Token invalido");
+    }
+    LOG(INFO) << "SKILLs GET REQUEST:\n"
+              << "\t\tUser: " << username << "\n"
+              << "\t\tResponse: " << response
+              << std::endl;
 }
 
 void SharedServerController::getCategoriesRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+    std::string username;
 
+    try {
+        username = sessionManager->get_username(token);
+
+        LOG(INFO) << "CATEGORIAs GET REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << std::endl;
+
+        Json::Value categories;
+        if(client->getNamesCategories(&categories)) {
+            response[STATUS] = SUCCES;
+            response[DATA] = categories;
+        } else {
+            ApiError::setError(response,500,"Internal server error");
+        }
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"Token invalido");
+    }
+    LOG(INFO) << "CATEGORIAs GET REQUEST:\n"
+              << "\t\tUser: " << username << "\n"
+              << "\t\tResponse: " << response
+              << std::endl;
 }
