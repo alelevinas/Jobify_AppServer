@@ -4,7 +4,6 @@
 
 #include <gtest/gtest.h>
 #include <ClientSharedServer.h>
-#include <DatabaseManager.h>
 
 class ClientSharedServerFixture : public ::testing::Test {
 
@@ -28,9 +27,30 @@ public:
     ClientSharedServer* ssClient;
 };
 
-TEST_F(ClientSharedServerFixture, test_open_bd_is_ok){
+TEST_F(ClientSharedServerFixture, test_get_job_pos) {
     std::string obtenido;
     EXPECT_NO_THROW(obtenido = ssClient->getJobPositions());
     std::cout << "JOB POSITIIONS TEST: " << std::endl;
-    std::cout << obtenido << std::endl;
+    std::cout << obtenido << std::endl << std::endl;
+}
+
+TEST_F(ClientSharedServerFixture, test_get_array_of_names_job_pos) {
+    Json::Value obtenido;
+    EXPECT_NO_THROW(obtenido = ssClient->getNamesJobPositions());
+    std::cout << "JOB POSITIIONS NAMES TEST: " << std::endl;
+    std::cout << obtenido << std::endl << std::endl;
+}
+
+TEST_F(ClientSharedServerFixture, test_get_array_of_names_skills) {
+    Json::Value obtenido;
+    EXPECT_NO_THROW(obtenido = ssClient->getNamesSkills());
+    std::cout << "SKILLS NAMES TEST: " << std::endl;
+    std::cout << obtenido << std::endl << std::endl;
+}
+
+TEST_F(ClientSharedServerFixture, test_get_array_of_names_categories) {
+    Json::Value obtenido;
+    EXPECT_NO_THROW(obtenido = ssClient->getNamesCategories());
+    std::cout << "CATEGORIES NAMES TEST: " << std::endl;
+    std::cout << obtenido << std::endl << std::endl;
 }

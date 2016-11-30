@@ -14,10 +14,13 @@
 
 #include <string>
 #include <restclient-cpp/restclient.h>
+#include <json/json.h>
 
 #define URL "http://localhost"
 #define PORT 8080
 #define JOB_POSITIONS "job_positions"
+#define SKILLS "skills"
+#define CATEGORIES "categories"
 
 
 class ClientSharedServer {
@@ -26,6 +29,12 @@ private:
 public:
     ClientSharedServer(std::string url, int port);
     std::string getJobPositions();
+
+    Json::Value getNamesJobPositions();
+
+    Json::Value getNamesSkills();
+
+    Json::Value getNamesCategories();
 };
 
 
