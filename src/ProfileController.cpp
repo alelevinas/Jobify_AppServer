@@ -513,10 +513,14 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
          * example: /users/search?sort=recommended&filter=10&job_position=developer&skill=java
          *
          */
+        Json::Value user = db->get_user(username);
+
+        string caller_coordenates = user["coordenates"].asString();
+
         response[STATUS] = SUCCES;
 //        Json::Value root;
         Json::Value users(Json::arrayValue);
-        if(!db->get_users_by(qSort,nFilter,qJob,qSkill, users)) //nDistance
+        if(!db->get_users_by(qSort,nFilter,qJob,qSkill, users)) //nDistance, caller_coordenates
             ApiError::setError(response,500,"Internal server error");
         else
             response[DATA] = users;
