@@ -5,13 +5,6 @@
 #ifndef JOBIFY_APPSERVER_CLIENTSHAREDSERVER_H
 #define JOBIFY_APPSERVER_CLIENTSHAREDSERVER_H
 
-//sudo apt-get install autoconf
-//sudo apt-get install libtool
-//cd restclient-cpp
-// ./autogen.sh
-// ./configure
-// sudo make install
-
 #include <string>
 #include <restclient-cpp/restclient.h>
 #include <json/json.h>
