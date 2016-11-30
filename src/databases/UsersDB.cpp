@@ -168,6 +168,7 @@ bool UsersDB::parse_json_array(std::string body, Json::Value &result) {
     return parsingSuccessful;
 }
 
+//agregar int nDistance
 bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill, Json::Value &result) {
     Json::Value users;
 
@@ -182,8 +183,13 @@ bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill
     filter_skill(result, skill);
     LOG(DEBUG) << "FILTRADO EL SKILL \n" << result << std::endl;
 
+
+    //primero ordeno por distancia, luego por lo que me haya pedido, si pidio algo
+    sort_by_distance(result);
+    LOG(DEBUG) << "ORDENANDO por distancia\n" << result << std::endl;
+
     sort_by(result, sorting);
-    LOG(DEBUG) << "ORDENANDO \n" << result << std::endl;
+    LOG(DEBUG) << "ORDENANDO por " << sorting << "\n" << result << std::endl;
 
     top_k(result, nFilter);
     LOG(DEBUG) << "TOP K \n" << result << std::endl;
@@ -278,6 +284,35 @@ void UsersDB::top_k(Json::Value &result, int n) {
         return;
 
     result.resize(n);
+}
+
+void UsersDB::sort_by_distance(Json::Value &result) { //recibir las coordenadas del usuario <double,double> o string o lo que sea
+    Json::Value aux_result(Json::arrayValue);
+    std::vector<std::pair<int, Json::Value> > ordered;
+
+    for (Json::ValueConstIterator itr = result.begin(); itr != result.end(); itr++) {
+        Json::Value user = *itr;
+
+//        std::cerr << "\nORDENANDO";
+//        std::cerr << "\n" << sorting << " --> " << user[sorting];
+
+        //int dist = calcularDistancia(user["coordenates"],caller_coordenates);
+
+        std::pair<int, Json::Value> pair = std::make_pair(dist, user);
+        ordered.push_back(pair);
+    }
+
+    //ordeno de mas cerca a mas lejos
+    std::sort(ordered.begin(), ordered.end(),
+              [](const std::pair<int, Json::Value> &left, const std::pair<int, Json::Value> &right) {
+                  return left.first < right.first;
+              });
+
+    for (std::pair<int, const Json::Value &> aux : ordered) {
+        aux_result.append(aux.second);
+    }
+
+    result.swapPayload(aux_result);
 }
 
 

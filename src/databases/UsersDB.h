@@ -53,6 +53,8 @@ public:
     void sort_by(Json::Value &result, string sorting);
 
     void top_k(Json::Value &result, int n);
+
+    void sort_by_distance(Json::Value &users);
 };
 
 
