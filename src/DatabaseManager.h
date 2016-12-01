@@ -60,7 +60,7 @@ public:
     bool delete_msg(string username1, string username2, string idMensaje);
 
     bool
-    get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value result, int i, string basic_string);
+    get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value& result, int i, string basic_string);
 
     Json::Value get_image(string username);
 
@@ -69,6 +69,8 @@ public:
     bool delete_image(const std::string &username);
 
     void filter_pos(Json::Value &result, int nDistance, string coordenates);
+
+    void sort_by_distance(Json::Value &result, string coordenates);
 };
 
 
