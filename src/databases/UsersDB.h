@@ -43,8 +43,6 @@ public:
     bool addContact(const string &usernameFrom, const string &usernameTo);
     bool removeContact(const string &usernameFrom, const string &usernameTo);
 
-    bool get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result);
-
     bool parse_json_array(std::string body, Json::Value& result);
 
     void filter_job(Json::Value &result, string job);
@@ -55,6 +53,15 @@ public:
     void top_k(Json::Value &result, int n);
 
     void sort_by_distance(Json::Value &users);
+
+    bool get_users_by(string sorting, int nFilter, string job, string skill,
+                      Json::Value result, int nDistance, string caller_coordenates);
+
+    void filter_pos(Json::Value &result, int nDistance, string caller_coordenates);
+
+    bool isInRange(string pos1, string pos2, int nDistance);
+
+    void getCoordinates(string coordenates, double *latitud, double * longitud);
 };
 
 

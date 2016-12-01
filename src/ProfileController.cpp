@@ -476,7 +476,6 @@ void ProfileController::deleteRemoveContact(Mongoose::Request &request, Mongoose
 void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
 
-//    cerr << "\ntoken recibido " << token;
     try {
         std::string username = sessionManager->get_username(token);
 
@@ -518,13 +517,15 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
         string caller_coordenates = user["coordenates"].asString();
 
         response[STATUS] = SUCCES;
-//        Json::Value root;
+
         Json::Value users(Json::arrayValue);
-        if(!db->get_users_by(qSort,nFilter,qJob,qSkill, users)) //nDistance, caller_coordenates
+
+        // Las caller_coordenates deben tener el formato "xxx:yyy"
+        if(!db->get_users_by(qSort, nFilter, qJob, qSkill, users, nDistance,
+                             caller_coordenates))
             ApiError::setError(response,500,"Internal server error");
         else
             response[DATA] = users;
-
 
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"invalid token");

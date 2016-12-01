@@ -6,6 +6,7 @@
 #include <sstream>
 #include <log/easylogging++.h>
 #include "UsersDB.h"
+#include "HaversineDistance.h"
 
 using std::cerr;
 using std::endl;
@@ -163,13 +164,10 @@ bool UsersDB::removeContact(const string &usernameFrom, const string &usernameTo
 
 bool UsersDB::parse_json_array(std::string body, Json::Value &result) {
     Json::Reader reader;
-    bool ok = true;
-    bool parsingSuccessful = reader.parse(body, result);
-    return parsingSuccessful;
+    return reader.parse(body, result);
 }
 
-//agregar int nDistance
-bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill, Json::Value &result) {
+bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill, Json::Value result, int nDistance, string caller_coordenates) {
     Json::Value users;
 
     if (!get_users(users))
@@ -177,12 +175,14 @@ bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill
 
     result.swapPayload(users["users"]);
 
+    filter_pos(result, nDistance, caller_coordenates);
+    LOG(DEBUG) << "FILTRADO POR POS \n" << result << std::endl;
+
     filter_job(result, job);
     LOG(DEBUG) << "FILTRADO EL JOB \n" << result << std::endl;
 
     filter_skill(result, skill);
     LOG(DEBUG) << "FILTRADO EL SKILL \n" << result << std::endl;
-
 
     //primero ordeno por distancia, luego por lo que me haya pedido, si pidio algo
     sort_by_distance(result);
@@ -194,6 +194,42 @@ bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill
     top_k(result, nFilter);
     LOG(DEBUG) << "TOP K \n" << result << std::endl;
     return true;
+}
+
+void UsersDB::filter_pos(Json::Value &result, int nDistance, std::string caller_coordenates) {
+    if(caller_coordenates.empty())
+        return;
+    Json::Value aux_result(Json::arrayValue);
+
+    for (Json::ValueConstIterator itr = result.begin(); itr != result.end(); itr++) {
+        Json::Value user = *itr;
+
+        Json::Value pos(Json::arrayValue);
+        pos = user["coordenates"];
+
+        if (isInRange(pos.asString(),caller_coordenates,nDistance)) {
+            aux_result.append(user);
+        }
+    }
+    result.swapPayload(aux_result);
+}
+
+/*
+ * Las posiciones deben tener el formato "xxx:yyy"
+ */
+bool UsersDB::isInRange(std::string pos1, std::string pos2, int nDistance) {
+    double lat1, long1, lat2, long2;
+    getCoordinates(pos1, &lat1, &long1);
+    getCoordinates(pos2, &lat2, &long2);
+
+    return distanceEarth(lat1, long1, lat2, long2) < nDistance;
+}
+
+void UsersDB::getCoordinates(string coordenates, double *latitud, double *longitud) {
+    std::stringstream ss(coordenates);
+    ss >> *latitud;
+    ss.ignore(1);
+    ss >> *longitud;
 }
 
 void UsersDB::filter_job(Json::Value &result, string job) {
@@ -297,12 +333,13 @@ void UsersDB::sort_by_distance(Json::Value &result) { //recibir la maxDist y las
 //        std::cerr << "\n" << sorting << " --> " << user[sorting];
 
         //int dist = calcularDistancia(user["coordenates"],caller_coordenates);
-
+/*
         if (dist > maxDist)
             continune;
-
         std::pair<int, Json::Value> pair = std::make_pair(dist, user);
         ordered.push_back(pair);
+
+        */
     }
 
     //ordeno de mas cerca a mas lejos
@@ -317,6 +354,4 @@ void UsersDB::sort_by_distance(Json::Value &result) { //recibir la maxDist y las
 
     result.swapPayload(aux_result);
 }
-
-
 

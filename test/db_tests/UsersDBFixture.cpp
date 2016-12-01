@@ -436,7 +436,8 @@ TEST_F(UsersDBFixture, test_get_users_job_carpintero) {
     EXPECT_TRUE(db->add_user(username2, user2));
 
     Json::Value users;
-    db->get_users_by("",10,"Carpintero","",users);
+    db->get_users_by("", 10, "Carpintero", "", users, 0,
+                     std::__cxx11::string());
 
     std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
          << users;
@@ -460,7 +461,8 @@ TEST_F(UsersDBFixture, test_get_users_skill_Gtest) {
     EXPECT_TRUE(db->add_user(username2, user2));
 
     Json::Value users;
-    db->get_users_by("",10,"","Google Test",users);
+    db->get_users_by("", 10, "", "Google Test", users, 0,
+                     std::__cxx11::string());
 
     std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
               << users;
@@ -494,7 +496,8 @@ TEST_F(UsersDBFixture, test_get_users_ordered_by_recommendations) {
     EXPECT_TRUE(db->add_user(username3, user3));
 
     Json::Value users_ordered_by_rec;
-    db->get_users_by("recommended_by",10,"","",users_ordered_by_rec);
+    db->get_users_by("recommended_by", 10, "", "", users_ordered_by_rec, 0,
+                     std::__cxx11::string());
 
     std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
               << users_ordered_by_rec;
@@ -550,7 +553,8 @@ TEST_F(UsersDBFixture, test_get_top_ten_users_ordered_by_recommendations) {
 
 
     Json::Value users_ordered_by_rec;
-    db->get_users_by("recommended_by",10,"","",users_ordered_by_rec);
+    db->get_users_by("recommended_by", 10, "", "", users_ordered_by_rec, 0,
+                     std::__cxx11::string());
 
     std::cerr << "\n------------------RESULTADO FILTRADO--------------\n"
               << users_ordered_by_rec;
@@ -561,5 +565,32 @@ TEST_F(UsersDBFixture, test_get_top_ten_users_ordered_by_recommendations) {
     EXPECT_EQ(users_ordered_by_rec[2], user1);
 }
 
+TEST_F(UsersDBFixture, test_filter_users_by_Ndistance) {
+    EXPECT_TRUE(db->openDBs());
 
+    string username1 = "alepox11";
+    Json::Value user1 = generate_user(username1);
+    user1["coordenates"] = ("100:100");
+
+    string username2 = "marcelo11";
+    Json::Value user2 = generate_user(username2);
+    user2["coordenates"] = ("100:120");
+
+    string username3 = "gabi11";
+    Json::Value user3 = generate_user(username3);
+    user3["coordenates"] = ("100:9999999999");
+
+    db->add_user(username1,user1);
+    db->add_user(username2,user2);
+    db->add_user(username3,user3);
+
+    Json::Value users;
+    db->get_users(users);
+    Json::Value result(Json::arrayValue);
+    result.swapPayload(users["users"]);
+
+    EXPECT_EQ(3,result.size());
+    db->filter_pos(result, 100, "100:100");
+    EXPECT_EQ(1,result.size());
+}
 
