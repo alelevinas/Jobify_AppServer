@@ -22,14 +22,15 @@ void SharedServerController::setup() {
 
 void SharedServerController::getJobPosRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
-    std::string username;
+//    std::string username;
 
     try {
-        username = sessionManager->get_username(token);
+//        username = sessionManager->get_username(token);
 
         LOG(INFO) << "JOBPOSITIONs GET REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
-                  << "\t\tUser: " << username << std::endl;
+//                  << "\t\tUser: " << username
+                  << std::endl;
 
         Json::Value job_positions;
         bool ok = client->getNamesJobPositions(&job_positions);
@@ -43,21 +44,22 @@ void SharedServerController::getJobPosRequest(Mongoose::Request &request, Mongoo
         ApiError::setError(response,501,"Token invalido");
     }
     LOG(INFO) << "JOBPOSITIONs GET REQUEST:\n"
-              << "\t\tUser: " << username << "\n"
+  //            << "\t\tUser: " << username << "\n"
               << "\t\tResponse: " << response
               << std::endl;
 }
 
 void SharedServerController::getSkillsRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
-    std::string username;
+//    std::string username;
 
     try {
-        username = sessionManager->get_username(token);
+  //      username = sessionManager->get_username(token);
 
         LOG(INFO) << "SKILLs GET REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
-                  << "\t\tUser: " << username << std::endl;
+    //              << "\t\tUser: " << username
+                  << std::endl;
 
         Json::Value skills;
         if(client->getNamesSkills(&skills)) {
@@ -70,21 +72,22 @@ void SharedServerController::getSkillsRequest(Mongoose::Request &request, Mongoo
         ApiError::setError(response,501,"Token invalido");
     }
     LOG(INFO) << "SKILLs GET REQUEST:\n"
-              << "\t\tUser: " << username << "\n"
+//              << "\t\tUser: " << username << "\n"
               << "\t\tResponse: " << response
               << std::endl;
 }
 
 void SharedServerController::getCategoriesRequest(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
-    std::string username;
+//    std::string username;
 
     try {
-        username = sessionManager->get_username(token);
+ //       username = sessionManager->get_username(token);
 
         LOG(INFO) << "CATEGORIAs GET REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
-                  << "\t\tUser: " << username << std::endl;
+  //                << "\t\tUser: " << username
+                  << std::endl;
 
         Json::Value categories;
         if(client->getNamesCategories(&categories)) {
@@ -97,7 +100,7 @@ void SharedServerController::getCategoriesRequest(Mongoose::Request &request, Mo
         ApiError::setError(response,501,"Token invalido");
     }
     LOG(INFO) << "CATEGORIAs GET REQUEST:\n"
-              << "\t\tUser: " << username << "\n"
+//              << "\t\tUser: " << username << "\n"
               << "\t\tResponse: " << response
               << std::endl;
 }

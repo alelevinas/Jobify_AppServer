@@ -48,6 +48,7 @@ public:
 
 private:
     void decodeAuth(std::string &b64_auth, std::string &usr, std::string &pass);
+    Json::Value logResponse(Json::Value& response);
 };
 
 

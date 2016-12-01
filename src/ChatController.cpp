@@ -14,8 +14,10 @@ using Json::Value;
 using namespace Mongoose;
 
 
-ChatController::ChatController(DatabaseManager *db, SessionManager *sessionManager)
-        : db(db), sessionManager(sessionManager) {}
+ChatController::ChatController(DatabaseManager *db, SessionManager *sessionManager, std::string fireServerToken)
+        : db(db), sessionManager(sessionManager) {
+    notSender = new NotificationSender(fireServerToken);
+}
 
 void ChatController::setup() {
     addRouteResponse("GET", "/chats", ChatController, getUserChatsRequest, JsonResponse);
@@ -107,6 +109,8 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
             } else {
                 response[STATUS] = SUCCES;
                 response[DATA] = OKK;
+                //enviar notificacion
+                notSender->send_notification(username, user2["firebase_token"].asString(), message);
             }
         }
     } catch (TokenInvalidException &e) {

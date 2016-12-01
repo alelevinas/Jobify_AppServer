@@ -29,6 +29,7 @@ int main() {
 
 
     signal(SIGTERM, handle_signal);
+    signal(SIGINT, handle_signal);
 
     DatabaseManager db("accounts","userss", "sessions", "chats", "images");
     if (!db.openDBs())
@@ -37,7 +38,7 @@ int main() {
     SessionManager sessionManager(&db,ONE_HOUR);  //5 mins
 
     ProfileController pf(&db, &sessionManager);
-    ChatController ch(&db, &sessionManager);
+    ChatController ch(&db, &sessionManager, "AIzaSyD91cge26COB1UtGA8IDsa4Jg7ZIHUEJME");
 
     ClientSharedServer ssClient(URLHEROKU);
     SharedServerController ssc(&ssClient, &sessionManager);

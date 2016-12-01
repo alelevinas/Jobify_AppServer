@@ -5,7 +5,7 @@ project(Jobify_AppServer)
 set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare  -Wwrite-strings -Wno-unused -DMG_ENABLE_THREADS -DMG_ENABLE_SSL -lssl -lcrypto -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11 -lleveldb -lpthread -lsnappy -lcryptopp -LLIBDIR")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11 -lleveldb -lpthread -lsnappy -lcryptopp -LLIBDIR")# -L/usr/local/lib") #-LLIBDIR
 
 
 
@@ -73,7 +73,7 @@ set(SOURCE_FILES
         src/exceptions/InvalidUsernamePasswordException.h
         src/log/easylogging++.h
         src/ApiError.h src/databases/ImagesDB.cpp src/databases/ImagesDB.h
-        src/ClientSharedServer.cpp)
+        src/ClientSharedServer.cpp src/NotificationSender.cpp src/NotificationSender.h)
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 

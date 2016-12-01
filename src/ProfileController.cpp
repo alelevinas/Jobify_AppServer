@@ -78,7 +78,7 @@ void ProfileController::getUserRequest(Mongoose::Request &request, Mongoose::Jso
     }
     LOG(INFO) << "USER GET RESPONSE:\n"
               << "\t\tUser: " << username << "\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -88,15 +88,15 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
     //std::string paramQ = request.get("q","hola");
     //std::string body = request.getData();
     try {
-        std::string token = request.getHeaderKeyValue("Token");
+        //std::string token = request.getHeaderKeyValue("Token");
 
         //cerr << " es del usuario: " << username;
 
-        std::string username = sessionManager->get_username(token);
+        //std::string username = sessionManager->get_username(token);
 
         LOG(INFO) << "USERS GET REQUEST:\n"
-                  << "\t\tHeader Token: " << token << "\n"
-                  << "\t\tUser: " << username
+          //        << "\t\tHeader Token: " << token << "\n"
+            //      << "\t\tUser: " << username
                   << std::endl;
 
         response[STATUS] = SUCCES;
@@ -112,7 +112,7 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
         ApiError::setError(response,501,"token invalido");
     }
     LOG(INFO) << "USERS RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -121,6 +121,8 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
     std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
     std::string usr, pass;
     this->decodeAuth(usr_pass_b64, usr, pass);
+
+    std::string firebase_reg_token = request.getHeaderKeyValue("FirebaseToken");
 
 
     std::string json_user = request.getData(); //el body
@@ -131,15 +133,22 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
               << "\t\tData: " << json_user
               << std::endl;
 
+    bool ok = true;
+    if(usr_pass_b64.empty()) {
+        ok = false;
+        ApiError::setError(response,400,"Wrong CREDENTIALS");
+    }
+
     Json::Reader reader;
     Json::Value user;
-    bool ok = true;
+
     bool parsingSuccessful = reader.parse(json_user, user);
-    if (!parsingSuccessful) {
+    if (ok && !parsingSuccessful) {
         ok = false;
         ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
     }
     user["username"] = usr;
+    user["firebase_token"] = firebase_reg_token;
     if(user["chats"].empty())
         user["chats"] = Json::Value(Json::arrayValue);
     if(user["contacts"].empty())
@@ -170,7 +179,7 @@ void ProfileController::postUserRequest(Mongoose::Request &request, Mongoose::Js
         ApiError::setError(response,409,"Email already in use");
     }
     LOG(INFO) << "SIGNUP RESPONSE:\n"
-              << "\t\t" << response
+              << "\t\t" << this->logResponse(response)
               << std::endl;
 }
 
@@ -214,7 +223,7 @@ void ProfileController::updateUserRequest(Mongoose::Request &request, Mongoose::
         ApiError::setError(response,501,"token invalido");
     }
     LOG(INFO) << "UPDATE USER RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -251,29 +260,35 @@ void ProfileController::deleteUserRequest(Mongoose::Request &request, Mongoose::
         ApiError::setError(response,501,"token invalido");
     }
     LOG(INFO) << "DELETE USER RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
 void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
-    if (usr_pass_b64 == "") {
+    if (usr_pass_b64.empty()) {
         ApiError::setError(response,401,"Invalid password or user");
         LOG(INFO) << "GET LOGIN: \t\t No se recibio header Authorization";
         return;
     }
+    std::string firebase_reg_token = request.getHeaderKeyValue("FirebaseToken");
 
     std::string usr, pass;
     this->decodeAuth(usr_pass_b64, usr, pass);
 
     LOG(INFO) << "LOGIN REQUEST:\n"
               << "\t\tHeader Authorization: " << usr_pass_b64 << "\n"
+	          << "\t\tHeader Firebase Token: " << firebase_reg_token << "\n"
               << "\t\tUser: " << usr << " Password: " << pass << std::endl;
 
     try {
         if (db->is_correct(usr, pass)) {  // si matchea la contrasena
 
-            std::string token = sessionManager->add_session(usr, pass);;
+            // actualizo el token de notificaciones
+            Json::Value user = db->get_user(usr);
+            user["firebase_token"] = firebase_reg_token;
+
+            std::string token = sessionManager->add_session(usr, pass);
             if (token == "") {
                 ApiError::setError(response,500,"Internal server error");
             } else {
@@ -287,7 +302,7 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
         ApiError::setError(response,401,"Invalid password or user");
     }
     LOG(INFO) << "LOGIN RESPONSE:\n"
-              << "\t\t" << response
+              << "\t\t" << this->logResponse(response)
               << std::endl;
 }
 
@@ -316,7 +331,7 @@ void ProfileController::postRecommend(Mongoose::Request &request, Mongoose::Json
         if (!parsingSuccessful) {
             ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
             LOG(INFO) << "RECOMMEND USER RESPONSE:\n"
-                      << "\t\tResponse: " << response
+                      << "\t\tResponse: " << this->logResponse(response)
                       << std::endl;
             return;
         }
@@ -334,7 +349,7 @@ void ProfileController::postRecommend(Mongoose::Request &request, Mongoose::Json
         ApiError::setError(response,501,"invalid token");
     }
     LOG(INFO) << "RECOMMEND USER RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -363,7 +378,7 @@ void ProfileController::deleteDeRecommend(Mongoose::Request &request, Mongoose::
         if (!parsingSuccessful) {
             ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
             LOG(INFO) << "DERECOMMEND USER RESPONSE:\n"
-                      << "\t\tResponse: " << response
+                      << "\t\tResponse: " << this->logResponse(response)
                       << std::endl;
         }
         if (db->deRecommend_user(username, userToRecomend["username"].asString())) {
@@ -378,7 +393,7 @@ void ProfileController::deleteDeRecommend(Mongoose::Request &request, Mongoose::
         ApiError::setError(response,501,"invalid token");
     }
     LOG(INFO) << "DERECOMMEND USER RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -407,7 +422,7 @@ void ProfileController::postAddContact(Mongoose::Request &request, Mongoose::Jso
         if (!parsingSuccessful) {
             ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
             LOG(INFO) << "ADD CONTACT USER RESPONSE:\n"
-                      << "\t\tResponse: " << response
+                      << "\t\tResponse: " << this->logResponse(response)
                       << std::endl;
             return;
         }
@@ -425,7 +440,7 @@ void ProfileController::postAddContact(Mongoose::Request &request, Mongoose::Jso
         ApiError::setError(response,501,"invalid token");
     }
     LOG(INFO) << "ADD CONTACT USER RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -454,7 +469,7 @@ void ProfileController::deleteRemoveContact(Mongoose::Request &request, Mongoose
         if (!parsingSuccessful) {
             ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
             LOG(INFO) << "DERECOMMEND USER RESPONSE:\n"
-                      << "\t\tResponse: " << response
+                      << "\t\tResponse: " << this->logResponse(response)
                       << std::endl;
         }
         if (db->removeContact(username, userToRemove["username"].asString())) {
@@ -469,7 +484,7 @@ void ProfileController::deleteRemoveContact(Mongoose::Request &request, Mongoose
         ApiError::setError(response,501,"invalid token");
     }
     LOG(INFO) << "REMOVE CONTACT USER RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -531,7 +546,7 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
         ApiError::setError(response,501,"invalid token");
     }
     LOG(INFO) << "GET SEARCH USERS RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -563,7 +578,7 @@ void ProfileController::getUserImage(Mongoose::Request &request, Mongoose::JsonR
         ApiError::setError(response,501,"token invalido");
     }
     LOG(INFO) << "GET USER IMAGE RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -592,7 +607,7 @@ void ProfileController::postUserImage(Mongoose::Request &request, Mongoose::Json
         if (!parsingSuccessful) {
             ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
             LOG(INFO) << "POST IMAGE USER RESPONSE:\n"
-                      << "\t\tResponse: " << response
+                      << "\t\tResponse: " << this->logResponse(response)
                       << std::endl;
             return;
         }
@@ -610,7 +625,7 @@ void ProfileController::postUserImage(Mongoose::Request &request, Mongoose::Json
         ApiError::setError(response,501,"invalid token");
     }
     LOG(INFO) << "POST IMAGE USER RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
 
@@ -642,9 +657,24 @@ void ProfileController::deleteUserImage(Mongoose::Request &request, Mongoose::Js
         ApiError::setError(response,501,"invalid token");
     }
     LOG(INFO) << "REMOVE IMAGE USER RESPONSE:\n"
-              << "\t\tResponse: " << response
+              << "\t\tResponse: " << this->logResponse(response)
               << std::endl;
 }
+
+Json::Value ProfileController::logResponse(Json::Value &response) {
+    Json::Value copy = response;
+    if (copy["data"].isArray()) {
+        for (Json::Value &user : copy["data"]) {
+            user["picture"] = "";
+        }
+    } else if (copy["data"].isMember("picture")) {
+        copy["data"]["picture"] = "";
+    }
+
+    return copy;
+}
+
+
 
 void ProfileController::setup() {
 
