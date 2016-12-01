@@ -29,6 +29,7 @@ int main() {
 
 
     signal(SIGTERM, handle_signal);
+    signal(SIGINT, handle_signal);
 
     DatabaseManager db("accounts","userss", "sessions", "chats", "images");
     if (!db.openDBs())

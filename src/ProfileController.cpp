@@ -88,15 +88,15 @@ void ProfileController::getUsersRequest(Mongoose::Request &request, Mongoose::Js
     //std::string paramQ = request.get("q","hola");
     //std::string body = request.getData();
     try {
-        std::string token = request.getHeaderKeyValue("Token");
+        //std::string token = request.getHeaderKeyValue("Token");
 
         //cerr << " es del usuario: " << username;
 
-        std::string username = sessionManager->get_username(token);
+        //std::string username = sessionManager->get_username(token);
 
         LOG(INFO) << "USERS GET REQUEST:\n"
-                  << "\t\tHeader Token: " << token << "\n"
-                  << "\t\tUser: " << username
+          //        << "\t\tHeader Token: " << token << "\n"
+            //      << "\t\tUser: " << username
                   << std::endl;
 
         response[STATUS] = SUCCES;
@@ -278,6 +278,7 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
 
     LOG(INFO) << "LOGIN REQUEST:\n"
               << "\t\tHeader Authorization: " << usr_pass_b64 << "\n"
+	          << "\t\tHeader Firebase Token: " << firebase_reg_token << "\n"
               << "\t\tUser: " << usr << " Password: " << pass << std::endl;
 
     try {
