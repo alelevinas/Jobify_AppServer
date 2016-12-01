@@ -362,12 +362,7 @@ bool UsersDB::get_user_contacts(string &username, Json::Value &contacts) {
     Json::Value aux_result(Json::arrayValue);
     Json::Value user = get_user(username);
 
-    LOG(DEBUG) << "HOLAAAAAAAAAAAAA\n" << user << user["contacts"];
-
-//    std::cerr << user["contacts"];
-
     for (Json::Value& contactName: user["contacts"]) {
-//        std::string contactName = (*itr).asString();
         std::cerr << contactName;
         Json::Value contact = get_user(contactName.asString());
         aux_result.append(contact);
