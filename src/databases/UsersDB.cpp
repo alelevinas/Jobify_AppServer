@@ -358,3 +358,16 @@ double UsersDB::calcularDistancia(string coord_user, string callerCoordenates) {
     return distanceEarth(lat1, long1, lat2, long2);
 }
 
+bool UsersDB::get_user_contacts(string &username, Json::Value &contacts) {
+    Json::Value aux_result(Json::arrayValue);
+    Json::Value user = get_user(username);
+
+    for (Json::Value& contactName: user["contacts"]) {
+        std::cerr << contactName;
+        Json::Value contact = get_user(contactName.asString());
+        aux_result.append(contact);
+    }
+    contacts.swapPayload(aux_result);
+    return true;
+}
+

@@ -397,6 +397,37 @@ void ProfileController::deleteDeRecommend(Mongoose::Request &request, Mongoose::
               << std::endl;
 }
 
+void ProfileController::getUserContacts(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string token = request.getHeaderKeyValue("Token");
+
+    try {
+        std::string username = sessionManager->get_username(token);
+
+
+        LOG(INFO) << "GET CONTACTS USERS REQUEST:\n"
+                  << "\t\tHeader Token: " << token << "\n"
+                  << "\t\tUser: " << username << "\n"
+                  << std::endl;
+
+        //Json::Value user = db->get_user(username);
+
+        response[STATUS] = SUCCES;
+        Json::Value contacts(Json::arrayValue);
+
+        if(!db->get_user_contacts(username, contacts))
+            ApiError::setError(response,500,"Internal server error");
+        else
+            response[DATA] = contacts;
+
+    } catch (TokenInvalidException &e) {
+        ApiError::setError(response,501,"invalid token");
+    }
+    LOG(INFO) << "GET CONTACTS USERS RESPONSE:\n"
+              << "\t\tResponse: " << this->logResponse(response)
+              << std::endl;
+
+}
+
 void ProfileController::postAddContact(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
 //    cerr << "\ntoken recibido " << token;
@@ -695,6 +726,8 @@ void ProfileController::setup() {
     addRouteResponse("DELETE", "/users/recommend", ProfileController, deleteDeRecommend, JsonResponse);
     addRouteResponse("POST", "/users/contacts", ProfileController, postAddContact, JsonResponse);
     addRouteResponse("DELETE", "/users/contacts", ProfileController, deleteRemoveContact, JsonResponse);
+
+    addRouteResponse("GET", "/users/contacts", ProfileController, getUserContacts, JsonResponse);
 
     addRouteResponse("GET", "/users/search", ProfileController, getFilteredUsers, JsonResponse);
 

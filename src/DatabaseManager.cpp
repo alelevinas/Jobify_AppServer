@@ -124,3 +124,7 @@ bool DatabaseManager::add_image(const std::string &username, Json::Value &image)
 bool DatabaseManager::delete_image(const std::string &username) {
     return images->delete_image(username);
 }
+
+bool DatabaseManager::get_user_contacts(string &username, Json::Value &contacts) {
+    return users->get_user_contacts(username,contacts);
+}

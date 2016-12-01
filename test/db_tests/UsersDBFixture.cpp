@@ -623,3 +623,35 @@ TEST_F(UsersDBFixture, test_sort_users_by_distance) {
               << result;
 }
 
+
+TEST_F(UsersDBFixture, test_get_contacts_info) {
+    EXPECT_TRUE(db->openDBs());
+
+    string username1 = "alepox";
+    Json::Value user1 = generate_user(username1);
+
+    EXPECT_TRUE(db->add_user(username1, user1));
+
+    string username2 = "marcelo";
+    Json::Value user2 = generate_user(username2);
+
+    EXPECT_TRUE(db->add_user(username2, user2));
+
+    string username3 = "pepe";
+    Json::Value user3 = generate_user(username3);
+
+    EXPECT_TRUE(db->add_user(username3, user3));
+
+    EXPECT_TRUE(db->addContact(username1, username2));
+    EXPECT_TRUE(db->addContact(username1, username3));
+
+    user1 = db->get_user(username1);
+    user2 = db->get_user(username2);
+    user3 = db->get_user(username3);
+
+    Json::Value contacts(Json::arrayValue);
+    db->get_user_contacts(username1, contacts);
+
+    EXPECT_EQ(contacts[0], user2);
+    EXPECT_EQ(contacts[1], user3);
+}

@@ -64,6 +64,8 @@ public:
     void getCoordinates(string coordenates, double *latitud, double * longitud);
 
     double calcularDistancia(string coord_user, string callerCoordenates);
+
+    bool get_user_contacts(string &username, Json::Value &contacts);
 };
 
 
