@@ -71,6 +71,8 @@ public:
     void filter_pos(Json::Value &result, int nDistance, string coordenates);
 
     void sort_by_distance(Json::Value &result, string coordenates);
+
+    bool get_user_contacts(string &username, Json::Value &contacts);
 };
 
 

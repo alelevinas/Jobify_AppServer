@@ -34,6 +34,8 @@ public:
     void postRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response);
     void deleteDeRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
+
+    void getUserContacts(Mongoose::Request &request, Mongoose::JsonResponse &response);
     void postAddContact(Mongoose::Request &request, Mongoose::JsonResponse &response);
     void deleteRemoveContact(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
