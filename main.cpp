@@ -39,7 +39,7 @@ int main() {
     ProfileController pf(&db, &sessionManager);
     ChatController ch(&db, &sessionManager);
 
-    ClientSharedServer ssClient(URL, PORT);
+    ClientSharedServer ssClient(URLHEROKU);
     SharedServerController ssc(&ssClient, &sessionManager);
 
     JobifyServer server(8000);

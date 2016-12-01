@@ -13,7 +13,7 @@ protected:
     }
 
     virtual void SetUp() {
-        ssClient = new ClientSharedServer(URL, PORT);
+        ssClient = new ClientSharedServer(URLHEROKU);
     }
 
 public:
@@ -33,9 +33,6 @@ TEST_F(ClientSharedServerFixture, test_get_job_pos) {
     std::cout << "JOB POSITIIONS TEST: " << std::endl;
     std::cout << obtenido << std::endl << std::endl;
 }
-/*
- * SOLO PUEDEN CORRERSE CON EL SHAREDSERVER ANDANDO
- *
 TEST_F(ClientSharedServerFixture, test_get_array_of_names_job_pos) {
     Json::Value obtenido;
     EXPECT_TRUE(ssClient->getNamesJobPositions(&obtenido));
@@ -56,4 +53,3 @@ TEST_F(ClientSharedServerFixture, test_get_array_of_names_categories) {
     std::cout << "CATEGORIES NAMES TEST: " << std::endl;
     std::cout << obtenido << std::endl << std::endl;
 }
- */

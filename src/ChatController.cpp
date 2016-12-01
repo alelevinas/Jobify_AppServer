@@ -88,7 +88,7 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
             ApiError::setError(response,410,"Wrong JSON");  // TODO agregar a la API documentation
         }
         std::string msgTo = request.get("user","");
-        std::string message = content.get("msg","").asString();
+        std::string message = content.get("text","").asString();
 
         LOG(INFO) << "USER CHAT POST REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
