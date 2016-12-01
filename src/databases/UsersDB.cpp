@@ -185,7 +185,7 @@ bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill
     LOG(DEBUG) << "FILTRADO EL SKILL \n" << result << std::endl;
 
     //primero ordeno por distancia, luego por lo que me haya pedido, si pidio algo
-    sort_by_distance(result);
+    sort_by_distance(result, caller_coordenates);
     LOG(DEBUG) << "ORDENANDO por distancia\n" << result << std::endl;
 
     sort_by(result, sorting);
@@ -322,36 +322,39 @@ void UsersDB::top_k(Json::Value &result, int n) {
     result.resize(n);
 }
 
-void UsersDB::sort_by_distance(Json::Value &result) { //recibir la maxDist y las coordenadas del usuario <double,double> o string o lo que sea
+void UsersDB::sort_by_distance(Json::Value &result, std::string caller_coordenates) {
     Json::Value aux_result(Json::arrayValue);
     std::vector<std::pair<int, Json::Value> > ordered;
 
     for (Json::ValueConstIterator itr = result.begin(); itr != result.end(); itr++) {
         Json::Value user = *itr;
 
-//        std::cerr << "\nORDENANDO";
-//        std::cerr << "\n" << sorting << " --> " << user[sorting];
+        std::cerr << "\nORDENANDO POR DISTANCIA";
 
-        //int dist = calcularDistancia(user["coordenates"],caller_coordenates);
-/*
-        if (dist > maxDist)
-            continune;
-        std::pair<int, Json::Value> pair = std::make_pair(dist, user);
+        double dist = calcularDistancia(user["coordenates"].asString(),caller_coordenates);
+
+        std::pair<double, Json::Value> pair = std::make_pair(dist, user);
         ordered.push_back(pair);
-
-        */
     }
 
     //ordeno de mas cerca a mas lejos
     std::sort(ordered.begin(), ordered.end(),
-              [](const std::pair<int, Json::Value> &left, const std::pair<int, Json::Value> &right) {
+              [](const std::pair<double, Json::Value> &left, const std::pair<double, Json::Value> &right) {
                   return left.first < right.first;
               });
 
-    for (std::pair<int, const Json::Value &> aux : ordered) {
+    for (std::pair<double, const Json::Value &> aux : ordered) {
         aux_result.append(aux.second);
     }
 
     result.swapPayload(aux_result);
+}
+
+double UsersDB::calcularDistancia(string coord_user, string callerCoordenates) {
+    double lat1, long1, lat2, long2;
+    getCoordinates(coord_user, &lat1, &long1);
+    getCoordinates(callerCoordenates, &lat2, &long2);
+
+    return distanceEarth(lat1, long1, lat2, long2);
 }
 

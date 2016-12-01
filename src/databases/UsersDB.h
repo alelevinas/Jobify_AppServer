@@ -52,7 +52,7 @@ public:
 
     void top_k(Json::Value &result, int n);
 
-    void sort_by_distance(Json::Value &users);
+    void sort_by_distance(Json::Value &users, std::string caller_coordenates);
 
     bool get_users_by(string sorting, int nFilter, string job, string skill,
                       Json::Value result, int nDistance, string caller_coordenates);
@@ -62,6 +62,8 @@ public:
     bool isInRange(string pos1, string pos2, int nDistance);
 
     void getCoordinates(string coordenates, double *latitud, double * longitud);
+
+    double calcularDistancia(string coord_user, string callerCoordenates);
 };
 
 

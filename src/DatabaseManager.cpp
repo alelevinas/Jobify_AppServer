@@ -89,6 +89,10 @@ void DatabaseManager::filter_pos(Json::Value &result, int nDistance, std::string
     users->filter_pos(result, nDistance, coordenates);
 }
 
+void DatabaseManager::sort_by_distance(Json::Value &result, std::string coordenates) {
+    users->sort_by_distance(result, coordenates);
+}
+
 bool DatabaseManager::add_msg(string user_from, string user_to, string message) {
     return chats->add_msg(user_from, user_to, message);
 }

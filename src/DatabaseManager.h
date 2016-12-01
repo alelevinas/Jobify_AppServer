@@ -69,6 +69,8 @@ public:
     bool delete_image(const std::string &username);
 
     void filter_pos(Json::Value &result, int nDistance, string coordenates);
+
+    void sort_by_distance(Json::Value &result, string coordenates);
 };
 
 
