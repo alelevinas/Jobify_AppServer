@@ -476,7 +476,6 @@ void ProfileController::deleteRemoveContact(Mongoose::Request &request, Mongoose
 void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
 
-//    cerr << "\ntoken recibido " << token;
     try {
         std::string username = sessionManager->get_username(token);
 
@@ -484,6 +483,7 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
         std::string qFilter = request.get("filter","");
         std::string qJob = request.get("job_position","");
         std::string qSkill = request.get("skill","");
+        std::string qDistance = request.get("distance",""); //solo los que estan a distancia menor a...
 
         LOG(INFO) << "GET SEARCH USERS REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
@@ -495,11 +495,15 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
                   << "\t\t\t\t skill " << qSkill
                   << std::endl;
 
-        int nFilter;
+        int nFilter, nDistance;
         if(!qFilter.empty())
             nFilter = stoi(qFilter);
         else
             nFilter = 10;
+        if (!qDistance.empty())
+            nDistance = stoi(qDistance);
+        else
+            nDistance = 10000;
         /*
          * REALIZAR CONSULTAS CON LAS BASES DE DATOS
          *
@@ -508,14 +512,20 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
          * example: /users/search?sort=recommended&filter=10&job_position=developer&skill=java
          *
          */
+        Json::Value user = db->get_user(username);
+
+        string caller_coordenates = user["coordenates"].asString();
+
         response[STATUS] = SUCCES;
-//        Json::Value root;
+
         Json::Value users(Json::arrayValue);
-        if(!db->get_users_by(qSort,nFilter,qJob,qSkill, users))
+
+        // Las caller_coordenates deben tener el formato "xxx:yyy"
+        if(!db->get_users_by(qSort, nFilter, qJob, qSkill, users, nDistance,
+                             caller_coordenates))
             ApiError::setError(response,500,"Internal server error");
         else
             response[DATA] = users;
-
 
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"invalid token");
