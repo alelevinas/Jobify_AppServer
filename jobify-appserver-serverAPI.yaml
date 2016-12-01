@@ -166,11 +166,10 @@ paths:
       description: The *users* Profile endpoint returns information about all the users within the application.
       parameters:
         - name: token
-        in: header
-        description: token received in login or signup
-        required: true
-        type: string
-
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
       tags:
         - User
       responses:
@@ -542,7 +541,6 @@ paths:
                     items:
                       properties:
                         username:
-                          type: object
                           $ref: '#/definitions/User'
         501:
           description: Invalid Token
@@ -665,7 +663,7 @@ paths:
           schema:
             type: object
             properties:
-              msg:
+              text:
                 type: string
       tags:
         - Chats

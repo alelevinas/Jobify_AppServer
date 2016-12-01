@@ -81,8 +81,16 @@ bool DatabaseManager::is_correct(std::string username, std::string password) {
     return accounts->is_correct(username, password);
 }
 
-bool DatabaseManager::get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value &result) {
-    return users->get_users_by(sort_by, nFilter, job, skill, result);
+bool DatabaseManager::get_users_by(string sort_by, int nFilter, string job, string skill, Json::Value& result, int nDistance, string caller_coordenates) {
+    return users->get_users_by(sort_by, nFilter, job, skill, result, nDistance, caller_coordenates);
+}
+
+void DatabaseManager::filter_pos(Json::Value &result, int nDistance, std::string coordenates) {
+    users->filter_pos(result, nDistance, coordenates);
+}
+
+void DatabaseManager::sort_by_distance(Json::Value &result, std::string coordenates) {
+    users->sort_by_distance(result, coordenates);
 }
 
 bool DatabaseManager::add_msg(string user_from, string user_to, string message) {
