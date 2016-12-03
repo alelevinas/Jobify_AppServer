@@ -6,7 +6,6 @@
 #include <zconf.h>
 #include <log/easylogging++.h>
 #include "ChatController.h"
-#include "SharedServerController.h"
 
 INITIALIZE_EASYLOGGINGPP
 #define ELPP_THREAD_SAFE
@@ -40,14 +39,14 @@ int main() {
     ProfileController pf(&db, &sessionManager);
     ChatController ch(&db, &sessionManager, "AIzaSyD91cge26COB1UtGA8IDsa4Jg7ZIHUEJME");
 
-    ClientSharedServer ssClient(URLHEROKU);
-    SharedServerController ssc(&ssClient, &sessionManager);
+    //ClientSharedServer ssClient(URLHEROKU);
+    //SharedServerController ssc(&ssClient, &sessionManager);
 
     JobifyServer server(8000);
 
     server.registerController(&pf);
     server.registerController(&ch);
-    server.registerController(&ssc);
+    //server.registerController(&ssc);
 
     server.start();
     LOG(INFO) << "Iniciando Servidor";
@@ -55,7 +54,7 @@ int main() {
     cout << "Server started, routes:" << endl;
     pf.dumpRoutes();
     ch.dumpRoutes();
-    ssc.dumpRoutes();
+    //ssc.dumpRoutes();
 
     while (running) {
         sleep(1000);

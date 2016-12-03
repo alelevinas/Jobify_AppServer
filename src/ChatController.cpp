@@ -16,7 +16,6 @@ using namespace Mongoose;
 
 ChatController::ChatController(DatabaseManager *db, SessionManager *sessionManager, std::string fireServerToken)
         : db(db), sessionManager(sessionManager) {
-    notSender = new NotificationSender(fireServerToken);
 }
 
 void ChatController::setup() {
@@ -60,7 +59,11 @@ void ChatController::getUserChatsRequest(Mongoose::Request &request, Mongoose::J
                 ApiError::setError(response,500,"Internal server error");
             } else {
                 response[STATUS] = SUCCES;
-                response[DATA] = conversation;
+                if (username2 == "") {
+                    response[DATA] = conversation["chats"];
+                } else {
+                    response[DATA] = conversation;
+                }
             }
         }
     } catch (TokenInvalidException &e) {
@@ -95,7 +98,7 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
         LOG(INFO) << "USER CHAT POST REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"
                   << "\t\tUser: " << username
-                <<"\t\tMensaje a: " << msgTo
+                <<"\t\tMensaje a: " << msgTo 
                 <<"\t\tMensaje: " << message << "-------" << std::endl;
 
         Json::Value user = db->get_user(username);
@@ -110,7 +113,6 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
                 response[STATUS] = SUCCES;
                 response[DATA] = OKK;
                 //enviar notificacion
-                notSender->send_notification(username, user2["firebase_token"].asString(), message);
             }
         }
     } catch (TokenInvalidException &e) {

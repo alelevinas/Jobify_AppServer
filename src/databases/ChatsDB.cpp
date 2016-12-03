@@ -18,13 +18,13 @@ ChatsDB::~ChatsDB() {
 
 bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string message) {
     Json::Value messageValue;
-    messageValue["msg"] = message;
+    messageValue["text"] = message;
     messageValue["auth"] = user_from;
 
     time_t t = time(0);   // get time now
     struct tm * now = localtime(&t);
     std::stringstream stime;
-    stime << (now->tm_year + 1900) << '-' << (now->tm_mon + 1) << '-' << now->tm_mday << '-' << now->tm_hour << ':' << now->tm_min << ':' << now->tm_sec;
+    stime << now->tm_hour << ':' << now->tm_min << ':' << now->tm_sec<<" "<< now->tm_mday << '/' << (now->tm_mon + 1) << '/' << (now->tm_year + 1900) ;
     messageValue["time"] = stime.str();
 
     std::string sKey1 = user_from + '_' + user_to;
@@ -88,10 +88,10 @@ bool ChatsDB::get_convs(std::string username, Json::Value *conversations, UsersD
     for (it->SeekToFirst(); it->Valid(); it->Next()) {
         if (strncmp(it->key().ToString().c_str(),username.c_str(),username.size()) == 0) {
             std::string user2 = it->key().ToString().substr(username.size()+1);
-            ss << separator << "{ \"" << user2 << "\":";
+            ss << separator ;//<< "{ \"" << user2 << "\":";
             //ss << it->value().ToString();
             ss << usersDB->get_user(user2);
-            ss << "}";
+            //ss << "}";
             separator = ",";
         }
     }

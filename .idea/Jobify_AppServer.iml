@@ -3,106 +3,99 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/ChatController.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/NotificationSender.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DatabaseManager.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/SessionManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/log/easylogging++.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/JobifyServer.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/SharedServerController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/SessionManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/jsoncpp/jsoncpp.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Foo.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/NotificationSender.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ApiError.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/ClientSharedServer.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/SharedServerController.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonResponse.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSocket.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Server.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Session.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonResponse.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonController.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/UploadFile.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Server.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/UploadFile.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSockets.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Response.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Mutex.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSockets.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Server.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Response.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Controller.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Response.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Controller.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Utils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/StreamResponse.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Request.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Mutex.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonResponse.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebController.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Sessions.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Session.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/StreamResponse.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSocket.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/mongoose.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSocket.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSockets.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/mongoose.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/mongoose.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/UploadFile.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Request.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Sessions.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Mutex.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/UploadFile.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonController.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/ProfileController.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ChatController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ProfileController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Foo.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/JobifyServer.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/SessionManager.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/ClientSharedServer.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ProfileController.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/HaversineDistance.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DatabaseManager.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/databases/DB.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/databases/ChatsDB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/ChatsDB.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/databases/ImagesDB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/SessionsDB.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/DB.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/UsersDB.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/AccountsDB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/AccountsDB.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/ImagesDB.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/databases/ImagesDB.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/databases/utils.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/databases/ChatsDB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/SessionsDB.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/databases/utils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/UsersDB.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/databases/DB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/KeyDoesntExistException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/TokenInvalidException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/InvalidUsernamePasswordException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/KeyAlreadyExistsException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/foo_tests/FooFixture.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/foo_tests/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/foo_tests/basic_check.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/lib/googletest/src/gtest_main.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/lib/googletest/src/gtest-all.cc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/lib/googletest/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/lib/googletest/cmake/internal_utils.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/db_tests/SessionsDBFixture.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/db_tests/ChatsDBFixture.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/db_tests/SessionManagerFixture.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/db_tests/UsersDBFixture.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/db_tests/ChatsDBFixture.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/test/ClientSharedServerFixture.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/foo_tests/FooFixture.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/foo_tests/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/foo_tests/basic_check.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library name="Header Search Paths">
         <CLASSES>
+          <root url="file:///usr/include" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
-          <root url="file:///usr/include" />
           <root url="file:///usr/local/include" />
         </CLASSES>
         <SOURCES>
+          <root url="file:///usr/include" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
-          <root url="file:///usr/include" />
           <root url="file:///usr/local/include" />
         </SOURCES>
       </library>

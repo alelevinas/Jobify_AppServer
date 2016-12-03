@@ -248,7 +248,7 @@ void UsersDB::filter_job(Json::Value &result, string job) {
         for (Json::ValueConstIterator jobItr = job_exp.begin(); jobItr != job_exp.end(); jobItr++) {
             Json::Value position = (*jobItr)["position"];
 
-            if (position["name"].asString() == job) {
+            if (position.asString() == job) {
                 aux_result.append(user);
                 break;
             }
@@ -273,7 +273,7 @@ void UsersDB::filter_skill(Json::Value &result, string skill) {
         for (Json::ValueConstIterator jobItr = skills.begin(); jobItr != skills.end(); jobItr++) {
             Json::Value json_skill = (*jobItr);
 
-            if (json_skill["name"].asString() == skill) {
+            if (json_skill.asString() == skill) {
                 aux_result.append(user);
                 break;
             }

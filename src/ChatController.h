@@ -8,13 +8,11 @@
 #include <JsonController.h>
 #include "DatabaseManager.h"
 #include "SessionManager.h"
-#include "NotificationSender.h"
 
 class ChatController : public Mongoose::JsonController {
 
     DatabaseManager* db;
     SessionManager* sessionManager;
-    NotificationSender* notSender;
 public:
     ChatController(DatabaseManager *pManager, SessionManager *pSessionManager, std::string fireServerToken);
 
