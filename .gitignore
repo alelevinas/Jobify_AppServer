@@ -52,3 +52,8 @@ test/lib/googletest/Makefile
 test/lib/googletest/cmake_install.cmake
 test/lib/googletest/libgtest.a
 test/lib/googletest/libgtest_main.a
+
+RestAPITest.py
+RestAPITest.py~
+build/
+cmake-build-debug/
