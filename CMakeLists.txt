@@ -86,4 +86,21 @@ include_directories(src)
 #add_subdirectory(src)
 add_subdirectory(test)
 
-#target_link_libraries(Jobify_AppServer foo)
+
+#--------------------------- DEB ----------------------------------------------
+INSTALL(TARGETS Jobify_AppServer DESTINATION "bin")
+
+SET(CPACK_GENERATOR "DEB")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Alejandro") #required
+
+SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libgcc1 (>= 1:3.4.2-12)")
+
+SET(CPACK_PACKAGING_INSTALL_PREFIX  "/usr/local")
+INCLUDE(CPack)
+
+# To use this:
+# make package
+# sudo dpkg -i DistanceBetweenPoints-0.1.1-Linux.deb
+
+# This will result in the file:
+#/usr/distance/DistanceBetweenPoints

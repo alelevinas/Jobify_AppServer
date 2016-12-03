@@ -4,6 +4,7 @@
 #include <ProfileController.h>
 #include <JobifyServer.h>
 #include <zconf.h>
+#include <pwd.h>
 #include <log/easylogging++.h>
 #include "ChatController.h"
 
@@ -26,11 +27,33 @@ void handle_signal(int sig)
 int main() {
     std::cout << "Hello, World!" << std::endl;
 
+    const char *homedir;
+
+    if ((homedir = getenv("HOME")) == NULL) {
+        homedir = getpwuid(getuid())->pw_dir;
+    }
+
+    std::string db_dir(homedir);
+    db_dir+="/.Jobify_Appserver/dbs";
+
+    std::string db_command = "mkdir -p ";
+    db_command+=db_dir;
+
+    LOG(INFO) << "DATABASES LOCATION ----> " << db_dir;
+
+    system(db_command.c_str());
+
 
     signal(SIGTERM, handle_signal);
     signal(SIGINT, handle_signal);
 
-    DatabaseManager db("accounts","userss", "sessions", "chats", "images");
+    std::string db_accounts = db_dir+"/accounts";
+    std::string db_users = db_dir+"/users";
+    std::string db_sessions = db_dir+"/sessions";
+    std::string db_chats = db_dir+"/chats";
+    std::string db_images = db_dir+"/images";
+
+    DatabaseManager db(db_accounts,db_users, db_sessions, db_chats, db_images);
     if (!db.openDBs())
         return -1;
 
