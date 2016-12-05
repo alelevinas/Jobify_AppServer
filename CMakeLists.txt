@@ -43,7 +43,6 @@ add_library (json ${JSONCPP_DIR}/jsoncpp.cpp)
 target_link_libraries (mongoose json leveldb)
 
 set(SOURCE_FILES
-        src/Foo.cpp
         src/DatabaseManager.cpp
         src/databases/UsersDB.cpp src/databases/UsersDB.h
         src/databases/ChatsDB.cpp src/databases/ChatsDB.h
@@ -66,8 +65,6 @@ set(SOURCE_FILES
         src/ClientSharedServer.cpp src/ClientSharedServer.h
         src/SharedServerController.cpp src/SharedServerController.h
         src/HaversineDistance.h)
-
-add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
 add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries (Jobify_AppServer leveldb mongoose json cryptopp restclient-cpp)
