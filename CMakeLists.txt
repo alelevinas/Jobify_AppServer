@@ -5,11 +5,7 @@ project(Jobify_AppServer)
 set(CMAKE_CXX_FLAGS         "-Wall -Wno-unknown-pragmas -Wno-sign-compare  -Wwrite-strings -Wno-unused -DMG_ENABLE_THREADS -DMG_ENABLE_SSL -lssl -lcrypto -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11 -lleveldb -lpthread -lsnappy -lcryptopp -LLIBDIR")# -L/usr/local/lib") #-LLIBDIR
-
-
-
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -std=c++11 -lleveldb -lpthread -lsnappy -lcryptopp -LLIBDIR")
 
 #Compilo la libreria de mongoose-cpp
 set (MONGOOSE_CPP "${PROJECT_SOURCE_DIR}/src/mongoose-cpp")
@@ -46,15 +42,6 @@ include_directories ("${JSONCPP_DIR}")
 add_library (json ${JSONCPP_DIR}/jsoncpp.cpp)
 target_link_libraries (mongoose json leveldb)
 
-
-#set (JWTCPP_DIR "${PROJECT_SOURCE_DIR}/src/jwt")
-#add_library (jwtcpp ${JWTCPP_DIR}/jwt.cpp ${JWTCPP_DIR}/utils.cpp)
-
-#LevelDB
-#include_directories("/usr/include/leveldb")
-
-
-#set(HEADER_FILES src/Foo.h src/mongoose-cpp/mongoose.h)  #lsoslas
 set(SOURCE_FILES
         src/Foo.cpp
         src/DatabaseManager.cpp
@@ -73,10 +60,14 @@ set(SOURCE_FILES
         src/exceptions/InvalidUsernamePasswordException.h
         src/log/easylogging++.h
         src/ApiError.h src/databases/ImagesDB.cpp src/databases/ImagesDB.h
-        src/ClientSharedServer.cpp src/NotificationSender.cpp src/NotificationSender.h)
+        src/ClientSharedServer.cpp
+        src/NotificationSender.cpp src/NotificationSender.h
+        src/ChatController.cpp src/ChatController.h
+        src/ClientSharedServer.cpp src/ClientSharedServer.h
+        src/SharedServerController.cpp src/SharedServerController.h
+        src/HaversineDistance.h)
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
-
 
 add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES} src/ChatController.cpp src/ChatController.h src/ClientSharedServer.cpp src/ClientSharedServer.h src/SharedServerController.cpp src/SharedServerController.h src/HaversineDistance.h)
 target_link_libraries (Jobify_AppServer leveldb mongoose json cryptopp restclient-cpp)
@@ -88,12 +79,20 @@ add_subdirectory(test)
 
 
 #--------------------------- DEB ----------------------------------------------
-INSTALL(TARGETS Jobify_AppServer DESTINATION "bin")
+INSTALL(TARGETS Jobify_AppServer DESTINATION "bin")  #se termina instalando en CPACK_PACKAGING_INSTALL_PREFIX/bin
 
 SET(CPACK_GENERATOR "DEB")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Alejandro") #required
 
-SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6), libgcc1 (>= 1:3.4.2-12)")
+SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6),
+                                  libgcc1 (>= 1:3.4.2-12),
+                                  libsnappy-dev,
+                                  libleveldb-dev,
+                                  libcrypto++-dev,
+                                  libjansson4,
+                                  autoconf,
+                                  libtool")
+
 
 SET(CPACK_PACKAGING_INSTALL_PREFIX  "/usr/local")
 INCLUDE(CPack)
