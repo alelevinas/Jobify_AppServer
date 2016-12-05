@@ -12,7 +12,7 @@ install:
   - sudo pip install cpp-coveralls
   - sudo apt-get install libsnappy-dev libleveldb-dev
   #para jwtcpp
-  - sudo apt-get install libcrypto++9 libcrypto++9-dbg libcrypto++-dev
+  - sudo apt-get install libcrypto++9-dbg libcrypto++-dev
   - sudo apt-get install libjansson4 libjansson-dev libjansson-dbg
   - sudo apt-get install autoconf libtool
   - git clone https://github.com/mrtazz/restclient-cpp.git
