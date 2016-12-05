@@ -6,8 +6,9 @@
 #include <zconf.h>
 #include <pwd.h>
 #include <log/easylogging++.h>
+#include <ClientSharedServer.h>
+#include <SharedServerController.h>
 #include "ChatController.h"
-#include "SharedServerController.h"
 
 INITIALIZE_EASYLOGGINGPP
 #define ELPP_THREAD_SAFE

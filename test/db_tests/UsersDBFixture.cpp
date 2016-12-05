@@ -42,25 +42,28 @@ public:
         job["company"] = company;
         job["description"] = description;
 
-        Json::Value pos;
-        pos["name"] = pos_name;
-        pos["description"] = pos_description;
-        pos["category"] = pos_category;
+//        Json::Value pos;
+//        pos["name"] = pos_name;
+//        pos["description"] = pos_description;
+//        pos["category"] = pos_category;
 
-        job["position"] = pos;
+        //job["position"] = pos;
+        job["position"] = pos_name;
 
         user["previous_exp"].append(job);
         return user;
     }
 
     Json::Value add_skill(Json::Value &user, const char* name, const char* description, const char* category) {
-        Json::Value skill;
-        skill["name"] = name;
-        skill["description"] = description;
-        skill["category"] = category;
-
-        user["skills"].append(skill);
-        return skill;
+//        Json::Value skill;
+//        skill["name"] = name;
+//        skill["description"] = description;
+//        skill["category"] = category;
+//
+//        user["skills"].append(skill);
+        user["skills"].append(name);
+//        return skill;
+        return user["skills"];
     }
 
     Json::Value generate_user(string &username) {
@@ -77,37 +80,40 @@ public:
                 "se propone............blabllbla...........";
 
         Json::Value skills(Json::arrayValue);
-//        skills.append(Json::Value("C"));
-//        skills.append(Json::Value("C++"));
-//        skills.append(Json::Value("GoogleTest"));
+        skills.append(Json::Value("C"));
+        skills.append(Json::Value("C++"));
+        skills.append(Json::Value("GoogleTest"));
         user["skills"] = skills;
-        add_skill(user, "C","C programming language","Software");
-        add_skill(user, "C++","C++ programming language","Software");
-        add_skill(user, "R","R programming language","Software");
+
+//        add_skill(user, "C","C programming language","Software");
+//        add_skill(user, "C++","C++ programming language","Software");
+//        add_skill(user, "R","R programming language","Software");
 
 
         Json::Value exp(Json::arrayValue);
         user["previous_exp"] = exp;
-        add_job_exp(user, "2006-2009", "NASA", "Desarrollador en lenguaje R para analizar......", "Docente", "Profesor dicta clases, etc.", "Education");
-        add_job_exp(user, "2010-actualidad", "UBA", "Docente de la materia Taller 2", "Docente", "Profesor dicta clases, etc.", "Education");
+//        add_job_exp(user, "2006-2009", "NASA", "Desarrollador en lenguaje R para analizar......", "Docente", "Profesor dicta clases, etc.", "Education");
+//        add_job_exp(user, "2010-actualidad", "UBA", "Docente de la materia Taller 2", "Docente", "Profesor dicta clases, etc.", "Education");
 
-        /*
+
         Json::Value job1;
         job1["years"] = "2006-2009";
         job1["company"] = "NASA";
-        job1["position"] = add_job_position(user, "developer", "Software dev....", "Software");
+        job1["position"] = "developer";
+        //job1["position"] = add_job_position(user, "developer", "Software dev....", "Software");
         job1["description"] = "Desarrollador en lenguaje R para analizar......";
 
         Json::Value job2;
         job2["years"] = "2010-actualidad";
         job2["company"] = "UBA";
-        job2["position"] = add_job_position(user, "Docente", "Profesor dicta clases, etc.", "Education");
+        job2["position"] = "Docente";
+        //job2["position"] = add_job_position(user, "Docente", "Profesor dicta clases, etc.", "Education");
         job2["description"] = "Docente de la materia Taller 2";
 
         exp.append(job1);
         exp.append(job2);
         user["previous_exp"] = exp;
-*/
+
         Json::Value cont(Json::arrayValue);
         Json::Value recc(Json::arrayValue);
         Json::Value chats(Json::arrayValue);

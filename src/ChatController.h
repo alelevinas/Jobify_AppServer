@@ -14,7 +14,7 @@ class ChatController : public Mongoose::JsonController {
 
     DatabaseManager* db;
     SessionManager* sessionManager;
-    NotificationSender* notSender;
+    NotificationSender *notSender;
 public:
     ChatController(DatabaseManager *pManager, SessionManager *pSessionManager, std::string fireServerToken);
 
@@ -27,6 +27,8 @@ public:
     void deleteConversationRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
     void deleteMessageRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
+
+
 };
 
 

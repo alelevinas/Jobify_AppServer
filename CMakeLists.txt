@@ -69,7 +69,7 @@ set(SOURCE_FILES
 
 add_library(foo STATIC ${HEADER_FILES}  ${SOURCE_FILES} )
 
-add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES} src/ChatController.cpp src/ChatController.h src/ClientSharedServer.cpp src/ClientSharedServer.h src/SharedServerController.cpp src/SharedServerController.h src/HaversineDistance.h)
+add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries (Jobify_AppServer leveldb mongoose json cryptopp restclient-cpp)
 
 include_directories(src)
