@@ -66,8 +66,12 @@ set(SOURCE_FILES
         src/SharedServerController.cpp src/SharedServerController.h
         src/HaversineDistance.h)
 
-add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES} ${HEADER_FILES})
-target_link_libraries (Jobify_AppServer leveldb mongoose json cryptopp restclient-cpp)
+add_library (libJobify_AppServer ${SOURCE_FILES})
+target_link_libraries (libJobify_AppServer leveldb mongoose json cryptopp restclient-cpp)
+
+add_executable(Jobify_AppServer main.cpp ${SOURCE_FILES})
+target_link_libraries(Jobify_AppServer libJobify_AppServer)
+
 
 include_directories(src)
 

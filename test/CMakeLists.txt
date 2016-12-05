@@ -15,4 +15,4 @@ add_subdirectory(lib/googletest)
 include_directories(db_tests)
 
 
-target_link_libraries(run_tests gtest gtest_main mongoose json leveldb cryptopp restclient-cpp)
+target_link_libraries(run_tests gtest gtest_main libJobify_AppServer mongoose json leveldb cryptopp restclient-cpp)
