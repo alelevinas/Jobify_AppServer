@@ -176,23 +176,23 @@ bool UsersDB::get_users_by(string sorting, int nFilter, string job, string skill
     result.swapPayload(users["users"]);
 
     filter_pos(result, nDistance, caller_coordenates);
-    LOG(DEBUG) << "FILTRADO POR POS \n" << result << std::endl;
+   // LOG(DEBUG) << "FILTRADO POR POS \n" << result << std::endl;
 
     filter_job(result, job);
-    LOG(DEBUG) << "FILTRADO EL JOB \n" << result << std::endl;
+ //   LOG(DEBUG) << "FILTRADO EL JOB \n" << result << std::endl;
 
     filter_skill(result, skill);
-    LOG(DEBUG) << "FILTRADO EL SKILL \n" << result << std::endl;
+ //   LOG(DEBUG) << "FILTRADO EL SKILL \n" << result << std::endl;
 
     //primero ordeno por distancia, luego por lo que me haya pedido, si pidio algo
     sort_by_distance(result, caller_coordenates);
-    LOG(DEBUG) << "ORDENANDO por distancia\n" << result << std::endl;
+ //   LOG(DEBUG) << "ORDENANDO por distancia\n" << result << std::endl;
 
     sort_by(result, sorting);
-    LOG(DEBUG) << "ORDENANDO por " << sorting << "\n" << result << std::endl;
+ //   LOG(DEBUG) << "ORDENANDO por " << sorting << "\n" << result << std::endl;
 
     top_k(result, nFilter);
-    LOG(DEBUG) << "TOP K \n" << result << std::endl;
+ //   LOG(DEBUG) << "TOP K \n" << result << std::endl;
     return true;
 }
 

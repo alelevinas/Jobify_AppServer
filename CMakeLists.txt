@@ -90,7 +90,6 @@ SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.3.1-6),
                                   libsnappy-dev,
                                   libleveldb-dev,
                                   libcrypto++-dev,
-                                  libjansson4,
                                   autoconf,
                                   libtool")
 

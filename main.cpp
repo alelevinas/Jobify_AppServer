@@ -62,7 +62,7 @@ int main() {
     SessionManager sessionManager(&db,ONE_HOUR);  //5 mins
 
     ProfileController pf(&db, &sessionManager);
-    ChatController ch(&db, &sessionManager, "AIzaSyD91cge26COB1UtGA8IDsa4Jg7ZIHUEJME");
+    ChatController ch(&db, &sessionManager, "AAAA425dth8:APA91bH81cAehi-kJ1JOGVHNhmn_rx7Meqm5QL1a6JUq89LlGAtBx1-5QIYOIwGE9XyHiOJgEBP5RGgBnowcvKV8uBcyAiLE6z8YBLvGCrKJfpSYt0dBYS972A3RLsYWnBbx8G9YBV2LEJYLCMwa8Ipca_1kme8TRw");
 
     ClientSharedServer ssClient(URLHEROKU);
     SharedServerController ssc(&ssClient, &sessionManager);

@@ -5,26 +5,26 @@
       <sourceFolder url="file://$MODULE_DIR$/src/ClientSharedServer.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/NotificationSender.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/DatabaseManager.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/SessionManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/log/easylogging++.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/JobifyServer.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/SharedServerController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/SessionManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/jsoncpp/jsoncpp.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ChatController.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/NotificationSender.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ApiError.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/SharedServerController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ClientSharedServer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/SharedServerController.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSocket.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonResponse.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Server.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Session.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonResponse.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonController.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/UploadFile.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Mutex.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSockets.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Response.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Mutex.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Controller.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Response.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Controller.cpp" isTestSource="false" />
@@ -36,7 +36,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Sessions.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Session.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/StreamResponse.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSocket.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/mongoose.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSocket.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebSockets.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/mongoose.c" isTestSource="false" />
@@ -44,7 +44,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/WebController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Request.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Sessions.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/mongoose.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/UploadFile.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/Utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/mongoose-cpp/JsonController.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ChatController.h" isTestSource="false" />
@@ -61,12 +61,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/databases/UsersDB.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/AccountsDB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/AccountsDB.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/databases/ImagesDB.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/databases/ImagesDB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/utils.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/databases/ChatsDB.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/databases/SessionsDB.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/databases/ImagesDB.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/databases/ImagesDB.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/databases/UsersDB.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/databases/SessionsDB.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/databases/ChatsDB.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/KeyDoesntExistException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/TokenInvalidException.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/exceptions/InvalidUsernamePasswordException.h" isTestSource="false" />
@@ -90,15 +90,15 @@
     <orderEntry type="module-library">
       <library name="Header Search Paths">
         <CLASSES>
+          <root url="file:///usr/include" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
-          <root url="file:///usr/include" />
           <root url="file:///usr/local/include" />
         </CLASSES>
         <SOURCES>
+          <root url="file:///usr/include" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
-          <root url="file:///usr/include" />
           <root url="file:///usr/local/include" />
         </SOURCES>
       </library>
