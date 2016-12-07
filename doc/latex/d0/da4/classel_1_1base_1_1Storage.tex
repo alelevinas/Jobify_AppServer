@@ -1,0 +1,147 @@
+\hypertarget{classel_1_1base_1_1Storage}{}\section{el\+:\+:base\+:\+:Storage Class Reference}
+\label{classel_1_1base_1_1Storage}\index{el\+::base\+::\+Storage@{el\+::base\+::\+Storage}}
+
+
+Easylogging++ management storage.  
+
+
+
+
+{\ttfamily \#include $<$easylogging++.\+h$>$}
+
+
+
+Inheritance diagram for el\+:\+:base\+:\+:Storage\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{de/d37/classel_1_1base_1_1Storage__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for el\+:\+:base\+:\+:Storage\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{db/d68/classel_1_1base_1_1Storage__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Storage} (const Log\+Builder\+Ptr \&default\+Log\+Builder)\hypertarget{classel_1_1base_1_1Storage_a4932a8f8a55c3b00467cf2feed6acf59}{}\label{classel_1_1base_1_1Storage_a4932a8f8a55c3b00467cf2feed6acf59}
+
+\item 
+bool {\bfseries validate\+Every\+N\+Counter} (const char $\ast$filename, unsigned long int line\+Number, std\+::size\+\_\+t occasion)\hypertarget{classel_1_1base_1_1Storage_ae99093b82b3f25b6baf5d3d8b00b27e5}{}\label{classel_1_1base_1_1Storage_ae99093b82b3f25b6baf5d3d8b00b27e5}
+
+\item 
+bool {\bfseries validate\+After\+N\+Counter} (const char $\ast$filename, unsigned long int line\+Number, std\+::size\+\_\+t n)\hypertarget{classel_1_1base_1_1Storage_ad93b7ae53a58a57b85db2dfb310406c6}{}\label{classel_1_1base_1_1Storage_ad93b7ae53a58a57b85db2dfb310406c6}
+
+\item 
+bool {\bfseries validate\+N\+Times\+Counter} (const char $\ast$filename, unsigned long int line\+Number, std\+::size\+\_\+t n)\hypertarget{classel_1_1base_1_1Storage_a141d7ef080be7eae11ac6201a538eec9}{}\label{classel_1_1base_1_1Storage_a141d7ef080be7eae11ac6201a538eec9}
+
+\item 
+\hyperlink{classel_1_1base_1_1RegisteredHitCounters}{base\+::\+Registered\+Hit\+Counters} $\ast$ {\bfseries hit\+Counters} (void) const \hypertarget{classel_1_1base_1_1Storage_accd5495cdad77254eb24ef8f75cd71ad}{}\label{classel_1_1base_1_1Storage_accd5495cdad77254eb24ef8f75cd71ad}
+
+\item 
+\hyperlink{classel_1_1base_1_1RegisteredLoggers}{base\+::\+Registered\+Loggers} $\ast$ {\bfseries registered\+Loggers} (void) const \hypertarget{classel_1_1base_1_1Storage_af0c2f1e119ac3f111f810a324b6b0d3a}{}\label{classel_1_1base_1_1Storage_af0c2f1e119ac3f111f810a324b6b0d3a}
+
+\item 
+\hyperlink{classel_1_1base_1_1VRegistry}{base\+::\+V\+Registry} $\ast$ {\bfseries v\+Registry} (void) const \hypertarget{classel_1_1base_1_1Storage_a1ec05ca060ff169569b6ea86da1e30da}{}\label{classel_1_1base_1_1Storage_a1ec05ca060ff169569b6ea86da1e30da}
+
+\item 
+const \hyperlink{classel_1_1base_1_1utils_1_1CommandLineArgs}{base\+::utils\+::\+Command\+Line\+Args} $\ast$ {\bfseries command\+Line\+Args} (void) const \hypertarget{classel_1_1base_1_1Storage_a84f3d208bead8a8b2c15834be7f30f8d}{}\label{classel_1_1base_1_1Storage_a84f3d208bead8a8b2c15834be7f30f8d}
+
+\item 
+void {\bfseries add\+Flag} (\hyperlink{namespaceel_a2784aacd04cb7816ac1c0b20fcbf83cb}{Logging\+Flag} flag)\hypertarget{classel_1_1base_1_1Storage_a3e17c61961f3b2f45e8ec77e3320bed5}{}\label{classel_1_1base_1_1Storage_a3e17c61961f3b2f45e8ec77e3320bed5}
+
+\item 
+void {\bfseries remove\+Flag} (\hyperlink{namespaceel_a2784aacd04cb7816ac1c0b20fcbf83cb}{Logging\+Flag} flag)\hypertarget{classel_1_1base_1_1Storage_aaecbb6ae954d0bf748ac7f3c980a9173}{}\label{classel_1_1base_1_1Storage_aaecbb6ae954d0bf748ac7f3c980a9173}
+
+\item 
+bool {\bfseries has\+Flag} (\hyperlink{namespaceel_a2784aacd04cb7816ac1c0b20fcbf83cb}{Logging\+Flag} flag) const \hypertarget{classel_1_1base_1_1Storage_ab569cf6e09897b0520dee7f4d1fb742e}{}\label{classel_1_1base_1_1Storage_ab569cf6e09897b0520dee7f4d1fb742e}
+
+\item 
+base\+::type\+::\+Enum\+Type {\bfseries flags} (void) const \hypertarget{classel_1_1base_1_1Storage_a0a8da674f034011c50b0479307677855}{}\label{classel_1_1base_1_1Storage_a0a8da674f034011c50b0479307677855}
+
+\item 
+void {\bfseries set\+Flags} (base\+::type\+::\+Enum\+Type flags)\hypertarget{classel_1_1base_1_1Storage_a5df88c56b8d923c20568e50ceb0bdd64}{}\label{classel_1_1base_1_1Storage_a5df88c56b8d923c20568e50ceb0bdd64}
+
+\item 
+void {\bfseries set\+Pre\+Roll\+Out\+Callback} (const Pre\+Roll\+Out\+Callback \&callback)\hypertarget{classel_1_1base_1_1Storage_a626165bc5c8808b733707294ce2a0dc8}{}\label{classel_1_1base_1_1Storage_a626165bc5c8808b733707294ce2a0dc8}
+
+\item 
+void {\bfseries unset\+Pre\+Roll\+Out\+Callback} (void)\hypertarget{classel_1_1base_1_1Storage_a2bfdc3a20eeafe158ee8603c805131e4}{}\label{classel_1_1base_1_1Storage_a2bfdc3a20eeafe158ee8603c805131e4}
+
+\item 
+Pre\+Roll\+Out\+Callback \& {\bfseries pre\+Roll\+Out\+Callback} (void)\hypertarget{classel_1_1base_1_1Storage_a90a3a886437746acae51cacbd5731572}{}\label{classel_1_1base_1_1Storage_a90a3a886437746acae51cacbd5731572}
+
+\item 
+bool {\bfseries has\+Custom\+Format\+Specifier} (const char $\ast$format\+Specifier)\hypertarget{classel_1_1base_1_1Storage_ae953cb6e8acafa96c5c1ab2f4826a4a5}{}\label{classel_1_1base_1_1Storage_ae953cb6e8acafa96c5c1ab2f4826a4a5}
+
+\item 
+void {\bfseries install\+Custom\+Format\+Specifier} (const \hyperlink{classel_1_1CustomFormatSpecifier}{Custom\+Format\+Specifier} \&custom\+Format\+Specifier)\hypertarget{classel_1_1base_1_1Storage_a355aac8191ab98869a52394cc868a315}{}\label{classel_1_1base_1_1Storage_a355aac8191ab98869a52394cc868a315}
+
+\item 
+bool {\bfseries uninstall\+Custom\+Format\+Specifier} (const char $\ast$format\+Specifier)\hypertarget{classel_1_1base_1_1Storage_a68e1d3e0b657418ddb0f62f60fe979d2}{}\label{classel_1_1base_1_1Storage_a68e1d3e0b657418ddb0f62f60fe979d2}
+
+\item 
+const std\+::vector$<$ \hyperlink{classel_1_1CustomFormatSpecifier}{Custom\+Format\+Specifier} $>$ $\ast$ {\bfseries custom\+Format\+Specifiers} (void) const \hypertarget{classel_1_1base_1_1Storage_aaafbc69cac920ec79f60e1cf4c2c12d6}{}\label{classel_1_1base_1_1Storage_aaafbc69cac920ec79f60e1cf4c2c12d6}
+
+\item 
+void {\bfseries set\+Logging\+Level} (\hyperlink{namespaceel_ab0ac6091262344c52dd2d3ad099e8e36}{Level} level)\hypertarget{classel_1_1base_1_1Storage_a163473357c32184769e8edd993c8b440}{}\label{classel_1_1base_1_1Storage_a163473357c32184769e8edd993c8b440}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries install\+Log\+Dispatch\+Callback} (const std\+::string \&id)\hypertarget{classel_1_1base_1_1Storage_aec36c8e770c0ac354e74d57aba1cfa03}{}\label{classel_1_1base_1_1Storage_aec36c8e770c0ac354e74d57aba1cfa03}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries uninstall\+Log\+Dispatch\+Callback} (const std\+::string \&id)\hypertarget{classel_1_1base_1_1Storage_a34c2c9f8abff647e22e1ee0b52357f88}{}\label{classel_1_1base_1_1Storage_a34c2c9f8abff647e22e1ee0b52357f88}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ {\bfseries log\+Dispatch\+Callback} (const std\+::string \&id)\hypertarget{classel_1_1base_1_1Storage_a408d2420169a7f7286552fd153967b8d}{}\label{classel_1_1base_1_1Storage_a408d2420169a7f7286552fd153967b8d}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries install\+Performance\+Tracking\+Callback} (const std\+::string \&id)\hypertarget{classel_1_1base_1_1Storage_ad95b77123066f0a49817155dd75583b5}{}\label{classel_1_1base_1_1Storage_ad95b77123066f0a49817155dd75583b5}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries uninstall\+Performance\+Tracking\+Callback} (const std\+::string \&id)\hypertarget{classel_1_1base_1_1Storage_a0e69baf4bf3140fb7bc88bb386d933cf}{}\label{classel_1_1base_1_1Storage_a0e69baf4bf3140fb7bc88bb386d933cf}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ {\bfseries performance\+Tracking\+Callback} (const std\+::string \&id)\hypertarget{classel_1_1base_1_1Storage_aa511779589370416030d9fc1149a32fd}{}\label{classel_1_1base_1_1Storage_aa511779589370416030d9fc1149a32fd}
+
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries el\+::\+Helpers}\hypertarget{classel_1_1base_1_1Storage_a2fb8a2c02cbf86247f093c118bed877a}{}\label{classel_1_1base_1_1Storage_a2fb8a2c02cbf86247f093c118bed877a}
+
+\item 
+class {\bfseries el\+::base\+::\+Default\+Log\+Dispatch\+Callback}\hypertarget{classel_1_1base_1_1Storage_a42b1de96d584ae4fecbfc2b9aff95052}{}\label{classel_1_1base_1_1Storage_a42b1de96d584ae4fecbfc2b9aff95052}
+
+\item 
+class {\bfseries el\+::\+Log\+Builder}\hypertarget{classel_1_1base_1_1Storage_a8c584bcf767a4d007311a7408b22ad62}{}\label{classel_1_1base_1_1Storage_a8c584bcf767a4d007311a7408b22ad62}
+
+\item 
+class {\bfseries el\+::base\+::\+Message\+Builder}\hypertarget{classel_1_1base_1_1Storage_a81bbf6fe31fab133d182efa8367304f1}{}\label{classel_1_1base_1_1Storage_a81bbf6fe31fab133d182efa8367304f1}
+
+\item 
+class {\bfseries el\+::base\+::\+Writer}\hypertarget{classel_1_1base_1_1Storage_a7a728edbb2761d151832daa74d5b2736}{}\label{classel_1_1base_1_1Storage_a7a728edbb2761d151832daa74d5b2736}
+
+\item 
+class {\bfseries el\+::base\+::\+Performance\+Tracker}\hypertarget{classel_1_1base_1_1Storage_a6a4d7851e1984800be3c230f06a79528}{}\label{classel_1_1base_1_1Storage_a6a4d7851e1984800be3c230f06a79528}
+
+\item 
+class {\bfseries el\+::base\+::\+Log\+Dispatcher}\hypertarget{classel_1_1base_1_1Storage_a9b37b28ea1c5f8f862cc89f135711d92}{}\label{classel_1_1base_1_1Storage_a9b37b28ea1c5f8f862cc89f135711d92}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Easylogging++ management storage. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/log/easylogging++.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,40 @@
+.TH "Json::Exception" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::Exception \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <json\&.h>\fP
+.PP
+Inherits exception\&.
+.PP
+Inherited by \fBJson::LogicError\fP, and \fBJson::RuntimeError\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBException\fP (JSONCPP_STRING const &msg)"
+.br
+.ti -1c
+.RI "char const * \fBwhat\fP () const JSONCPP_OVERRIDE  throw ()"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "JSONCPP_STRING \fBmsg_\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base class for all exceptions we throw\&.
+.PP
+We use nothing but these internally\&. Of course, STL can throw others\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

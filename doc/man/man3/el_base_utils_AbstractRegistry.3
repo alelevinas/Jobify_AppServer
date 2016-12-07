@@ -1,0 +1,154 @@
+.TH "el::base::utils::AbstractRegistry< T_Ptr, Container >" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::utils::AbstractRegistry< T_Ptr, Container > \- Abstract registry (aka repository) that provides basic interface for pointer repository specified by T_Ptr type\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::threading::ThreadSafe\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef Container::iterator \fBiterator\fP"
+.br
+.ti -1c
+.RI "typedef Container::const_iterator \fBconst_iterator\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAbstractRegistry\fP (void)"
+.br
+.RI "\fIDefault constructor\&. \fP"
+.ti -1c
+.RI "\fBAbstractRegistry\fP (\fBAbstractRegistry\fP &&sr)"
+.br
+.RI "\fIMove constructor that is useful for base classes\&. \fP"
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBAbstractRegistry\fP< T_Ptr, Container > &other)"
+.br
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBAbstractRegistry\fP< T_Ptr, Container > &other)"
+.br
+.ti -1c
+.RI "\fBAbstractRegistry\fP & \fBoperator=\fP (\fBAbstractRegistry\fP &&sr)"
+.br
+.RI "\fIAssignment move operator\&. \fP"
+.ti -1c
+.RI "virtual iterator \fBbegin\fP (void) ELPP_FINAL"
+.br
+.ti -1c
+.RI "virtual iterator \fBend\fP (void) ELPP_FINAL"
+.br
+.ti -1c
+.RI "virtual const_iterator \fBcbegin\fP (void) const ELPP_FINAL"
+.br
+.ti -1c
+.RI "virtual const_iterator \fBcend\fP (void) const ELPP_FINAL"
+.br
+.ti -1c
+.RI "virtual bool \fBempty\fP (void) const ELPP_FINAL"
+.br
+.ti -1c
+.RI "virtual std::size_t \fBsize\fP (void) const ELPP_FINAL"
+.br
+.ti -1c
+.RI "virtual Container & \fBlist\fP (void) ELPP_FINAL"
+.br
+.RI "\fIReturns underlying container by reference\&. \fP"
+.ti -1c
+.RI "virtual const Container & \fBlist\fP (void) const ELPP_FINAL"
+.br
+.RI "\fIReturns underlying container by constant reference\&. \fP"
+.ti -1c
+.RI "virtual void \fBunregisterAll\fP (void)=0"
+.br
+.RI "\fIUnregisters all the pointers from current repository\&. \fP"
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBdeepCopy\fP (const \fBAbstractRegistry\fP< T_Ptr, Container > &)=0"
+.br
+.ti -1c
+.RI "void \fBreinitDeepCopy\fP (const \fBAbstractRegistry\fP< T_Ptr, Container > &sr)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T_Ptr, typename Container>
+.br
+class el::base::utils::AbstractRegistry< T_Ptr, Container >"
+Abstract registry (aka repository) that provides basic interface for pointer repository specified by T_Ptr type\&. 
+
+Most of the functions are virtual final methods but anything implementing this abstract class should implement \fBunregisterAll()\fP and deepCopy(const AbstractRegistry<T_Ptr, Container>&) and write registerNew() method according to container and few more methods; get() to find element, unregister() to unregister single entry\&. Please note that this is thread-unsafe and should also implement thread-safety mechanisms in implementation\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T_Ptr, typename Container> virtual iterator \fBel::base::utils::AbstractRegistry\fP< T_Ptr, Container >::begin (void)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+\fBReturns:\fP
+.RS 4
+Iterator pointer from start of repository 
+.RE
+.PP
+
+.SS "template<typename T_Ptr, typename Container> virtual const_iterator \fBel::base::utils::AbstractRegistry\fP< T_Ptr, Container >::cbegin (void) const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+\fBReturns:\fP
+.RS 4
+Constant iterator pointer from start of repository 
+.RE
+.PP
+
+.SS "template<typename T_Ptr, typename Container> virtual const_iterator \fBel::base::utils::AbstractRegistry\fP< T_Ptr, Container >::cend (void) const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+\fBReturns:\fP
+.RS 4
+End of repository 
+.RE
+.PP
+
+.SS "template<typename T_Ptr, typename Container> virtual bool \fBel::base::utils::AbstractRegistry\fP< T_Ptr, Container >::empty (void) const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+\fBReturns:\fP
+.RS 4
+Whether or not repository is empty 
+.RE
+.PP
+
+.SS "template<typename T_Ptr, typename Container> virtual iterator \fBel::base::utils::AbstractRegistry\fP< T_Ptr, Container >::end (void)\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+\fBReturns:\fP
+.RS 4
+Iterator pointer from end of repository 
+.RE
+.PP
+
+.SS "template<typename T_Ptr, typename Container> virtual std::size_t \fBel::base::utils::AbstractRegistry\fP< T_Ptr, Container >::size (void) const\fC [inline]\fP, \fC [virtual]\fP"
+
+.PP
+\fBReturns:\fP
+.RS 4
+Size of repository 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

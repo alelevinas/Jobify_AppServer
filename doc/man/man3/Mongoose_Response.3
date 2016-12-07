@@ -1,0 +1,106 @@
+.TH "Mongoose::Response" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose::Response \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBMongoose::JsonResponse\fP, and \fBMongoose::StreamResponse\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual bool \fBhasHeader\fP (string key)"
+.br
+.ti -1c
+.RI "virtual void \fBsetHeader\fP (string key, string value)"
+.br
+.ti -1c
+.RI "virtual string \fBgetData\fP ()"
+.br
+.ti -1c
+.RI "virtual string \fBgetBody\fP ()=0"
+.br
+.ti -1c
+.RI "virtual void \fBsetCookie\fP (string key, string value)"
+.br
+.ti -1c
+.RI "virtual void \fBsetCode\fP (int code)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBcode\fP"
+.br
+.ti -1c
+.RI "map< string, string > \fBheaders\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual string Mongoose::Response::getBody ()\fC [pure virtual]\fP"
+Gets the response body
+.PP
+\fBReturns:\fP
+.RS 4
+string the response body 
+.RE
+.PP
+
+.PP
+Implemented in \fBMongoose::JsonResponse\fP, and \fBMongoose::StreamResponse\fP\&.
+.SS "string Mongoose::Response::getData ()\fC [virtual]\fP"
+Get the data of the response, this will contain headers and body
+.PP
+\fBReturns:\fP
+.RS 4
+string the response data 
+.RE
+.PP
+
+.SS "bool Mongoose::Response::hasHeader (string key)\fC [virtual]\fP"
+Test if the given header is present
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the header key
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+bool true if the header is set 
+.RE
+.PP
+
+.SS "void Mongoose::Response::setCode (int code)\fC [virtual]\fP"
+Sets the response code 
+.SS "void Mongoose::Response::setCookie (string key, string value)\fC [virtual]\fP"
+Sets the cookie, note that you can only define one cookie by request for now
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the key of the cookie 
+.br
+\fIstring\fP value the cookie value 
+.RE
+.PP
+
+.SS "void Mongoose::Response::setHeader (string key, string value)\fC [virtual]\fP"
+Sets the header
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP the header key
+.br
+\fIvalue\fP the header value 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

@@ -1,0 +1,160 @@
+.TH "el::Loggers" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::Loggers \- Static helpers to deal with loggers and their configurations\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::StaticClass\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBScopedAddFlag\fP"
+.br
+.RI "\fIAdds flag and removes it when scope goes out\&. \fP"
+.ti -1c
+.RI "class \fBScopedRemoveFlag\fP"
+.br
+.RI "\fIRemoves flag and add it when scope goes out\&. \fP"
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBLogger\fP * \fBgetLogger\fP (const std::string &identity, bool registerIfNotAvailable=true)"
+.br
+.RI "\fIGets existing or registers new logger\&. \fP"
+.ti -1c
+.RI "static bool \fBunregisterLogger\fP (const std::string &identity)"
+.br
+.RI "\fIUnregisters logger - use it only when you know what you are doing, you may unregister loggers initialized / used by third-party libs\&. \fP"
+.ti -1c
+.RI "static bool \fBhasLogger\fP (const std::string &identity)"
+.br
+.RI "\fIWhether or not logger with id is registered\&. \fP"
+.ti -1c
+.RI "static \fBLogger\fP * \fBreconfigureLogger\fP (\fBLogger\fP *logger, const \fBConfigurations\fP &configurations)"
+.br
+.RI "\fIReconfigures specified logger with new configurations\&. \fP"
+.ti -1c
+.RI "static \fBLogger\fP * \fBreconfigureLogger\fP (const std::string &identity, const \fBConfigurations\fP &configurations)"
+.br
+.RI "\fIReconfigures logger with new configurations after looking it up using identity\&. \fP"
+.ti -1c
+.RI "static \fBLogger\fP * \fBreconfigureLogger\fP (const std::string &identity, \fBConfigurationType\fP configurationType, const std::string &value)"
+.br
+.RI "\fIReconfigures logger's single configuration\&. \fP"
+.ti -1c
+.RI "static void \fBreconfigureAllLoggers\fP (const \fBConfigurations\fP &configurations)"
+.br
+.RI "\fIReconfigures all the existing loggers with new configurations\&. \fP"
+.ti -1c
+.RI "static void \fBreconfigureAllLoggers\fP (\fBConfigurationType\fP configurationType, const std::string &value)"
+.br
+.RI "\fIReconfigures single configuration for all the loggers\&. \fP"
+.ti -1c
+.RI "static void \fBreconfigureAllLoggers\fP (\fBLevel\fP level, \fBConfigurationType\fP configurationType, const std::string &value)"
+.br
+.RI "\fIReconfigures single configuration for all the loggers for specified level\&. \fP"
+.ti -1c
+.RI "static void \fBsetDefaultConfigurations\fP (const \fBConfigurations\fP &configurations, bool reconfigureExistingLoggers=false)"
+.br
+.RI "\fISets default configurations\&. This configuration is used for future (and conditionally for existing) loggers\&. \fP"
+.ti -1c
+.RI "static const \fBConfigurations\fP * \fBdefaultConfigurations\fP (void)"
+.br
+.RI "\fIReturns current default\&. \fP"
+.ti -1c
+.RI "static const base::LogStreamsReferenceMap * \fBlogStreamsReference\fP (void)"
+.br
+.RI "\fIReturns log stream reference pointer if needed by user\&. \fP"
+.ti -1c
+.RI "static \fBbase::TypedConfigurations\fP \fBdefaultTypedConfigurations\fP (void)"
+.br
+.RI "\fIDefault typed configuration based on existing defaultConf\&. \fP"
+.ti -1c
+.RI "static std::vector< std::string > * \fBpopulateAllLoggerIds\fP (std::vector< std::string > *targetList)"
+.br
+.RI "\fIPopulates all logger IDs in current repository\&. \fP"
+.ti -1c
+.RI "static void \fBconfigureFromGlobal\fP (const char *globalConfigurationFilePath)"
+.br
+.RI "\fISets configurations from global configuration file\&. \fP"
+.ti -1c
+.RI "static bool \fBconfigureFromArg\fP (const char *argKey)"
+.br
+.RI "\fIConfigures loggers using command line arg\&. Ensure you have already set command line args,\&. \fP"
+.ti -1c
+.RI "static void \fBflushAll\fP (void)"
+.br
+.RI "\fIFlushes all loggers for all levels - Be careful if you dont know how many loggers are registered\&. \fP"
+.ti -1c
+.RI "static void \fBaddFlag\fP (\fBLoggingFlag\fP flag)"
+.br
+.RI "\fIAdds logging flag used internally\&. \fP"
+.ti -1c
+.RI "static void \fBremoveFlag\fP (\fBLoggingFlag\fP flag)"
+.br
+.RI "\fIRemoves logging flag used internally\&. \fP"
+.ti -1c
+.RI "static bool \fBhasFlag\fP (\fBLoggingFlag\fP flag)"
+.br
+.RI "\fIDetermines whether or not certain flag is active\&. \fP"
+.ti -1c
+.RI "static void \fBsetLoggingLevel\fP (\fBLevel\fP level)"
+.br
+.RI "\fISets hierarchy for logging\&. Needs to enable logging flag (HierarchicalLogging) \fP"
+.ti -1c
+.RI "static void \fBsetVerboseLevel\fP (base::type::VerboseLevel level)"
+.br
+.RI "\fISets verbose level on the fly\&. \fP"
+.ti -1c
+.RI "static base::type::VerboseLevel \fBverboseLevel\fP (void)"
+.br
+.RI "\fIGets current verbose level\&. \fP"
+.ti -1c
+.RI "static void \fBsetVModules\fP (const char *modules)"
+.br
+.RI "\fISets vmodules as specified (on the fly) \fP"
+.ti -1c
+.RI "static void \fBclearVModules\fP (void)"
+.br
+.RI "\fIClears vmodules\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Static helpers to deal with loggers and their configurations\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static bool el::Loggers::configureFromArg (const char * argKey)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Configures loggers using command line arg\&. Ensure you have already set command line args,\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+False if invalid argument or argument with no value provided, true if attempted to configure logger\&. If true is returned that does not mean it has been configured successfully, it only means that it has attempeted to configure logger using configuration file provided in argument 
+.RE
+.PP
+
+.SS "static std::vector<std::string>* el::Loggers::populateAllLoggerIds (std::vector< std::string > * targetList)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Populates all logger IDs in current repository\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItargetList\fP List of fill up\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

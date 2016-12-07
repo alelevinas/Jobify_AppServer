@@ -1,0 +1,283 @@
+\hypertarget{classMongoose_1_1Server}{}\section{Mongoose\+:\+:Server Class Reference}
+\label{classMongoose_1_1Server}\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+
+
+Inheritance diagram for Mongoose\+:\+:Server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{d5/d41/classMongoose_1_1Server__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mongoose\+:\+:Server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d5e/classMongoose_1_1Server__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMongoose_1_1Server_aca7e4d98d6ee16b15c46791a2d2f2739}{Server} (int port=80, const char $\ast$document\+Root=\char`\"{}www\char`\"{})
+\item 
+void \hyperlink{classMongoose_1_1Server_a1ea120f0ba0ab8e71e0afb28ad12fbd3}{start} ()
+\item 
+void \hyperlink{classMongoose_1_1Server_a4da5f1aca21385c007eb7defcf410265}{stop} ()
+\item 
+void \hyperlink{classMongoose_1_1Server_a9efd2ef8c0d8432ad0f65173dd818bf0}{register\+Controller} (\hyperlink{classMongoose_1_1Controller}{Controller} $\ast$)
+\item 
+int \hyperlink{classMongoose_1_1Server_a49ee3958235e05c9a8a66dda87f1b304}{\+\_\+handle\+Request} (struct \hyperlink{structmg__connection}{mg\+\_\+connection} $\ast$conn)
+\item 
+void \hyperlink{classMongoose_1_1Server_ab9ce5c4c5bacc867947f2c975b8dd495}{\+\_\+upload} (struct \hyperlink{structmg__connection}{mg\+\_\+connection} $\ast$conn, const char $\ast$file\+Name)
+\item 
+void \hyperlink{classMongoose_1_1Server_a43e3c4c39a9e9cc59527071c3febbfec}{\+\_\+web\+Socket\+Ready} (struct \hyperlink{structmg__connection}{mg\+\_\+connection} $\ast$conn)
+\item 
+int \hyperlink{classMongoose_1_1Server_a9d0decf97aaff999935a246037d0c1b8}{\+\_\+web\+Socket\+Data} (struct \hyperlink{structmg__connection}{mg\+\_\+connection} $\ast$conn, string data)
+\item 
+\hyperlink{classMongoose_1_1Response}{Response} $\ast$ \hyperlink{classMongoose_1_1Server_aa4421fe1e9d141ee9f3520570eb0d372}{handle\+Request} (\hyperlink{classMongoose_1_1Request}{Request} \&request)
+\item 
+void \hyperlink{classMongoose_1_1Server_a3364cff3a91cc284ca43aba0bf859efa}{set\+Option} (string key, string value)
+\item 
+\hyperlink{classMongoose_1_1WebSockets}{Web\+Sockets} \& \hyperlink{classMongoose_1_1Server_a5560e2a8394bb202e3ec415a0d059503}{get\+Web\+Sockets} ()
+\item 
+void \hyperlink{classMongoose_1_1Server_a9095044ead0a2f09c2fa7d4da8b1f991}{print\+Stats} ()
+\item 
+void \hyperlink{classMongoose_1_1Server_a91beaea7ac911c4e826a92bbde79fcc6}{poll} ()
+\item 
+bool \hyperlink{classMongoose_1_1Server_a067a174ddf1fc0ead483807883834c62}{handles} (string method, string url)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+volatile bool {\bfseries stopped}\hypertarget{classMongoose_1_1Server_ae9e6d0dda9b7ac94d1c1c3a5f676bcdb}{}\label{classMongoose_1_1Server_ae9e6d0dda9b7ac94d1c1c3a5f676bcdb}
+
+\item 
+volatile bool {\bfseries destroyed}\hypertarget{classMongoose_1_1Server_a6d62e877360c2f692515deaec026a899}{}\label{classMongoose_1_1Server_a6d62e877360c2f692515deaec026a899}
+
+\item 
+\hyperlink{classMongoose_1_1Sessions}{Sessions} {\bfseries sessions}\hypertarget{classMongoose_1_1Server_a96c6d2a83d60a718cfb828314f27bc1e}{}\label{classMongoose_1_1Server_a96c6d2a83d60a718cfb828314f27bc1e}
+
+\item 
+\hyperlink{classMongoose_1_1Mutex}{Mutex} {\bfseries mutex}\hypertarget{classMongoose_1_1Server_a904a15c2ef0898687f71803802e5d6c9}{}\label{classMongoose_1_1Server_a904a15c2ef0898687f71803802e5d6c9}
+
+\item 
+map$<$ string, string $>$ {\bfseries options\+Map}\hypertarget{classMongoose_1_1Server_a684c094cf39754b73785b0f586d5a4e6}{}\label{classMongoose_1_1Server_a684c094cf39754b73785b0f586d5a4e6}
+
+\item 
+map$<$ struct \hyperlink{structmg__connection}{mg\+\_\+connection} $\ast$, \hyperlink{classMongoose_1_1Request}{Request} $\ast$ $>$ {\bfseries current\+Requests}\hypertarget{classMongoose_1_1Server_adedb1fd1406329834ca5901506bbb39c}{}\label{classMongoose_1_1Server_adedb1fd1406329834ca5901506bbb39c}
+
+\item 
+struct \hyperlink{structmg__server}{mg\+\_\+server} $\ast$ {\bfseries server}\hypertarget{classMongoose_1_1Server_a305c65cdcb023600f84c40840a80fc7a}{}\label{classMongoose_1_1Server_a305c65cdcb023600f84c40840a80fc7a}
+
+\item 
+\hyperlink{classMongoose_1_1WebSockets}{Web\+Sockets} {\bfseries websockets}\hypertarget{classMongoose_1_1Server_ab2b9fe0d35a1d714fa69fd0bd70b964e}{}\label{classMongoose_1_1Server_ab2b9fe0d35a1d714fa69fd0bd70b964e}
+
+\item 
+vector$<$ \hyperlink{classMongoose_1_1Controller}{Controller} $\ast$ $>$ {\bfseries controllers}\hypertarget{classMongoose_1_1Server_aebbbe023570f0b74307643a26b447f52}{}\label{classMongoose_1_1Server_aebbbe023570f0b74307643a26b447f52}
+
+\item 
+int {\bfseries requests}\hypertarget{classMongoose_1_1Server_abf770ab12cc32a4e4bacb378e15d41d5}{}\label{classMongoose_1_1Server_abf770ab12cc32a4e4bacb378e15d41d5}
+
+\item 
+int {\bfseries start\+Time}\hypertarget{classMongoose_1_1Server_a5a10491bb58ca7a7917e3c8f0fa9f572}{}\label{classMongoose_1_1Server_a5a10491bb58ca7a7917e3c8f0fa9f572}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!Server@{Server}}
+\index{Server@{Server}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{Server(int port=80, const char $\ast$document\+Root=""www"")}{Server(int port=80, const char *documentRoot="www")}}]{\setlength{\rightskip}{0pt plus 5cm}Mongoose\+::\+Server\+::\+Server (
+\begin{DoxyParamCaption}
+\item[{int}]{port = {\ttfamily 80}, }
+\item[{const char $\ast$}]{document\+Root = {\ttfamily \char`\"{}www\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_aca7e4d98d6ee16b15c46791a2d2f2739}{}\label{classMongoose_1_1Server_aca7e4d98d6ee16b15c46791a2d2f2739}
+Constructs the server
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & the number of the port to listen to \\
+\hline
+{\em string} & document\+Root the root that should be used for static files \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!\+\_\+handle\+Request@{\+\_\+handle\+Request}}
+\index{\+\_\+handle\+Request@{\+\_\+handle\+Request}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{\+\_\+handle\+Request(struct mg\+\_\+connection $\ast$conn)}{_handleRequest(struct mg_connection *conn)}}]{\setlength{\rightskip}{0pt plus 5cm}int Mongoose\+::\+Server\+::\+\_\+handle\+Request (
+\begin{DoxyParamCaption}
+\item[{struct {\bf mg\+\_\+connection} $\ast$}]{conn}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a49ee3958235e05c9a8a66dda87f1b304}{}\label{classMongoose_1_1Server_a49ee3958235e05c9a8a66dda87f1b304}
+Internally used to process a request
+
+
+\begin{DoxyParams}{Parameters}
+{\em struct} & mg\+\_\+connection$\ast$ the mongoose connection \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!\+\_\+upload@{\+\_\+upload}}
+\index{\+\_\+upload@{\+\_\+upload}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{\+\_\+upload(struct mg\+\_\+connection $\ast$conn, const char $\ast$file\+Name)}{_upload(struct mg_connection *conn, const char *fileName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Server\+::\+\_\+upload (
+\begin{DoxyParamCaption}
+\item[{struct {\bf mg\+\_\+connection} $\ast$}]{conn, }
+\item[{const char $\ast$}]{file\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_ab9ce5c4c5bacc867947f2c975b8dd495}{}\label{classMongoose_1_1Server_ab9ce5c4c5bacc867947f2c975b8dd495}
+Internally used to process a file upload
+
+
+\begin{DoxyParams}{Parameters}
+{\em struct} & mg\+\_\+connection$\ast$ the mongoose conneciton \\
+\hline
+{\em const} & char $\ast$ the name of the uploaded file \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!\+\_\+web\+Socket\+Data@{\+\_\+web\+Socket\+Data}}
+\index{\+\_\+web\+Socket\+Data@{\+\_\+web\+Socket\+Data}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{\+\_\+web\+Socket\+Data(struct mg\+\_\+connection $\ast$conn, string data)}{_webSocketData(struct mg_connection *conn, string data)}}]{\setlength{\rightskip}{0pt plus 5cm}int Mongoose\+::\+Server\+::\+\_\+web\+Socket\+Data (
+\begin{DoxyParamCaption}
+\item[{struct {\bf mg\+\_\+connection} $\ast$}]{conn, }
+\item[{string}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a9d0decf97aaff999935a246037d0c1b8}{}\label{classMongoose_1_1Server_a9d0decf97aaff999935a246037d0c1b8}
+Handles web sockets data
+
+
+\begin{DoxyParams}{Parameters}
+{\em struct} & mg\+\_\+connection$\ast$ the mongoose connection \\
+\hline
+{\em int} & flags the data flags \\
+\hline
+{\em char$\ast$} & the data \\
+\hline
+{\em size} & the data size\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int if we have to keep the connection opened 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!\+\_\+web\+Socket\+Ready@{\+\_\+web\+Socket\+Ready}}
+\index{\+\_\+web\+Socket\+Ready@{\+\_\+web\+Socket\+Ready}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{\+\_\+web\+Socket\+Ready(struct mg\+\_\+connection $\ast$conn)}{_webSocketReady(struct mg_connection *conn)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Server\+::\+\_\+web\+Socket\+Ready (
+\begin{DoxyParamCaption}
+\item[{struct {\bf mg\+\_\+connection} $\ast$}]{conn}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a43e3c4c39a9e9cc59527071c3febbfec}{}\label{classMongoose_1_1Server_a43e3c4c39a9e9cc59527071c3febbfec}
+Handles a web socket connection
+
+
+\begin{DoxyParams}{Parameters}
+{\em struct} & mg\+\_\+connection$\ast$ the mongoose connection with the client \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!get\+Web\+Sockets@{get\+Web\+Sockets}}
+\index{get\+Web\+Sockets@{get\+Web\+Sockets}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{get\+Web\+Sockets()}{getWebSockets()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Web\+Sockets} \& Mongoose\+::\+Server\+::get\+Web\+Sockets (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a5560e2a8394bb202e3ec415a0d059503}{}\label{classMongoose_1_1Server_a5560e2a8394bb202e3ec415a0d059503}
+Returns the \hyperlink{classMongoose_1_1WebSockets}{Web\+Sockets} container
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classMongoose_1_1WebSockets}{Web\+Sockets} the web sockets container 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!handle\+Request@{handle\+Request}}
+\index{handle\+Request@{handle\+Request}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{handle\+Request(\+Request \&request)}{handleRequest(Request &request)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response} $\ast$ Mongoose\+::\+Server\+::handle\+Request (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_aa4421fe1e9d141ee9f3520570eb0d372}{}\label{classMongoose_1_1Server_aa4421fe1e9d141ee9f3520570eb0d372}
+Process the request by controllers
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classMongoose_1_1Response}{Response} the response if one of the controllers can handle it, N\+U\+LL else 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!handles@{handles}}
+\index{handles@{handles}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{handles(string method, string url)}{handles(string method, string url)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Mongoose\+::\+Server\+::handles (
+\begin{DoxyParamCaption}
+\item[{string}]{method, }
+\item[{string}]{url}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a067a174ddf1fc0ead483807883834c62}{}\label{classMongoose_1_1Server_a067a174ddf1fc0ead483807883834c62}
+Does the server handles url? \index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!poll@{poll}}
+\index{poll@{poll}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{poll()}{poll()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Server\+::poll (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a91beaea7ac911c4e826a92bbde79fcc6}{}\label{classMongoose_1_1Server_a91beaea7ac911c4e826a92bbde79fcc6}
+Polls the server \index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!print\+Stats@{print\+Stats}}
+\index{print\+Stats@{print\+Stats}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{print\+Stats()}{printStats()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Server\+::print\+Stats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a9095044ead0a2f09c2fa7d4da8b1f991}{}\label{classMongoose_1_1Server_a9095044ead0a2f09c2fa7d4da8b1f991}
+Print statistics \index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!register\+Controller@{register\+Controller}}
+\index{register\+Controller@{register\+Controller}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{register\+Controller(\+Controller $\ast$)}{registerController(Controller *)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Server\+::register\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf Controller} $\ast$}]{controller}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a9efd2ef8c0d8432ad0f65173dd818bf0}{}\label{classMongoose_1_1Server_a9efd2ef8c0d8432ad0f65173dd818bf0}
+Register a new controller on the server
+
+
+\begin{DoxyParams}{Parameters}
+{\em Controller$\ast$} & a pointer to a controller \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!set\+Option@{set\+Option}}
+\index{set\+Option@{set\+Option}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{set\+Option(string key, string value)}{setOption(string key, string value)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Server\+::set\+Option (
+\begin{DoxyParamCaption}
+\item[{string}]{key, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a3364cff3a91cc284ca43aba0bf859efa}{}\label{classMongoose_1_1Server_a3364cff3a91cc284ca43aba0bf859efa}
+Sets a mongoose extra option
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the name of the option \\
+\hline
+{\em string} & the value of the option \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!start@{start}}
+\index{start@{start}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{start()}{start()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Server\+::start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a1ea120f0ba0ab8e71e0afb28ad12fbd3}{}\label{classMongoose_1_1Server_a1ea120f0ba0ab8e71e0afb28ad12fbd3}
+Runs the \hyperlink{namespaceMongoose}{Mongoose} server \index{Mongoose\+::\+Server@{Mongoose\+::\+Server}!stop@{stop}}
+\index{stop@{stop}!Mongoose\+::\+Server@{Mongoose\+::\+Server}}
+\subsubsection[{\texorpdfstring{stop()}{stop()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Server\+::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Server_a4da5f1aca21385c007eb7defcf410265}{}\label{classMongoose_1_1Server_a4da5f1aca21385c007eb7defcf410265}
+Stops the \hyperlink{namespaceMongoose}{Mongoose} server 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mongoose-\/cpp/Server.\+h\item 
+src/mongoose-\/cpp/Server.\+cpp\end{DoxyCompactItemize}

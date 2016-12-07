@@ -1,0 +1,60 @@
+.TH "Json::CharReader" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::CharReader \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <json\&.h>\fP
+.PP
+Inherited by \fBJson::OurCharReader\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBFactory\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual bool \fBparse\fP (char const *beginDoc, char const *endDoc, \fBValue\fP *root, JSONCPP_STRING *errs)=0"
+.br
+.RI "\fIRead a \fBValue\fP from a \fCJSON\fP document\&. The document must be a UTF-8 encoded string containing the document to read\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Interface for reading JSON from a char array\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual bool Json::CharReader::parse (char const * beginDoc, char const * endDoc, \fBValue\fP * root, JSONCPP_STRING * errs)\fC [pure virtual]\fP"
+
+.PP
+Read a \fBValue\fP from a \fCJSON\fP document\&. The document must be a UTF-8 encoded string containing the document to read\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbeginDoc\fP Pointer on the beginning of the UTF-8 encoded string of the document to read\&. 
+.br
+\fIendDoc\fP Pointer on the end of the UTF-8 encoded string of the document to read\&. Must be >= beginDoc\&. 
+.br
+\fIroot\fP [out] Contains the root value of the document if it was successfully parsed\&. 
+.br
+\fIerrs\fP [out] Formatted error messages (if not NULL) a user friendly string that lists errors in the parsed document\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fCtrue\fP if the document was successfully parsed, \fCfalse\fP if an error occurred\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBJson::OurCharReader\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

@@ -1,0 +1,82 @@
+\hypertarget{classMongoose_1_1WebController}{}\section{Mongoose\+:\+:Web\+Controller Class Reference}
+\label{classMongoose_1_1WebController}\index{Mongoose\+::\+Web\+Controller@{Mongoose\+::\+Web\+Controller}}
+
+
+Inheritance diagram for Mongoose\+:\+:Web\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{da/d58/classMongoose_1_1WebController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mongoose\+:\+:Web\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{da/de9/classMongoose_1_1WebController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMongoose_1_1WebController_a15b894f06fc589f5ef67d78fce5a3577}{Web\+Controller} (int gc\+Divisor=100)
+\item 
+void \hyperlink{classMongoose_1_1WebController_acd7b2317485e2b19fe1ffbb5d69e6c00}{pre\+Process} (\hyperlink{classMongoose_1_1Request}{Request} \&request, \hyperlink{classMongoose_1_1Response}{Response} \&response)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMongoose_1_1Mutex}{Mutex} {\bfseries mutex}\hypertarget{classMongoose_1_1WebController_ab52620e5d16f73319b7e30b7da09a618}{}\label{classMongoose_1_1WebController_ab52620e5d16f73319b7e30b7da09a618}
+
+\item 
+int {\bfseries gc\+Divisor}\hypertarget{classMongoose_1_1WebController_afc795dfa9d7054d9b8ca214c73770ca4}{}\label{classMongoose_1_1WebController_afc795dfa9d7054d9b8ca214c73770ca4}
+
+\item 
+int {\bfseries counter}\hypertarget{classMongoose_1_1WebController_a82be2cba74600aaab76115624f864b5d}{}\label{classMongoose_1_1WebController_a82be2cba74600aaab76115624f864b5d}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mongoose\+::\+Web\+Controller@{Mongoose\+::\+Web\+Controller}!Web\+Controller@{Web\+Controller}}
+\index{Web\+Controller@{Web\+Controller}!Mongoose\+::\+Web\+Controller@{Mongoose\+::\+Web\+Controller}}
+\subsubsection[{\texorpdfstring{Web\+Controller(int gc\+Divisor=100)}{WebController(int gcDivisor=100)}}]{\setlength{\rightskip}{0pt plus 5cm}Mongoose\+::\+Web\+Controller\+::\+Web\+Controller (
+\begin{DoxyParamCaption}
+\item[{int}]{gc\+Divisor = {\ttfamily 100}}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1WebController_a15b894f06fc589f5ef67d78fce5a3577}{}\label{classMongoose_1_1WebController_a15b894f06fc589f5ef67d78fce5a3577}
+Creates a web controller, each gc\+Divisor request, the sessions will be garbage collected 
+
+\subsection{Member Function Documentation}
+\index{Mongoose\+::\+Web\+Controller@{Mongoose\+::\+Web\+Controller}!pre\+Process@{pre\+Process}}
+\index{pre\+Process@{pre\+Process}!Mongoose\+::\+Web\+Controller@{Mongoose\+::\+Web\+Controller}}
+\subsubsection[{\texorpdfstring{pre\+Process(\+Request \&request, Response \&response)}{preProcess(Request &request, Response &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Web\+Controller\+::pre\+Process (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request, }
+\item[{{\bf Response} \&}]{response}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1WebController_acd7b2317485e2b19fe1ffbb5d69e6c00}{}\label{classMongoose_1_1WebController_acd7b2317485e2b19fe1ffbb5d69e6c00}
+Pre process the request, this will set the content type to text/html and ping the user session
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request \\
+\hline
+{\em \hyperlink{classMongoose_1_1Response}{Response}} & the response \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classMongoose_1_1Controller_a3eff704e4a3b4dc5a63fbfaa50a934ff}{Mongoose\+::\+Controller}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mongoose-\/cpp/Web\+Controller.\+h\item 
+src/mongoose-\/cpp/Web\+Controller.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,127 @@
+.TH "el::Logger" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::Logger \- Represents a logger holding ID and configurations we need to write logs\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::threading::ThreadSafe\fP, and \fBel::Loggable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBLogger\fP (const std::string &id, base::LogStreamsReferenceMap *logStreamsReference)"
+.br
+.ti -1c
+.RI "\fBLogger\fP (const std::string &id, const \fBConfigurations\fP &configurations, base::LogStreamsReferenceMap *logStreamsReference)"
+.br
+.ti -1c
+.RI "\fBLogger\fP (const \fBLogger\fP &logger)"
+.br
+.ti -1c
+.RI "\fBLogger\fP & \fBoperator=\fP (const \fBLogger\fP &logger)"
+.br
+.ti -1c
+.RI "virtual void \fBlog\fP (el::base::type::ostream_t &os) const "
+.br
+.ti -1c
+.RI "void \fBconfigure\fP (const \fBConfigurations\fP &configurations)"
+.br
+.RI "\fIConfigures the logger using specified configurations\&. \fP"
+.ti -1c
+.RI "void \fBreconfigure\fP (void)"
+.br
+.RI "\fIReconfigures logger using existing configurations\&. \fP"
+.ti -1c
+.RI "const std::string & \fBid\fP (void) const "
+.br
+.ti -1c
+.RI "const std::string & \fBparentApplicationName\fP (void) const "
+.br
+.ti -1c
+.RI "void \fBsetParentApplicationName\fP (const std::string &parentApplicationName)"
+.br
+.ti -1c
+.RI "\fBConfigurations\fP * \fBconfigurations\fP (void)"
+.br
+.ti -1c
+.RI "\fBbase::TypedConfigurations\fP * \fBtypedConfigurations\fP (void)"
+.br
+.ti -1c
+.RI "void \fBflush\fP (void)"
+.br
+.RI "\fIFlushes logger to sync all log files for all levels\&. \fP"
+.ti -1c
+.RI "void \fBflush\fP (\fBLevel\fP level, base::type::fstream_t *fs)"
+.br
+.ti -1c
+.RI "bool \fBisFlushNeeded\fP (\fBLevel\fP level)"
+.br
+.ti -1c
+.RI "\fBLogBuilder\fP * \fBlogBuilder\fP (void) const "
+.br
+.ti -1c
+.RI "void \fBsetLogBuilder\fP (const LogBuilderPtr &logBuilder)"
+.br
+.ti -1c
+.RI "bool \fBenabled\fP (\fBLevel\fP level) const "
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBisValidId\fP (const std::string &id)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::LogMessage\fP"
+.br
+.ti -1c
+.RI "class \fBel::Loggers\fP"
+.br
+.ti -1c
+.RI "class \fBel::Helpers\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::RegisteredLoggers\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::DefaultLogDispatchCallback\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::MessageBuilder\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::Writer\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::PErrorWriter\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::Storage\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::PerformanceTracker\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::LogDispatcher\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents a logger holding ID and configurations we need to write logs\&. 
+
+This class does not write logs itself instead its used by writer to read configuations from\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

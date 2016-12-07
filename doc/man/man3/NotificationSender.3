@@ -1,0 +1,43 @@
+.TH "NotificationSender" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+NotificationSender \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <NotificationSender\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNotificationSender\fP (const std::string &server_key)"
+.br
+.RI "\fIFirebase server_key\&. \fP"
+.ti -1c
+.RI "void \fBsend_notification\fP (std::string from, std::string dest_reg_token, std::string message)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class made for sending notifications throug Google Firebase tokens 
+.SH "Member Function Documentation"
+.PP 
+.SS "void NotificationSender::send_notification (std::string from, std::string dest_reg_token, std::string message)"
+Send an HTTP post to firebase endpoint with the notification data\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfrom\fP The sender of the message 
+.br
+\fIdest_reg_token\fP The firebase token of the destinatary devise 
+.br
+\fImessage\fP The body of the message 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

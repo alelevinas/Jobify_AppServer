@@ -1,0 +1,46 @@
+.TH "Mongoose::JsonController" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose::JsonController \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBMongoose::WebController\fP\&.
+.PP
+Inherited by \fBChatController\fP, \fBProfileController\fP, and \fBSharedServerController\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBJsonController\fP (int gcDivisor=100)"
+.br
+.ti -1c
+.RI "void \fBpreProcess\fP (\fBRequest\fP &request, \fBResponse\fP &response)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Mongoose::JsonController::JsonController (int gcDivisor = \fC100\fP)"
+Creates a json controller, each gcDivisor request, the sessions will be garbage collected 
+.SH "Member Function Documentation"
+.PP 
+.SS "void Mongoose::JsonController::preProcess (\fBRequest\fP & request, \fBResponse\fP & response)\fC [virtual]\fP"
+Pre process the request, this will set the content type to text/html and ping the user session
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBRequest\fP\fP the request 
+.br
+\fI\fBResponse\fP\fP the response 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBMongoose::Controller\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

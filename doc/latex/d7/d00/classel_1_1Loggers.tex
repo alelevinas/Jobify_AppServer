@@ -1,0 +1,155 @@
+\hypertarget{classel_1_1Loggers}{}\section{el\+:\+:Loggers Class Reference}
+\label{classel_1_1Loggers}\index{el\+::\+Loggers@{el\+::\+Loggers}}
+
+
+Static helpers to deal with loggers and their configurations.  
+
+
+
+
+{\ttfamily \#include $<$easylogging++.\+h$>$}
+
+
+
+Inheritance diagram for el\+:\+:Loggers\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{df/de8/classel_1_1Loggers__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for el\+:\+:Loggers\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{dc/dc4/classel_1_1Loggers__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classel_1_1Loggers_1_1ScopedAddFlag}{Scoped\+Add\+Flag}
+\begin{DoxyCompactList}\small\item\em Adds flag and removes it when scope goes out. \end{DoxyCompactList}\item 
+class \hyperlink{classel_1_1Loggers_1_1ScopedRemoveFlag}{Scoped\+Remove\+Flag}
+\begin{DoxyCompactList}\small\item\em Removes flag and add it when scope goes out. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classel_1_1Logger}{Logger} $\ast$ \hyperlink{classel_1_1Loggers_aaebf868c558e3ba1d2e4f073a00f1d4a}{get\+Logger} (const std\+::string \&identity, bool register\+If\+Not\+Available=true)\hypertarget{classel_1_1Loggers_aaebf868c558e3ba1d2e4f073a00f1d4a}{}\label{classel_1_1Loggers_aaebf868c558e3ba1d2e4f073a00f1d4a}
+
+\begin{DoxyCompactList}\small\item\em Gets existing or registers new logger. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1Loggers_a201d261ea57c070f07f0bf2006158587}{unregister\+Logger} (const std\+::string \&identity)\hypertarget{classel_1_1Loggers_a201d261ea57c070f07f0bf2006158587}{}\label{classel_1_1Loggers_a201d261ea57c070f07f0bf2006158587}
+
+\begin{DoxyCompactList}\small\item\em Unregisters logger -\/ use it only when you know what you are doing, you may unregister loggers initialized / used by third-\/party libs. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1Loggers_a2d7a056cb7d9da3d96c709a2fac5c2bb}{has\+Logger} (const std\+::string \&identity)\hypertarget{classel_1_1Loggers_a2d7a056cb7d9da3d96c709a2fac5c2bb}{}\label{classel_1_1Loggers_a2d7a056cb7d9da3d96c709a2fac5c2bb}
+
+\begin{DoxyCompactList}\small\item\em Whether or not logger with id is registered. \end{DoxyCompactList}\item 
+static \hyperlink{classel_1_1Logger}{Logger} $\ast$ \hyperlink{classel_1_1Loggers_a888aca5bdccccc322da2eed430909d04}{reconfigure\+Logger} (\hyperlink{classel_1_1Logger}{Logger} $\ast$logger, const \hyperlink{classel_1_1Configurations}{Configurations} \&configurations)\hypertarget{classel_1_1Loggers_a888aca5bdccccc322da2eed430909d04}{}\label{classel_1_1Loggers_a888aca5bdccccc322da2eed430909d04}
+
+\begin{DoxyCompactList}\small\item\em Reconfigures specified logger with new configurations. \end{DoxyCompactList}\item 
+static \hyperlink{classel_1_1Logger}{Logger} $\ast$ \hyperlink{classel_1_1Loggers_a105f776fe19cb7fa2fccd2993d9f7a7c}{reconfigure\+Logger} (const std\+::string \&identity, const \hyperlink{classel_1_1Configurations}{Configurations} \&configurations)\hypertarget{classel_1_1Loggers_a105f776fe19cb7fa2fccd2993d9f7a7c}{}\label{classel_1_1Loggers_a105f776fe19cb7fa2fccd2993d9f7a7c}
+
+\begin{DoxyCompactList}\small\item\em Reconfigures logger with new configurations after looking it up using identity. \end{DoxyCompactList}\item 
+static \hyperlink{classel_1_1Logger}{Logger} $\ast$ \hyperlink{classel_1_1Loggers_aef49fdae329cefcc1c01428568dced4b}{reconfigure\+Logger} (const std\+::string \&identity, \hyperlink{namespaceel_a281f5db6d6163678bc68a8b23b59e124}{Configuration\+Type} configuration\+Type, const std\+::string \&value)\hypertarget{classel_1_1Loggers_aef49fdae329cefcc1c01428568dced4b}{}\label{classel_1_1Loggers_aef49fdae329cefcc1c01428568dced4b}
+
+\begin{DoxyCompactList}\small\item\em Reconfigures logger\textquotesingle{}s single configuration. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_ac834df0f5e9e3dab18e70321a2543af7}{reconfigure\+All\+Loggers} (const \hyperlink{classel_1_1Configurations}{Configurations} \&configurations)\hypertarget{classel_1_1Loggers_ac834df0f5e9e3dab18e70321a2543af7}{}\label{classel_1_1Loggers_ac834df0f5e9e3dab18e70321a2543af7}
+
+\begin{DoxyCompactList}\small\item\em Reconfigures all the existing loggers with new configurations. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_a1ebd33bc0208b430f41508e34509c7c9}{reconfigure\+All\+Loggers} (\hyperlink{namespaceel_a281f5db6d6163678bc68a8b23b59e124}{Configuration\+Type} configuration\+Type, const std\+::string \&value)\hypertarget{classel_1_1Loggers_a1ebd33bc0208b430f41508e34509c7c9}{}\label{classel_1_1Loggers_a1ebd33bc0208b430f41508e34509c7c9}
+
+\begin{DoxyCompactList}\small\item\em Reconfigures single configuration for all the loggers. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_ab24b99e5bb3c907d1418ee3266f15397}{reconfigure\+All\+Loggers} (\hyperlink{namespaceel_ab0ac6091262344c52dd2d3ad099e8e36}{Level} level, \hyperlink{namespaceel_a281f5db6d6163678bc68a8b23b59e124}{Configuration\+Type} configuration\+Type, const std\+::string \&value)\hypertarget{classel_1_1Loggers_ab24b99e5bb3c907d1418ee3266f15397}{}\label{classel_1_1Loggers_ab24b99e5bb3c907d1418ee3266f15397}
+
+\begin{DoxyCompactList}\small\item\em Reconfigures single configuration for all the loggers for specified level. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_ab9fb62a8ff904ff887fefde3282f46a4}{set\+Default\+Configurations} (const \hyperlink{classel_1_1Configurations}{Configurations} \&configurations, bool reconfigure\+Existing\+Loggers=false)\hypertarget{classel_1_1Loggers_ab9fb62a8ff904ff887fefde3282f46a4}{}\label{classel_1_1Loggers_ab9fb62a8ff904ff887fefde3282f46a4}
+
+\begin{DoxyCompactList}\small\item\em Sets default configurations. This configuration is used for future (and conditionally for existing) loggers. \end{DoxyCompactList}\item 
+static const \hyperlink{classel_1_1Configurations}{Configurations} $\ast$ \hyperlink{classel_1_1Loggers_a96f2336fafdc3ef2c4df01a73ae5ffb7}{default\+Configurations} (void)\hypertarget{classel_1_1Loggers_a96f2336fafdc3ef2c4df01a73ae5ffb7}{}\label{classel_1_1Loggers_a96f2336fafdc3ef2c4df01a73ae5ffb7}
+
+\begin{DoxyCompactList}\small\item\em Returns current default. \end{DoxyCompactList}\item 
+static const base\+::\+Log\+Streams\+Reference\+Map $\ast$ \hyperlink{classel_1_1Loggers_ad17312c9474d94bc98efcaf08ca279a4}{log\+Streams\+Reference} (void)\hypertarget{classel_1_1Loggers_ad17312c9474d94bc98efcaf08ca279a4}{}\label{classel_1_1Loggers_ad17312c9474d94bc98efcaf08ca279a4}
+
+\begin{DoxyCompactList}\small\item\em Returns log stream reference pointer if needed by user. \end{DoxyCompactList}\item 
+static \hyperlink{classel_1_1base_1_1TypedConfigurations}{base\+::\+Typed\+Configurations} \hyperlink{classel_1_1Loggers_af296007c3eb3b71602ec80ff59875b46}{default\+Typed\+Configurations} (void)\hypertarget{classel_1_1Loggers_af296007c3eb3b71602ec80ff59875b46}{}\label{classel_1_1Loggers_af296007c3eb3b71602ec80ff59875b46}
+
+\begin{DoxyCompactList}\small\item\em Default typed configuration based on existing default\+Conf. \end{DoxyCompactList}\item 
+static std\+::vector$<$ std\+::string $>$ $\ast$ \hyperlink{classel_1_1Loggers_adea07ec6cbc1dfc50f939d69dcac7160}{populate\+All\+Logger\+Ids} (std\+::vector$<$ std\+::string $>$ $\ast$target\+List)
+\begin{DoxyCompactList}\small\item\em Populates all logger I\+Ds in current repository. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_a9992995a85745639aa9aa5a2df2255f5}{configure\+From\+Global} (const char $\ast$global\+Configuration\+File\+Path)\hypertarget{classel_1_1Loggers_a9992995a85745639aa9aa5a2df2255f5}{}\label{classel_1_1Loggers_a9992995a85745639aa9aa5a2df2255f5}
+
+\begin{DoxyCompactList}\small\item\em Sets configurations from global configuration file. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1Loggers_a28acf6f2b1ea7e5edd1b2560cde82406}{configure\+From\+Arg} (const char $\ast$arg\+Key)
+\begin{DoxyCompactList}\small\item\em Configures loggers using command line arg. Ensure you have already set command line args,. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_a1834480e970c16817459ca3ee26b44b5}{flush\+All} (void)\hypertarget{classel_1_1Loggers_a1834480e970c16817459ca3ee26b44b5}{}\label{classel_1_1Loggers_a1834480e970c16817459ca3ee26b44b5}
+
+\begin{DoxyCompactList}\small\item\em Flushes all loggers for all levels -\/ Be careful if you dont know how many loggers are registered. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_aedd2de02dd701b0f20ddaa10f1f728f1}{add\+Flag} (\hyperlink{namespaceel_a2784aacd04cb7816ac1c0b20fcbf83cb}{Logging\+Flag} flag)\hypertarget{classel_1_1Loggers_aedd2de02dd701b0f20ddaa10f1f728f1}{}\label{classel_1_1Loggers_aedd2de02dd701b0f20ddaa10f1f728f1}
+
+\begin{DoxyCompactList}\small\item\em Adds logging flag used internally. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_a23fcb4b492f70a34285c45c0b5e2e515}{remove\+Flag} (\hyperlink{namespaceel_a2784aacd04cb7816ac1c0b20fcbf83cb}{Logging\+Flag} flag)\hypertarget{classel_1_1Loggers_a23fcb4b492f70a34285c45c0b5e2e515}{}\label{classel_1_1Loggers_a23fcb4b492f70a34285c45c0b5e2e515}
+
+\begin{DoxyCompactList}\small\item\em Removes logging flag used internally. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1Loggers_a591a45565c1eb7073ec3a979df8b5a4c}{has\+Flag} (\hyperlink{namespaceel_a2784aacd04cb7816ac1c0b20fcbf83cb}{Logging\+Flag} flag)\hypertarget{classel_1_1Loggers_a591a45565c1eb7073ec3a979df8b5a4c}{}\label{classel_1_1Loggers_a591a45565c1eb7073ec3a979df8b5a4c}
+
+\begin{DoxyCompactList}\small\item\em Determines whether or not certain flag is active. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_afbee019d722fef5148d8355f45ba7993}{set\+Logging\+Level} (\hyperlink{namespaceel_ab0ac6091262344c52dd2d3ad099e8e36}{Level} level)\hypertarget{classel_1_1Loggers_afbee019d722fef5148d8355f45ba7993}{}\label{classel_1_1Loggers_afbee019d722fef5148d8355f45ba7993}
+
+\begin{DoxyCompactList}\small\item\em Sets hierarchy for logging. Needs to enable logging flag (Hierarchical\+Logging) \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_a826b238fe4f3719305a2d19f0c121fa0}{set\+Verbose\+Level} (base\+::type\+::\+Verbose\+Level level)\hypertarget{classel_1_1Loggers_a826b238fe4f3719305a2d19f0c121fa0}{}\label{classel_1_1Loggers_a826b238fe4f3719305a2d19f0c121fa0}
+
+\begin{DoxyCompactList}\small\item\em Sets verbose level on the fly. \end{DoxyCompactList}\item 
+static base\+::type\+::\+Verbose\+Level \hyperlink{classel_1_1Loggers_ad4840bb4b6b80746a2212cf3cc058142}{verbose\+Level} (void)\hypertarget{classel_1_1Loggers_ad4840bb4b6b80746a2212cf3cc058142}{}\label{classel_1_1Loggers_ad4840bb4b6b80746a2212cf3cc058142}
+
+\begin{DoxyCompactList}\small\item\em Gets current verbose level. \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_acbc5e2cef230331c57f364852a671507}{set\+V\+Modules} (const char $\ast$modules)\hypertarget{classel_1_1Loggers_acbc5e2cef230331c57f364852a671507}{}\label{classel_1_1Loggers_acbc5e2cef230331c57f364852a671507}
+
+\begin{DoxyCompactList}\small\item\em Sets vmodules as specified (on the fly) \end{DoxyCompactList}\item 
+static void \hyperlink{classel_1_1Loggers_afcf50abc11530eb7f28fcab7eab27e4f}{clear\+V\+Modules} (void)\hypertarget{classel_1_1Loggers_afcf50abc11530eb7f28fcab7eab27e4f}{}\label{classel_1_1Loggers_afcf50abc11530eb7f28fcab7eab27e4f}
+
+\begin{DoxyCompactList}\small\item\em Clears vmodules. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Static helpers to deal with loggers and their configurations. 
+
+\subsection{Member Function Documentation}
+\index{el\+::\+Loggers@{el\+::\+Loggers}!configure\+From\+Arg@{configure\+From\+Arg}}
+\index{configure\+From\+Arg@{configure\+From\+Arg}!el\+::\+Loggers@{el\+::\+Loggers}}
+\subsubsection[{\texorpdfstring{configure\+From\+Arg(const char $\ast$arg\+Key)}{configureFromArg(const char *argKey)}}]{\setlength{\rightskip}{0pt plus 5cm}static bool el\+::\+Loggers\+::configure\+From\+Arg (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{arg\+Key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1Loggers_a28acf6f2b1ea7e5edd1b2560cde82406}{}\label{classel_1_1Loggers_a28acf6f2b1ea7e5edd1b2560cde82406}
+
+
+Configures loggers using command line arg. Ensure you have already set command line args,. 
+
+\begin{DoxyReturn}{Returns}
+False if invalid argument or argument with no value provided, true if attempted to configure logger. If true is returned that does not mean it has been configured successfully, it only means that it has attempeted to configure logger using configuration file provided in argument 
+\end{DoxyReturn}
+\index{el\+::\+Loggers@{el\+::\+Loggers}!populate\+All\+Logger\+Ids@{populate\+All\+Logger\+Ids}}
+\index{populate\+All\+Logger\+Ids@{populate\+All\+Logger\+Ids}!el\+::\+Loggers@{el\+::\+Loggers}}
+\subsubsection[{\texorpdfstring{populate\+All\+Logger\+Ids(std\+::vector$<$ std\+::string $>$ $\ast$target\+List)}{populateAllLoggerIds(std::vector< std::string > *targetList)}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::vector$<$std\+::string$>$$\ast$ el\+::\+Loggers\+::populate\+All\+Logger\+Ids (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::string $>$ $\ast$}]{target\+List}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1Loggers_adea07ec6cbc1dfc50f939d69dcac7160}{}\label{classel_1_1Loggers_adea07ec6cbc1dfc50f939d69dcac7160}
+
+
+Populates all logger I\+Ds in current repository. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em target\+List} & List of fill up. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/log/easylogging++.\+h\end{DoxyCompactItemize}

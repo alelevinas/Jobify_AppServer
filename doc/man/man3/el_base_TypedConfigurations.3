@@ -1,0 +1,102 @@
+.TH "el::base::TypedConfigurations" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::TypedConfigurations \- \fBConfigurations\fP with data types\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::threading::ThreadSafe\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTypedConfigurations\fP (\fBConfigurations\fP *configurations, base::LogStreamsReferenceMap *logStreamsReference)"
+.br
+.RI "\fIConstructor to initialize (construct) the object off \fBel::Configurations\fP\&. \fP"
+.ti -1c
+.RI "\fBTypedConfigurations\fP (const \fBTypedConfigurations\fP &other)"
+.br
+.ti -1c
+.RI "const \fBConfigurations\fP * \fBconfigurations\fP (void) const "
+.br
+.ti -1c
+.RI "bool \fBenabled\fP (\fBLevel\fP level)"
+.br
+.ti -1c
+.RI "bool \fBtoFile\fP (\fBLevel\fP level)"
+.br
+.ti -1c
+.RI "const std::string & \fBfilename\fP (\fBLevel\fP level)"
+.br
+.ti -1c
+.RI "bool \fBtoStandardOutput\fP (\fBLevel\fP level)"
+.br
+.ti -1c
+.RI "const \fBbase::LogFormat\fP & \fBlogFormat\fP (\fBLevel\fP level)"
+.br
+.ti -1c
+.RI "const \fBbase::MillisecondsWidth\fP & \fBmillisecondsWidth\fP (\fBLevel\fP level=\fBLevel::Global\fP)"
+.br
+.ti -1c
+.RI "bool \fBperformanceTracking\fP (\fBLevel\fP level=\fBLevel::Global\fP)"
+.br
+.ti -1c
+.RI "base::type::fstream_t * \fBfileStream\fP (\fBLevel\fP level)"
+.br
+.ti -1c
+.RI "std::size_t \fBmaxLogFileSize\fP (\fBLevel\fP level)"
+.br
+.ti -1c
+.RI "std::size_t \fBlogFlushThreshold\fP (\fBLevel\fP level)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::Helpers\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::MessageBuilder\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::Writer\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::DefaultLogDispatchCallback\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::LogDispatcher\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBConfigurations\fP with data types\&. 
+
+\fBel::Configurations\fP have string based values\&. This is whats used internally in order to read correct configurations\&. This is to perform faster while writing logs using correct configurations\&.
+.PP
+This is thread safe and final class containing non-virtual destructor (means nothing should inherit this class) 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "el::base::TypedConfigurations::TypedConfigurations (\fBConfigurations\fP * configurations, base::LogStreamsReferenceMap * logStreamsReference)\fC [inline]\fP"
+
+.PP
+Constructor to initialize (construct) the object off \fBel::Configurations\fP\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconfigurations\fP \fBConfigurations\fP pointer/reference to base this typed configurations off\&. 
+.br
+\fIlogStreamsReference\fP Use ELPP->registeredLoggers()->logStreamsReference() 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

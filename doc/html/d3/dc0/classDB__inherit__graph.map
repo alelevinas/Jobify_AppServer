@@ -1,0 +1,7 @@
+<map id="DB" name="DB">
+<area shape="rect" id="node2" href="$dd/deb/classAccountsDB.html" title="{AccountsDB\n||+ ~AccountsDB()\l+ AccountsDB()\l+ add_account()\l+ is_correct()\l}" alt="" coords="5,285,129,406"/>
+<area shape="rect" id="node3" href="$db/dcd/classChatsDB.html" title="{ChatsDB\n||+ ChatsDB()\l+ ~ChatsDB()\l+ add_msg()\l+ updateMessages()\l+ get_conv()\l+ get_convs()\l+ delete_conv()\l+ delete_message()\l}" alt="" coords="153,255,294,435"/>
+<area shape="rect" id="node4" href="$d9/d31/classImagesDB.html" title="{ImagesDB\n||+ ImagesDB()\l+ ~ImagesDB()\l+ add_image()\l+ update_image()\l+ get_image()\l+ delete_image()\l}" alt="" coords="318,270,441,421"/>
+<area shape="rect" id="node5" href="$da/dc3/classSessionsDB.html" title="{SessionsDB\n||+ ~SessionsDB()\l+ SessionsDB()\l+ add_session()\l+ get_session()\l+ delete_session()\l}" alt="" coords="465,277,595,413"/>
+<area shape="rect" id="node6" href="$da/d1b/classUsersDB.html" title="{UsersDB\n||+ ~UsersDB()\l+ UsersDB()\l+ add_user()\l+ get_user()\l+ edit_user()\l+ delete_user()\l+ get_users()\l+ recommend_user()\l+ deRecommend_user()\l+ addContact()\land 13 more...\l}" alt="" coords="619,233,782,457"/>
+</map>

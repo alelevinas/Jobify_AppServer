@@ -1,0 +1,63 @@
+\hypertarget{classel_1_1base_1_1PerformanceTracker}{}\section{el\+:\+:base\+:\+:Performance\+Tracker Class Reference}
+\label{classel_1_1base_1_1PerformanceTracker}\index{el\+::base\+::\+Performance\+Tracker@{el\+::base\+::\+Performance\+Tracker}}
+
+
+Represents performance\+Tracker block of code that conditionally adds performance status to log either when goes outside the scope of when \hyperlink{classel_1_1base_1_1PerformanceTracker_aec9a6e149674c5782cc855e49aeb0aaf}{checkpoint()} is called.  
+
+
+
+
+{\ttfamily \#include $<$easylogging++.\+h$>$}
+
+
+
+Inheritance diagram for el\+:\+:base\+:\+:Performance\+Tracker\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{d6/d73/classel_1_1base_1_1PerformanceTracker__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for el\+:\+:base\+:\+:Performance\+Tracker\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{da/d81/classel_1_1base_1_1PerformanceTracker__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Performance\+Tracker} (const std\+::string \&block\+Name, \hyperlink{namespaceel_1_1base_a1b886858c6409097395b24b1bdf03c39}{base\+::\+Timestamp\+Unit} timestamp\+Unit=base\+::\+Timestamp\+Unit\+::\+Millisecond, const std\+::string \&logger\+Id=std\+::string(E\+L\+P\+P\+\_\+\+C\+U\+R\+R\+\_\+\+F\+I\+L\+E\+\_\+\+P\+E\+R\+F\+O\+R\+M\+A\+N\+C\+E\+\_\+\+L\+O\+G\+G\+ER), bool scoped\+Log=true, \hyperlink{namespaceel_ab0ac6091262344c52dd2d3ad099e8e36}{Level} level=base\+::consts\+::k\+Performance\+Tracker\+Default\+Level)\hypertarget{classel_1_1base_1_1PerformanceTracker_a46ac6a851c6d1cde6742a7ebfeedd1b6}{}\label{classel_1_1base_1_1PerformanceTracker_a46ac6a851c6d1cde6742a7ebfeedd1b6}
+
+\item 
+\hyperlink{classel_1_1base_1_1PerformanceTracker_a49e655c1f414f904b2d6a9abb0d344f4}{Performance\+Tracker} (const \hyperlink{classel_1_1base_1_1PerformanceTracker}{Performance\+Tracker} \&t)\hypertarget{classel_1_1base_1_1PerformanceTracker_a49e655c1f414f904b2d6a9abb0d344f4}{}\label{classel_1_1base_1_1PerformanceTracker_a49e655c1f414f904b2d6a9abb0d344f4}
+
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+void \hyperlink{classel_1_1base_1_1PerformanceTracker_aec9a6e149674c5782cc855e49aeb0aaf}{checkpoint} (const std\+::string \&id=std\+::string(), const char $\ast$file=\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, unsigned long int line=\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+, const char $\ast$func=\char`\"{}\char`\"{})\hypertarget{classel_1_1base_1_1PerformanceTracker_aec9a6e149674c5782cc855e49aeb0aaf}{}\label{classel_1_1base_1_1PerformanceTracker_aec9a6e149674c5782cc855e49aeb0aaf}
+
+\begin{DoxyCompactList}\small\item\em A checkpoint for current performance\+Tracker block. \end{DoxyCompactList}\item 
+\hyperlink{namespaceel_ab0ac6091262344c52dd2d3ad099e8e36}{Level} {\bfseries level} (void) const \hypertarget{classel_1_1base_1_1PerformanceTracker_a3e0ebd666cc7416dc9b818418266161b}{}\label{classel_1_1base_1_1PerformanceTracker_a3e0ebd666cc7416dc9b818418266161b}
+
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries el\+::\+Performance\+Tracking\+Data}\hypertarget{classel_1_1base_1_1PerformanceTracker_a7a4da7334b79856c37538484584207a6}{}\label{classel_1_1base_1_1PerformanceTracker_a7a4da7334b79856c37538484584207a6}
+
+\item 
+class {\bfseries base\+::\+Default\+Performance\+Tracking\+Callback}\hypertarget{classel_1_1base_1_1PerformanceTracker_ad346c4097e3db22a7434e7da5aa9c5e3}{}\label{classel_1_1base_1_1PerformanceTracker_ad346c4097e3db22a7434e7da5aa9c5e3}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents performance\+Tracker block of code that conditionally adds performance status to log either when goes outside the scope of when \hyperlink{classel_1_1base_1_1PerformanceTracker_aec9a6e149674c5782cc855e49aeb0aaf}{checkpoint()} is called. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/log/easylogging++.\+h\end{DoxyCompactItemize}

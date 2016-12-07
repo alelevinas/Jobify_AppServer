@@ -1,0 +1,99 @@
+\hypertarget{classMongoose_1_1Sessions}{}\section{Mongoose\+:\+:Sessions Class Reference}
+\label{classMongoose_1_1Sessions}\index{Mongoose\+::\+Sessions@{Mongoose\+::\+Sessions}}
+
+
+Collaboration diagram for Mongoose\+:\+:Sessions\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{db/da1/classMongoose_1_1Sessions__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Sessions} (string key=\char`\"{}sessid\char`\"{})\hypertarget{classMongoose_1_1Sessions_a30d8ed311ce6092071b25fea717b448e}{}\label{classMongoose_1_1Sessions_a30d8ed311ce6092071b25fea717b448e}
+
+\item 
+string \hyperlink{classMongoose_1_1Sessions_a8323fe10b456891337c05ff4358bede8}{get\+Id} (\hyperlink{classMongoose_1_1Request}{Request} \&request, \hyperlink{classMongoose_1_1Response}{Response} \&response)
+\item 
+\hyperlink{classMongoose_1_1Session}{Session} \& \hyperlink{classMongoose_1_1Sessions_a160e49534d6e426eaa72fc77313fb150}{get} (\hyperlink{classMongoose_1_1Request}{Request} \&request, \hyperlink{classMongoose_1_1Response}{Response} \&response)
+\item 
+void \hyperlink{classMongoose_1_1Sessions_aaa120a3d5b2567629f3c233bba4a4e93}{garbage\+Collect} (int old\+Age=3600)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ string, \hyperlink{classMongoose_1_1Session}{Session} $\ast$ $>$ {\bfseries sessions}\hypertarget{classMongoose_1_1Sessions_a6a3b8c318e38b56d4c79a8e14c70ba92}{}\label{classMongoose_1_1Sessions_a6a3b8c318e38b56d4c79a8e14c70ba92}
+
+\item 
+string {\bfseries key}\hypertarget{classMongoose_1_1Sessions_aca025398d795a445cc76d54a8bd9e8b2}{}\label{classMongoose_1_1Sessions_aca025398d795a445cc76d54a8bd9e8b2}
+
+\item 
+\hyperlink{classMongoose_1_1Mutex}{Mutex} {\bfseries mutex}\hypertarget{classMongoose_1_1Sessions_a5f5ca550a32daef7350ccff39c073e33}{}\label{classMongoose_1_1Sessions_a5f5ca550a32daef7350ccff39c073e33}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Mongoose\+::\+Sessions@{Mongoose\+::\+Sessions}!garbage\+Collect@{garbage\+Collect}}
+\index{garbage\+Collect@{garbage\+Collect}!Mongoose\+::\+Sessions@{Mongoose\+::\+Sessions}}
+\subsubsection[{\texorpdfstring{garbage\+Collect(int old\+Age=3600)}{garbageCollect(int oldAge=3600)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Sessions\+::garbage\+Collect (
+\begin{DoxyParamCaption}
+\item[{int}]{old\+Age = {\ttfamily 3600}}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Sessions_aaa120a3d5b2567629f3c233bba4a4e93}{}\label{classMongoose_1_1Sessions_aaa120a3d5b2567629f3c233bba4a4e93}
+Remove all the sessions older than age
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & the age of the too old sessions in second \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Sessions@{Mongoose\+::\+Sessions}!get@{get}}
+\index{get@{get}!Mongoose\+::\+Sessions@{Mongoose\+::\+Sessions}}
+\subsubsection[{\texorpdfstring{get(\+Request \&request, Response \&response)}{get(Request &request, Response &response)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Session} \& Mongoose\+::\+Sessions\+::get (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request, }
+\item[{{\bf Response} \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Sessions_a160e49534d6e426eaa72fc77313fb150}{}\label{classMongoose_1_1Sessions_a160e49534d6e426eaa72fc77313fb150}
+Gets the session for a certain request
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request \\
+\hline
+{\em \hyperlink{classMongoose_1_1Response}{Response}} & the response inwhich the cookie should be write\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classMongoose_1_1Session}{Session} the session corresponding 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Sessions@{Mongoose\+::\+Sessions}!get\+Id@{get\+Id}}
+\index{get\+Id@{get\+Id}!Mongoose\+::\+Sessions@{Mongoose\+::\+Sessions}}
+\subsubsection[{\texorpdfstring{get\+Id(\+Request \&request, Response \&response)}{getId(Request &request, Response &response)}}]{\setlength{\rightskip}{0pt plus 5cm}string Mongoose\+::\+Sessions\+::get\+Id (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request, }
+\item[{{\bf Response} \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Sessions_a8323fe10b456891337c05ff4358bede8}{}\label{classMongoose_1_1Sessions_a8323fe10b456891337c05ff4358bede8}
+Gets the session ID of a certain request, this will look in the cookies and create it if necessary
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request \\
+\hline
+{\em \hyperlink{classMongoose_1_1Response}{Response}} & the response in which the cookie should be write\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string the session ID for this request 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mongoose-\/cpp/Sessions.\+h\item 
+src/mongoose-\/cpp/Sessions.\+cpp\end{DoxyCompactItemize}

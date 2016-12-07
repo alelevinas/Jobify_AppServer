@@ -1,0 +1,131 @@
+\#\+Documentacion Técnica 
+
+ {\itshape Proyecto\+:} Jobify App\+Server {\itshape Author\+:} Grupo 3 {\itshape Created\+:} 30/11/2016 {\itshape Version\+:} 1.\+0.\+0 
+
+
+
+\subsection*{Table of Contents}
+
+
+\begin{DoxyEnumerate}
+\item Servidor H\+T\+ML
+\item Bases de datos
+\item J\+S\+ON
+\item L\+OG
+\item Protocolo de acceso
+\item Instalación 
+
+
+\end{DoxyEnumerate}
+
+\subsection*{1. Servidor H\+T\+TP}
+
+Para montar el servidor se utilizó la libreria mongoose-\/cpp. \href{https://github.com/Gregwar/mongoose-cpp}{\tt Github}. La misma consiste en una encapsulación de mongoose de forma tal que para manejar los distintos endpoints se utilizan controladores. Los controladores son los que registran las rutas, el H\+T\+TP verb y el handler que actuará cuando un cliente le pega. Actualmente la aplicación consta de 3 controladores\+: \paragraph*{\hyperlink{classProfileController}{Profile\+Controller}}
+
+Se utiliza para todo lo relacionado con alta, baja, modificación y actualización de perfiles de usuario. También para los servicios de agregar contacto, recomendar y búsquedas con filtros. \paragraph*{\hyperlink{classChatController}{Chat\+Controller}}
+
+Se utiliza para el manejo de chats. Enviar, pedir una conversación o borrar un mensaje entre otras cosas. \paragraph*{\hyperlink{classSharedServerController}{Shared\+Server\+Controller}}
+
+Se utiliza para entregar información antes consultada ante el Shared\+Server. Son skills, job\+\_\+positions y categories.
+
+
+
+ \subsection*{2. Bases de datos}
+
+Para el almacenado de la información se utilizó la librería leveldb. La misma es no\+S\+QL y almacena cualquier tipo de dato en una relación {\itshape clave-\/valor} Para manejarse con Json creamos la clase \hyperlink{classDB}{DB} con métodos que reciben valores en J\+S\+ON y parsean antes de devolver. Hay 4 bases de datos principales\+:
+
+
+\begin{DoxyItemize}
+\item Users
+\item Accounts
+\item Sessions
+\item Chats
+\end{DoxyItemize}
+
+\subparagraph*{Users}
+
+Esta base de datos almacena todo el perfil del usuario en formato json. Un ejemplo de usuario es\+: 
+\begin{DoxyCode}
+1 \{
+2         "chats" : ["id1","id2"],
+3         "contacts" : ["nuan@a.com", "nico@b.com"],
+4         "coordenates" : "",
+5         "dob" : "19/08/1993",
+6         "email" : "ale.l@hotmail.com",
+7         "firebase\_token" :
+       "ftpNLANtYrg:APA91bG1SMVr9u3DSsKV88XVxDjKnAzix3ZLHr1jiKvOIq1rF2LM9PZffhvAjkEAJxzxdWo\_Tlq-oX2xSO0P5iQC30QnsxXjydYh4NwY3l5TRIcS8iiFUn51vhiAgRY6Zt82MKnXOH-V",
+8         "gender" : "male",
+9         "name" : "Alejandro Levinas",
+10         "picture" : "",
+11         "recommended\_by" : ["leo@a.com", "pedro@a.com"],
+12         "username" : "ale.l@hotmail.com"
+13 \}
+\end{DoxyCode}
+ \subparagraph*{Accounts}
+
+La base de datos almacena usuarios y contraseñas. \subparagraph*{Sessions}
+
+Almacena información de la sesión actual. Esto es, username y timestamp. La clave es el Token, que es una combinación de username, password y timestamp encryptados. Es el mismo token que se devuelve al cliente para acceder a la A\+PI. \subparagraph*{Chats}
+
+Almacena los chats. Las claves son {\itshape username1\+\_\+username2} o {\itshape username2\+\_\+username1}. Contiene un array de mensajes en el que cada mensaje contiene el {\itshape username} del emisor, el {\itshape timestamp} y el cuerpo del mensaje. 
+
+ \subsection*{3. J\+S\+ON}
+
+Para el manejo de J\+S\+ON se utilizó la librería {\itshape jsoncpp} \href{https://github.com/open-source-parsers/jsoncpp}{\tt Github}
+
+
+
+ \subsection*{4. L\+OG}
+
+El log se realizó mediante la librería {\itshape easylogging++$\ast$ \href{https://github.com/easylogging/easyloggingpp}{\tt Github} 
+
+ \subsection*{5. Protocolo de acceso}}
+
+{\itshape  Para acceder a las funcionalidades principales del servidor hace falta estar autentificado. Al hacer $\ast$/signup}, un cliente da de alta un usuario con un {\itshape username} y una {\itshape password}. La respuesta a ese endpoint es un {\itshape token}. Este {\itshape token} tiene una duración y solo es válido mientras no expire. Para la utilización de la mayoriá de los endpoint hace falta incluir el {\itshape token} en los headres H\+T\+TP. Es un header con clave {\ttfamily Token} y valor el {\itshape token} recibido. Ej {\ttfamily Token\+: 55\+F\+C\+F21\+B40\+F8\+A9\+A1\+D56\+D95\+F302\+D\+A9045}
+
+\subsection*{6. Instalación}
+
+Hay 3 formas\+:
+\begin{DoxyItemize}
+\item Compilando el código fuente
+\item Instalando el paquete {\ttfamily .deb} en sistemas debian
+\item Utilizando el {\ttfamily Dockerfile}
+\end{DoxyItemize}
+
+\subparagraph*{Chats}
+
+Primero hace falta descargar las librerías necesarias y luego el código fuente. Una vez descargados, hace falta ejecutar {\ttfamily cmake} para luego compilar con {\ttfamily make Jobify\+Appserver} un script {\ttfamily yaml} de ejemplo se ve acontinuación\+: 
+\begin{DoxyCode}
+1 install:
+2   - sudo pip install cpp-coveralls
+3   - sudo apt-get install libsnappy-dev libleveldb-dev
+4   #para jwtcpp
+5   - sudo apt-get install libcrypto++9-dbg libcrypto++-dev
+6   - sudo apt-get install libjansson4 libjansson-dev libjansson-dbg
+7   - sudo apt-get install autoconf libtool
+8   - git clone https://github.com/mrtazz/restclient-cpp.git
+9   - cd restclient-cpp
+10   - ./autogen.sh
+11   - ./configure
+12   - sudo make install
+13   - export LD\_LIBRARY\_PATH=/usr/local/lib:$LD\_LIBRARY\_PATH
+14   - cd ..
+15 
+16 script:
+17   - mkdir build
+18   - cd build
+19   - cmake ..
+20   - make JobifyAppserver
+21   - ./JobifyAppserver
+\end{DoxyCode}
+
+
+\subparagraph*{Paquete {\ttfamily .deb}}
+
+Una vez descargado el paquete debe ejecutar el siguiente comando\+: {\ttfamily sudo dpkg -\/i Jobify\+\_\+\+App\+Server-\/0.\+1.\+1-\/\+Linux.\+deb}
+
+El ejecutable se instalará en {\ttfamily /home/usuario/local/bin} por lo que estará en el {\ttfamily P\+A\+TH} y se podrá ejecutar en cualquier terminal. Las bases de datos se almacenarán en {\ttfamily /home/usuario/.Jobify\+\_\+\+App\+Server/bds}
+
+\subparagraph*{Dockerfile}
+
+Simplemente tener descargado Docker \href{https://docs.docker.com/engine/installation/linux/ubuntulinux/}{\tt install} Luego ubicarse en el mismo directorio del {\ttfamily Dockerfile} y ejecutar el comando {\ttfamily docker build .} 

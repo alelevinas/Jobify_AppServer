@@ -1,0 +1,158 @@
+.TH "el::Helpers" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::Helpers \- Static helpers for developers\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::StaticClass\fP\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBsetStorage\fP (base::type::StoragePointer \fBstorage\fP)"
+.br
+.RI "\fIShares logging repository (\fBbase::Storage\fP) \fP"
+.ti -1c
+.RI "static base::type::StoragePointer \fBstorage\fP ()"
+.br
+.ti -1c
+.RI "static void \fBsetArgs\fP (int argc, char **argv)"
+.br
+.RI "\fISets application arguments and figures out whats active for logging and whats not\&. \fP"
+.ti -1c
+.RI "static void \fBsetArgs\fP (int argc, const char **argv)"
+.br
+.RI "\fISets application arguments and figures out whats active for logging and whats not\&. \fP"
+.ti -1c
+.RI "static void \fBsetCrashHandler\fP (const el::base::debug::CrashHandler::Handler &crashHandler)"
+.br
+.RI "\fIOverrides default crash handler and installs custom handler\&. \fP"
+.ti -1c
+.RI "static void \fBcrashAbort\fP (int sig, const char *sourceFile='', unsigned int long line=0)"
+.br
+.RI "\fIAbort due to crash with signal in parameter\&. \fP"
+.ti -1c
+.RI "static void \fBlogCrashReason\fP (int sig, bool stackTraceIfAvailable=false, \fBLevel\fP level=\fBLevel::Fatal\fP, const char *logger=base::consts::kDefaultLoggerId)"
+.br
+.RI "\fILogs reason of crash as per sig\&. \fP"
+.ti -1c
+.RI "static void \fBinstallPreRollOutCallback\fP (const PreRollOutCallback &callback)"
+.br
+.RI "\fIInstalls pre rollout callback, this callback is triggered when log file is about to be rolled out (can be useful for backing up) \fP"
+.ti -1c
+.RI "static void \fBuninstallPreRollOutCallback\fP (void)"
+.br
+.RI "\fIUninstalls pre rollout callback\&. \fP"
+.ti -1c
+.RI "template<typename T > static bool \fBinstallLogDispatchCallback\fP (const std::string &id)"
+.br
+.RI "\fIInstalls post log dispatch callback, this callback is triggered when log is dispatched\&. \fP"
+.ti -1c
+.RI "template<typename T > static void \fBuninstallLogDispatchCallback\fP (const std::string &id)"
+.br
+.RI "\fIUninstalls log dispatch callback\&. \fP"
+.ti -1c
+.RI "template<typename T > static T * \fBlogDispatchCallback\fP (const std::string &id)"
+.br
+.ti -1c
+.RI "template<typename T > static bool \fBinstallPerformanceTrackingCallback\fP (const std::string &id)"
+.br
+.RI "\fIInstalls post performance tracking callback, this callback is triggered when performance tracking is finished\&. \fP"
+.ti -1c
+.RI "template<typename T > static void \fBuninstallPerformanceTrackingCallback\fP (const std::string &id)"
+.br
+.RI "\fIUninstalls post performance tracking handler\&. \fP"
+.ti -1c
+.RI "template<typename T > static T * \fBperformanceTrackingCallback\fP (const std::string &id)"
+.br
+.ti -1c
+.RI "template<typename T > static std::string \fBconvertTemplateToStdString\fP (const T &templ)"
+.br
+.RI "\fIConverts template to std::string - useful for loggable classes to log containers within log(std::ostream&) const\&. \fP"
+.ti -1c
+.RI "static const \fBel::base::utils::CommandLineArgs\fP * \fBcommandLineArgs\fP (void)"
+.br
+.RI "\fIReturns command line arguments (pointer) provided to easylogging++\&. \fP"
+.ti -1c
+.RI "static void \fBinstallCustomFormatSpecifier\fP (const \fBCustomFormatSpecifier\fP &customFormatSpecifier)"
+.br
+.RI "\fIInstalls user defined format specifier and handler\&. \fP"
+.ti -1c
+.RI "static bool \fBuninstallCustomFormatSpecifier\fP (const char *formatSpecifier)"
+.br
+.RI "\fIUninstalls user defined format specifier and handler\&. \fP"
+.ti -1c
+.RI "static bool \fBhasCustomFormatSpecifier\fP (const char *formatSpecifier)"
+.br
+.RI "\fIReturns true if custom format specifier is installed\&. \fP"
+.ti -1c
+.RI "static void \fBvalidateFileRolling\fP (\fBLogger\fP *logger, \fBLevel\fP level)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Static helpers for developers\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static void el::Helpers::crashAbort (int sig, const char * sourceFile = \fC''\fP, unsigned int long line = \fC0\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Abort due to crash with signal in parameter\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsig\fP Crash signal 
+.RE
+.PP
+
+.SS "static void el::Helpers::logCrashReason (int sig, bool stackTraceIfAvailable = \fCfalse\fP, \fBLevel\fP level = \fC\fBLevel::Fatal\fP\fP, const char * logger = \fCbase::consts::kDefaultLoggerId\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Logs reason of crash as per sig\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsig\fP Crash signal 
+.br
+\fIstackTraceIfAvailable\fP Includes stack trace if available 
+.br
+\fIlevel\fP Logging level 
+.br
+\fIlogger\fP \fBLogger\fP to use for logging 
+.RE
+.PP
+
+.SS "static void el::Helpers::setArgs (int argc, const char ** argv)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Sets application arguments and figures out whats active for logging and whats not\&. 
+.SS "static void el::Helpers::setCrashHandler (const el::base::debug::CrashHandler::Handler & crashHandler)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Overrides default crash handler and installs custom handler\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcrashHandler\fP A functor with no return type that takes single int argument\&. Handler is a typedef with specification: void (*Handler)(int) 
+.RE
+.PP
+
+.SS "static base::type::StoragePointer el::Helpers::storage ()\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+\fBReturns:\fP
+.RS 4
+Main storage repository 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

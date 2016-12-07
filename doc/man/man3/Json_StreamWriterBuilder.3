@@ -1,0 +1,145 @@
+.TH "Json::StreamWriterBuilder" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::StreamWriterBuilder \- Build a \fBStreamWriter\fP implementation\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <json\&.h>\fP
+.PP
+Inherits \fBJson::StreamWriter::Factory\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBStreamWriter\fP * \fBnewStreamWriter\fP () const JSONCPP_OVERRIDE"
+.br
+.ti -1c
+.RI "bool \fBvalidate\fP (\fBJson::Value\fP *invalid) const "
+.br
+.ti -1c
+.RI "\fBValue\fP & \fBoperator[]\fP (JSONCPP_STRING key)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBsetDefaults\fP (\fBJson::Value\fP *settings)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBJson::Value\fP \fBsettings_\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Build a \fBStreamWriter\fP implementation\&. 
+
+Usage: 
+.PP
+.nf
+using namespace Json;
+Value value = \&.\&.\&.;
+StreamWriterBuilder builder;
+builder["commentStyle"] = "None";
+builder["indentation"] = "   ";  // or whatever you like
+std::unique_ptr<Json::StreamWriter> writer(
+    builder\&.newStreamWriter());
+writer->write(value, &std::cout);
+std::cout << std::endl;  // add lf and flush
+
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBStreamWriter\fP * Json::StreamWriterBuilder::newStreamWriter () const\fC [virtual]\fP"
+
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIstd::exception\fP if something goes wrong (e\&.g\&. invalid settings) 
+.RE
+.PP
+
+.PP
+Implements \fBJson::StreamWriter::Factory\fP\&.
+.SS "\fBValue\fP & Json::StreamWriterBuilder::operator[] (JSONCPP_STRING key)"
+A simple way to update a specific setting\&. 
+.SS "void Json::StreamWriterBuilder::setDefaults (\fBJson::Value\fP * settings)\fC [static]\fP"
+Called by ctor, but you can use this to reset settings_\&. 
+.PP
+\fBPrecondition:\fP
+.RS 4
+'settings' != NULL (but Json::null is fine) 
+.RE
+.PP
+\fBRemarks:\fP
+.RS 4
+Defaults: 
+.PP
+.nf
+
+.fi
+.PP
+.RE
+.PP
+[StreamWriterBuilderDefaults]
+.PP
+[StreamWriterBuilderDefaults] 
+.SS "bool Json::StreamWriterBuilder::validate (\fBJson::Value\fP * invalid) const"
+
+.PP
+\fBReturns:\fP
+.RS 4
+true if 'settings' are legal and consistent; otherwise, indicate bad settings via 'invalid'\&. 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBJson::Value\fP Json::StreamWriterBuilder::settings_"
+Configuration of this builder\&. Available settings (case-sensitive):
+.IP "\(bu" 2
+'commentStyle': 'None' or 'All'
+.IP "\(bu" 2
+'indentation': '<anything>'
+.IP "\(bu" 2
+'enableYAMLCompatibility': false or true
+.IP "  \(bu" 4
+slightly change the whitespace around colons
+.PP
+
+.IP "\(bu" 2
+'dropNullPlaceholders': false or true
+.IP "  \(bu" 4
+Drop the 'null' string from the writer's output for nullValues\&. Strictly speaking, this is not valid JSON\&. But when the output is being fed to a browser's Javascript, it makes for smaller output and the browser can handle the output just fine\&.
+.PP
+
+.IP "\(bu" 2
+'useSpecialFloats': false or true
+.IP "  \(bu" 4
+If true, outputs non-finite floating point values in the following way: NaN values as 'NaN', positive infinity as 'Infinity', and negative infinity as '-Infinity'\&.
+.PP
+
+.PP
+.PP
+You can examine 'settings_` yourself to see the defaults\&. You can also write and read them just like any JSON \fBValue\fP\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBsetDefaults()\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

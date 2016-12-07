@@ -1,0 +1,93 @@
+\hypertarget{classel_1_1base_1_1utils_1_1DateTime}{}\section{el\+:\+:base\+:\+:utils\+:\+:Date\+Time Class Reference}
+\label{classel_1_1base_1_1utils_1_1DateTime}\index{el\+::base\+::utils\+::\+Date\+Time@{el\+::base\+::utils\+::\+Date\+Time}}
+
+
+Contains utilities for cross-\/platform date/time. This class make use of \hyperlink{classel_1_1base_1_1utils_1_1Str}{el\+::base\+::utils\+::\+Str}.  
+
+
+
+
+{\ttfamily \#include $<$easylogging++.\+h$>$}
+
+
+
+Inheritance diagram for el\+:\+:base\+:\+:utils\+:\+:Date\+Time\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{dc/d11/classel_1_1base_1_1utils_1_1DateTime__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for el\+:\+:base\+:\+:utils\+:\+:Date\+Time\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{df/d0d/classel_1_1base_1_1utils_1_1DateTime__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classel_1_1base_1_1utils_1_1DateTime_ac000e6ecf705c2194a173d618ff4acfd}{gettimeofday} (struct timeval $\ast$tv)
+\begin{DoxyCompactList}\small\item\em Cross platform gettimeofday for Windows and unix platform. This can be used to determine current millisecond. \end{DoxyCompactList}\item 
+static std\+::string \hyperlink{classel_1_1base_1_1utils_1_1DateTime_aa813c606a98b8741f59ccdf5aacef733}{get\+Date\+Time} (const char $\ast$format, const \hyperlink{classel_1_1base_1_1MillisecondsWidth}{base\+::\+Milliseconds\+Width} $\ast$ms\+Width)
+\begin{DoxyCompactList}\small\item\em Gets current date and time with milliseconds. \end{DoxyCompactList}\item 
+static base\+::type\+::string\+\_\+t \hyperlink{classel_1_1base_1_1utils_1_1DateTime_a1eea58fffe291c969a526d08515d29d7}{format\+Time} (unsigned long long time, \hyperlink{namespaceel_1_1base_a1b886858c6409097395b24b1bdf03c39}{base\+::\+Timestamp\+Unit} timestamp\+Unit)\hypertarget{classel_1_1base_1_1utils_1_1DateTime_a1eea58fffe291c969a526d08515d29d7}{}\label{classel_1_1base_1_1utils_1_1DateTime_a1eea58fffe291c969a526d08515d29d7}
+
+\begin{DoxyCompactList}\small\item\em Formats time to get unit accordingly, units like second if $>$ 1000 or minutes if $>$ 60000 etc. \end{DoxyCompactList}\item 
+static unsigned long long \hyperlink{classel_1_1base_1_1utils_1_1DateTime_a9181a3544442e1d3c05d8c96bbfff16d}{get\+Time\+Difference} (const struct timeval \&end\+Time, const struct timeval \&start\+Time, \hyperlink{namespaceel_1_1base_a1b886858c6409097395b24b1bdf03c39}{base\+::\+Timestamp\+Unit} timestamp\+Unit)\hypertarget{classel_1_1base_1_1utils_1_1DateTime_a9181a3544442e1d3c05d8c96bbfff16d}{}\label{classel_1_1base_1_1utils_1_1DateTime_a9181a3544442e1d3c05d8c96bbfff16d}
+
+\begin{DoxyCompactList}\small\item\em Gets time difference in milli/micro second depending on timestamp\+Unit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains utilities for cross-\/platform date/time. This class make use of \hyperlink{classel_1_1base_1_1utils_1_1Str}{el\+::base\+::utils\+::\+Str}. 
+
+\subsection{Member Function Documentation}
+\index{el\+::base\+::utils\+::\+Date\+Time@{el\+::base\+::utils\+::\+Date\+Time}!get\+Date\+Time@{get\+Date\+Time}}
+\index{get\+Date\+Time@{get\+Date\+Time}!el\+::base\+::utils\+::\+Date\+Time@{el\+::base\+::utils\+::\+Date\+Time}}
+\subsubsection[{\texorpdfstring{get\+Date\+Time(const char $\ast$format, const base\+::\+Milliseconds\+Width $\ast$ms\+Width)}{getDateTime(const char *format, const base::MillisecondsWidth *msWidth)}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string el\+::base\+::utils\+::\+Date\+Time\+::get\+Date\+Time (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{format, }
+\item[{const {\bf base\+::\+Milliseconds\+Width} $\ast$}]{ms\+Width}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1DateTime_aa813c606a98b8741f59ccdf5aacef733}{}\label{classel_1_1base_1_1utils_1_1DateTime_aa813c606a98b8741f59ccdf5aacef733}
+
+
+Gets current date and time with milliseconds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em format} & User provided date/time format \\
+\hline
+{\em ms\+Width} & A pointer to \hyperlink{classel_1_1base_1_1MillisecondsWidth}{base\+::\+Milliseconds\+Width} from configuration (non-\/null) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string based date time in specified format. 
+\end{DoxyReturn}
+\index{el\+::base\+::utils\+::\+Date\+Time@{el\+::base\+::utils\+::\+Date\+Time}!gettimeofday@{gettimeofday}}
+\index{gettimeofday@{gettimeofday}!el\+::base\+::utils\+::\+Date\+Time@{el\+::base\+::utils\+::\+Date\+Time}}
+\subsubsection[{\texorpdfstring{gettimeofday(struct timeval $\ast$tv)}{gettimeofday(struct timeval *tv)}}]{\setlength{\rightskip}{0pt plus 5cm}static void el\+::base\+::utils\+::\+Date\+Time\+::gettimeofday (
+\begin{DoxyParamCaption}
+\item[{struct timeval $\ast$}]{tv}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1DateTime_ac000e6ecf705c2194a173d618ff4acfd}{}\label{classel_1_1base_1_1utils_1_1DateTime_ac000e6ecf705c2194a173d618ff4acfd}
+
+
+Cross platform gettimeofday for Windows and unix platform. This can be used to determine current millisecond. 
+
+For unix system it uses gettimeofday(timeval$\ast$, timezone$\ast$) and for Windows, a seperate implementation is provided 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em tv} & Pointer that gets updated \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/log/easylogging++.\+h\end{DoxyCompactItemize}

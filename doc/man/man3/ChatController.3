@@ -1,0 +1,87 @@
+.TH "ChatController" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ChatController \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ChatController\&.h>\fP
+.PP
+Inherits JsonController\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBChatController\fP (\fBDatabaseManager\fP *pManager, \fBSessionManager\fP *pSessionManager, std::string fireServerToken)"
+.br
+.ti -1c
+.RI "void \fBsetup\fP ()"
+.br
+.ti -1c
+.RI "void \fBpostUserChatRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBgetUserChatsRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBdeleteConversationRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBdeleteMessageRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Controller that manages the chat related api endpoints\&. Every method recieves a Moongose::Request with the request data and a Mongoose::JsonResponse to store the response json\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void ChatController::deleteConversationRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Endpoint to delete a conversation with another user 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ChatController::deleteMessageRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Endpoint to delete a chat message with another user 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ChatController::getUserChatsRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Endpoint to get chat messages with another user 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ChatController::postUserChatRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Endpoint to send a chat message to another user 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

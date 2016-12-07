@@ -1,0 +1,137 @@
+\hypertarget{classMongoose_1_1WebSockets}{}\section{Mongoose\+:\+:Web\+Sockets Class Reference}
+\label{classMongoose_1_1WebSockets}\index{Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}}
+
+
+Collaboration diagram for Mongoose\+:\+:Web\+Sockets\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{d6/d42/classMongoose_1_1WebSockets__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMongoose_1_1WebSockets_a7ccfbebe86fcc41f7f42b39f2974a1b2}{Web\+Sockets} (bool responsible=false)
+\item 
+void \hyperlink{classMongoose_1_1WebSockets_af2e55d2a9877949339e11b26443bbea6}{add} (\hyperlink{classMongoose_1_1WebSocket}{Web\+Socket} $\ast$websocket)
+\item 
+void \hyperlink{classMongoose_1_1WebSockets_a3560e45954a7459b10650522e3ddce05}{send\+All} (string data)
+\item 
+\hyperlink{classMongoose_1_1WebSocket}{Web\+Socket} $\ast$ \hyperlink{classMongoose_1_1WebSockets_abc662ddb0f96acf4f197b8411dfd38e3}{get\+Web\+Socket} (struct \hyperlink{structmg__connection}{mg\+\_\+connection} $\ast$\hyperlink{structconnection}{connection})
+\item 
+void \hyperlink{classMongoose_1_1WebSockets_aa4fc479628df979d1c63ed51fc6bc712}{clean} ()
+\item 
+void \hyperlink{classMongoose_1_1WebSockets_a41ef753fb1aa658ef3cc53f5ccac6a19}{remove} (\hyperlink{classMongoose_1_1WebSocket}{Web\+Socket} $\ast$websocket, bool lock=true)
+\item 
+\hyperlink{classMongoose_1_1WebSocket}{Web\+Socket} $\ast$ \hyperlink{classMongoose_1_1WebSockets_a22630d0ceb5dd20207ee9a4715b3e1d9}{get\+Web\+Socket} (int id)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMongoose_1_1Mutex}{Mutex} {\bfseries mutex}\hypertarget{classMongoose_1_1WebSockets_a770b89e5ef38c841ac2f37a80c4d3951}{}\label{classMongoose_1_1WebSockets_a770b89e5ef38c841ac2f37a80c4d3951}
+
+\item 
+map$<$ struct \hyperlink{structmg__connection}{mg\+\_\+connection} $\ast$, \hyperlink{classMongoose_1_1WebSocket}{Web\+Socket} $\ast$ $>$ {\bfseries websockets}\hypertarget{classMongoose_1_1WebSockets_a57fbcc7ed752a81a0fb430c11a723fd0}{}\label{classMongoose_1_1WebSockets_a57fbcc7ed752a81a0fb430c11a723fd0}
+
+\item 
+map$<$ int, \hyperlink{classMongoose_1_1WebSocket}{Web\+Socket} $\ast$ $>$ {\bfseries websockets\+By\+Id}\hypertarget{classMongoose_1_1WebSockets_a225d52cf207797ff7af1f66e8c7c1af7}{}\label{classMongoose_1_1WebSockets_a225d52cf207797ff7af1f66e8c7c1af7}
+
+\item 
+bool {\bfseries responsible}\hypertarget{classMongoose_1_1WebSockets_a2be6254cdcabc8230c6d8017165c52f8}{}\label{classMongoose_1_1WebSockets_a2be6254cdcabc8230c6d8017165c52f8}
+
+\item 
+int {\bfseries id}\hypertarget{classMongoose_1_1WebSockets_a84f873296e3f6ba78fb4523275b796d5}{}\label{classMongoose_1_1WebSockets_a84f873296e3f6ba78fb4523275b796d5}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}!Web\+Sockets@{Web\+Sockets}}
+\index{Web\+Sockets@{Web\+Sockets}!Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}}
+\subsubsection[{\texorpdfstring{Web\+Sockets(bool responsible=false)}{WebSockets(bool responsible=false)}}]{\setlength{\rightskip}{0pt plus 5cm}Mongoose\+::\+Web\+Sockets\+::\+Web\+Sockets (
+\begin{DoxyParamCaption}
+\item[{bool}]{responsible = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1WebSockets_a7ccfbebe86fcc41f7f42b39f2974a1b2}{}\label{classMongoose_1_1WebSockets_a7ccfbebe86fcc41f7f42b39f2974a1b2}
+Creates a websockets array, the responsible false specify whether the container will be responsible for cleaning the websocket 
+
+\subsection{Member Function Documentation}
+\index{Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}!add@{add}}
+\index{add@{add}!Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}}
+\subsubsection[{\texorpdfstring{add(\+Web\+Socket $\ast$websocket)}{add(WebSocket *websocket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Web\+Sockets\+::add (
+\begin{DoxyParamCaption}
+\item[{{\bf Web\+Socket} $\ast$}]{websocket}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1WebSockets_af2e55d2a9877949339e11b26443bbea6}{}\label{classMongoose_1_1WebSockets_af2e55d2a9877949339e11b26443bbea6}
+Adds the given websocket to the poll. This container will not become responsible for cleaning this object
+
+
+\begin{DoxyParams}{Parameters}
+{\em Web\+Socket$\ast$} & the websocket object \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}!clean@{clean}}
+\index{clean@{clean}!Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}}
+\subsubsection[{\texorpdfstring{clean()}{clean()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Web\+Sockets\+::clean (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1WebSockets_aa4fc479628df979d1c63ed51fc6bc712}{}\label{classMongoose_1_1WebSockets_aa4fc479628df979d1c63ed51fc6bc712}
+Cleans all the connections that are hold in this object and that are closed \index{Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}!get\+Web\+Socket@{get\+Web\+Socket}}
+\index{get\+Web\+Socket@{get\+Web\+Socket}!Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}}
+\subsubsection[{\texorpdfstring{get\+Web\+Socket(struct mg\+\_\+connection $\ast$connection)}{getWebSocket(struct mg_connection *connection)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Web\+Socket} $\ast$ Mongoose\+::\+Web\+Sockets\+::get\+Web\+Socket (
+\begin{DoxyParamCaption}
+\item[{struct {\bf mg\+\_\+connection} $\ast$}]{connection}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1WebSockets_abc662ddb0f96acf4f197b8411dfd38e3}{}\label{classMongoose_1_1WebSockets_abc662ddb0f96acf4f197b8411dfd38e3}
+Gets the websocket corresponding to the given connection
+
+
+\begin{DoxyParams}{Parameters}
+{\em strut} & mg\+\_\+connection$\ast$ the mongoose connection \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}!get\+Web\+Socket@{get\+Web\+Socket}}
+\index{get\+Web\+Socket@{get\+Web\+Socket}!Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}}
+\subsubsection[{\texorpdfstring{get\+Web\+Socket(int id)}{getWebSocket(int id)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Web\+Socket} $\ast$ Mongoose\+::\+Web\+Sockets\+::get\+Web\+Socket (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1WebSockets_a22630d0ceb5dd20207ee9a4715b3e1d9}{}\label{classMongoose_1_1WebSockets_a22630d0ceb5dd20207ee9a4715b3e1d9}
+Gets the websockets having the id
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & id \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}!remove@{remove}}
+\index{remove@{remove}!Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}}
+\subsubsection[{\texorpdfstring{remove(\+Web\+Socket $\ast$websocket, bool lock=true)}{remove(WebSocket *websocket, bool lock=true)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Web\+Sockets\+::remove (
+\begin{DoxyParamCaption}
+\item[{{\bf Web\+Socket} $\ast$}]{websocket, }
+\item[{bool}]{lock = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1WebSockets_a41ef753fb1aa658ef3cc53f5ccac6a19}{}\label{classMongoose_1_1WebSockets_a41ef753fb1aa658ef3cc53f5ccac6a19}
+Removes the websocket from the container
+
+
+\begin{DoxyParams}{Parameters}
+{\em Web\+Socket$\ast$} & the websocket object \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}!send\+All@{send\+All}}
+\index{send\+All@{send\+All}!Mongoose\+::\+Web\+Sockets@{Mongoose\+::\+Web\+Sockets}}
+\subsubsection[{\texorpdfstring{send\+All(string data)}{sendAll(string data)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Web\+Sockets\+::send\+All (
+\begin{DoxyParamCaption}
+\item[{string}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1WebSockets_a3560e45954a7459b10650522e3ddce05}{}\label{classMongoose_1_1WebSockets_a3560e45954a7459b10650522e3ddce05}
+Send data to all sockets in this container 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mongoose-\/cpp/Web\+Sockets.\+h\item 
+src/mongoose-\/cpp/Web\+Sockets.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,40 @@
+.TH "el::base::debug::CrashHandler" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::debug::CrashHandler \- Handles unexpected crashes\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::NoCopy\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef void(* \fBHandler\fP) (int)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCrashHandler\fP (bool useDefault)"
+.br
+.ti -1c
+.RI "\fBCrashHandler\fP (const Handler &cHandler)"
+.br
+.ti -1c
+.RI "void \fBsetHandler\fP (const Handler &cHandler)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Handles unexpected crashes\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

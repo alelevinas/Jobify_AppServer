@@ -1,0 +1,77 @@
+.TH "AccountsDB" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AccountsDB \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <AccountsDB\&.h>\fP
+.PP
+Inherits \fBDB\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAccountsDB\fP (const std::string &\fBdb_name\fP)"
+.br
+.ti -1c
+.RI "bool \fBadd_account\fP (std::string username, std::string password)"
+.br
+.ti -1c
+.RI "bool \fBis_correct\fP (std::string username, std::string password)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+\fBDB\fP that saves the username and password (encrypted) data from users\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool AccountsDB::add_account (std::string username, std::string password)"
+Adds a username-password entry to the \fBDB\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername\fP the users username 
+.br
+\fIpassword\fP the users password 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if the username doesnt exist 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fI\fBKeyAlreadyExistsException\fP\fP 
+.RE
+.PP
+
+.SS "bool AccountsDB::is_correct (std::string username, std::string password)"
+Checks if the password corresponds to that username 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername\fP 
+.br
+\fIpassword\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+True if it is correct 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fI\fBKeyDoesntExistException\fP\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

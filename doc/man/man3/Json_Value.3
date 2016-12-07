@@ -1,0 +1,778 @@
+.TH "Json::Value" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::Value \- Represents a \fCJSON\fP value\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <json\&.h>\fP
+.PP
+Inherited by \fBMongoose::JsonResponse\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef std::vector< JSONCPP_STRING > \fBMembers\fP"
+.br
+.ti -1c
+.RI "typedef \fBValueIterator\fP \fBiterator\fP"
+.br
+.ti -1c
+.RI "typedef \fBValueConstIterator\fP \fBconst_iterator\fP"
+.br
+.ti -1c
+.RI "typedef Json::UInt \fBUInt\fP"
+.br
+.ti -1c
+.RI "typedef Json::Int \fBInt\fP"
+.br
+.ti -1c
+.RI "typedef Json::UInt64 \fBUInt64\fP"
+.br
+.ti -1c
+.RI "typedef Json::Int64 \fBInt64\fP"
+.br
+.ti -1c
+.RI "typedef Json::LargestInt \fBLargestInt\fP"
+.br
+.ti -1c
+.RI "typedef Json::LargestUInt \fBLargestUInt\fP"
+.br
+.ti -1c
+.RI "typedef Json::ArrayIndex \fBArrayIndex\fP"
+.br
+.ti -1c
+.RI "typedef std::map< CZString, \fBValue\fP > \fBObjectValues\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBValue\fP (\fBValueType\fP type=\fBnullValue\fP)"
+.br
+.RI "\fICreate a default \fBValue\fP of the given type\&. \fP"
+.ti -1c
+.RI "\fBValue\fP (Int value)"
+.br
+.ti -1c
+.RI "\fBValue\fP (UInt value)"
+.br
+.ti -1c
+.RI "\fBValue\fP (Int64 value)"
+.br
+.ti -1c
+.RI "\fBValue\fP (UInt64 value)"
+.br
+.ti -1c
+.RI "\fBValue\fP (double value)"
+.br
+.ti -1c
+.RI "\fBValue\fP (const char *value)"
+.br
+.RI "\fICopy til first 0\&. (NULL causes to seg-fault\&.) \fP"
+.ti -1c
+.RI "\fBValue\fP (const char *begin, const char *end)"
+.br
+.RI "\fICopy all, incl zeroes\&. \fP"
+.ti -1c
+.RI "\fBValue\fP (const \fBStaticString\fP &value)"
+.br
+.RI "\fIConstructs a value from a static string\&. \fP"
+.ti -1c
+.RI "\fBValue\fP (const JSONCPP_STRING &value)"
+.br
+.RI "\fICopy data() til \fBsize()\fP\&. Embedded zeroes too\&. \fP"
+.ti -1c
+.RI "\fBValue\fP (bool value)"
+.br
+.ti -1c
+.RI "\fBValue\fP (const \fBValue\fP &other)"
+.br
+.RI "\fIDeep copy\&. \fP"
+.ti -1c
+.RI "\fBValue\fP & \fBoperator=\fP (\fBValue\fP other)"
+.br
+.ti -1c
+.RI "void \fBswap\fP (\fBValue\fP &other)"
+.br
+.RI "\fISwap everything\&. \fP"
+.ti -1c
+.RI "void \fBswapPayload\fP (\fBValue\fP &other)"
+.br
+.RI "\fISwap values but leave comments and source offsets in place\&. \fP"
+.ti -1c
+.RI "\fBValueType\fP \fBtype\fP () const "
+.br
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBValue\fP &other) const "
+.br
+.RI "\fICompare payload only, not comments etc\&. \fP"
+.ti -1c
+.RI "bool \fBoperator<=\fP (const \fBValue\fP &other) const "
+.br
+.ti -1c
+.RI "bool \fBoperator>=\fP (const \fBValue\fP &other) const "
+.br
+.ti -1c
+.RI "bool \fBoperator>\fP (const \fBValue\fP &other) const "
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBValue\fP &other) const "
+.br
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBValue\fP &other) const "
+.br
+.ti -1c
+.RI "int \fBcompare\fP (const \fBValue\fP &other) const "
+.br
+.ti -1c
+.RI "const char * \fBasCString\fP () const "
+.br
+.RI "\fIEmbedded zeroes could cause you trouble! \fP"
+.ti -1c
+.RI "JSONCPP_STRING \fBasString\fP () const "
+.br
+.RI "\fIEmbedded zeroes are possible\&. \fP"
+.ti -1c
+.RI "bool \fBgetString\fP (char const **begin, char const **end) const "
+.br
+.ti -1c
+.RI "Int \fBasInt\fP () const "
+.br
+.ti -1c
+.RI "UInt \fBasUInt\fP () const "
+.br
+.ti -1c
+.RI "Int64 \fBasInt64\fP () const "
+.br
+.ti -1c
+.RI "UInt64 \fBasUInt64\fP () const "
+.br
+.ti -1c
+.RI "LargestInt \fBasLargestInt\fP () const "
+.br
+.ti -1c
+.RI "LargestUInt \fBasLargestUInt\fP () const "
+.br
+.ti -1c
+.RI "float \fBasFloat\fP () const "
+.br
+.ti -1c
+.RI "double \fBasDouble\fP () const "
+.br
+.ti -1c
+.RI "bool \fBasBool\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisNull\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisBool\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisInt\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisInt64\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisUInt\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisUInt64\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisIntegral\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisDouble\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisNumeric\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisString\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisArray\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisObject\fP () const "
+.br
+.ti -1c
+.RI "bool \fBisConvertibleTo\fP (\fBValueType\fP other) const "
+.br
+.ti -1c
+.RI "ArrayIndex \fBsize\fP () const "
+.br
+.RI "\fINumber of values in array or object\&. \fP"
+.ti -1c
+.RI "bool \fBempty\fP () const "
+.br
+.RI "\fIReturn true if empty array, empty object, or null; otherwise, false\&. \fP"
+.ti -1c
+.RI "bool \fBoperator!\fP () const "
+.br
+.RI "\fIReturn isNull() \fP"
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.ti -1c
+.RI "void \fBresize\fP (ArrayIndex \fBsize\fP)"
+.br
+.ti -1c
+.RI "\fBValue\fP & \fBoperator[]\fP (ArrayIndex index)"
+.br
+.ti -1c
+.RI "\fBValue\fP & \fBoperator[]\fP (int index)"
+.br
+.ti -1c
+.RI "const \fBValue\fP & \fBoperator[]\fP (ArrayIndex index) const "
+.br
+.ti -1c
+.RI "const \fBValue\fP & \fBoperator[]\fP (int index) const "
+.br
+.ti -1c
+.RI "\fBValue\fP \fBget\fP (ArrayIndex index, const \fBValue\fP &defaultValue) const "
+.br
+.ti -1c
+.RI "bool \fBisValidIndex\fP (ArrayIndex index) const "
+.br
+.RI "\fIReturn true if index < \fBsize()\fP\&. \fP"
+.ti -1c
+.RI "\fBValue\fP & \fBappend\fP (const \fBValue\fP &value)"
+.br
+.RI "\fIAppend value to array at the end\&. \fP"
+.ti -1c
+.RI "\fBValue\fP & \fBoperator[]\fP (const char *key)"
+.br
+.ti -1c
+.RI "const \fBValue\fP & \fBoperator[]\fP (const char *key) const "
+.br
+.ti -1c
+.RI "\fBValue\fP & \fBoperator[]\fP (const JSONCPP_STRING &key)"
+.br
+.ti -1c
+.RI "const \fBValue\fP & \fBoperator[]\fP (const JSONCPP_STRING &key) const "
+.br
+.ti -1c
+.RI "\fBValue\fP & \fBoperator[]\fP (const \fBStaticString\fP &key)"
+.br
+.RI "\fIAccess an object value by name, create a null member if it does not exist\&. \fP"
+.ti -1c
+.RI "\fBValue\fP \fBget\fP (const char *key, const \fBValue\fP &defaultValue) const "
+.br
+.ti -1c
+.RI "\fBValue\fP \fBget\fP (const char *begin, const char *end, const \fBValue\fP &defaultValue) const "
+.br
+.ti -1c
+.RI "\fBValue\fP \fBget\fP (const JSONCPP_STRING &key, const \fBValue\fP &defaultValue) const "
+.br
+.ti -1c
+.RI "\fBValue\fP const * \fBfind\fP (char const *begin, char const *end) const "
+.br
+.ti -1c
+.RI "\fBValue\fP const * \fBdemand\fP (char const *begin, char const *end)"
+.br
+.ti -1c
+.RI "\fBValue\fP \fBremoveMember\fP (const char *key)"
+.br
+.RI "\fIRemove and return the named member\&. \fP"
+.ti -1c
+.RI "\fBValue\fP \fBremoveMember\fP (const JSONCPP_STRING &key)"
+.br
+.ti -1c
+.RI "bool \fBremoveMember\fP (const char *key, \fBValue\fP *removed)"
+.br
+.ti -1c
+.RI "bool \fBremoveMember\fP (JSONCPP_STRING const &key, \fBValue\fP *removed)"
+.br
+.RI "\fIRemove the named map member\&. \fP"
+.ti -1c
+.RI "bool \fBremoveMember\fP (const char *begin, const char *end, \fBValue\fP *removed)"
+.br
+.RI "\fISame as \fBremoveMember(JSONCPP_STRING const& key, Value* removed)\fP \fP"
+.ti -1c
+.RI "bool \fBremoveIndex\fP (ArrayIndex i, \fBValue\fP *removed)"
+.br
+.RI "\fIRemove the indexed array element\&. \fP"
+.ti -1c
+.RI "bool \fBisMember\fP (const char *key) const "
+.br
+.ti -1c
+.RI "bool \fBisMember\fP (const JSONCPP_STRING &key) const "
+.br
+.ti -1c
+.RI "bool \fBisMember\fP (const char *begin, const char *end) const "
+.br
+.RI "\fISame as \fBisMember(JSONCPP_STRING const& key)const\fP\&. \fP"
+.ti -1c
+.RI "Members \fBgetMemberNames\fP () const "
+.br
+.RI "\fIReturn a list of the member names\&. \fP"
+.ti -1c
+.RI "void \fBsetComment\fP (const char *comment, \fBCommentPlacement\fP placement)"
+.br
+.ti -1c
+.RI "void \fBsetComment\fP (const char *comment, size_t len, \fBCommentPlacement\fP placement)"
+.br
+.RI "\fIComments must be //\&.\&.\&. or /* \&.\&.\&. */\&. \fP"
+.ti -1c
+.RI "void \fBsetComment\fP (const JSONCPP_STRING &comment, \fBCommentPlacement\fP placement)"
+.br
+.RI "\fIComments must be //\&.\&.\&. or /* \&.\&.\&. */\&. \fP"
+.ti -1c
+.RI "bool \fBhasComment\fP (\fBCommentPlacement\fP placement) const "
+.br
+.ti -1c
+.RI "JSONCPP_STRING \fBgetComment\fP (\fBCommentPlacement\fP placement) const "
+.br
+.RI "\fIInclude delimiters and embedded newlines\&. \fP"
+.ti -1c
+.RI "JSONCPP_STRING \fBtoStyledString\fP () const "
+.br
+.ti -1c
+.RI "\fBconst_iterator\fP \fBbegin\fP () const "
+.br
+.ti -1c
+.RI "\fBconst_iterator\fP \fBend\fP () const "
+.br
+.ti -1c
+.RI "\fBiterator\fP \fBbegin\fP ()"
+.br
+.ti -1c
+.RI "\fBiterator\fP \fBend\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetOffsetStart\fP (ptrdiff_t start)"
+.br
+.ti -1c
+.RI "void \fBsetOffsetLimit\fP (ptrdiff_t limit)"
+.br
+.ti -1c
+.RI "ptrdiff_t \fBgetOffsetStart\fP () const "
+.br
+.ti -1c
+.RI "ptrdiff_t \fBgetOffsetLimit\fP () const "
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBValue\fP const & \fBnullSingleton\fP ()"
+.br
+.RI "\fIPrefer this to null or nullRef\&. \fP"
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const \fBValue\fP & \fBnull\fP = \fBValue::nullSingleton\fP()"
+.br
+.RI "\fIWe regret this reference to a global instance; prefer the simpler \fBValue()\fP\&. \fP"
+.ti -1c
+.RI "static const \fBValue\fP & \fBnullRef\fP = \fBValue::nullSingleton\fP()"
+.br
+.RI "\fIjust a kludge for binary-compatibility; same as null \fP"
+.ti -1c
+.RI "static const LargestInt \fBminLargestInt\fP = LargestInt(~(LargestUInt(\-1) / 2))"
+.br
+.RI "\fIMinimum signed integer value that can be stored in a \fBJson::Value\fP\&. \fP"
+.ti -1c
+.RI "static const LargestInt \fBmaxLargestInt\fP = LargestInt(LargestUInt(\-1) / 2)"
+.br
+.RI "\fIMaximum signed integer value that can be stored in a \fBJson::Value\fP\&. \fP"
+.ti -1c
+.RI "static const LargestUInt \fBmaxLargestUInt\fP = LargestUInt(\-1)"
+.br
+.RI "\fIMaximum unsigned integer value that can be stored in a \fBJson::Value\fP\&. \fP"
+.ti -1c
+.RI "static const Int \fBminInt\fP = Int(~(UInt(\-1) / 2))"
+.br
+.RI "\fIMinimum signed int value that can be stored in a \fBJson::Value\fP\&. \fP"
+.ti -1c
+.RI "static const Int \fBmaxInt\fP = Int(UInt(\-1) / 2)"
+.br
+.RI "\fIMaximum signed int value that can be stored in a \fBJson::Value\fP\&. \fP"
+.ti -1c
+.RI "static const UInt \fBmaxUInt\fP = UInt(\-1)"
+.br
+.RI "\fIMaximum unsigned int value that can be stored in a \fBJson::Value\fP\&. \fP"
+.ti -1c
+.RI "static const Int64 \fBminInt64\fP = Int64(~(UInt64(\-1) / 2))"
+.br
+.RI "\fIMinimum signed 64 bits int value that can be stored in a \fBJson::Value\fP\&. \fP"
+.ti -1c
+.RI "static const Int64 \fBmaxInt64\fP = Int64(UInt64(\-1) / 2)"
+.br
+.RI "\fIMaximum signed 64 bits int value that can be stored in a \fBJson::Value\fP\&. \fP"
+.ti -1c
+.RI "static const UInt64 \fBmaxUInt64\fP = UInt64(\-1)"
+.br
+.RI "\fIMaximum unsigned 64 bits int value that can be stored in a \fBJson::Value\fP\&. \fP"
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBValueIteratorBase\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents a \fCJSON\fP value\&. 
+
+This class is a discriminated union wrapper that can represents a:
+.IP "\(bu" 2
+signed integer [range: \fBValue::minInt\fP - \fBValue::maxInt\fP]
+.IP "\(bu" 2
+unsigned integer (range: 0 - \fBValue::maxUInt\fP)
+.IP "\(bu" 2
+double
+.IP "\(bu" 2
+UTF-8 string
+.IP "\(bu" 2
+boolean
+.IP "\(bu" 2
+'null'
+.IP "\(bu" 2
+an ordered list of \fBValue\fP
+.IP "\(bu" 2
+collection of name/value pairs (javascript object)
+.PP
+.PP
+The type of the held value is represented by a \fBValueType\fP and can be obtained using type()\&.
+.PP
+Values of an \fBobjectValue\fP or \fBarrayValue\fP can be accessed using \fBoperator[]()\fP methods\&. Non-const methods will automatically create the a \fBnullValue\fP element if it does not exist\&. The sequence of an \fBarrayValue\fP will be automatically resized and initialized with \fBnullValue\fP\&. \fBresize()\fP can be used to enlarge or truncate an \fBarrayValue\fP\&.
+.PP
+The \fBget()\fP methods can be used to obtain default value in the case the required element does not exist\&.
+.PP
+It is possible to iterate over the list of a \fBobjectValue\fP values using the \fBgetMemberNames()\fP method\&.
+.PP
+\fBNote:\fP
+.RS 4
+\fBValue\fP string-length fit in size_t, but keys must be < 2^30\&. (The reason is an implementation detail\&.) A #CharReader will raise an exception if a bound is exceeded to avoid security holes in your app, but the \fBValue\fP API does \fInot\fP check bounds\&. That is the responsibility of the caller\&. 
+.RE
+.PP
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Json::Value::Value (\fBValueType\fP type = \fC\fBnullValue\fP\fP)"
+
+.PP
+Create a default \fBValue\fP of the given type\&. This is a very useful constructor\&. To create an empty array, pass arrayValue\&. To create an empty object, pass objectValue\&. Another \fBValue\fP can then be set to this one by assignment\&. This is useful since \fBclear()\fP and \fBresize()\fP will not alter types\&. 
+.PP
+.nf
+Examples:
+
+.fi
+.PP
+ 
+.PP
+.nf
+Json::Value null_value; // null
+Json::Value arr_value(Json::arrayValue); // []
+Json::Value obj_value(Json::objectValue); // {}
+
+.fi
+.PP
+ 
+.SS "Json::Value::Value (const \fBStaticString\fP & value)"
+
+.PP
+Constructs a value from a static string\&. Like other value string constructor but do not duplicate the string for internal storage\&. The given string must remain alive after the call to this constructor\&. 
+.PP
+\fBNote:\fP
+.RS 4
+This works only for null-terminated strings\&. (We cannot change the size of this class, so we have nowhere to store the length, which might be computed later for various operations\&.)
+.RE
+.PP
+Example of usage: 
+.PP
+.nf
+static StaticString foo("some text");
+Json::Value aValue(foo);
+
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBValue\fP & Json::Value::append (const \fBValue\fP & value)"
+
+.PP
+Append value to array at the end\&. Equivalent to jsonvalue[jsonvalue\&.size()] = value; 
+.SS "void Json::Value::clear ()"
+Remove all object members and array elements\&. 
+.PP
+\fBPrecondition:\fP
+.RS 4
+type() is arrayValue, objectValue, or nullValue 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+type() is unchanged 
+.RE
+.PP
+
+.SS "\fBValue\fP const* Json::Value::demand (char const * begin, char const * end)"
+Most general and efficient version of object-mutators\&. 
+.PP
+\fBNote:\fP
+.RS 4
+As stated elsewhere, behavior is undefined if (end-begin) >= 2^30 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+non-zero, but JSON_ASSERT if this is neither object nor nullValue\&. 
+.RE
+.PP
+
+.SS "\fBValue\fP const * Json::Value::find (char const * begin, char const * end) const"
+Most general and efficient version of isMember()const, get()const, and operator[]const 
+.PP
+\fBNote:\fP
+.RS 4
+As stated elsewhere, behavior is undefined if (end-begin) >= 2^30 
+.RE
+.PP
+
+.SS "\fBValue\fP Json::Value::get (ArrayIndex index, const \fBValue\fP & defaultValue) const"
+If the array contains at least index+1 elements, returns the element value, otherwise returns defaultValue\&. 
+.SS "\fBValue\fP Json::Value::get (const char * key, const \fBValue\fP & defaultValue) const"
+Return the member named key if it exist, defaultValue otherwise\&. 
+.PP
+\fBNote:\fP
+.RS 4
+deep copy 
+.RE
+.PP
+
+.SS "\fBValue\fP Json::Value::get (const char * begin, const char * end, const \fBValue\fP & defaultValue) const"
+Return the member named key if it exist, defaultValue otherwise\&. 
+.PP
+\fBNote:\fP
+.RS 4
+deep copy 
+.PP
+key may contain embedded nulls\&. 
+.RE
+.PP
+
+.SS "\fBValue\fP Json::Value::get (const JSONCPP_STRING & key, const \fBValue\fP & defaultValue) const"
+Return the member named key if it exist, defaultValue otherwise\&. 
+.PP
+\fBNote:\fP
+.RS 4
+deep copy 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP may contain embedded nulls\&. 
+.RE
+.PP
+
+.SS "Value::Members Json::Value::getMemberNames () const"
+
+.PP
+Return a list of the member names\&. If null, return an empty list\&. 
+.PP
+\fBPrecondition:\fP
+.RS 4
+type() is objectValue or nullValue 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+if type() was nullValue, it remains nullValue 
+.RE
+.PP
+
+.SS "bool Json::Value::getString (char const ** begin, char const ** end) const"
+Get raw char* of string-value\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+false if !string\&. (Seg-fault if str or end are NULL\&.) 
+.RE
+.PP
+
+.SS "bool Json::Value::isMember (const char * key) const"
+Return true if the object has a member named key\&. 
+.PP
+\fBNote:\fP
+.RS 4
+'key' must be null-terminated\&. 
+.RE
+.PP
+
+.SS "bool Json::Value::isMember (const JSONCPP_STRING & key) const"
+Return true if the object has a member named key\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP may contain embedded nulls\&. 
+.RE
+.PP
+
+.SS "\fBValue\fP & Json::Value::operator= (\fBValue\fP other)"
+Deep copy, then swap(other)\&. 
+.PP
+\fBNote:\fP
+.RS 4
+Over-write existing comments\&. To preserve comments, use \fBswapPayload()\fP\&. 
+.RE
+.PP
+
+.SS "\fBValue\fP & Json::Value::operator[] (ArrayIndex index)"
+Access an array element (zero based index )\&. If the array contains less than index element, then null value are inserted in the array so that its size is index+1\&. (You may need to say 'value[0u]' to get your compiler to distinguish this from the operator[] which takes a string\&.) 
+.SS "\fBValue\fP & Json::Value::operator[] (int index)"
+Access an array element (zero based index )\&. If the array contains less than index element, then null value are inserted in the array so that its size is index+1\&. (You may need to say 'value[0u]' to get your compiler to distinguish this from the operator[] which takes a string\&.) 
+.SS "const \fBValue\fP & Json::Value::operator[] (ArrayIndex index) const"
+Access an array element (zero based index ) (You may need to say 'value[0u]' to get your compiler to distinguish this from the operator[] which takes a string\&.) 
+.SS "const \fBValue\fP & Json::Value::operator[] (int index) const"
+Access an array element (zero based index ) (You may need to say 'value[0u]' to get your compiler to distinguish this from the operator[] which takes a string\&.) 
+.SS "\fBValue\fP & Json::Value::operator[] (const char * key)"
+Access an object value by name, create a null member if it does not exist\&. 
+.PP
+\fBNote:\fP
+.RS 4
+Because of our implementation, keys are limited to 2^30 -1 chars\&. Exceeding that will cause an exception\&. 
+.RE
+.PP
+
+.SS "const \fBValue\fP & Json::Value::operator[] (const char * key) const"
+Access an object value by name, returns null if there is no member with that name\&. 
+.SS "\fBValue\fP & Json::Value::operator[] (const JSONCPP_STRING & key)"
+Access an object value by name, create a null member if it does not exist\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP may contain embedded nulls\&. 
+.RE
+.PP
+
+.SS "\fBValue\fP const & Json::Value::operator[] (const JSONCPP_STRING & key) const"
+Access an object value by name, returns null if there is no member with that name\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP may contain embedded nulls\&. 
+.RE
+.PP
+
+.SS "\fBValue\fP & Json::Value::operator[] (const \fBStaticString\fP & key)"
+
+.PP
+Access an object value by name, create a null member if it does not exist\&. If the object has no entry for that name, then the member name used to store the new entry is not duplicated\&. Example of use: 
+.PP
+.nf
+Json::Value object;
+static const StaticString code("code");
+object[code] = 1234;
+
+.fi
+.PP
+ 
+.SS "bool Json::Value::removeIndex (ArrayIndex i, \fBValue\fP * removed)"
+
+.PP
+Remove the indexed array element\&. O(n) expensive operations\&. Update 'removed' iff removed\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+true iff removed (no exceptions) 
+.RE
+.PP
+
+.SS "\fBValue\fP Json::Value::removeMember (const char * key)"
+
+.PP
+Remove and return the named member\&. Do nothing if it did not exist\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+the removed \fBValue\fP, or null\&. 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+type() is objectValue or nullValue 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+type() is unchanged 
+.RE
+.PP
+\fBDeprecated\fP
+.RS 4
+.RE
+.PP
+
+.SS "\fBValue\fP Json::Value::removeMember (const JSONCPP_STRING & key)"
+Same as \fBremoveMember(const char*)\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP may contain embedded nulls\&. 
+.RE
+.PP
+\fBDeprecated\fP
+.RS 4
+.RE
+.PP
+
+.SS "bool Json::Value::removeMember (const char * key, \fBValue\fP * removed)"
+Same as \fBremoveMember(const char* begin, const char* end, Value* removed)\fP, but 'key' is null-terminated\&. 
+.SS "bool Json::Value::removeMember (JSONCPP_STRING const & key, \fBValue\fP * removed)"
+
+.PP
+Remove the named map member\&. Update 'removed' iff removed\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP may contain embedded nulls\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true iff removed (no exceptions) 
+.RE
+.PP
+
+.SS "void Json::Value::resize (ArrayIndex size)"
+Resize the array to size elements\&. New elements are initialized to null\&. May only be called on nullValue or arrayValue\&. 
+.PP
+\fBPrecondition:\fP
+.RS 4
+type() is arrayValue or nullValue 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+type() is arrayValue 
+.RE
+.PP
+
+.SS "void Json::Value::setComment (const char * comment, \fBCommentPlacement\fP placement)"
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Always pass len\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

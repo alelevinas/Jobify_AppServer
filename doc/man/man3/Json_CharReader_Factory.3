@@ -1,0 +1,37 @@
+.TH "Json::CharReader::Factory" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::CharReader::Factory \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBJson::CharReaderBuilder\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fBCharReader\fP * \fBnewCharReader\fP () const =0"
+.br
+.RI "\fIAllocate a \fBCharReader\fP via operator new()\&. \fP"
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual \fBCharReader\fP* Json::CharReader::Factory::newCharReader () const\fC [pure virtual]\fP"
+
+.PP
+Allocate a \fBCharReader\fP via operator new()\&. 
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIstd::exception\fP if something goes wrong (e\&.g\&. invalid settings) 
+.RE
+.PP
+
+.PP
+Implemented in \fBJson::CharReaderBuilder\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

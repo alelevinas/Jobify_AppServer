@@ -1,0 +1,48 @@
+.TH "el::base::PerformanceTracker" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::PerformanceTracker \- Represents performanceTracker block of code that conditionally adds performance status to log either when goes outside the scope of when \fBcheckpoint()\fP is called\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::threading::ThreadSafe\fP, and \fBel::Loggable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPerformanceTracker\fP (const std::string &blockName, \fBbase::TimestampUnit\fP timestampUnit=base::TimestampUnit::Millisecond, const std::string &loggerId=std::string(ELPP_CURR_FILE_PERFORMANCE_LOGGER), bool scopedLog=true, \fBLevel\fP level=base::consts::kPerformanceTrackerDefaultLevel)"
+.br
+.ti -1c
+.RI "\fBPerformanceTracker\fP (const \fBPerformanceTracker\fP &t)"
+.br
+.RI "\fICopy constructor\&. \fP"
+.ti -1c
+.RI "void \fBcheckpoint\fP (const std::string &id=std::string(), const char *file=__FILE__, unsigned long int line=__LINE__, const char *func='')"
+.br
+.RI "\fIA checkpoint for current performanceTracker block\&. \fP"
+.ti -1c
+.RI "\fBLevel\fP \fBlevel\fP (void) const "
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::PerformanceTrackingData\fP"
+.br
+.ti -1c
+.RI "class \fBbase::DefaultPerformanceTrackingCallback\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents performanceTracker block of code that conditionally adds performance status to log either when goes outside the scope of when \fBcheckpoint()\fP is called\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

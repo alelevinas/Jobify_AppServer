@@ -1,0 +1,253 @@
+.TH "el" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el \- Easylogging++ entry namespace\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBbase\fP"
+.br
+.RI "\fINamespace containing base/internal functionality used by Easylogging++\&. \fP"
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBCallback\fP"
+.br
+.ti -1c
+.RI "class \fBConfiguration\fP"
+.br
+.RI "\fIRepresents single configuration that has representing level, configuration type and a string based value\&. \fP"
+.ti -1c
+.RI "class \fBConfigurations\fP"
+.br
+.RI "\fIThread-safe \fBConfiguration\fP repository\&. \fP"
+.ti -1c
+.RI "class \fBConfigurationTypeHelper\fP"
+.br
+.RI "\fIStatic class that contains helper functions for \fBel::ConfigurationType\fP\&. \fP"
+.ti -1c
+.RI "class \fBCustomFormatSpecifier\fP"
+.br
+.RI "\fIUser-provided custom format specifier\&. \fP"
+.ti -1c
+.RI "class \fBHelpers\fP"
+.br
+.RI "\fIStatic helpers for developers\&. \fP"
+.ti -1c
+.RI "class \fBLevelHelper\fP"
+.br
+.RI "\fIStatic class that contains helper functions for \fBel::Level\fP\&. \fP"
+.ti -1c
+.RI "class \fBLogBuilder\fP"
+.br
+.ti -1c
+.RI "class \fBLogDispatchCallback\fP"
+.br
+.ti -1c
+.RI "class \fBLogDispatchData\fP"
+.br
+.ti -1c
+.RI "class \fBLoggable\fP"
+.br
+.RI "\fIBase of Easylogging++ friendly class\&. \fP"
+.ti -1c
+.RI "class \fBLogger\fP"
+.br
+.RI "\fIRepresents a logger holding ID and configurations we need to write logs\&. \fP"
+.ti -1c
+.RI "class \fBLoggers\fP"
+.br
+.RI "\fIStatic helpers to deal with loggers and their configurations\&. \fP"
+.ti -1c
+.RI "class \fBLogMessage\fP"
+.br
+.ti -1c
+.RI "class \fBPerformanceTrackingCallback\fP"
+.br
+.ti -1c
+.RI "class \fBPerformanceTrackingData\fP"
+.br
+.ti -1c
+.RI "class \fBSysLogInitializer\fP"
+.br
+.RI "\fIInitializes syslog with process ID, options and facility\&. calls closelog() on d'tor\&. \fP"
+.ti -1c
+.RI "class \fBVersionInfo\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef std::function< void(const char *, std::size_t)> \fBPreRollOutCallback\fP"
+.br
+.ti -1c
+.RI "typedef std::function< const char *(void)> \fBFormatSpecifierValueResolver\fP"
+.br
+.RI "\fIResolving function for format specifier\&. \fP"
+.ti -1c
+.RI "typedef std::shared_ptr< \fBLogBuilder\fP > \fBLogBuilderPtr\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBLevel\fP : base::type::EnumType { \fBLevel::Global\fP = 1, \fBLevel::Trace\fP = 2, \fBLevel::Debug\fP = 4, \fBLevel::Fatal\fP = 8, \fBLevel::Error\fP = 16, \fBLevel::Warning\fP = 32, \fBLevel::Verbose\fP = 64, \fBLevel::Info\fP = 128, \fBLevel::Unknown\fP = 1010 }
+.RI "\fIRepresents enumeration for severity level used to determine level of logging\&. \fP""
+.br
+.ti -1c
+.RI "enum \fBConfigurationType\fP : base::type::EnumType { \fBConfigurationType::Enabled\fP = 1, \fBConfigurationType::ToFile\fP = 2, \fBConfigurationType::ToStandardOutput\fP = 4, \fBConfigurationType::Format\fP = 8, \fBConfigurationType::Filename\fP = 16, \fBConfigurationType::MillisecondsWidth\fP = 32, \fBConfigurationType::PerformanceTracking\fP = 64, \fBConfigurationType::MaxLogFileSize\fP = 128, \fBConfigurationType::LogFlushThreshold\fP = 256, \fBConfigurationType::Unknown\fP = 1010 }
+.RI "\fIRepresents enumeration of ConfigurationType used to configure or access certain aspect of logging\&. \fP""
+.br
+.ti -1c
+.RI "enum \fBLoggingFlag\fP : base::type::EnumType { \fBLoggingFlag::NewLineForContainer\fP = 1, \fBLoggingFlag::AllowVerboseIfModuleNotSpecified\fP = 2, \fBLoggingFlag::LogDetailedCrashReason\fP = 4, \fBLoggingFlag::DisableApplicationAbortOnFatalLog\fP = 8, \fBLoggingFlag::ImmediateFlush\fP = 16, \fBLoggingFlag::StrictLogFileSizeCheck\fP = 32, \fBLoggingFlag::ColoredTerminalOutput\fP = 64, \fBLoggingFlag::MultiLoggerSupport\fP = 128, \fBLoggingFlag::DisablePerformanceTrackingCheckpointComparison\fP = 256, \fBLoggingFlag::DisableVModules\fP = 512, \fBLoggingFlag::DisableVModulesExtensions\fP = 1024, \fBLoggingFlag::HierarchicalLogging\fP = 2048, \fBLoggingFlag::CreateLoggerAutomatically\fP = 4096, \fBLoggingFlag::AutoSpacing\fP = 8192, \fBLoggingFlag::FixedTimeFormat\fP = 16384 }
+.RI "\fIFlags used while writing logs\&. This flags are set by user\&. \fP""
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBbase::debug::CrashHandler\fP \fBelCrashHandler\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Easylogging++ entry namespace\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBel::ConfigurationType\fP : base::type::EnumType\fC [strong]\fP"
+
+.PP
+Represents enumeration of ConfigurationType used to configure or access certain aspect of logging\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIEnabled \fP\fP
+Determines whether or not corresponding level and logger of logging is enabled You may disable all logs by using \fBel::Level::Global\fP\&. 
+.TP
+\fB\fIToFile \fP\fP
+Whether or not to write corresponding log to log file\&. 
+.TP
+\fB\fIToStandardOutput \fP\fP
+Whether or not to write corresponding level and logger log to standard output\&. By standard output meaning termnal, command prompt etc\&. 
+.TP
+\fB\fIFormat \fP\fP
+Determines format of logging corresponding level and logger\&. 
+.TP
+\fB\fIFilename \fP\fP
+Determines log file (full path) to write logs to for correponding level and logger\&. 
+.TP
+\fB\fIMillisecondsWidth \fP\fP
+Specifies milliseconds width\&. Width can be within range (1-6) 
+.TP
+\fB\fIPerformanceTracking \fP\fP
+Determines whether or not performance tracking is enabled\&. This does not depend on logger or level\&. Performance tracking always uses 'performance' logger 
+.TP
+\fB\fIMaxLogFileSize \fP\fP
+Specifies log file max size\&. If file size of corresponding log file (for corresponding level) is >= specified size, log file will be truncated and re-initiated\&. 
+.TP
+\fB\fILogFlushThreshold \fP\fP
+Specifies number of log entries to hold until we flush pending log data\&. 
+.TP
+\fB\fIUnknown \fP\fP
+Represents unknown configuration\&. 
+.SS "enum \fBel::Level\fP : base::type::EnumType\fC [strong]\fP"
+
+.PP
+Represents enumeration for severity level used to determine level of logging\&. With Easylogging++, developers may disable or enable any level regardless of what the severity is\&. Or they can choose to log using hierarchical logging flag 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIGlobal \fP\fP
+Generic level that represents all the levels\&. Useful when setting global configuration for all levels\&. 
+.TP
+\fB\fITrace \fP\fP
+Information that can be useful to back-trace certain events - mostly useful than debug logs\&. 
+.TP
+\fB\fIDebug \fP\fP
+Informational events most useful for developers to debug application\&. 
+.TP
+\fB\fIFatal \fP\fP
+Severe error information that will presumably abort application\&. 
+.TP
+\fB\fIError \fP\fP
+Information representing errors in application but application will keep running\&. 
+.TP
+\fB\fIWarning \fP\fP
+Useful when application has potentially harmful situtaions\&. 
+.TP
+\fB\fIVerbose \fP\fP
+Information that can be highly useful and vary with verbose logging level\&. 
+.TP
+\fB\fIInfo \fP\fP
+Mainly useful to represent current progress of application\&. 
+.TP
+\fB\fIUnknown \fP\fP
+Represents unknown level\&. 
+.SS "enum \fBel::LoggingFlag\fP : base::type::EnumType\fC [strong]\fP"
+
+.PP
+Flags used while writing logs\&. This flags are set by user\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fINewLineForContainer \fP\fP
+Makes sure we have new line for each container log entry\&. 
+.TP
+\fB\fIAllowVerboseIfModuleNotSpecified \fP\fP
+Makes sure if -vmodule is used and does not specifies a module, then verbose logging is allowed via that module\&. 
+.TP
+\fB\fILogDetailedCrashReason \fP\fP
+When handling crashes by default, detailed crash reason will be logged as well\&. 
+.TP
+\fB\fIDisableApplicationAbortOnFatalLog \fP\fP
+Allows to disable application abortion when logged using FATAL level\&. 
+.TP
+\fB\fIImmediateFlush \fP\fP
+Flushes log with every log-entry (performance sensative) - Disabled by default\&. 
+.TP
+\fB\fIStrictLogFileSizeCheck \fP\fP
+Enables strict file rolling\&. 
+.TP
+\fB\fIColoredTerminalOutput \fP\fP
+Make terminal output colorful for supported terminals\&. 
+.TP
+\fB\fIMultiLoggerSupport \fP\fP
+Supports use of multiple logging in same macro, e\&.g, CLOG(INFO, 'default', 'network') 
+.TP
+\fB\fIDisablePerformanceTrackingCheckpointComparison \fP\fP
+Disables comparing performance tracker's checkpoints\&. 
+.TP
+\fB\fIDisableVModules \fP\fP
+Disable VModules\&. 
+.TP
+\fB\fIDisableVModulesExtensions \fP\fP
+Disable VModules extensions\&. 
+.TP
+\fB\fIHierarchicalLogging \fP\fP
+Enables hierarchical logging\&. 
+.TP
+\fB\fICreateLoggerAutomatically \fP\fP
+Creates logger automatically when not available\&. 
+.TP
+\fB\fIAutoSpacing \fP\fP
+Adds spaces b/w logs that separated by left-shift operator\&. 
+.TP
+\fB\fIFixedTimeFormat \fP\fP
+Preserves time format and does not convert it to sec, hour etc (performance tracking only) 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

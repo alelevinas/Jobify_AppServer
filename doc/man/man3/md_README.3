@@ -1,0 +1,24 @@
+.TH "md_README" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_README \- Jobify_AppServer 
+CI: \fC\fP Coverage: \fC\fP
+.PP
+Application Server para el proyecto de Taller de Programación II
+.PP
+Instalación:
+.PP
+Las únicas librería que usamos y no compilamos directamente son leveldb y restclient-cpp, por lo que es necesario ejecutar los comandos
+.PP
+sudo apt-get install libsnappy-dev libleveldb1 libleveldb-dev sudo apt-get install autoconf libtool git git clone https://github.com/mrtazz/restclient-cpp.git cd restclient-cpp \&./autogen\&.sh \&./configure sudo make install export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH cd \&.\&.
+.PP
+luego a compilar\&.\&.\&.
+.PP
+mkdir build cd build cmake \&.\&. make
+.PP
+y para ejecutar
+.PP
+cd build \&./Jobify_AppServer
+.PP
+Documentación API: \fClink\fP 

@@ -1,0 +1,322 @@
+.TH "Json" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json \- JSON (JavaScript Object Notation)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBBuiltStyledStreamWriter\fP"
+.br
+.ti -1c
+.RI "class \fBCharReader\fP"
+.br
+.ti -1c
+.RI "class \fBCharReaderBuilder\fP"
+.br
+.RI "\fIBuild a \fBCharReader\fP implementation\&. \fP"
+.ti -1c
+.RI "struct \fBCommentStyle\fP"
+.br
+.RI "\fIScoped enums are not available until C++11\&. \fP"
+.ti -1c
+.RI "class \fBException\fP"
+.br
+.ti -1c
+.RI "class \fBFastWriter\fP"
+.br
+.RI "\fIOutputs a \fBValue\fP in \fCJSON\fP format without formatting (not human friendly)\&. \fP"
+.ti -1c
+.RI "class \fBFeatures\fP"
+.br
+.RI "\fIConfiguration passed to reader and writer\&. This configuration object can be used to force the \fBReader\fP or \fBWriter\fP to behave in a standard conforming way\&. \fP"
+.ti -1c
+.RI "class \fBLogicError\fP"
+.br
+.ti -1c
+.RI "class \fBOurCharReader\fP"
+.br
+.ti -1c
+.RI "class \fBOurFeatures\fP"
+.br
+.ti -1c
+.RI "class \fBOurReader\fP"
+.br
+.ti -1c
+.RI "class \fBPath\fP"
+.br
+.RI "\fIExperimental and untested: represents a 'path' to access a node\&. \fP"
+.ti -1c
+.RI "class \fBPathArgument\fP"
+.br
+.RI "\fIExperimental and untested: represents an element of the 'path' to access a node\&. \fP"
+.ti -1c
+.RI "class \fBReader\fP"
+.br
+.RI "\fIUnserialize a \fCJSON\fP document into a \fBValue\fP\&. \fP"
+.ti -1c
+.RI "class \fBRuntimeError\fP"
+.br
+.ti -1c
+.RI "class \fBStaticString\fP"
+.br
+.RI "\fILightweight wrapper to tag static string\&. \fP"
+.ti -1c
+.RI "class \fBStreamWriter\fP"
+.br
+.ti -1c
+.RI "class \fBStreamWriterBuilder\fP"
+.br
+.RI "\fIBuild a \fBStreamWriter\fP implementation\&. \fP"
+.ti -1c
+.RI "class \fBStyledStreamWriter\fP"
+.br
+.RI "\fIWrites a \fBValue\fP in \fCJSON\fP format in a human friendly way, to a stream rather than to a string\&. \fP"
+.ti -1c
+.RI "class \fBStyledWriter\fP"
+.br
+.RI "\fIWrites a \fBValue\fP in \fCJSON\fP format in a human friendly way\&. \fP"
+.ti -1c
+.RI "class \fBValue\fP"
+.br
+.RI "\fIRepresents a \fCJSON\fP value\&. \fP"
+.ti -1c
+.RI "class \fBValueConstIterator\fP"
+.br
+.RI "\fIconst iterator for object and array value\&. \fP"
+.ti -1c
+.RI "class \fBValueIterator\fP"
+.br
+.RI "\fIIterator for object and array value\&. \fP"
+.ti -1c
+.RI "class \fBValueIteratorBase\fP"
+.br
+.RI "\fIbase class for \fBValue\fP iterators\&. \fP"
+.ti -1c
+.RI "class \fBWriter\fP"
+.br
+.RI "\fIAbstract class for writers\&. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef int \fBInt\fP"
+.br
+.ti -1c
+.RI "typedef unsigned int \fBUInt\fP"
+.br
+.ti -1c
+.RI "typedef int64_t \fBInt64\fP"
+.br
+.ti -1c
+.RI "typedef uint64_t \fBUInt64\fP"
+.br
+.ti -1c
+.RI "typedef Int64 \fBLargestInt\fP"
+.br
+.ti -1c
+.RI "typedef UInt64 \fBLargestUInt\fP"
+.br
+.ti -1c
+.RI "typedef unsigned int \fBArrayIndex\fP"
+.br
+.ti -1c
+.RI "typedef char \fBUIntToStringBuffer\fP[\fBuintToStringBufferSize\fP]"
+.br
+.ti -1c
+.RI "typedef std::auto_ptr< \fBCharReader\fP > \fBCharReaderPtr\fP"
+.br
+.ti -1c
+.RI "typedef std::auto_ptr< \fBStreamWriter\fP > \fBStreamWriterPtr\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBValueType\fP { \fBnullValue\fP = 0, \fBintValue\fP, \fBuintValue\fP, \fBrealValue\fP, \fBstringValue\fP, \fBbooleanValue\fP, \fBarrayValue\fP, \fBobjectValue\fP }
+.RI "\fIType of the value held by a Value object\&. \fP""
+.br
+.ti -1c
+.RI "enum \fBCommentPlacement\fP { \fBcommentBefore\fP = 0, \fBcommentAfterOnSameLine\fP, \fBcommentAfter\fP, \fBnumberOfCommentPlacement\fP }"
+.br
+.ti -1c
+.RI "enum { \fBuintToStringBufferSize\fP = 3 * sizeof(LargestUInt) + 1 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "JSONCPP_NORETURN void \fBthrowRuntimeError\fP (JSONCPP_STRING const &msg)"
+.br
+.RI "\fIused internally \fP"
+.ti -1c
+.RI "JSONCPP_NORETURN void \fBthrowLogicError\fP (JSONCPP_STRING const &msg)"
+.br
+.RI "\fIused internally \fP"
+.ti -1c
+.RI "bool JSON_API \fBparseFromStream\fP (\fBCharReader::Factory\fP const &, JSONCPP_ISTREAM &, \fBValue\fP *root, std::string *errs)"
+.br
+.ti -1c
+.RI "JSON_API JSONCPP_ISTREAM & \fBoperator>>\fP (JSONCPP_ISTREAM &, \fBValue\fP &)"
+.br
+.RI "\fIRead from 'sin' into 'root'\&. \fP"
+.ti -1c
+.RI "JSONCPP_STRING JSON_API \fBwriteString\fP (\fBStreamWriter::Factory\fP const &factory, \fBValue\fP const &root)"
+.br
+.RI "\fIWrite into stringstream, then return string, for convenience\&. A \fBStreamWriter\fP will be created from the factory, used, and then deleted\&. \fP"
+.ti -1c
+.RI "JSONCPP_STRING JSON_API \fBvalueToString\fP (Int value)"
+.br
+.ti -1c
+.RI "JSONCPP_STRING JSON_API \fBvalueToString\fP (UInt value)"
+.br
+.ti -1c
+.RI "JSONCPP_STRING JSON_API \fBvalueToString\fP (LargestInt value)"
+.br
+.ti -1c
+.RI "JSONCPP_STRING JSON_API \fBvalueToString\fP (LargestUInt value)"
+.br
+.ti -1c
+.RI "JSONCPP_STRING JSON_API \fBvalueToString\fP (double value)"
+.br
+.ti -1c
+.RI "JSONCPP_STRING JSON_API \fBvalueToString\fP (bool value)"
+.br
+.ti -1c
+.RI "JSONCPP_STRING JSON_API \fBvalueToQuotedString\fP (const char *value)"
+.br
+.ti -1c
+.RI "JSON_API JSONCPP_OSTREAM & \fBoperator<<\fP (JSONCPP_OSTREAM &, const \fBValue\fP &root)"
+.br
+.RI "\fIOutput using the \fBStyledStreamWriter\fP\&. \fP"
+.ti -1c
+.RI "bool \fBparseFromStream\fP (\fBCharReader::Factory\fP const &fact, JSONCPP_ISTREAM &sin, \fBValue\fP *root, JSONCPP_STRING *errs)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+JSON (JavaScript Object Notation)\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIuintToStringBufferSize \fP\fP
+Constant that specify the size of the buffer that must be passed to uintToString\&. 
+.SS "enum \fBJson::CommentPlacement\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIcommentBefore \fP\fP
+a comment placed on the line before a value 
+.TP
+\fB\fIcommentAfterOnSameLine \fP\fP
+a comment just after a value on the same line 
+.TP
+\fB\fIcommentAfter \fP\fP
+a comment on the line after a value (only make sense for 
+.TP
+\fB\fInumberOfCommentPlacement \fP\fP
+root value) 
+.SS "enum \fBJson::ValueType\fP"
+
+.PP
+Type of the value held by a \fBValue\fP object\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fInullValue \fP\fP
+'null' value 
+.TP
+\fB\fIintValue \fP\fP
+signed integer value 
+.TP
+\fB\fIuintValue \fP\fP
+unsigned integer value 
+.TP
+\fB\fIrealValue \fP\fP
+double value 
+.TP
+\fB\fIstringValue \fP\fP
+UTF-8 string value\&. 
+.TP
+\fB\fIbooleanValue \fP\fP
+bool value 
+.TP
+\fB\fIarrayValue \fP\fP
+array value (ordered list) 
+.TP
+\fB\fIobjectValue \fP\fP
+object value (collection of name/value pairs)\&. 
+.SH "Function Documentation"
+.PP 
+.SS "JSONCPP_OSTREAM & Json::operator<< (JSONCPP_OSTREAM & sout, const \fBValue\fP & root)"
+
+.PP
+Output using the \fBStyledStreamWriter\fP\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBJson::operator>>()\fP 
+.RE
+.PP
+
+.SS "JSONCPP_ISTREAM & Json::operator>> (JSONCPP_ISTREAM & sin, \fBValue\fP & root)"
+
+.PP
+Read from 'sin' into 'root'\&. Always keep comments from the input JSON\&.
+.PP
+This can be used to read a file into a particular sub-object\&. For example: 
+.PP
+.nf
+Json::Value root;
+cin >> root["dir"]["file"];
+cout << root;
+
+.fi
+.PP
+ Result: 
+.PP
+.nf
+{
+"dir": {
+    "file": {
+    // The input stream JSON would be nested here.
+    }
+}
+}
+
+.fi
+.PP
+ 
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIstd::exception\fP on parse error\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBJson::operator<<()\fP 
+.RE
+.PP
+
+.SS "bool JSON_API Json::parseFromStream (\fBCharReader::Factory\fP const &, JSONCPP_ISTREAM &, \fBValue\fP * root, std::string * errs)"
+Consume entire stream and use its begin/end\&. Someday we might have a real StreamReader, but for now this is convenient\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

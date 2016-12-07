@@ -1,0 +1,53 @@
+\hypertarget{classNotificationSender}{}\section{Notification\+Sender Class Reference}
+\label{classNotificationSender}\index{Notification\+Sender@{Notification\+Sender}}
+
+
+{\ttfamily \#include $<$Notification\+Sender.\+h$>$}
+
+
+
+Collaboration diagram for Notification\+Sender\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{d5/d07/classNotificationSender__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classNotificationSender_a66f6e3ebf175d8d894f2dd61f8184732}{Notification\+Sender} (const std\+::string \&server\+\_\+key)\hypertarget{classNotificationSender_a66f6e3ebf175d8d894f2dd61f8184732}{}\label{classNotificationSender_a66f6e3ebf175d8d894f2dd61f8184732}
+
+\begin{DoxyCompactList}\small\item\em Firebase server\+\_\+key. \end{DoxyCompactList}\item 
+void \hyperlink{classNotificationSender_a0c066b5231c6110b8118d98de43eacac}{send\+\_\+notification} (std\+::string from, std\+::string dest\+\_\+reg\+\_\+token, std\+::string message)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class made for sending notifications throug Google Firebase tokens 
+
+\subsection{Member Function Documentation}
+\index{Notification\+Sender@{Notification\+Sender}!send\+\_\+notification@{send\+\_\+notification}}
+\index{send\+\_\+notification@{send\+\_\+notification}!Notification\+Sender@{Notification\+Sender}}
+\subsubsection[{\texorpdfstring{send\+\_\+notification(std\+::string from, std\+::string dest\+\_\+reg\+\_\+token, std\+::string message)}{send_notification(std::string from, std::string dest_reg_token, std::string message)}}]{\setlength{\rightskip}{0pt plus 5cm}void Notification\+Sender\+::send\+\_\+notification (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{from, }
+\item[{std\+::string}]{dest\+\_\+reg\+\_\+token, }
+\item[{std\+::string}]{message}
+\end{DoxyParamCaption}
+)}\hypertarget{classNotificationSender_a0c066b5231c6110b8118d98de43eacac}{}\label{classNotificationSender_a0c066b5231c6110b8118d98de43eacac}
+Send an H\+T\+TP post to firebase endpoint with the notification data. 
+\begin{DoxyParams}{Parameters}
+{\em from} & The sender of the message \\
+\hline
+{\em dest\+\_\+reg\+\_\+token} & The firebase token of the destinatary devise \\
+\hline
+{\em message} & The body of the message \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Notification\+Sender.\+h\item 
+src/Notification\+Sender.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,76 @@
+.TH "el::base::utils::CommandLineArgs" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::utils::CommandLineArgs \- Command line arguments for application if specified using \fBel::Helpers::setArgs\fP(\&.\&.) or START_EASYLOGGINGPP(\&.\&.)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCommandLineArgs\fP (int argc, const char **argv)"
+.br
+.ti -1c
+.RI "\fBCommandLineArgs\fP (int argc, char **argv)"
+.br
+.ti -1c
+.RI "void \fBsetArgs\fP (int argc, const char **argv)"
+.br
+.RI "\fISets arguments and parses them\&. \fP"
+.ti -1c
+.RI "void \fBsetArgs\fP (int argc, char **argv)"
+.br
+.RI "\fISets arguments and parses them\&. \fP"
+.ti -1c
+.RI "bool \fBhasParamWithValue\fP (const char *paramKey) const "
+.br
+.RI "\fIReturns true if arguments contain paramKey with a value (seperated by '=') \fP"
+.ti -1c
+.RI "const char * \fBgetParamValue\fP (const char *paramKey) const "
+.br
+.RI "\fIReturns value of arguments\&. \fP"
+.ti -1c
+.RI "bool \fBhasParam\fP (const char *paramKey) const "
+.br
+.RI "\fIReturn true if arguments has a param (not having a value) i,e without '='\&. \fP"
+.ti -1c
+.RI "bool \fBempty\fP (void) const "
+.br
+.RI "\fIReturns true if no params available\&. This exclude argv[0]\&. \fP"
+.ti -1c
+.RI "std::size_t \fBsize\fP (void) const "
+.br
+.RI "\fIReturns total number of arguments\&. This exclude argv[0]\&. \fP"
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "base::type::ostream_t & \fBoperator<<\fP (base::type::ostream_t &os, const \fBCommandLineArgs\fP &c)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Command line arguments for application if specified using \fBel::Helpers::setArgs\fP(\&.\&.) or START_EASYLOGGINGPP(\&.\&.) 
+.SH "Member Function Documentation"
+.PP 
+.SS "const char* el::base::utils::CommandLineArgs::getParamValue (const char * paramKey) const\fC [inline]\fP"
+
+.PP
+Returns value of arguments\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+hasParamWithValue(const char*) 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

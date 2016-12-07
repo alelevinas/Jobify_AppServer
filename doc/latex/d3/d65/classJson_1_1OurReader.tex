@@ -1,0 +1,55 @@
+\hypertarget{classJson_1_1OurReader}{}\section{Json\+:\+:Our\+Reader Class Reference}
+\label{classJson_1_1OurReader}\index{Json\+::\+Our\+Reader@{Json\+::\+Our\+Reader}}
+
+
+Collaboration diagram for Json\+:\+:Our\+Reader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{df/d10/classJson_1_1OurReader__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structJson_1_1OurReader_1_1StructuredError}{Structured\+Error}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef char {\bfseries Char}\hypertarget{classJson_1_1OurReader_a0cd0bab4caa66594ab843ccd5f9dc239}{}\label{classJson_1_1OurReader_a0cd0bab4caa66594ab843ccd5f9dc239}
+
+\item 
+typedef const Char $\ast$ {\bfseries Location}\hypertarget{classJson_1_1OurReader_a1bdc7bbc52ba87cae6b19746f2ee0189}{}\label{classJson_1_1OurReader_a1bdc7bbc52ba87cae6b19746f2ee0189}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Our\+Reader} (\hyperlink{classJson_1_1OurFeatures}{Our\+Features} const \&features)\hypertarget{classJson_1_1OurReader_a48a850914b9c8d7781be172930c478e5}{}\label{classJson_1_1OurReader_a48a850914b9c8d7781be172930c478e5}
+
+\item 
+bool {\bfseries parse} (const char $\ast$begin\+Doc, const char $\ast$end\+Doc, \hyperlink{classJson_1_1Value}{Value} \&root, bool collect\+Comments=true)\hypertarget{classJson_1_1OurReader_aba4f8749aab7f02ec17f107e392caf80}{}\label{classJson_1_1OurReader_aba4f8749aab7f02ec17f107e392caf80}
+
+\item 
+J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+NG {\bfseries get\+Formatted\+Error\+Messages} () const \hypertarget{classJson_1_1OurReader_a61b627b274f3bf110d559e4ab50e29b8}{}\label{classJson_1_1OurReader_a61b627b274f3bf110d559e4ab50e29b8}
+
+\item 
+std\+::vector$<$ \hyperlink{structJson_1_1OurReader_1_1StructuredError}{Structured\+Error} $>$ {\bfseries get\+Structured\+Errors} () const \hypertarget{classJson_1_1OurReader_a02ef7871af3706754a233c36e6d489e9}{}\label{classJson_1_1OurReader_a02ef7871af3706754a233c36e6d489e9}
+
+\item 
+bool {\bfseries push\+Error} (const \hyperlink{classJson_1_1Value}{Value} \&value, const J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+NG \&message)\hypertarget{classJson_1_1OurReader_a700e9d8e0977fa7e0375d26690d7025f}{}\label{classJson_1_1OurReader_a700e9d8e0977fa7e0375d26690d7025f}
+
+\item 
+bool {\bfseries push\+Error} (const \hyperlink{classJson_1_1Value}{Value} \&value, const J\+S\+O\+N\+C\+P\+P\+\_\+\+S\+T\+R\+I\+NG \&message, const \hyperlink{classJson_1_1Value}{Value} \&extra)\hypertarget{classJson_1_1OurReader_addccecfca74b79adaad6115ddd614477}{}\label{classJson_1_1OurReader_addccecfca74b79adaad6115ddd614477}
+
+\item 
+bool {\bfseries good} () const \hypertarget{classJson_1_1OurReader_a048346238d703ad9aed06beb686e6102}{}\label{classJson_1_1OurReader_a048346238d703ad9aed06beb686e6102}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/jsoncpp/jsoncpp.\+cpp\end{DoxyCompactItemize}

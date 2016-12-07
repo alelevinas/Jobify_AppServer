@@ -1,0 +1,83 @@
+.TH "el::Configurations::Parser" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::Configurations::Parser \- \fBParser\fP used internally to parse configurations from file or text\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::StaticClass\fP\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBparseFromFile\fP (const std::string &\fBconfigurationFile\fP, \fBConfigurations\fP *sender, \fBConfigurations\fP *base=nullptr)"
+.br
+.RI "\fIParses configuration from file\&. \fP"
+.ti -1c
+.RI "static bool \fBparseFromText\fP (const std::string &configurationsString, \fBConfigurations\fP *sender, \fBConfigurations\fP *base=nullptr)"
+.br
+.RI "\fIParse configurations from configuration string\&. \fP"
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::Loggers\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBParser\fP used internally to parse configurations from file or text\&. 
+
+This class makes use of \fBbase::utils::Str\fP\&. You should not need this unless you are working on some tool for Easylogging++ 
+.SH "Member Function Documentation"
+.PP 
+.SS "static bool el::Configurations::Parser::parseFromFile (const std::string & configurationFile, \fBConfigurations\fP * sender, \fBConfigurations\fP * base = \fCnullptr\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Parses configuration from file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconfigurationFile\fP Full path to configuration file 
+.br
+\fIsender\fP Sender configurations pointer\&. Usually 'this' is used from calling class 
+.br
+\fIbase\fP \fBConfigurations\fP to base new configuration repository off\&. This value is used when you want to use existing \fBConfigurations\fP to base all the values and then set rest of configuration via configuration file\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+True if successfully parsed, false otherwise\&. You may define '_STOP_ON_FIRSTELPP_ASSERTION' to make sure you do not proceed without successful parse\&. 
+.RE
+.PP
+
+.SS "static bool el::Configurations::Parser::parseFromText (const std::string & configurationsString, \fBConfigurations\fP * sender, \fBConfigurations\fP * base = \fCnullptr\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Parse configurations from configuration string\&. This configuration string has same syntax as configuration file contents\&. Make sure all the necessary new line characters are provided\&. You may define '_STOP_ON_FIRSTELPP_ASSERTION' to make sure you do not proceed without successful parse (This is recommended) 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconfigurationsString\fP 
+.br
+\fIsender\fP Sender configurations pointer\&. Usually 'this' is used from calling class 
+.br
+\fIbase\fP \fBConfigurations\fP to base new configuration repository off\&. This value is used when you want to use existing \fBConfigurations\fP to base all the values and then set rest of configuration via configuration text\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+True if successfully parsed, false otherwise\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

@@ -1,0 +1,73 @@
+.TH "SharedServerController" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SharedServerController \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SharedServerController\&.h>\fP
+.PP
+Inherits JsonController\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSharedServerController\fP (\fBClientSharedServer\fP *clientSharedServer, \fBSessionManager\fP *sessionManager)"
+.br
+.ti -1c
+.RI "void \fBsetup\fP ()"
+.br
+.ti -1c
+.RI "void \fBgetJobPosRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBgetSkillsRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBgetCategoriesRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Controller that manages the shared Server common data\&. The connection to the shared server is made through the \fBClientSharedServer\fP\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void SharedServerController::getCategoriesRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Gets the categories from the shared server and responds them 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void SharedServerController::getJobPosRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Gets the job positions from the shared server and responds them 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void SharedServerController::getSkillsRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Gets the skills from the shared server and responds them 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

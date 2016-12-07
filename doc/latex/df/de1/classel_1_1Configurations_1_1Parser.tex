@@ -1,0 +1,107 @@
+\hypertarget{classel_1_1Configurations_1_1Parser}{}\section{el\+:\+:Configurations\+:\+:Parser Class Reference}
+\label{classel_1_1Configurations_1_1Parser}\index{el\+::\+Configurations\+::\+Parser@{el\+::\+Configurations\+::\+Parser}}
+
+
+\hyperlink{classel_1_1Configurations_1_1Parser}{Parser} used internally to parse configurations from file or text.  
+
+
+
+
+{\ttfamily \#include $<$easylogging++.\+h$>$}
+
+
+
+Inheritance diagram for el\+:\+:Configurations\+:\+:Parser\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{de/db8/classel_1_1Configurations_1_1Parser__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for el\+:\+:Configurations\+:\+:Parser\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{dd/dbe/classel_1_1Configurations_1_1Parser__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classel_1_1Configurations_1_1Parser_a45def5007bf368c4d2a505af58cd94c2}{parse\+From\+File} (const std\+::string \&\hyperlink{classel_1_1Configurations_a18df64bb5cd97bee672160290133141c}{configuration\+File}, \hyperlink{classel_1_1Configurations}{Configurations} $\ast$sender, \hyperlink{classel_1_1Configurations}{Configurations} $\ast$base=nullptr)
+\begin{DoxyCompactList}\small\item\em Parses configuration from file. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1Configurations_1_1Parser_a39ec1b06f673e8155a83d66e08229129}{parse\+From\+Text} (const std\+::string \&configurations\+String, \hyperlink{classel_1_1Configurations}{Configurations} $\ast$sender, \hyperlink{classel_1_1Configurations}{Configurations} $\ast$base=nullptr)
+\begin{DoxyCompactList}\small\item\em Parse configurations from configuration string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries el\+::\+Loggers}\hypertarget{classel_1_1Configurations_1_1Parser_a6efe246b312d02731fb0e1d120c0331d}{}\label{classel_1_1Configurations_1_1Parser_a6efe246b312d02731fb0e1d120c0331d}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classel_1_1Configurations_1_1Parser}{Parser} used internally to parse configurations from file or text. 
+
+This class makes use of \hyperlink{classel_1_1base_1_1utils_1_1Str}{base\+::utils\+::\+Str}. You should not need this unless you are working on some tool for Easylogging++ 
+
+\subsection{Member Function Documentation}
+\index{el\+::\+Configurations\+::\+Parser@{el\+::\+Configurations\+::\+Parser}!parse\+From\+File@{parse\+From\+File}}
+\index{parse\+From\+File@{parse\+From\+File}!el\+::\+Configurations\+::\+Parser@{el\+::\+Configurations\+::\+Parser}}
+\subsubsection[{\texorpdfstring{parse\+From\+File(const std\+::string \&configuration\+File, Configurations $\ast$sender, Configurations $\ast$base=nullptr)}{parseFromFile(const std::string &configurationFile, Configurations *sender, Configurations *base=nullptr)}}]{\setlength{\rightskip}{0pt plus 5cm}static bool el\+::\+Configurations\+::\+Parser\+::parse\+From\+File (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{configuration\+File, }
+\item[{{\bf Configurations} $\ast$}]{sender, }
+\item[{{\bf Configurations} $\ast$}]{base = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1Configurations_1_1Parser_a45def5007bf368c4d2a505af58cd94c2}{}\label{classel_1_1Configurations_1_1Parser_a45def5007bf368c4d2a505af58cd94c2}
+
+
+Parses configuration from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration\+File} & Full path to configuration file \\
+\hline
+{\em sender} & Sender configurations pointer. Usually \textquotesingle{}this\textquotesingle{} is used from calling class \\
+\hline
+{\em base} & \hyperlink{classel_1_1Configurations}{Configurations} to base new configuration repository off. This value is used when you want to use existing \hyperlink{classel_1_1Configurations}{Configurations} to base all the values and then set rest of configuration via configuration file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successfully parsed, false otherwise. You may define \textquotesingle{}\+\_\+\+S\+T\+O\+P\+\_\+\+O\+N\+\_\+\+F\+I\+R\+S\+T\+E\+L\+P\+P\+\_\+\+A\+S\+S\+E\+R\+T\+I\+ON\textquotesingle{} to make sure you do not proceed without successful parse. 
+\end{DoxyReturn}
+\index{el\+::\+Configurations\+::\+Parser@{el\+::\+Configurations\+::\+Parser}!parse\+From\+Text@{parse\+From\+Text}}
+\index{parse\+From\+Text@{parse\+From\+Text}!el\+::\+Configurations\+::\+Parser@{el\+::\+Configurations\+::\+Parser}}
+\subsubsection[{\texorpdfstring{parse\+From\+Text(const std\+::string \&configurations\+String, Configurations $\ast$sender, Configurations $\ast$base=nullptr)}{parseFromText(const std::string &configurationsString, Configurations *sender, Configurations *base=nullptr)}}]{\setlength{\rightskip}{0pt plus 5cm}static bool el\+::\+Configurations\+::\+Parser\+::parse\+From\+Text (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{configurations\+String, }
+\item[{{\bf Configurations} $\ast$}]{sender, }
+\item[{{\bf Configurations} $\ast$}]{base = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1Configurations_1_1Parser_a39ec1b06f673e8155a83d66e08229129}{}\label{classel_1_1Configurations_1_1Parser_a39ec1b06f673e8155a83d66e08229129}
+
+
+Parse configurations from configuration string. 
+
+This configuration string has same syntax as configuration file contents. Make sure all the necessary new line characters are provided. You may define \textquotesingle{}\+\_\+\+S\+T\+O\+P\+\_\+\+O\+N\+\_\+\+F\+I\+R\+S\+T\+E\+L\+P\+P\+\_\+\+A\+S\+S\+E\+R\+T\+I\+ON\textquotesingle{} to make sure you do not proceed without successful parse (This is recommended) 
+\begin{DoxyParams}{Parameters}
+{\em configurations\+String} & \\
+\hline
+{\em sender} & Sender configurations pointer. Usually \textquotesingle{}this\textquotesingle{} is used from calling class \\
+\hline
+{\em base} & \hyperlink{classel_1_1Configurations}{Configurations} to base new configuration repository off. This value is used when you want to use existing \hyperlink{classel_1_1Configurations}{Configurations} to base all the values and then set rest of configuration via configuration text. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successfully parsed, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/log/easylogging++.\+h\end{DoxyCompactItemize}

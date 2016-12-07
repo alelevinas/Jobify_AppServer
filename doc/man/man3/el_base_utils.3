@@ -1,0 +1,71 @@
+.TH "el::base::utils" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::utils \- Namespace containing utility functions/static classes used internally\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBbitwise\fP"
+.br
+.RI "\fIBitwise operations for C++11 strong enum class\&. This casts e into Flag_T and returns value after bitwise operation Use these function as\&. \fP"
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBAbstractRegistry\fP"
+.br
+.RI "\fIAbstract registry (aka repository) that provides basic interface for pointer repository specified by T_Ptr type\&. \fP"
+.ti -1c
+.RI "class \fBCommandLineArgs\fP"
+.br
+.RI "\fICommand line arguments for application if specified using \fBel::Helpers::setArgs\fP(\&.\&.) or START_EASYLOGGINGPP(\&.\&.) \fP"
+.ti -1c
+.RI "class \fBDateTime\fP"
+.br
+.RI "\fIContains utilities for cross-platform date/time\&. This class make use of \fBel::base::utils::Str\fP\&. \fP"
+.ti -1c
+.RI "class \fBFile\fP"
+.br
+.ti -1c
+.RI "class \fBOS\fP"
+.br
+.RI "\fIOperating System helper static class used internally\&. You should not use it\&. \fP"
+.ti -1c
+.RI "class \fBRegistry\fP"
+.br
+.RI "\fIA pointer registry mechanism to manage memory and provide search functionalities\&. (non-predicate version) \fP"
+.ti -1c
+.RI "class \fBRegistryWithPred\fP"
+.br
+.RI "\fIA pointer registry mechanism to manage memory and provide search functionalities\&. (predicate version) \fP"
+.ti -1c
+.RI "class \fBStr\fP"
+.br
+.RI "\fIString utilities helper class used internally\&. You should not use it\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBs_currentUser\fP"
+.br
+.ti -1c
+.RI "std::string \fBs_currentHost\fP"
+.br
+.ti -1c
+.RI "bool \fBs_termSupportsColor\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Namespace containing utility functions/static classes used internally\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

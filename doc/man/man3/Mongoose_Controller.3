@@ -1,0 +1,233 @@
+.TH "Mongoose::Controller" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose::Controller \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBMongoose::WebController\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBsetServer\fP (\fBServer\fP *server)"
+.br
+.ti -1c
+.RI "virtual void \fBpreProcess\fP (\fBRequest\fP &request, \fBResponse\fP &response)"
+.br
+.ti -1c
+.RI "virtual \fBResponse\fP * \fBprocess\fP (\fBRequest\fP &request)"
+.br
+.ti -1c
+.RI "virtual void \fBpostProcess\fP (\fBRequest\fP &request, \fBResponse\fP &response)"
+.br
+.ti -1c
+.RI "virtual \fBResponse\fP * \fBhandleRequest\fP (\fBRequest\fP &request)"
+.br
+.ti -1c
+.RI "void \fBsetPrefix\fP (string prefix)"
+.br
+.ti -1c
+.RI "virtual void \fBwebSocketReady\fP (\fBWebSocket\fP *websocket)"
+.br
+.ti -1c
+.RI "virtual void \fBwebSocketData\fP (\fBWebSocket\fP *websocket, string data)"
+.br
+.ti -1c
+.RI "virtual void \fBregisterRoute\fP (string httpMethod, string route, \fBRequestHandlerBase\fP *handler)"
+.br
+.ti -1c
+.RI "virtual void \fBsetup\fP ()"
+.br
+.ti -1c
+.RI "void \fBdumpRoutes\fP ()"
+.br
+.ti -1c
+.RI "virtual \fBResponse\fP * \fBserverInternalError\fP (string message)"
+.br
+.ti -1c
+.RI "\fBSession\fP & \fBgetSession\fP (\fBRequest\fP &request, \fBResponse\fP &response)"
+.br
+.ti -1c
+.RI "void \fBsetSessions\fP (\fBSessions\fP *sessions)"
+.br
+.ti -1c
+.RI "virtual bool \fBhandles\fP (string method, string url)"
+.br
+.ti -1c
+.RI "vector< string > \fBgetUrls\fP ()"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBSessions\fP * \fBsessions\fP"
+.br
+.ti -1c
+.RI "\fBServer\fP * \fBserver\fP"
+.br
+.ti -1c
+.RI "string \fBprefix\fP"
+.br
+.ti -1c
+.RI "map< string, \fBRequestHandlerBase\fP * > \fBroutes\fP"
+.br
+.ti -1c
+.RI "vector< string > \fBurls\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "void Mongoose::Controller::dumpRoutes ()"
+Dump all routes 
+.SS "\fBSession\fP & Mongoose::Controller::getSession (\fBRequest\fP & request, \fBResponse\fP & response)"
+Gets the session for a request/response
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBRequest\fP\fP the request 
+.br
+\fI\fBResponse\fP\fP the response
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fBSession\fP the session for the request/response 
+.RE
+.PP
+
+.SS "\fBResponse\fP * Mongoose::Controller::handleRequest (\fBRequest\fP & request)\fC [virtual]\fP"
+Handle a request, this will try to match the request, if this controller handles it, it will preProcess, process then postProcess it
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBRequest\fP\fP the request
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fBResponse\fP the created response, or NULL if the controller does not handle this request 
+.RE
+.PP
+
+.SS "void Mongoose::Controller::postProcess (\fBRequest\fP & request, \fBResponse\fP & response)\fC [virtual]\fP"
+Called after a request is processed, if the controller responded
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBRequest\fP\fP the request 
+.br
+\fI\fBResponse\fP\fP the response 
+.RE
+.PP
+
+.SS "void Mongoose::Controller::preProcess (\fBRequest\fP & request, \fBResponse\fP & response)\fC [virtual]\fP"
+Called before a request is processed
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBRequest\fP\fP the request 
+.br
+\fI\fBResponse\fP\fP the response 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBMongoose::WebController\fP, and \fBMongoose::JsonController\fP\&.
+.SS "\fBResponse\fP * Mongoose::Controller::process (\fBRequest\fP & request)\fC [virtual]\fP"
+Called to process a request
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBRequest\fP\fP the request
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fBResponse\fP the created response, or NULL if the controller does not handle this request 
+.RE
+.PP
+
+.SS "void Mongoose::Controller::registerRoute (string httpMethod, string route, \fBRequestHandlerBase\fP * handler)\fC [virtual]\fP"
+Registers a route to the controller
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the route path 
+.br
+\fI\fBRequestHandlerBase\fP\fP the request handler for this route 
+.RE
+.PP
+
+.SS "\fBResponse\fP * Mongoose::Controller::serverInternalError (string message)\fC [virtual]\fP"
+Called when an exception occur during the rendering
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the error message
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+response a response to send, 404 will occur if NULL 
+.RE
+.PP
+
+.SS "void Mongoose::Controller::setPrefix (string prefix)"
+Sets the controller prefix, for instance '/api'
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the prefix of all urls for this controller 
+.RE
+.PP
+
+.SS "void Mongoose::Controller::setServer (\fBServer\fP * server)\fC [virtual]\fP"
+Sets the reference to the server hosting this controller
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBServer\fP\fP the hosting server 
+.RE
+.PP
+
+.SS "void Mongoose::Controller::setSessions (\fBSessions\fP * sessions)"
+Sets the sessions
+.PP
+\fBParameters:\fP
+.RS 4
+\fISessions*\fP the pointer to the sessions jar 
+.RE
+.PP
+
+.SS "void Mongoose::Controller::setup ()\fC [virtual]\fP"
+Initializes the route and settings 
+.PP
+Reimplemented in \fBChatController\fP, \fBProfileController\fP, and \fBSharedServerController\fP\&.
+.SS "void Mongoose::Controller::webSocketData (\fBWebSocket\fP * websocket, string data)\fC [virtual]\fP"
+Called when data arrive in a websocket connection
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBWebSocket\fP\fP the instance of the connection 
+.br
+\fIstring\fP the data arriving 
+.RE
+.PP
+
+.SS "void Mongoose::Controller::webSocketReady (\fBWebSocket\fP * websocket)\fC [virtual]\fP"
+Called when a new websocket connection is ready
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBWebSocket\fP\fP the instance of the connection 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

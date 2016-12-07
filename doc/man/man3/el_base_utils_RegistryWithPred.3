@@ -1,0 +1,88 @@
+.TH "el::base::utils::RegistryWithPred< T_Ptr, Pred >" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::utils::RegistryWithPred< T_Ptr, Pred > \- A pointer registry mechanism to manage memory and provide search functionalities\&. (predicate version)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::utils::AbstractRegistry< T_Ptr, std::vector< T_Ptr * > >\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBRegistryWithPred\fP< T_Ptr, Pred >::iterator \fBiterator\fP"
+.br
+.ti -1c
+.RI "typedef \fBRegistryWithPred\fP< T_Ptr, Pred >::const_iterator \fBconst_iterator\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRegistryWithPred\fP (const \fBRegistryWithPred\fP &sr)"
+.br
+.RI "\fICopy constructor that is useful for base classes\&. Try to avoid this constructor, use move constructor\&. \fP"
+.ti -1c
+.RI "\fBRegistryWithPred\fP & \fBoperator=\fP (const \fBRegistryWithPred\fP &sr)"
+.br
+.RI "\fIAssignment operator that unregisters all the existing registeries and deeply copies each of repo element\&. \fP"
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBunregisterAll\fP (void) ELPP_FINAL"
+.br
+.RI "\fIUnregisters all the pointers from current repository\&. \fP"
+.ti -1c
+.RI "virtual void \fBunregister\fP (T_Ptr *&ptr) ELPP_FINAL"
+.br
+.ti -1c
+.RI "virtual void \fBregisterNew\fP (T_Ptr *ptr) ELPP_FINAL"
+.br
+.ti -1c
+.RI "template<typename T , typename T2 > T_Ptr * \fBget\fP (const T &arg1, const T2 arg2)"
+.br
+.RI "\fIGets pointer from repository with speicifed arguments\&. Arguments are passed to predicate in order to validate pointer\&. \fP"
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "base::type::ostream_t & \fBoperator<<\fP (base::type::ostream_t &os, const \fBRegistryWithPred\fP &sr)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T_Ptr, typename Pred>
+.br
+class el::base::utils::RegistryWithPred< T_Ptr, Pred >"
+A pointer registry mechanism to manage memory and provide search functionalities\&. (predicate version) 
+
+NOTE: This is thread-unsafe implementation of AbstractRegistry<T_Ptr, Container>\&. Any implementation of this class should be made thread-safe explicitly 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T_Ptr, typename Pred> \fBRegistryWithPred\fP& \fBel::base::utils::RegistryWithPred\fP< T_Ptr, Pred >::operator= (const \fBRegistryWithPred\fP< T_Ptr, Pred > & sr)\fC [inline]\fP"
+
+.PP
+Assignment operator that unregisters all the existing registeries and deeply copies each of repo element\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBunregisterAll()\fP 
+.PP
+deepCopy(const AbstractRegistry&) 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

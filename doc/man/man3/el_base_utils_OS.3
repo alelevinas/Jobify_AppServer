@@ -1,0 +1,81 @@
+.TH "el::base::utils::OS" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::utils::OS \- Operating System helper static class used internally\&. You should not use it\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::StaticClass\fP\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static const std::string \fBgetBashOutput\fP (const char *command)"
+.br
+.RI "\fIRuns command on terminal and returns the output\&. \fP"
+.ti -1c
+.RI "static std::string \fBgetEnvironmentVariable\fP (const char *variableName, const char *defaultVal, const char *alternativeBashCommand=nullptr)"
+.br
+.RI "\fIGets environment variable\&. This is cross-platform and CRT safe (for VC++) \fP"
+.ti -1c
+.RI "static std::string \fBcurrentUser\fP (void)"
+.br
+.RI "\fIGets current username\&. \fP"
+.ti -1c
+.RI "static std::string \fBcurrentHost\fP (void)"
+.br
+.RI "\fIGets current host name or computer name\&. \fP"
+.ti -1c
+.RI "static bool \fBtermSupportsColor\fP (void)"
+.br
+.RI "\fIWhether or not terminal supports colors\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Operating System helper static class used internally\&. You should not use it\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static std::string el::base::utils::OS::currentHost (void)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Gets current host name or computer name\&. For android systems this is device name with its manufacturer and model seperated by hyphen 
+.SS "static const std::string el::base::utils::OS::getBashOutput (const char * command)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Runs command on terminal and returns the output\&. This is applicable only on unix based systems, for all other \fBOS\fP, an empty string is returned\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcommand\fP Bash command 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Result of bash output or empty string if no result found\&. 
+.RE
+.PP
+
+.SS "static std::string el::base::utils::OS::getEnvironmentVariable (const char * variableName, const char * defaultVal, const char * alternativeBashCommand = \fCnullptr\fP)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Gets environment variable\&. This is cross-platform and CRT safe (for VC++) 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvariableName\fP Environment variable name 
+.br
+\fIdefaultVal\fP If no environment variable or value found the value to return by default 
+.br
+\fIalternativeBashCommand\fP If environment variable not found what would be alternative bash command in order to look for value user is looking for\&. E\&.g, for 'user' alternative command will 'whoami' 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

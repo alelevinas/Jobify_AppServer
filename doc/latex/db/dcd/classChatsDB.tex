@@ -1,0 +1,179 @@
+\hypertarget{classChatsDB}{}\section{Chats\+DB Class Reference}
+\label{classChatsDB}\index{Chats\+DB@{Chats\+DB}}
+
+
+{\ttfamily \#include $<$Chats\+D\+B.\+h$>$}
+
+
+
+Inheritance diagram for Chats\+DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{d1/db9/classChatsDB__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Chats\+DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{db/db2/classChatsDB__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Chats\+DB} (std\+::string \&db\+Name)\hypertarget{classChatsDB_ac3bbf89572923a92cb1ff9b792c6d1c9}{}\label{classChatsDB_ac3bbf89572923a92cb1ff9b792c6d1c9}
+
+\item 
+bool \hyperlink{classChatsDB_a0c7faaba32d188a85f84be4691efa0d6}{add\+\_\+msg} (std\+::string username\+\_\+from, std\+::string name\+\_\+from, std\+::string user\+\_\+to, std\+::string message)
+\item 
+bool \hyperlink{classChatsDB_a05ea195c16303f526298b754d48c3758}{update\+Messages} (std\+::string, Json\+::\+Value)
+\item 
+bool \hyperlink{classChatsDB_a976b7d969fd6e85faf145e5bb5744b63}{get\+\_\+conv} (std\+::string username, std\+::string username2, Json\+::\+Value $\ast$conversation)
+\item 
+bool \hyperlink{classChatsDB_a916b0f127080bc573e2c7b71cb2a1a62}{get\+\_\+convs} (std\+::string username, Json\+::\+Value $\ast$conversations, \hyperlink{classUsersDB}{Users\+DB} $\ast$p\+DB)
+\item 
+bool \hyperlink{classChatsDB_a73a2b8f7e85ea4df47d1b7fac2d050d5}{delete\+\_\+conv} (std\+::string username, std\+::string username2)
+\item 
+bool \hyperlink{classChatsDB_a9bbe399ab9fea2b3d9e4b913de723240}{delete\+\_\+message} (std\+::string username1, std\+::string username2, std\+::string id\+Mensaje)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classDB}{DB} that stores the chat messages data from users conversations. 
+
+\subsection{Member Function Documentation}
+\index{Chats\+DB@{Chats\+DB}!add\+\_\+msg@{add\+\_\+msg}}
+\index{add\+\_\+msg@{add\+\_\+msg}!Chats\+DB@{Chats\+DB}}
+\subsubsection[{\texorpdfstring{add\+\_\+msg(std\+::string username\+\_\+from, std\+::string name\+\_\+from, std\+::string user\+\_\+to, std\+::string message)}{add_msg(std::string username_from, std::string name_from, std::string user_to, std::string message)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Chats\+D\+B\+::add\+\_\+msg (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{username\+\_\+from, }
+\item[{std\+::string}]{name\+\_\+from, }
+\item[{std\+::string}]{user\+\_\+to, }
+\item[{std\+::string}]{message}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatsDB_a0c7faaba32d188a85f84be4691efa0d6}{}\label{classChatsDB_a0c7faaba32d188a85f84be4691efa0d6}
+Stores a message in the \hyperlink{classDB}{DB}. The keys will be \char`\"{}@param username\+\_\+from + \+\_\+ + @param user\+\_\+to\char`\"{} and \char`\"{}@param user\+\_\+to + \+\_\+ + @param username\+\_\+from\char`\"{} 
+\begin{DoxyParams}{Parameters}
+{\em username\+\_\+from} & The username that sends the message \\
+\hline
+{\em name\+\_\+from} & the name of \\
+\hline
+{\em username\+\_\+from} & user \\
+\hline
+{\em user\+\_\+to} & the destination user\textquotesingle{}s username \\
+\hline
+{\em message} & the message body \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no problem 
+\end{DoxyReturn}
+\index{Chats\+DB@{Chats\+DB}!delete\+\_\+conv@{delete\+\_\+conv}}
+\index{delete\+\_\+conv@{delete\+\_\+conv}!Chats\+DB@{Chats\+DB}}
+\subsubsection[{\texorpdfstring{delete\+\_\+conv(std\+::string username, std\+::string username2)}{delete_conv(std::string username, std::string username2)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Chats\+D\+B\+::delete\+\_\+conv (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{username, }
+\item[{std\+::string}]{username2}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatsDB_a73a2b8f7e85ea4df47d1b7fac2d050d5}{}\label{classChatsDB_a73a2b8f7e85ea4df47d1b7fac2d050d5}
+Deletes the conversation between username and username2 
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+{\em username2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Chats\+DB@{Chats\+DB}!delete\+\_\+message@{delete\+\_\+message}}
+\index{delete\+\_\+message@{delete\+\_\+message}!Chats\+DB@{Chats\+DB}}
+\subsubsection[{\texorpdfstring{delete\+\_\+message(std\+::string username1, std\+::string username2, std\+::string id\+Mensaje)}{delete_message(std::string username1, std::string username2, std::string idMensaje)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Chats\+D\+B\+::delete\+\_\+message (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{username1, }
+\item[{std\+::string}]{username2, }
+\item[{std\+::string}]{id\+Mensaje}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatsDB_a9bbe399ab9fea2b3d9e4b913de723240}{}\label{classChatsDB_a9bbe399ab9fea2b3d9e4b913de723240}
+Deletes the message with the 
+\begin{DoxyParams}{Parameters}
+{\em id\+Mensaje} & in the conversation between \\
+\hline
+{\em username1} & and \\
+\hline
+{\em username2} & \\
+\hline
+{\em username1} & \\
+\hline
+{\em username2} & \\
+\hline
+{\em id\+Mensaje} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message could be deleted 
+\end{DoxyReturn}
+\index{Chats\+DB@{Chats\+DB}!get\+\_\+conv@{get\+\_\+conv}}
+\index{get\+\_\+conv@{get\+\_\+conv}!Chats\+DB@{Chats\+DB}}
+\subsubsection[{\texorpdfstring{get\+\_\+conv(std\+::string username, std\+::string username2, Json\+::\+Value $\ast$conversation)}{get_conv(std::string username, std::string username2, Json::Value *conversation)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Chats\+D\+B\+::get\+\_\+conv (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{username, }
+\item[{std\+::string}]{username2, }
+\item[{Json\+::\+Value $\ast$}]{conversation}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatsDB_a976b7d969fd6e85faf145e5bb5744b63}{}\label{classChatsDB_a976b7d969fd6e85faf145e5bb5744b63}
+Gets the conversation between username and username2 
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+{\em username2} & \\
+\hline
+{\em conversation} & to store the result \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no \hyperlink{classDB}{DB} errors 
+\end{DoxyReturn}
+\index{Chats\+DB@{Chats\+DB}!get\+\_\+convs@{get\+\_\+convs}}
+\index{get\+\_\+convs@{get\+\_\+convs}!Chats\+DB@{Chats\+DB}}
+\subsubsection[{\texorpdfstring{get\+\_\+convs(std\+::string username, Json\+::\+Value $\ast$conversations, Users\+D\+B $\ast$p\+D\+B)}{get_convs(std::string username, Json::Value *conversations, UsersDB *pDB)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Chats\+D\+B\+::get\+\_\+convs (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{username, }
+\item[{Json\+::\+Value $\ast$}]{conversations, }
+\item[{{\bf Users\+DB} $\ast$}]{p\+DB}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatsDB_a916b0f127080bc573e2c7b71cb2a1a62}{}\label{classChatsDB_a916b0f127080bc573e2c7b71cb2a1a62}
+Gets every conversation in the \hyperlink{classDB}{DB} 
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+{\em conversations} & \\
+\hline
+{\em p\+DB} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Chats\+DB@{Chats\+DB}!update\+Messages@{update\+Messages}}
+\index{update\+Messages@{update\+Messages}!Chats\+DB@{Chats\+DB}}
+\subsubsection[{\texorpdfstring{update\+Messages(std\+::string, Json\+::\+Value)}{updateMessages(std::string, Json::Value)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Chats\+D\+B\+::update\+Messages (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{s\+Key, }
+\item[{Json\+::\+Value}]{message\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatsDB_a05ea195c16303f526298b754d48c3758}{}\label{classChatsDB_a05ea195c16303f526298b754d48c3758}
+Assigns an \char`\"{}id\char`\"{} to the messages. \begin{DoxyReturn}{Returns}
+True if no database errors 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/databases/Chats\+D\+B.\+h\item 
+src/databases/Chats\+D\+B.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+.TH "Mongoose" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBController\fP"
+.br
+.ti -1c
+.RI "class \fBJsonController\fP"
+.br
+.ti -1c
+.RI "class \fBJsonResponse\fP"
+.br
+.ti -1c
+.RI "class \fBMutex\fP"
+.br
+.ti -1c
+.RI "class \fBRequest\fP"
+.br
+.ti -1c
+.RI "class \fBRequestHandler\fP"
+.br
+.ti -1c
+.RI "class \fBRequestHandlerBase\fP"
+.br
+.ti -1c
+.RI "class \fBResponse\fP"
+.br
+.ti -1c
+.RI "class \fBServer\fP"
+.br
+.ti -1c
+.RI "class \fBSession\fP"
+.br
+.ti -1c
+.RI "class \fBSessions\fP"
+.br
+.ti -1c
+.RI "class \fBStreamResponse\fP"
+.br
+.ti -1c
+.RI "class \fBUploadFile\fP"
+.br
+.ti -1c
+.RI "class \fBUtils\fP"
+.br
+.ti -1c
+.RI "class \fBWebController\fP"
+.br
+.ti -1c
+.RI "class \fBWebSocket\fP"
+.br
+.ti -1c
+.RI "class \fBWebSockets\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A controller is a module that respond to requests
+.PP
+You can override the preProcess, process and postProcess to answer to the requests
+.PP
+A json controller is a controller that serves JSON API
+.PP
+A stream response to a request
+.PP
+A mutex allow thread-safe operations
+.PP
+\fBRequest\fP is a wrapper for the clients requests
+.PP
+A response to a request
+.PP
+Wrapper for the \fBMongoose\fP server
+.PP
+A session contains the user specific values
+.PP
+A file uploaded in a request
+.PP
+A web controller is a controller that serves HTML pages
+.PP
+\fBWebSockets\fP is an array that contains \fBWebSocket\fP connections, this can be used for instance to broadcast informations to them\&.
+.PP
+The function clean() allow to remove closed connections from the array\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

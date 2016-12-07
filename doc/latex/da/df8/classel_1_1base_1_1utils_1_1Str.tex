@@ -1,0 +1,252 @@
+\hypertarget{classel_1_1base_1_1utils_1_1Str}{}\section{el\+:\+:base\+:\+:utils\+:\+:Str Class Reference}
+\label{classel_1_1base_1_1utils_1_1Str}\index{el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}}
+
+
+String utilities helper class used internally. You should not use it.  
+
+
+
+
+{\ttfamily \#include $<$easylogging++.\+h$>$}
+
+
+
+Inheritance diagram for el\+:\+:base\+:\+:utils\+:\+:Str\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{d4/d0f/classel_1_1base_1_1utils_1_1Str__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for el\+:\+:base\+:\+:utils\+:\+:Str\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{dd/d07/classel_1_1base_1_1utils_1_1Str__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classel_1_1base_1_1utils_1_1Str_a4caae91dfe0310d9f182bd9b7e99103c}{is\+Digit} (char c)\hypertarget{classel_1_1base_1_1utils_1_1Str_a4caae91dfe0310d9f182bd9b7e99103c}{}\label{classel_1_1base_1_1utils_1_1Str_a4caae91dfe0310d9f182bd9b7e99103c}
+
+\begin{DoxyCompactList}\small\item\em Checks if character is digit. Dont use libc implementation of it to prevent locale issues. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1base_1_1utils_1_1Str_a95e007a25dfcbd77d4c573b0f73b3153}{wild\+Card\+Match} (const char $\ast$str, const char $\ast$pattern)\hypertarget{classel_1_1base_1_1utils_1_1Str_a95e007a25dfcbd77d4c573b0f73b3153}{}\label{classel_1_1base_1_1utils_1_1Str_a95e007a25dfcbd77d4c573b0f73b3153}
+
+\begin{DoxyCompactList}\small\item\em Matches wildcards, \textquotesingle{}$\ast$\textquotesingle{} and \textquotesingle{}?\textquotesingle{} only supported. \end{DoxyCompactList}\item 
+static std\+::string \& \hyperlink{classel_1_1base_1_1utils_1_1Str_a64b7a841f04ed916ed8d234b8508703e}{ltrim} (std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Trims string from start. \end{DoxyCompactList}\item 
+static std\+::string \& \hyperlink{classel_1_1base_1_1utils_1_1Str_a9202797763e10861c4fa84ffd40198bb}{rtrim} (std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Trim string from end. \end{DoxyCompactList}\item 
+static std\+::string \& \hyperlink{classel_1_1base_1_1utils_1_1Str_aba0bc132c410fd3c1e128d1038e996ba}{trim} (std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Trims string from left and right. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1base_1_1utils_1_1Str_acf80221cec72da701ef50995a61ab91f}{starts\+With} (const std\+::string \&str, const std\+::string \&start)
+\begin{DoxyCompactList}\small\item\em Determines whether or not str starts with specified string. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1base_1_1utils_1_1Str_a5bcf5f6cc41a7ed683be115148579561}{ends\+With} (const std\+::string \&str, const std\+::string \&end)
+\begin{DoxyCompactList}\small\item\em Determines whether or not str ends with specified string. \end{DoxyCompactList}\item 
+static std\+::string \& \hyperlink{classel_1_1base_1_1utils_1_1Str_aa07bfda259ed194120b371401734ae86}{replace\+All} (std\+::string \&str, char replace\+What, char replace\+With)
+\begin{DoxyCompactList}\small\item\em Replaces all instances of replace\+What with \textquotesingle{}replace\+With\textquotesingle{}. Original variable is changed for performance. \end{DoxyCompactList}\item 
+static std\+::string \& \hyperlink{classel_1_1base_1_1utils_1_1Str_a8e823aa60b160451ca0b8732c3c75568}{replace\+All} (std\+::string \&str, const std\+::string \&replace\+What, const std\+::string \&replace\+With)
+\begin{DoxyCompactList}\small\item\em Replaces all instances of \textquotesingle{}replace\+What\textquotesingle{} with \textquotesingle{}replace\+With\textquotesingle{}. (String version) Replaces in place. \end{DoxyCompactList}\item 
+static void {\bfseries replace\+First\+With\+Escape} (base\+::type\+::string\+\_\+t \&str, const base\+::type\+::string\+\_\+t \&replace\+What, const base\+::type\+::string\+\_\+t \&replace\+With)\hypertarget{classel_1_1base_1_1utils_1_1Str_a3725349f601d07316d1c2bc211daaaa1}{}\label{classel_1_1base_1_1utils_1_1Str_a3725349f601d07316d1c2bc211daaaa1}
+
+\item 
+static std\+::string \& \hyperlink{classel_1_1base_1_1utils_1_1Str_a6a05315fb967508dc1faf0584421a95d}{to\+Upper} (std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Converts string to uppercase. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1base_1_1utils_1_1Str_a8081458c7848ff991d765c69f7858c44}{c\+String\+Eq} (const char $\ast$s1, const char $\ast$s2)\hypertarget{classel_1_1base_1_1utils_1_1Str_a8081458c7848ff991d765c69f7858c44}{}\label{classel_1_1base_1_1utils_1_1Str_a8081458c7848ff991d765c69f7858c44}
+
+\begin{DoxyCompactList}\small\item\em Compares cstring equality -\/ uses strcmp. \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1base_1_1utils_1_1Str_aaa37755d713b5e6475950134ce9ce0e8}{c\+String\+Case\+Eq} (const char $\ast$s1, const char $\ast$s2)\hypertarget{classel_1_1base_1_1utils_1_1Str_aaa37755d713b5e6475950134ce9ce0e8}{}\label{classel_1_1base_1_1utils_1_1Str_aaa37755d713b5e6475950134ce9ce0e8}
+
+\begin{DoxyCompactList}\small\item\em Compares cstring equality (case-\/insensitive) -\/ uses toupper(char) Dont use strcasecmp because of C\+RT (V\+C++) \end{DoxyCompactList}\item 
+static bool \hyperlink{classel_1_1base_1_1utils_1_1Str_a27cc1c1625b21597eb75df62b8fca0f8}{contains} (const char $\ast$str, char c)\hypertarget{classel_1_1base_1_1utils_1_1Str_a27cc1c1625b21597eb75df62b8fca0f8}{}\label{classel_1_1base_1_1utils_1_1Str_a27cc1c1625b21597eb75df62b8fca0f8}
+
+\begin{DoxyCompactList}\small\item\em Returns true if c exist in str. \end{DoxyCompactList}\item 
+static char $\ast$ {\bfseries convert\+And\+Add\+To\+Buff} (std\+::size\+\_\+t n, int len, char $\ast$buf, const char $\ast$buf\+Lim, bool zero\+Padded=true)\hypertarget{classel_1_1base_1_1utils_1_1Str_a5e12c163bf1085441ea5453fd6c62fa0}{}\label{classel_1_1base_1_1utils_1_1Str_a5e12c163bf1085441ea5453fd6c62fa0}
+
+\item 
+static char $\ast$ {\bfseries add\+To\+Buff} (const char $\ast$str, char $\ast$buf, const char $\ast$buf\+Lim)\hypertarget{classel_1_1base_1_1utils_1_1Str_aa6a96f625f71661c02ecd5366533abaa}{}\label{classel_1_1base_1_1utils_1_1Str_aa6a96f625f71661c02ecd5366533abaa}
+
+\item 
+static char $\ast$ {\bfseries clear\+Buff} (char buff\mbox{[}$\,$\mbox{]}, std\+::size\+\_\+t lim)\hypertarget{classel_1_1base_1_1utils_1_1Str_adf0c36c9b8276ede18111a866e31db8b}{}\label{classel_1_1base_1_1utils_1_1Str_adf0c36c9b8276ede18111a866e31db8b}
+
+\item 
+static char $\ast$ \hyperlink{classel_1_1base_1_1utils_1_1Str_a6dc022e7e8d4cbf2c80ba9e1354feaea}{wchar\+Ptr\+To\+Char\+Ptr} (const wchar\+\_\+t $\ast$line)\hypertarget{classel_1_1base_1_1utils_1_1Str_a6dc022e7e8d4cbf2c80ba9e1354feaea}{}\label{classel_1_1base_1_1utils_1_1Str_a6dc022e7e8d4cbf2c80ba9e1354feaea}
+
+\begin{DoxyCompactList}\small\item\em Converst wchar$\ast$ to char$\ast$ N\+O\+TE\+: Need to free return value after use! \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+String utilities helper class used internally. You should not use it. 
+
+\subsection{Member Function Documentation}
+\index{el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}!ends\+With@{ends\+With}}
+\index{ends\+With@{ends\+With}!el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}}
+\subsubsection[{\texorpdfstring{ends\+With(const std\+::string \&str, const std\+::string \&end)}{endsWith(const std::string &str, const std::string &end)}}]{\setlength{\rightskip}{0pt plus 5cm}static bool el\+::base\+::utils\+::\+Str\+::ends\+With (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str, }
+\item[{const std\+::string \&}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1Str_a5bcf5f6cc41a7ed683be115148579561}{}\label{classel_1_1base_1_1utils_1_1Str_a5bcf5f6cc41a7ed683be115148579561}
+
+
+Determines whether or not str ends with specified string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to check \\
+\hline
+{\em end} & String to check against \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if ends with specified string, false otherwise 
+\end{DoxyReturn}
+\index{el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}!ltrim@{ltrim}}
+\index{ltrim@{ltrim}!el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}}
+\subsubsection[{\texorpdfstring{ltrim(std\+::string \&str)}{ltrim(std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string\& el\+::base\+::utils\+::\+Str\+::ltrim (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1Str_a64b7a841f04ed916ed8d234b8508703e}{}\label{classel_1_1base_1_1utils_1_1Str_a64b7a841f04ed916ed8d234b8508703e}
+
+
+Trims string from start. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em str} & String to trim \\
+\hline
+\end{DoxyParams}
+\index{el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}!replace\+All@{replace\+All}}
+\index{replace\+All@{replace\+All}!el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}}
+\subsubsection[{\texorpdfstring{replace\+All(std\+::string \&str, char replace\+What, char replace\+With)}{replaceAll(std::string &str, char replaceWhat, char replaceWith)}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string\& el\+::base\+::utils\+::\+Str\+::replace\+All (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&}]{str, }
+\item[{char}]{replace\+What, }
+\item[{char}]{replace\+With}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1Str_aa07bfda259ed194120b371401734ae86}{}\label{classel_1_1base_1_1utils_1_1Str_aa07bfda259ed194120b371401734ae86}
+
+
+Replaces all instances of replace\+What with \textquotesingle{}replace\+With\textquotesingle{}. Original variable is changed for performance. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em str} & String to replace from \\
+\hline
+ & {\em replace\+What} & Character to replace \\
+\hline
+ & {\em replace\+With} & Character to replace with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Modified version of str 
+\end{DoxyReturn}
+\index{el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}!replace\+All@{replace\+All}}
+\index{replace\+All@{replace\+All}!el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}}
+\subsubsection[{\texorpdfstring{replace\+All(std\+::string \&str, const std\+::string \&replace\+What, const std\+::string \&replace\+With)}{replaceAll(std::string &str, const std::string &replaceWhat, const std::string &replaceWith)}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string\& el\+::base\+::utils\+::\+Str\+::replace\+All (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&}]{str, }
+\item[{const std\+::string \&}]{replace\+What, }
+\item[{const std\+::string \&}]{replace\+With}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1Str_a8e823aa60b160451ca0b8732c3c75568}{}\label{classel_1_1base_1_1utils_1_1Str_a8e823aa60b160451ca0b8732c3c75568}
+
+
+Replaces all instances of \textquotesingle{}replace\+What\textquotesingle{} with \textquotesingle{}replace\+With\textquotesingle{}. (String version) Replaces in place. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to replace from \\
+\hline
+{\em replace\+What} & Character to replace \\
+\hline
+{\em replace\+With} & Character to replace with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Modified (original) str 
+\end{DoxyReturn}
+\index{el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}!rtrim@{rtrim}}
+\index{rtrim@{rtrim}!el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}}
+\subsubsection[{\texorpdfstring{rtrim(std\+::string \&str)}{rtrim(std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string\& el\+::base\+::utils\+::\+Str\+::rtrim (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1Str_a9202797763e10861c4fa84ffd40198bb}{}\label{classel_1_1base_1_1utils_1_1Str_a9202797763e10861c4fa84ffd40198bb}
+
+
+Trim string from end. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em str} & String to trim \\
+\hline
+\end{DoxyParams}
+\index{el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}!starts\+With@{starts\+With}}
+\index{starts\+With@{starts\+With}!el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}}
+\subsubsection[{\texorpdfstring{starts\+With(const std\+::string \&str, const std\+::string \&start)}{startsWith(const std::string &str, const std::string &start)}}]{\setlength{\rightskip}{0pt plus 5cm}static bool el\+::base\+::utils\+::\+Str\+::starts\+With (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str, }
+\item[{const std\+::string \&}]{start}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1Str_acf80221cec72da701ef50995a61ab91f}{}\label{classel_1_1base_1_1utils_1_1Str_acf80221cec72da701ef50995a61ab91f}
+
+
+Determines whether or not str starts with specified string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to check \\
+\hline
+{\em start} & String to check against \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if starts with specified string, false otherwise 
+\end{DoxyReturn}
+\index{el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}!to\+Upper@{to\+Upper}}
+\index{to\+Upper@{to\+Upper}!el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}}
+\subsubsection[{\texorpdfstring{to\+Upper(std\+::string \&str)}{toUpper(std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string\& el\+::base\+::utils\+::\+Str\+::to\+Upper (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1Str_a6a05315fb967508dc1faf0584421a95d}{}\label{classel_1_1base_1_1utils_1_1Str_a6a05315fb967508dc1faf0584421a95d}
+
+
+Converts string to uppercase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Uppercase string 
+\end{DoxyReturn}
+\index{el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}!trim@{trim}}
+\index{trim@{trim}!el\+::base\+::utils\+::\+Str@{el\+::base\+::utils\+::\+Str}}
+\subsubsection[{\texorpdfstring{trim(std\+::string \&str)}{trim(std::string &str)}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string\& el\+::base\+::utils\+::\+Str\+::trim (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classel_1_1base_1_1utils_1_1Str_aba0bc132c410fd3c1e128d1038e996ba}{}\label{classel_1_1base_1_1utils_1_1Str_aba0bc132c410fd3c1e128d1038e996ba}
+
+
+Trims string from left and right. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em str} & String to trim \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/log/easylogging++.\+h\end{DoxyCompactItemize}

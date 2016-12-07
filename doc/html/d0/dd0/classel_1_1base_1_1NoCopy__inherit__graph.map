@@ -1,0 +1,14 @@
+<map id="el::base::NoCopy" name="el::base::NoCopy">
+<area shape="rect" id="node2" href="$db/d81/classel_1_1base_1_1debug_1_1CrashHandler.html" title="Handles unexpected crashes. " alt="" coords="5,241,204,347"/>
+<area shape="rect" id="node3" href="$d3/d38/classel_1_1base_1_1debug_1_1StackTrace.html" title="{el::base::debug::StackTrace\n|+ kMaxStack\l+ kStackStart\l|+ StackTrace()\l+ ~StackTrace()\l+ getLatestStack()\l}" alt="" coords="229,233,415,355"/>
+<area shape="rect" id="node4" href="$d5/dce/classel_1_1base_1_1LogDispatcher.html" title="Dispatches log messages. " alt="" coords="439,248,599,340"/>
+<area shape="rect" id="node5" href="$dc/d20/classel_1_1base_1_1NullWriter.html" title="Writes nothing &#45; Used when certain log is disabled. " alt="" coords="624,241,759,347"/>
+<area shape="rect" id="node6" href="$d0/da4/classel_1_1base_1_1Storage.html" title="Easylogging++ management storage. " alt="" coords="783,182,962,406"/>
+<area shape="rect" id="node7" href="$d0/db3/classel_1_1base_1_1threading_1_1internal_1_1NoMutex.html" title="Mutex wrapper used when multi&#45;threading is disabled. " alt="" coords="986,226,1119,362"/>
+<area shape="rect" id="node8" href="$d5/d27/classel_1_1base_1_1threading_1_1internal_1_1NoScopedLock.html" title="Lock guard wrapper used when multi&#45;threading is disabled. " alt="" coords="1144,233,1313,355"/>
+<area shape="rect" id="node9" href="$de/d00/classel_1_1base_1_1VRegistry.html" title="Represents registries for verbose logging. " alt="" coords="1337,197,1483,391"/>
+<area shape="rect" id="node10" href="$d8/dea/classel_1_1base_1_1Writer.html" title="Main entry point of each logging. " alt="" coords="1507,131,1651,457"/>
+<area shape="rect" id="node12" href="$dc/dc4/classel_1_1LogBuilder.html" title="{el::LogBuilder\n||+ ~LogBuilder()\l+ build()\l+ convertToColoredOutput()\l}" alt="" coords="1675,241,1859,347"/>
+<area shape="rect" id="node11" href="$d6/d55/classel_1_1base_1_1PErrorWriter.html" title="{el::base::PErrorWriter\n||+ PErrorWriter()\l+ ~PErrorWriter()\l}" alt="" coords="1505,505,1653,597"/>
+<area shape="rect" id="node13" href="$d2/de2/classel_1_1base_1_1DefaultLogBuilder.html" title="{el::base::DefaultLogBuilder\n||+ build()\l}" alt="" coords="1678,513,1857,590"/>
+</map>

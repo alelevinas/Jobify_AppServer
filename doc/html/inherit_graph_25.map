@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$db/dbe/classInvalidUsernamePasswordException.html" title="InvalidUsernamePasswordException" alt="" coords="132,5,368,32"/>
+<area shape="rect" id="node3" href="$df/dde/classJson_1_1Exception.html" title="Json::Exception" alt="" coords="192,56,308,83"/>
+<area shape="rect" id="node6" href="$d4/d52/classKeyAlreadyExistsException.html" title="KeyAlreadyExistsException" alt="" coords="158,107,342,133"/>
+<area shape="rect" id="node7" href="$d0/d5b/classKeyDoesntExistException.html" title="KeyDoesntExistException" alt="" coords="163,157,337,184"/>
+<area shape="rect" id="node8" href="$d4/d49/classTokenInvalidException.html" title="TokenInvalidException" alt="" coords="173,208,327,235"/>
+<area shape="rect" id="node4" href="$da/d86/classJson_1_1LogicError.html" title="Json::LogicError" alt="" coords="425,31,542,57"/>
+<area shape="rect" id="node5" href="$d1/d28/classJson_1_1RuntimeError.html" title="Json::RuntimeError" alt="" coords="416,81,551,108"/>
+</map>

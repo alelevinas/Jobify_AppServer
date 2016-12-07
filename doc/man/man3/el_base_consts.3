@@ -1,0 +1,82 @@
+.TH "el::base::consts" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::consts \- Namespace containing constants used internally\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "struct {"
+.br
+.ti -1c
+.RI "   double \fBvalue\fP"
+.br
+.ti -1c
+.RI "   const base::type::char_t * \fBunit\fP"
+.br
+.ti -1c
+.RI "} \fBkTimeFormats\fP []"
+.br
+.ti -1c
+.RI "struct {"
+.br
+.ti -1c
+.RI "   int \fBnumb\fP"
+.br
+.ti -1c
+.RI "   const char * \fBname\fP"
+.br
+.ti -1c
+.RI "   const char * \fBbrief\fP"
+.br
+.ti -1c
+.RI "   const char * \fBdetail\fP"
+.br
+.ti -1c
+.RI "} \fBkCrashSignals\fP []"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Namespace containing constants used internally\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "const { \&.\&.\&. }   el::base::consts::kCrashSignals[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+                            
+                            { SIGABRT, "SIGABRT", "Abnormal termination",
+                                "Program was abnormally terminated\&." },
+                            { SIGFPE, "SIGFPE", "Erroneous arithmetic operation",
+                                "Arithemetic operation issue such as division by zero or operation resulting in overflow\&." },
+                            { SIGILL, "SIGILL", "Illegal instruction",
+                                "Generally due to a corruption in the code or to an attempt to execute data\&."},
+                            { SIGSEGV, "SIGSEGV", "Invalid access to memory",
+                                "Program is trying to read an invalid (unallocated, deleted or corrupted) or inaccessible memory\&." },
+                            { SIGINT, "SIGINT", "Interactive attention signal",
+                                "Interruption generated (generally) by user or operating system\&." },
+                        }
+.fi
+.SS "const { \&.\&.\&. }   el::base::consts::kTimeFormats[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+                            { 1000\&.0f, ELPP_LITERAL("mis") },
+                            { 1000\&.0f, ELPP_LITERAL("ms") },
+                            { 60\&.0f, ELPP_LITERAL("seconds") },
+                            { 60\&.0f, ELPP_LITERAL("minutes") },
+                            { 24\&.0f, ELPP_LITERAL("hours") },
+                            { 7\&.0f, ELPP_LITERAL("days") }
+                        }
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

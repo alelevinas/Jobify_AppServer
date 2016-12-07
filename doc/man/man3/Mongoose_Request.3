@@ -1,0 +1,171 @@
+.TH "Mongoose::Request" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose::Request \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRequest\fP (struct \fBmg_connection\fP *\fBconnection\fP)"
+.br
+.ti -1c
+.RI "void \fBwriteResponse\fP (\fBResponse\fP *response)"
+.br
+.ti -1c
+.RI "bool \fBhasVariable\fP (string key)"
+.br
+.ti -1c
+.RI "map< string, string > \fBgetAllVariable\fP ()"
+.br
+.RI "\fIgetAllVariable \fP"
+.ti -1c
+.RI "string \fBget\fP (string key, string fallback='')"
+.br
+.ti -1c
+.RI "bool \fBhasCookie\fP (string key)"
+.br
+.ti -1c
+.RI "string \fBgetCookie\fP (string key, string fallback='')"
+.br
+.ti -1c
+.RI "string \fBgetHeaderKeyValue\fP (const std::string &header_key)"
+.br
+.ti -1c
+.RI "void \fBhandleUploads\fP ()"
+.br
+.ti -1c
+.RI "string \fBgetUrl\fP ()"
+.br
+.ti -1c
+.RI "string \fBgetMethod\fP ()"
+.br
+.ti -1c
+.RI "string \fBgetData\fP ()"
+.br
+.ti -1c
+.RI "bool \fBreadVariable\fP (const char *data, string key, string &output)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "vector< \fBUploadFile\fP > \fBuploadFiles\fP"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBmethod\fP"
+.br
+.ti -1c
+.RI "string \fBurl\fP"
+.br
+.ti -1c
+.RI "string \fBdata\fP"
+.br
+.ti -1c
+.RI "struct \fBmg_connection\fP * \fBconnection\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "string Mongoose::Request::get (string key, string fallback = \fC''\fP)"
+Get the value for a certain variable
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the name of the variable 
+.br
+\fIstring\fP the fallback value if the variable doesn't exists
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+string the value of the variable if it exists, fallback else 
+.RE
+.PP
+
+.SS "map< string, string > Mongoose::Request::getAllVariable ()"
+
+.PP
+getAllVariable Get All variable present in GET or POST data
+.PP
+\fBReturns:\fP
+.RS 4
+map<string, string> with all variables 
+.RE
+.PP
+
+.SS "string Mongoose::Request::getCookie (string key, string fallback = \fC''\fP)"
+Try to get the cookie value
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the name of the cookie 
+.br
+\fIstring\fP the fallback value
+.RE
+.PP
+the value of the cookie if it exists, fallback else 
+.SS "void Mongoose::Request::handleUploads ()"
+Handle uploads to the target directory
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the target directory 
+.br
+\fIpath\fP the posted file path 
+.RE
+.PP
+
+.SS "bool Mongoose::Request::hasCookie (string key)"
+Checks if the given cookie exists
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the name of the cookie
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+bool true if the given cookie is set 
+.RE
+.PP
+
+.SS "bool Mongoose::Request::hasVariable (string key)"
+Check if the variable given by key is present in GET or POST data
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the name of the variable
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+bool true if the param is present, false else 
+.RE
+.PP
+
+.SS "void Mongoose::Request::writeResponse (\fBResponse\fP * response)"
+Sends a given response to the client
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBResponse\fP\fP a response for this request 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "vector<\fBUploadFile\fP> Mongoose::Request::uploadFiles"
+Files uploaded in this request 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

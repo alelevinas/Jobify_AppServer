@@ -1,0 +1,72 @@
+.TH "el::PerformanceTrackingData" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::PerformanceTrackingData \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBDataType\fP : base::type::EnumType { \fBCheckpoint\fP = 1, \fBComplete\fP = 2 }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPerformanceTrackingData\fP (DataType dataType)"
+.br
+.ti -1c
+.RI "const std::string * \fBblockName\fP (void) const "
+.br
+.ti -1c
+.RI "const struct timeval * \fBstartTime\fP (void) const "
+.br
+.ti -1c
+.RI "const struct timeval * \fBendTime\fP (void) const "
+.br
+.ti -1c
+.RI "const struct timeval * \fBlastCheckpointTime\fP (void) const "
+.br
+.ti -1c
+.RI "const \fBbase::PerformanceTracker\fP * \fBperformanceTracker\fP (void) const "
+.br
+.ti -1c
+.RI "PerformanceTrackingData::DataType \fBdataType\fP (void) const "
+.br
+.ti -1c
+.RI "bool \fBfirstCheckpoint\fP (void) const "
+.br
+.ti -1c
+.RI "std::string \fBcheckpointId\fP (void) const "
+.br
+.ti -1c
+.RI "const char * \fBfile\fP (void) const "
+.br
+.ti -1c
+.RI "unsigned long int \fBline\fP (void) const "
+.br
+.ti -1c
+.RI "const char * \fBfunc\fP (void) const "
+.br
+.ti -1c
+.RI "const base::type::string_t * \fBformattedTimeTaken\fP () const "
+.br
+.ti -1c
+.RI "const std::string & \fBloggerId\fP (void) const "
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::base::PerformanceTracker\fP"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

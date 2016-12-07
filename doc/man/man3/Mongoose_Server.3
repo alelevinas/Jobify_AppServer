@@ -1,0 +1,214 @@
+.TH "Mongoose::Server" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose::Server \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBJobifyServer\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBServer\fP (int port=80, const char *documentRoot='www')"
+.br
+.ti -1c
+.RI "void \fBstart\fP ()"
+.br
+.ti -1c
+.RI "void \fBstop\fP ()"
+.br
+.ti -1c
+.RI "void \fBregisterController\fP (\fBController\fP *)"
+.br
+.ti -1c
+.RI "int \fB_handleRequest\fP (struct \fBmg_connection\fP *conn)"
+.br
+.ti -1c
+.RI "void \fB_upload\fP (struct \fBmg_connection\fP *conn, const char *fileName)"
+.br
+.ti -1c
+.RI "void \fB_webSocketReady\fP (struct \fBmg_connection\fP *conn)"
+.br
+.ti -1c
+.RI "int \fB_webSocketData\fP (struct \fBmg_connection\fP *conn, string data)"
+.br
+.ti -1c
+.RI "\fBResponse\fP * \fBhandleRequest\fP (\fBRequest\fP &request)"
+.br
+.ti -1c
+.RI "void \fBsetOption\fP (string key, string value)"
+.br
+.ti -1c
+.RI "\fBWebSockets\fP & \fBgetWebSockets\fP ()"
+.br
+.ti -1c
+.RI "void \fBprintStats\fP ()"
+.br
+.ti -1c
+.RI "void \fBpoll\fP ()"
+.br
+.ti -1c
+.RI "bool \fBhandles\fP (string method, string url)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "volatile bool \fBstopped\fP"
+.br
+.ti -1c
+.RI "volatile bool \fBdestroyed\fP"
+.br
+.ti -1c
+.RI "\fBSessions\fP \fBsessions\fP"
+.br
+.ti -1c
+.RI "\fBMutex\fP \fBmutex\fP"
+.br
+.ti -1c
+.RI "map< string, string > \fBoptionsMap\fP"
+.br
+.ti -1c
+.RI "map< struct \fBmg_connection\fP *, \fBRequest\fP * > \fBcurrentRequests\fP"
+.br
+.ti -1c
+.RI "struct \fBmg_server\fP * \fBserver\fP"
+.br
+.ti -1c
+.RI "\fBWebSockets\fP \fBwebsockets\fP"
+.br
+.ti -1c
+.RI "vector< \fBController\fP * > \fBcontrollers\fP"
+.br
+.ti -1c
+.RI "int \fBrequests\fP"
+.br
+.ti -1c
+.RI "int \fBstartTime\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Mongoose::Server::Server (int port = \fC80\fP, const char * documentRoot = \fC'www'\fP)"
+Constructs the server
+.PP
+\fBParameters:\fP
+.RS 4
+\fIint\fP the number of the port to listen to 
+.br
+\fIstring\fP documentRoot the root that should be used for static files 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "int Mongoose::Server::_handleRequest (struct \fBmg_connection\fP * conn)"
+Internally used to process a request
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstruct\fP mg_connection* the mongoose connection 
+.RE
+.PP
+
+.SS "void Mongoose::Server::_upload (struct \fBmg_connection\fP * conn, const char * fileName)"
+Internally used to process a file upload
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstruct\fP mg_connection* the mongoose conneciton 
+.br
+\fIconst\fP char * the name of the uploaded file 
+.RE
+.PP
+
+.SS "int Mongoose::Server::_webSocketData (struct \fBmg_connection\fP * conn, string data)"
+Handles web sockets data
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstruct\fP mg_connection* the mongoose connection 
+.br
+\fIint\fP flags the data flags 
+.br
+\fIchar*\fP the data 
+.br
+\fIsize\fP the data size
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int if we have to keep the connection opened 
+.RE
+.PP
+
+.SS "void Mongoose::Server::_webSocketReady (struct \fBmg_connection\fP * conn)"
+Handles a web socket connection
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstruct\fP mg_connection* the mongoose connection with the client 
+.RE
+.PP
+
+.SS "\fBWebSockets\fP & Mongoose::Server::getWebSockets ()"
+Returns the \fBWebSockets\fP container
+.PP
+\fBReturns:\fP
+.RS 4
+\fBWebSockets\fP the web sockets container 
+.RE
+.PP
+
+.SS "\fBResponse\fP * Mongoose::Server::handleRequest (\fBRequest\fP & request)"
+Process the request by controllers
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBRequest\fP\fP the request
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fBResponse\fP the response if one of the controllers can handle it, NULL else 
+.RE
+.PP
+
+.SS "bool Mongoose::Server::handles (string method, string url)"
+Does the server handles url? 
+.SS "void Mongoose::Server::poll ()"
+Polls the server 
+.SS "void Mongoose::Server::printStats ()"
+Print statistics 
+.SS "void Mongoose::Server::registerController (\fBController\fP * controller)"
+Register a new controller on the server
+.PP
+\fBParameters:\fP
+.RS 4
+\fIController*\fP a pointer to a controller 
+.RE
+.PP
+
+.SS "void Mongoose::Server::setOption (string key, string value)"
+Sets a mongoose extra option
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the name of the option 
+.br
+\fIstring\fP the value of the option 
+.RE
+.PP
+
+.SS "void Mongoose::Server::start ()"
+Runs the \fBMongoose\fP server 
+.SS "void Mongoose::Server::stop ()"
+Stops the \fBMongoose\fP server 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

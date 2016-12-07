@@ -1,0 +1,6 @@
+<map id="Mongoose::WebSocket" name="Mongoose::WebSocket">
+<area shape="rect" id="node2" href="$d2/dad/structmg__connection.html" title="{mg_connection\n|+ request_method\l+ uri\l+ http_version\l+ query_string\l+ remote_ip\l+ remote_port\l+ num_headers\l+ content\l+ content_len\l+ is_websocket\l+ status_code\l+ wsbits\l+ server_param\l+ connection_param\l|}" alt="" coords="136,160,276,428"/>
+<area shape="rect" id="node6" href="$da/da9/classMongoose_1_1Request.html" title="{Mongoose::Request\n|+ uploadFiles\l|+ Request()\l+ writeResponse()\l+ hasVariable()\l+ getAllVariable()\l+ get()\l+ hasCookie()\l+ getCookie()\l+ getHeaderKeyValue()\l+ handleUploads()\l+ getUrl()\l+ getMethod()\l+ getData()\l+ readVariable()\l}" alt="" coords="87,520,246,773"/>
+<area shape="rect" id="node3" href="$da/d69/structmg__connection_1_1mg__header.html" title="{mg_connection::mg_header\n|+ name\l+ value\l|}" alt="" coords="115,5,298,97"/>
+<area shape="rect" id="node4" href="$da/dfc/classMongoose_1_1Mutex.html" title="{Mongoose::Mutex\n|# _mutex\l|+ Mutex()\l+ ~Mutex()\l+ lock()\l+ unlock()\l}" alt="" coords="394,586,520,707"/>
+</map>

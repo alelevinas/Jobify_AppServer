@@ -1,0 +1,46 @@
+.TH "mg_server" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mg_server \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "sock_t \fBlistening_sock\fP"
+.br
+.ti -1c
+.RI "union \fBsocket_address\fP \fBlsa\fP"
+.br
+.ti -1c
+.RI "struct \fBll\fP \fBactive_connections\fP"
+.br
+.ti -1c
+.RI "struct \fBll\fP \fBuri_handlers\fP"
+.br
+.ti -1c
+.RI "mg_handler_t \fBerror_handler\fP"
+.br
+.ti -1c
+.RI "char * \fBconfig_options\fP [NUM_OPTIONS]"
+.br
+.ti -1c
+.RI "void * \fBserver_data\fP"
+.br
+.ti -1c
+.RI "void * \fBssl_ctx\fP"
+.br
+.ti -1c
+.RI "mg_handler_t \fBdo_i_handle\fP"
+.br
+.ti -1c
+.RI "sock_t \fBctl\fP [2]"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

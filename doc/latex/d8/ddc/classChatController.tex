@@ -1,0 +1,113 @@
+\hypertarget{classChatController}{}\section{Chat\+Controller Class Reference}
+\label{classChatController}\index{Chat\+Controller@{Chat\+Controller}}
+
+
+{\ttfamily \#include $<$Chat\+Controller.\+h$>$}
+
+
+
+Inheritance diagram for Chat\+Controller\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{da/d87/classChatController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Chat\+Controller\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{d9/da9/classChatController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Chat\+Controller} (\hyperlink{classDatabaseManager}{Database\+Manager} $\ast$p\+Manager, \hyperlink{classSessionManager}{Session\+Manager} $\ast$p\+Session\+Manager, std\+::string fire\+Server\+Token)\hypertarget{classChatController_a61968183ea481dca8a6b303532aadb4b}{}\label{classChatController_a61968183ea481dca8a6b303532aadb4b}
+
+\item 
+void {\bfseries setup} ()\hypertarget{classChatController_a3bbf4b8db89c6e35f6fb4e35b52cf06e}{}\label{classChatController_a3bbf4b8db89c6e35f6fb4e35b52cf06e}
+
+\item 
+void \hyperlink{classChatController_a0fec4ddc971ac48152b95eff2094616b}{post\+User\+Chat\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classChatController_ac7099d629232418a4834a4d7bb46a026}{get\+User\+Chats\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classChatController_a1b70506b3e64214f97aac62fdd93df1b}{delete\+Conversation\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classChatController_a0dfd8abc1196567c30eb5fbb5d355179}{delete\+Message\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Controller that manages the chat related api endpoints. Every method recieves a Moongose\+::\+Request with the request data and a Mongoose\+::\+Json\+Response to store the response json. 
+
+\subsection{Member Function Documentation}
+\index{Chat\+Controller@{Chat\+Controller}!delete\+Conversation\+Request@{delete\+Conversation\+Request}}
+\index{delete\+Conversation\+Request@{delete\+Conversation\+Request}!Chat\+Controller@{Chat\+Controller}}
+\subsubsection[{\texorpdfstring{delete\+Conversation\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{deleteConversationRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chat\+Controller\+::delete\+Conversation\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatController_a1b70506b3e64214f97aac62fdd93df1b}{}\label{classChatController_a1b70506b3e64214f97aac62fdd93df1b}
+Endpoint to delete a conversation with another user 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Chat\+Controller@{Chat\+Controller}!delete\+Message\+Request@{delete\+Message\+Request}}
+\index{delete\+Message\+Request@{delete\+Message\+Request}!Chat\+Controller@{Chat\+Controller}}
+\subsubsection[{\texorpdfstring{delete\+Message\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{deleteMessageRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chat\+Controller\+::delete\+Message\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatController_a0dfd8abc1196567c30eb5fbb5d355179}{}\label{classChatController_a0dfd8abc1196567c30eb5fbb5d355179}
+Endpoint to delete a chat message with another user 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Chat\+Controller@{Chat\+Controller}!get\+User\+Chats\+Request@{get\+User\+Chats\+Request}}
+\index{get\+User\+Chats\+Request@{get\+User\+Chats\+Request}!Chat\+Controller@{Chat\+Controller}}
+\subsubsection[{\texorpdfstring{get\+User\+Chats\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getUserChatsRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chat\+Controller\+::get\+User\+Chats\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatController_ac7099d629232418a4834a4d7bb46a026}{}\label{classChatController_ac7099d629232418a4834a4d7bb46a026}
+Endpoint to get chat messages with another user 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Chat\+Controller@{Chat\+Controller}!post\+User\+Chat\+Request@{post\+User\+Chat\+Request}}
+\index{post\+User\+Chat\+Request@{post\+User\+Chat\+Request}!Chat\+Controller@{Chat\+Controller}}
+\subsubsection[{\texorpdfstring{post\+User\+Chat\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{postUserChatRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chat\+Controller\+::post\+User\+Chat\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classChatController_a0fec4ddc971ac48152b95eff2094616b}{}\label{classChatController_a0fec4ddc971ac48152b95eff2094616b}
+Endpoint to send a chat message to another user 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Chat\+Controller.\+h\item 
+src/Chat\+Controller.\+cpp\end{DoxyCompactItemize}

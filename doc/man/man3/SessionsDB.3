@@ -1,0 +1,54 @@
+.TH "SessionsDB" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SessionsDB \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SessionsDB\&.h>\fP
+.PP
+Inherits \fBDB\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSessionsDB\fP (const std::string &\fBdb_name\fP)"
+.br
+.ti -1c
+.RI "bool \fBadd_session\fP (const std::string &token, Json::Value session)"
+.br
+.ti -1c
+.RI "Json::Value \fBget_session\fP (const std::string &token)"
+.br
+.ti -1c
+.RI "bool \fBdelete_session\fP (const std::string &token)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+For now, this \fBDB\fP will consist of a generated token and its username\&. Only the active ones will be on the \fBDB\fP {token: username}
+.PP
+TODO: Add metadata and automatic logout (invalidate token) in a certain period of time 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool SessionsDB::delete_session (const std::string & token)"
+Deletes the session from the db\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItoken\fP of the session to delete 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no database errors\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

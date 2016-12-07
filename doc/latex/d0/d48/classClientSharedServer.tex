@@ -1,0 +1,87 @@
+\hypertarget{classClientSharedServer}{}\section{Client\+Shared\+Server Class Reference}
+\label{classClientSharedServer}\index{Client\+Shared\+Server@{Client\+Shared\+Server}}
+
+
+{\ttfamily \#include $<$Client\+Shared\+Server.\+h$>$}
+
+
+
+Collaboration diagram for Client\+Shared\+Server\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{d9/dd4/classClientSharedServer__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classClientSharedServer_a62284b905408f5b051003941142183ea}{Client\+Shared\+Server} (std\+::string url)\hypertarget{classClientSharedServer_a62284b905408f5b051003941142183ea}{}\label{classClientSharedServer_a62284b905408f5b051003941142183ea}
+
+\begin{DoxyCompactList}\small\item\em url of the shared server \end{DoxyCompactList}\item 
+std\+::string {\bfseries get\+Job\+Positions} ()\hypertarget{classClientSharedServer_a5aa2cc5bd2459fd69ab09c8e91431e31}{}\label{classClientSharedServer_a5aa2cc5bd2459fd69ab09c8e91431e31}
+
+\item 
+bool \hyperlink{classClientSharedServer_af5e6b2fc5be7dea4778c38c757267cdf}{get\+Names\+Job\+Positions} (Json\+::\+Value $\ast$names)
+\item 
+bool \hyperlink{classClientSharedServer_a03de2db456340fccc4bee6e89e20bc84}{get\+Names\+Skills} (Json\+::\+Value $\ast$names)
+\item 
+bool \hyperlink{classClientSharedServer_ac80766f7c0f6a4cdf3210a27ed72a8a6}{get\+Names\+Categories} (Json\+::\+Value $\ast$names)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+H\+T\+TP Client used to get data from the shared server instance. 
+
+\subsection{Member Function Documentation}
+\index{Client\+Shared\+Server@{Client\+Shared\+Server}!get\+Names\+Categories@{get\+Names\+Categories}}
+\index{get\+Names\+Categories@{get\+Names\+Categories}!Client\+Shared\+Server@{Client\+Shared\+Server}}
+\subsubsection[{\texorpdfstring{get\+Names\+Categories(\+Json\+::\+Value $\ast$names)}{getNamesCategories(Json::Value *names)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+Shared\+Server\+::get\+Names\+Categories (
+\begin{DoxyParamCaption}
+\item[{Json\+::\+Value $\ast$}]{names}
+\end{DoxyParamCaption}
+)}\hypertarget{classClientSharedServer_ac80766f7c0f6a4cdf3210a27ed72a8a6}{}\label{classClientSharedServer_ac80766f7c0f6a4cdf3210a27ed72a8a6}
+Gets the categories names from the shared server. 
+\begin{DoxyParams}{Parameters}
+{\em names} & Json array to store the result \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if got result 
+\end{DoxyReturn}
+\index{Client\+Shared\+Server@{Client\+Shared\+Server}!get\+Names\+Job\+Positions@{get\+Names\+Job\+Positions}}
+\index{get\+Names\+Job\+Positions@{get\+Names\+Job\+Positions}!Client\+Shared\+Server@{Client\+Shared\+Server}}
+\subsubsection[{\texorpdfstring{get\+Names\+Job\+Positions(\+Json\+::\+Value $\ast$names)}{getNamesJobPositions(Json::Value *names)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+Shared\+Server\+::get\+Names\+Job\+Positions (
+\begin{DoxyParamCaption}
+\item[{Json\+::\+Value $\ast$}]{names}
+\end{DoxyParamCaption}
+)}\hypertarget{classClientSharedServer_af5e6b2fc5be7dea4778c38c757267cdf}{}\label{classClientSharedServer_af5e6b2fc5be7dea4778c38c757267cdf}
+Gets the job Position names from the shared server. 
+\begin{DoxyParams}{Parameters}
+{\em names} & Json array to store the result \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if got result 
+\end{DoxyReturn}
+\index{Client\+Shared\+Server@{Client\+Shared\+Server}!get\+Names\+Skills@{get\+Names\+Skills}}
+\index{get\+Names\+Skills@{get\+Names\+Skills}!Client\+Shared\+Server@{Client\+Shared\+Server}}
+\subsubsection[{\texorpdfstring{get\+Names\+Skills(\+Json\+::\+Value $\ast$names)}{getNamesSkills(Json::Value *names)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Client\+Shared\+Server\+::get\+Names\+Skills (
+\begin{DoxyParamCaption}
+\item[{Json\+::\+Value $\ast$}]{names}
+\end{DoxyParamCaption}
+)}\hypertarget{classClientSharedServer_a03de2db456340fccc4bee6e89e20bc84}{}\label{classClientSharedServer_a03de2db456340fccc4bee6e89e20bc84}
+skills names from the shared server. 
+\begin{DoxyParams}{Parameters}
+{\em names} & Json array to store the result \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if got result 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Client\+Shared\+Server.\+h\item 
+src/Client\+Shared\+Server.\+cpp\end{DoxyCompactItemize}

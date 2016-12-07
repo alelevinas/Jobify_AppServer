@@ -1,0 +1,242 @@
+.TH "ProfileController" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ProfileController \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ProfileController\&.h>\fP
+.PP
+Inherits JsonController\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBProfileController\fP (\fBDatabaseManager\fP *db, \fBSessionManager\fP *sessionManager)"
+.br
+.RI "\fIThe Session Manager instance that controls active users\&. \fP"
+.ti -1c
+.RI "void \fBsetup\fP ()"
+.br
+.ti -1c
+.RI "void \fBgetUserRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBpostUserRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBupdateUserRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBdeleteUserRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBgetUsersRequest\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBgetLogin\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBpostRecommend\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBdeleteDeRecommend\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBgetUserContacts\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBpostAddContact\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBdeleteRemoveContact\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBgetFilteredUsers\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBgetUserImage\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBpostUserImage\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.ti -1c
+.RI "void \fBdeleteUserImage\fP (Mongoose::Request &request, Mongoose::JsonResponse &response)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Controller that manages the user related api endpoints\&. Every method recieves a Moongose::Request with the request data and a Mongoose::JsonResponse to store the response json\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void ProfileController::deleteDeRecommend (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Derecommends the user specified in the body\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::deleteRemoveContact (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Deletes the contact specified in the body 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::deleteUserImage (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Deletes the users image 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::deleteUserRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Deletes from de \fBDB\fP the user specified in the decrypted header Token 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::getFilteredUsers (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Gets the users corresponding to the filter queries 'sort', 'filter', 'job_position', 'skill' and 'distance' 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::getLogin (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Login endpoint\&. Checks if the username:password in b64 matches any on the \fBDB\fP and grants acces throug a token or declines it 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::getUserContacts (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Gets the user's contacts\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::getUserImage (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Gets the users image 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::getUserRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Gets the user specified in the query 'username' and sets de response 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::getUsersRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Gets all the users\&. Then it sets de response 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::postAddContact (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Adds the contact specified in the body 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::postRecommend (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Recommends the user specified in the body\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::postUserImage (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Posts the users image 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::postUserRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Gets the user specified in the request body and saves it in the \fBDB\fP\&. Then it sets de response 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+.SS "void ProfileController::updateUserRequest (Mongoose::Request & request, Mongoose::JsonResponse & response)"
+Updates the user specified in the request body and saves it in the \fBDB\fP\&. Then it sets de response 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIrequest\fP The request data 
+.br
+\fIresponse\fP The JsonResponse to send 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

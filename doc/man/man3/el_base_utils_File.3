@@ -1,0 +1,70 @@
+.TH "el::base::utils::File" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::utils::File \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBel::base::StaticClass\fP\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static base::type::fstream_t * \fBnewFileStream\fP (const std::string &filename)"
+.br
+.RI "\fICreates new out file stream for specified filename\&. \fP"
+.ti -1c
+.RI "static std::size_t \fBgetSizeOfFile\fP (base::type::fstream_t *fs)"
+.br
+.RI "\fIGets size of file provided in stream\&. \fP"
+.ti -1c
+.RI "static bool \fBpathExists\fP (const char *path, bool considerFile=false)"
+.br
+.RI "\fIDetermines whether or not provided path exist in current file system\&. \fP"
+.ti -1c
+.RI "static bool \fBcreatePath\fP (const std::string &path)"
+.br
+.RI "\fICreates specified path on file system\&. \fP"
+.ti -1c
+.RI "static std::string \fBextractPathFromFilename\fP (const std::string &fullPath, const char *seperator=base::consts::kFilePathSeperator)"
+.br
+.RI "\fIExtracts path of filename with leading slash\&. \fP"
+.ti -1c
+.RI "static void \fBbuildStrippedFilename\fP (const char *filename, char buff[], std::size_t limit=base::consts::kSourceFilenameMaxLength)"
+.br
+.RI "\fIbuilds stripped filename and puts it in buff \fP"
+.ti -1c
+.RI "static void \fBbuildBaseFilename\fP (const std::string &fullPath, char buff[], std::size_t limit=base::consts::kSourceFilenameMaxLength, const char *seperator=base::consts::kFilePathSeperator)"
+.br
+.RI "\fIbuilds base filename and puts it in buff \fP"
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "static bool el::base::utils::File::createPath (const std::string & path)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Creates specified path on file system\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath\fP Path to create\&. 
+.RE
+.PP
+
+.SS "static base::type::fstream_t* el::base::utils::File::newFileStream (const std::string & filename)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Creates new out file stream for specified filename\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+Pointer to newly created fstream or nullptr 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

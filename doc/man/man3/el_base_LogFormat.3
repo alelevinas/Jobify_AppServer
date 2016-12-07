@@ -1,0 +1,112 @@
+.TH "el::base::LogFormat" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::LogFormat \- Represents log format containing flags and date format\&. This is used internally to start initial log\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::Loggable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBLogFormat\fP (\fBLevel\fP level, const base::type::string_t &format)"
+.br
+.ti -1c
+.RI "\fBLogFormat\fP (const \fBLogFormat\fP &logFormat)"
+.br
+.ti -1c
+.RI "\fBLogFormat\fP (\fBLogFormat\fP &&logFormat)"
+.br
+.ti -1c
+.RI "\fBLogFormat\fP & \fBoperator=\fP (const \fBLogFormat\fP &logFormat)"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBLogFormat\fP &other)"
+.br
+.ti -1c
+.RI "void \fBparseFromFormat\fP (const base::type::string_t &userFormat)"
+.br
+.RI "\fIUpdates format to be used while logging\&. \fP"
+.ti -1c
+.RI "\fBLevel\fP \fBlevel\fP (void) const "
+.br
+.ti -1c
+.RI "const base::type::string_t & \fBuserFormat\fP (void) const "
+.br
+.ti -1c
+.RI "const base::type::string_t & \fBformat\fP (void) const "
+.br
+.ti -1c
+.RI "const std::string & \fBdateTimeFormat\fP (void) const "
+.br
+.ti -1c
+.RI "base::type::EnumType \fBflags\fP (void) const "
+.br
+.ti -1c
+.RI "bool \fBhasFlag\fP (\fBbase::FormatFlags\fP flag) const "
+.br
+.ti -1c
+.RI "virtual void \fBlog\fP (el::base::type::ostream_t &os) const "
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBupdateDateFormat\fP (std::size_t index, base::type::string_t &currFormat) ELPP_FINAL"
+.br
+.RI "\fIUpdates date time format if available in currFormat\&. \fP"
+.ti -1c
+.RI "virtual void \fBupdateFormatSpec\fP (void) ELPP_FINAL"
+.br
+.RI "\fIUpdates level from format\&. This is so that we dont have to do it at log-writing-time\&. It uses m_format and m_level\&. \fP"
+.ti -1c
+.RI "void \fBaddFlag\fP (\fBbase::FormatFlags\fP flag)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::Logger\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents log format containing flags and date format\&. This is used internally to start initial log\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "void el::base::LogFormat::parseFromFormat (const base::type::string_t & userFormat)\fC [inline]\fP"
+
+.PP
+Updates format to be used while logging\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIuserFormat\fP User provided format 
+.RE
+.PP
+
+.SS "virtual void el::base::LogFormat::updateDateFormat (std::size_t index, base::type::string_t & currFormat)\fC [inline]\fP, \fC [protected]\fP, \fC [virtual]\fP"
+
+.PP
+Updates date time format if available in currFormat\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIindex\fP Index where datetime, date or time was found 
+.br
+\fIcurrFormat\fP current format that is being used to format 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

@@ -1,0 +1,95 @@
+.TH "el::base::Writer" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::Writer \- Main entry point of each logging\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::NoCopy\fP\&.
+.PP
+Inherited by \fBel::base::PErrorWriter\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBWriter\fP (\fBLevel\fP level, const char *file, unsigned long int line, const char *func, \fBbase::DispatchAction\fP dispatchAction=base::DispatchAction::NormalLog, base::type::VerboseLevel verboseLevel=0)"
+.br
+.ti -1c
+.RI "template<typename T > \fBWriter\fP & \fBoperator<<\fP (const T &log)"
+.br
+.ti -1c
+.RI "\fBWriter\fP & \fBoperator<<\fP (std::ostream &(*log)(std::ostream &))"
+.br
+.ti -1c
+.RI "\fBWriter\fP & \fBconstruct\fP (\fBLogger\fP *logger, bool needLock=true)"
+.br
+.ti -1c
+.RI "\fBWriter\fP & \fBconstruct\fP (int count, const char *loggerIds,\&.\&.\&.)"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinitializeLogger\fP (const std::string &loggerId, bool lookup=true, bool needLock=true)"
+.br
+.ti -1c
+.RI "void \fBprocessDispatch\fP ()"
+.br
+.ti -1c
+.RI "void \fBtriggerDispatch\fP (void)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBLevel\fP \fBm_level\fP"
+.br
+.ti -1c
+.RI "const char * \fBm_file\fP"
+.br
+.ti -1c
+.RI "const unsigned long int \fBm_line\fP"
+.br
+.ti -1c
+.RI "const char * \fBm_func\fP"
+.br
+.ti -1c
+.RI "base::type::VerboseLevel \fBm_verboseLevel\fP"
+.br
+.ti -1c
+.RI "\fBLogger\fP * \fBm_logger\fP"
+.br
+.ti -1c
+.RI "bool \fBm_proceed\fP"
+.br
+.ti -1c
+.RI "\fBbase::MessageBuilder\fP \fBm_messageBuilder\fP"
+.br
+.ti -1c
+.RI "\fBbase::DispatchAction\fP \fBm_dispatchAction\fP"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBm_loggerIds\fP"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::Helpers\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Main entry point of each logging\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

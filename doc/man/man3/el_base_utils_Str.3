@@ -1,0 +1,219 @@
+.TH "el::base::utils::Str" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::utils::Str \- String utilities helper class used internally\&. You should not use it\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::StaticClass\fP\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBisDigit\fP (char c)"
+.br
+.RI "\fIChecks if character is digit\&. Dont use libc implementation of it to prevent locale issues\&. \fP"
+.ti -1c
+.RI "static bool \fBwildCardMatch\fP (const char *str, const char *pattern)"
+.br
+.RI "\fIMatches wildcards, '*' and '?' only supported\&. \fP"
+.ti -1c
+.RI "static std::string & \fBltrim\fP (std::string &str)"
+.br
+.RI "\fITrims string from start\&. \fP"
+.ti -1c
+.RI "static std::string & \fBrtrim\fP (std::string &str)"
+.br
+.RI "\fITrim string from end\&. \fP"
+.ti -1c
+.RI "static std::string & \fBtrim\fP (std::string &str)"
+.br
+.RI "\fITrims string from left and right\&. \fP"
+.ti -1c
+.RI "static bool \fBstartsWith\fP (const std::string &str, const std::string &start)"
+.br
+.RI "\fIDetermines whether or not str starts with specified string\&. \fP"
+.ti -1c
+.RI "static bool \fBendsWith\fP (const std::string &str, const std::string &end)"
+.br
+.RI "\fIDetermines whether or not str ends with specified string\&. \fP"
+.ti -1c
+.RI "static std::string & \fBreplaceAll\fP (std::string &str, char replaceWhat, char replaceWith)"
+.br
+.RI "\fIReplaces all instances of replaceWhat with 'replaceWith'\&. Original variable is changed for performance\&. \fP"
+.ti -1c
+.RI "static std::string & \fBreplaceAll\fP (std::string &str, const std::string &replaceWhat, const std::string &replaceWith)"
+.br
+.RI "\fIReplaces all instances of 'replaceWhat' with 'replaceWith'\&. (String version) Replaces in place\&. \fP"
+.ti -1c
+.RI "static void \fBreplaceFirstWithEscape\fP (base::type::string_t &str, const base::type::string_t &replaceWhat, const base::type::string_t &replaceWith)"
+.br
+.ti -1c
+.RI "static std::string & \fBtoUpper\fP (std::string &str)"
+.br
+.RI "\fIConverts string to uppercase\&. \fP"
+.ti -1c
+.RI "static bool \fBcStringEq\fP (const char *s1, const char *s2)"
+.br
+.RI "\fICompares cstring equality - uses strcmp\&. \fP"
+.ti -1c
+.RI "static bool \fBcStringCaseEq\fP (const char *s1, const char *s2)"
+.br
+.RI "\fICompares cstring equality (case-insensitive) - uses toupper(char) Dont use strcasecmp because of CRT (VC++) \fP"
+.ti -1c
+.RI "static bool \fBcontains\fP (const char *str, char c)"
+.br
+.RI "\fIReturns true if c exist in str\&. \fP"
+.ti -1c
+.RI "static char * \fBconvertAndAddToBuff\fP (std::size_t n, int len, char *buf, const char *bufLim, bool zeroPadded=true)"
+.br
+.ti -1c
+.RI "static char * \fBaddToBuff\fP (const char *str, char *buf, const char *bufLim)"
+.br
+.ti -1c
+.RI "static char * \fBclearBuff\fP (char buff[], std::size_t lim)"
+.br
+.ti -1c
+.RI "static char * \fBwcharPtrToCharPtr\fP (const wchar_t *line)"
+.br
+.RI "\fIConverst wchar* to char* NOTE: Need to free return value after use! \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+String utilities helper class used internally\&. You should not use it\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static bool el::base::utils::Str::endsWith (const std::string & str, const std::string & end)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Determines whether or not str ends with specified string\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP String to check 
+.br
+\fIend\fP String to check against 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if ends with specified string, false otherwise 
+.RE
+.PP
+
+.SS "static std::string& el::base::utils::Str::ltrim (std::string & str)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Trims string from start\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP String to trim 
+.RE
+.PP
+
+.SS "static std::string& el::base::utils::Str::replaceAll (std::string & str, char replaceWhat, char replaceWith)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Replaces all instances of replaceWhat with 'replaceWith'\&. Original variable is changed for performance\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP String to replace from 
+.br
+\fIreplaceWhat\fP Character to replace 
+.br
+\fIreplaceWith\fP Character to replace with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Modified version of str 
+.RE
+.PP
+
+.SS "static std::string& el::base::utils::Str::replaceAll (std::string & str, const std::string & replaceWhat, const std::string & replaceWith)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Replaces all instances of 'replaceWhat' with 'replaceWith'\&. (String version) Replaces in place\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP String to replace from 
+.br
+\fIreplaceWhat\fP Character to replace 
+.br
+\fIreplaceWith\fP Character to replace with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Modified (original) str 
+.RE
+.PP
+
+.SS "static std::string& el::base::utils::Str::rtrim (std::string & str)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Trim string from end\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP String to trim 
+.RE
+.PP
+
+.SS "static bool el::base::utils::Str::startsWith (const std::string & str, const std::string & start)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Determines whether or not str starts with specified string\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP String to check 
+.br
+\fIstart\fP String to check against 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if starts with specified string, false otherwise 
+.RE
+.PP
+
+.SS "static std::string& el::base::utils::Str::toUpper (std::string & str)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Converts string to uppercase\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP String to convert 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Uppercase string 
+.RE
+.PP
+
+.SS "static std::string& el::base::utils::Str::trim (std::string & str)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Trims string from left and right\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP String to trim 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

@@ -1,0 +1,304 @@
+\hypertarget{classMongoose_1_1Controller}{}\section{Mongoose\+:\+:Controller Class Reference}
+\label{classMongoose_1_1Controller}\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+
+
+Inheritance diagram for Mongoose\+:\+:Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/dd0/classMongoose_1_1Controller__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mongoose\+:\+:Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d8/d10/classMongoose_1_1Controller__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classMongoose_1_1Controller_a9548116fa83f27ac8015947580e1f298}{set\+Server} (\hyperlink{classMongoose_1_1Server}{Server} $\ast$server)
+\item 
+virtual void \hyperlink{classMongoose_1_1Controller_a3eff704e4a3b4dc5a63fbfaa50a934ff}{pre\+Process} (\hyperlink{classMongoose_1_1Request}{Request} \&request, \hyperlink{classMongoose_1_1Response}{Response} \&response)
+\item 
+virtual \hyperlink{classMongoose_1_1Response}{Response} $\ast$ \hyperlink{classMongoose_1_1Controller_adca552473aded39dc406c6fa95908a9e}{process} (\hyperlink{classMongoose_1_1Request}{Request} \&request)
+\item 
+virtual void \hyperlink{classMongoose_1_1Controller_aebbfe1104785733a7a1b8b696d20d9ba}{post\+Process} (\hyperlink{classMongoose_1_1Request}{Request} \&request, \hyperlink{classMongoose_1_1Response}{Response} \&response)
+\item 
+virtual \hyperlink{classMongoose_1_1Response}{Response} $\ast$ \hyperlink{classMongoose_1_1Controller_a0d23611062a1cd97e50086f354888069}{handle\+Request} (\hyperlink{classMongoose_1_1Request}{Request} \&request)
+\item 
+void \hyperlink{classMongoose_1_1Controller_a5acbb34767fb842ce5ed442f2bfff7f0}{set\+Prefix} (string prefix)
+\item 
+virtual void \hyperlink{classMongoose_1_1Controller_a22c0abaf30b4eb82ea617907081ca99a}{web\+Socket\+Ready} (\hyperlink{classMongoose_1_1WebSocket}{Web\+Socket} $\ast$websocket)
+\item 
+virtual void \hyperlink{classMongoose_1_1Controller_a51ec9458bebbc9cbb8c230fc41650cd3}{web\+Socket\+Data} (\hyperlink{classMongoose_1_1WebSocket}{Web\+Socket} $\ast$websocket, string data)
+\item 
+virtual void \hyperlink{classMongoose_1_1Controller_aed1073c26ca8930754d7f6269ae6fd01}{register\+Route} (string http\+Method, string route, \hyperlink{classMongoose_1_1RequestHandlerBase}{Request\+Handler\+Base} $\ast$handler)
+\item 
+virtual void \hyperlink{classMongoose_1_1Controller_a4be4bd61089bd89502e2189d3e5f5490}{setup} ()
+\item 
+void \hyperlink{classMongoose_1_1Controller_a484400c4fbfab243397d77be6bb5cfc6}{dump\+Routes} ()
+\item 
+virtual \hyperlink{classMongoose_1_1Response}{Response} $\ast$ \hyperlink{classMongoose_1_1Controller_ae1297f77e5e3124a68f1113727934834}{server\+Internal\+Error} (string message)
+\item 
+\hyperlink{classMongoose_1_1Session}{Session} \& \hyperlink{classMongoose_1_1Controller_abc99e0d6d1a10d3540cf05b72aa06e63}{get\+Session} (\hyperlink{classMongoose_1_1Request}{Request} \&request, \hyperlink{classMongoose_1_1Response}{Response} \&response)
+\item 
+void \hyperlink{classMongoose_1_1Controller_a66683621a71e59f898fcee200f3196c4}{set\+Sessions} (\hyperlink{classMongoose_1_1Sessions}{Sessions} $\ast$sessions)
+\item 
+virtual bool {\bfseries handles} (string method, string url)\hypertarget{classMongoose_1_1Controller_aa98fc750ce722bce0f7e5ff546ea3fe4}{}\label{classMongoose_1_1Controller_aa98fc750ce722bce0f7e5ff546ea3fe4}
+
+\item 
+vector$<$ string $>$ {\bfseries get\+Urls} ()\hypertarget{classMongoose_1_1Controller_a214cffbb67045b3ccbd60cf11bd5b05c}{}\label{classMongoose_1_1Controller_a214cffbb67045b3ccbd60cf11bd5b05c}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMongoose_1_1Sessions}{Sessions} $\ast$ {\bfseries sessions}\hypertarget{classMongoose_1_1Controller_a5721ad564526733206058cd62ff9ebdd}{}\label{classMongoose_1_1Controller_a5721ad564526733206058cd62ff9ebdd}
+
+\item 
+\hyperlink{classMongoose_1_1Server}{Server} $\ast$ {\bfseries server}\hypertarget{classMongoose_1_1Controller_a811645920fdeb285df467f3e0ecd2137}{}\label{classMongoose_1_1Controller_a811645920fdeb285df467f3e0ecd2137}
+
+\item 
+string {\bfseries prefix}\hypertarget{classMongoose_1_1Controller_aff921018e75abc2d7c1d6206a619e520}{}\label{classMongoose_1_1Controller_aff921018e75abc2d7c1d6206a619e520}
+
+\item 
+map$<$ string, \hyperlink{classMongoose_1_1RequestHandlerBase}{Request\+Handler\+Base} $\ast$ $>$ {\bfseries routes}\hypertarget{classMongoose_1_1Controller_a5adcae7c9bf7e95c5e45b966655c0780}{}\label{classMongoose_1_1Controller_a5adcae7c9bf7e95c5e45b966655c0780}
+
+\item 
+vector$<$ string $>$ {\bfseries urls}\hypertarget{classMongoose_1_1Controller_a14c823d051b5ae31403bea02941e4b2c}{}\label{classMongoose_1_1Controller_a14c823d051b5ae31403bea02941e4b2c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!dump\+Routes@{dump\+Routes}}
+\index{dump\+Routes@{dump\+Routes}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{dump\+Routes()}{dumpRoutes()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::dump\+Routes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Controller_a484400c4fbfab243397d77be6bb5cfc6}{}\label{classMongoose_1_1Controller_a484400c4fbfab243397d77be6bb5cfc6}
+Dump all routes \index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!get\+Session@{get\+Session}}
+\index{get\+Session@{get\+Session}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{get\+Session(\+Request \&request, Response \&response)}{getSession(Request &request, Response &response)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Session} \& Mongoose\+::\+Controller\+::get\+Session (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request, }
+\item[{{\bf Response} \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Controller_abc99e0d6d1a10d3540cf05b72aa06e63}{}\label{classMongoose_1_1Controller_abc99e0d6d1a10d3540cf05b72aa06e63}
+Gets the session for a request/response
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request \\
+\hline
+{\em \hyperlink{classMongoose_1_1Response}{Response}} & the response\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classMongoose_1_1Session}{Session} the session for the request/response 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!handle\+Request@{handle\+Request}}
+\index{handle\+Request@{handle\+Request}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{handle\+Request(\+Request \&request)}{handleRequest(Request &request)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response} $\ast$ Mongoose\+::\+Controller\+::handle\+Request (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_a0d23611062a1cd97e50086f354888069}{}\label{classMongoose_1_1Controller_a0d23611062a1cd97e50086f354888069}
+Handle a request, this will try to match the request, if this controller handles it, it will pre\+Process, process then post\+Process it
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classMongoose_1_1Response}{Response} the created response, or N\+U\+LL if the controller does not handle this request 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!post\+Process@{post\+Process}}
+\index{post\+Process@{post\+Process}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{post\+Process(\+Request \&request, Response \&response)}{postProcess(Request &request, Response &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::post\+Process (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request, }
+\item[{{\bf Response} \&}]{response}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_aebbfe1104785733a7a1b8b696d20d9ba}{}\label{classMongoose_1_1Controller_aebbfe1104785733a7a1b8b696d20d9ba}
+Called after a request is processed, if the controller responded
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request \\
+\hline
+{\em \hyperlink{classMongoose_1_1Response}{Response}} & the response \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!pre\+Process@{pre\+Process}}
+\index{pre\+Process@{pre\+Process}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{pre\+Process(\+Request \&request, Response \&response)}{preProcess(Request &request, Response &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::pre\+Process (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request, }
+\item[{{\bf Response} \&}]{response}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_a3eff704e4a3b4dc5a63fbfaa50a934ff}{}\label{classMongoose_1_1Controller_a3eff704e4a3b4dc5a63fbfaa50a934ff}
+Called before a request is processed
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request \\
+\hline
+{\em \hyperlink{classMongoose_1_1Response}{Response}} & the response \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classMongoose_1_1WebController_acd7b2317485e2b19fe1ffbb5d69e6c00}{Mongoose\+::\+Web\+Controller}, and \hyperlink{classMongoose_1_1JsonController_abb2ee896c92e8bb885aabc4bbec56be7}{Mongoose\+::\+Json\+Controller}.
+
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!process@{process}}
+\index{process@{process}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{process(\+Request \&request)}{process(Request &request)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response} $\ast$ Mongoose\+::\+Controller\+::process (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_adca552473aded39dc406c6fa95908a9e}{}\label{classMongoose_1_1Controller_adca552473aded39dc406c6fa95908a9e}
+Called to process a request
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classMongoose_1_1Response}{Response} the created response, or N\+U\+LL if the controller does not handle this request 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!register\+Route@{register\+Route}}
+\index{register\+Route@{register\+Route}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{register\+Route(string http\+Method, string route, Request\+Handler\+Base $\ast$handler)}{registerRoute(string httpMethod, string route, RequestHandlerBase *handler)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::register\+Route (
+\begin{DoxyParamCaption}
+\item[{string}]{http\+Method, }
+\item[{string}]{route, }
+\item[{{\bf Request\+Handler\+Base} $\ast$}]{handler}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_aed1073c26ca8930754d7f6269ae6fd01}{}\label{classMongoose_1_1Controller_aed1073c26ca8930754d7f6269ae6fd01}
+Registers a route to the controller
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the route path \\
+\hline
+{\em \hyperlink{classMongoose_1_1RequestHandlerBase}{Request\+Handler\+Base}} & the request handler for this route \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!server\+Internal\+Error@{server\+Internal\+Error}}
+\index{server\+Internal\+Error@{server\+Internal\+Error}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{server\+Internal\+Error(string message)}{serverInternalError(string message)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response} $\ast$ Mongoose\+::\+Controller\+::server\+Internal\+Error (
+\begin{DoxyParamCaption}
+\item[{string}]{message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_ae1297f77e5e3124a68f1113727934834}{}\label{classMongoose_1_1Controller_ae1297f77e5e3124a68f1113727934834}
+Called when an exception occur during the rendering
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the error message\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+response a response to send, 404 will occur if N\+U\+LL 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!set\+Prefix@{set\+Prefix}}
+\index{set\+Prefix@{set\+Prefix}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{set\+Prefix(string prefix)}{setPrefix(string prefix)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::set\+Prefix (
+\begin{DoxyParamCaption}
+\item[{string}]{prefix}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Controller_a5acbb34767fb842ce5ed442f2bfff7f0}{}\label{classMongoose_1_1Controller_a5acbb34767fb842ce5ed442f2bfff7f0}
+Sets the controller prefix, for instance \char`\"{}/api\char`\"{}
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the prefix of all urls for this controller \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!set\+Server@{set\+Server}}
+\index{set\+Server@{set\+Server}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{set\+Server(\+Server $\ast$server)}{setServer(Server *server)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::set\+Server (
+\begin{DoxyParamCaption}
+\item[{{\bf Server} $\ast$}]{server}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_a9548116fa83f27ac8015947580e1f298}{}\label{classMongoose_1_1Controller_a9548116fa83f27ac8015947580e1f298}
+Sets the reference to the server hosting this controller
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Server}{Server}} & the hosting server \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!set\+Sessions@{set\+Sessions}}
+\index{set\+Sessions@{set\+Sessions}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{set\+Sessions(\+Sessions $\ast$sessions)}{setSessions(Sessions *sessions)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::set\+Sessions (
+\begin{DoxyParamCaption}
+\item[{{\bf Sessions} $\ast$}]{sessions}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Controller_a66683621a71e59f898fcee200f3196c4}{}\label{classMongoose_1_1Controller_a66683621a71e59f898fcee200f3196c4}
+Sets the sessions
+
+
+\begin{DoxyParams}{Parameters}
+{\em Sessions$\ast$} & the pointer to the sessions jar \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!setup@{setup}}
+\index{setup@{setup}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{setup()}{setup()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::setup (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_a4be4bd61089bd89502e2189d3e5f5490}{}\label{classMongoose_1_1Controller_a4be4bd61089bd89502e2189d3e5f5490}
+Initializes the route and settings 
+
+Reimplemented in \hyperlink{classChatController_a3bbf4b8db89c6e35f6fb4e35b52cf06e}{Chat\+Controller}, \hyperlink{classProfileController_a6185e67ac2ef5d321f867b578e3cae4f}{Profile\+Controller}, and \hyperlink{classSharedServerController_a683f37c601ffa96ff15e06f437447fc9}{Shared\+Server\+Controller}.
+
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!web\+Socket\+Data@{web\+Socket\+Data}}
+\index{web\+Socket\+Data@{web\+Socket\+Data}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{web\+Socket\+Data(\+Web\+Socket $\ast$websocket, string data)}{webSocketData(WebSocket *websocket, string data)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::web\+Socket\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Web\+Socket} $\ast$}]{websocket, }
+\item[{string}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_a51ec9458bebbc9cbb8c230fc41650cd3}{}\label{classMongoose_1_1Controller_a51ec9458bebbc9cbb8c230fc41650cd3}
+Called when data arrive in a websocket connection
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1WebSocket}{Web\+Socket}} & the instance of the connection \\
+\hline
+{\em string} & the data arriving \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Controller@{Mongoose\+::\+Controller}!web\+Socket\+Ready@{web\+Socket\+Ready}}
+\index{web\+Socket\+Ready@{web\+Socket\+Ready}!Mongoose\+::\+Controller@{Mongoose\+::\+Controller}}
+\subsubsection[{\texorpdfstring{web\+Socket\+Ready(\+Web\+Socket $\ast$websocket)}{webSocketReady(WebSocket *websocket)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Controller\+::web\+Socket\+Ready (
+\begin{DoxyParamCaption}
+\item[{{\bf Web\+Socket} $\ast$}]{websocket}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Controller_a22c0abaf30b4eb82ea617907081ca99a}{}\label{classMongoose_1_1Controller_a22c0abaf30b4eb82ea617907081ca99a}
+Called when a new websocket connection is ready
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1WebSocket}{Web\+Socket}} & the instance of the connection \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mongoose-\/cpp/Controller.\+h\item 
+src/mongoose-\/cpp/Controller.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,143 @@
+\hypertarget{classDB}{}\section{DB Class Reference}
+\label{classDB}\index{DB@{DB}}
+
+
+Inheritance diagram for DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/dc0/classDB__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{d7/d82/classDB__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries DB} (const std\+::string \&\hyperlink{classDB_a8c58fbd6650f3d5850adf699d1ee7ada}{db\+\_\+name})\hypertarget{classDB_a85e27c8f4f3e3a519807996171552935}{}\label{classDB_a85e27c8f4f3e3a519807996171552935}
+
+\item 
+bool {\bfseries open\+DB} ()\hypertarget{classDB_a3f15981d4a972d3aa8076baae539c1fb}{}\label{classDB_a3f15981d4a972d3aa8076baae539c1fb}
+
+\item 
+bool \hyperlink{classDB_ab37e04fc57a20b5abe8960bccdfc73e9}{update} (const std\+::string \&key, Json\+::\+Value value)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classDB_ab77d1e0d8335375cf70105c748014358}{add} (const std\+::string \&key, Json\+::\+Value value)
+\item 
+Json\+::\+Value \hyperlink{classDB_a9f02db7e7b5f79d8daca90bcbc5962e6}{get} (const std\+::string \&key)
+\item 
+bool \hyperlink{classDB_a484efe20a1a0f520e76c882c34f28779}{delete\+\_\+key} (const std\+::string \&key)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+leveldb\+::\+DB $\ast$ {\bfseries db}\hypertarget{classDB_af44b7dfd56993060c50d7554ef8689db}{}\label{classDB_af44b7dfd56993060c50d7554ef8689db}
+
+\item 
+std\+::string \hyperlink{classDB_a8c58fbd6650f3d5850adf699d1ee7ada}{db\+\_\+name}\hypertarget{classDB_a8c58fbd6650f3d5850adf699d1ee7ada}{}\label{classDB_a8c58fbd6650f3d5850adf699d1ee7ada}
+
+\begin{DoxyCompactList}\small\item\em the actual database \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{DB@{DB}!add@{add}}
+\index{add@{add}!DB@{DB}}
+\subsubsection[{\texorpdfstring{add(const std\+::string \&key, Json\+::\+Value value)}{add(const std::string &key, Json::Value value)}}]{\setlength{\rightskip}{0pt plus 5cm}bool D\+B\+::add (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{key, }
+\item[{Json\+::\+Value}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classDB_ab77d1e0d8335375cf70105c748014358}{}\label{classDB_ab77d1e0d8335375cf70105c748014358}
+Adds a new key-\/value to the db 
+\begin{DoxyParams}{Parameters}
+{\em key} & \\
+\hline
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the value with key was added 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{classKeyAlreadyExistsException}{Key\+Already\+Exists\+Exception}} & \\
+\hline
+\end{DoxyExceptions}
+\index{DB@{DB}!delete\+\_\+key@{delete\+\_\+key}}
+\index{delete\+\_\+key@{delete\+\_\+key}!DB@{DB}}
+\subsubsection[{\texorpdfstring{delete\+\_\+key(const std\+::string \&key)}{delete_key(const std::string &key)}}]{\setlength{\rightskip}{0pt plus 5cm}bool D\+B\+::delete\+\_\+key (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classDB_a484efe20a1a0f520e76c882c34f28779}{}\label{classDB_a484efe20a1a0f520e76c882c34f28779}
+Deletes the key-\/value from the database 
+\begin{DoxyParams}{Parameters}
+{\em key} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no db errors 
+\end{DoxyReturn}
+\index{DB@{DB}!get@{get}}
+\index{get@{get}!DB@{DB}}
+\subsubsection[{\texorpdfstring{get(const std\+::string \&key)}{get(const std::string &key)}}]{\setlength{\rightskip}{0pt plus 5cm}Json\+::\+Value D\+B\+::get (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classDB_a9f02db7e7b5f79d8daca90bcbc5962e6}{}\label{classDB_a9f02db7e7b5f79d8daca90bcbc5962e6}
+Gets the value of 
+\begin{DoxyParams}{Parameters}
+{\em key} & \\
+\hline
+{\em key} & The key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A copy of the value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{classKeyDoesntExistException}{Key\+Doesnt\+Exist\+Exception}} & \\
+\hline
+\end{DoxyExceptions}
+\index{DB@{DB}!update@{update}}
+\index{update@{update}!DB@{DB}}
+\subsubsection[{\texorpdfstring{update(const std\+::string \&key, Json\+::\+Value value)}{update(const std::string &key, Json::Value value)}}]{\setlength{\rightskip}{0pt plus 5cm}bool D\+B\+::update (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{key, }
+\item[{Json\+::\+Value}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{classDB_ab37e04fc57a20b5abe8960bccdfc73e9}{}\label{classDB_ab37e04fc57a20b5abe8960bccdfc73e9}
+Updates a value from the db. 
+\begin{DoxyParams}{Parameters}
+{\em key} & The key \\
+\hline
+{\em value} & the new value to store \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & was added with key \\
+\hline
+{\em key} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/databases/D\+B.\+h\item 
+src/databases/D\+B.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,232 @@
+.TH "UsersDB" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+UsersDB \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <UsersDB\&.h>\fP
+.PP
+Inherits \fBDB\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBUsersDB\fP (const string &\fBdb_name\fP)"
+.br
+.ti -1c
+.RI "bool \fBadd_user\fP (const string &username, Json::Value user)"
+.br
+.ti -1c
+.RI "Json::Value \fBget_user\fP (const string &username)"
+.br
+.ti -1c
+.RI "bool \fBedit_user\fP (const string &username, Json::Value userEdited)"
+.br
+.ti -1c
+.RI "bool \fBdelete_user\fP (const string &username)"
+.br
+.ti -1c
+.RI "bool \fBget_users\fP (Json::Value &result)"
+.br
+.ti -1c
+.RI "bool \fBrecommend_user\fP (const string &usernameFrom, const string &usernameTo)"
+.br
+.ti -1c
+.RI "bool \fBdeRecommend_user\fP (const string &usernameFrom, const string &usernameTo)"
+.br
+.ti -1c
+.RI "bool \fBaddContact\fP (const string &usernameFrom, const string &usernameTo)"
+.br
+.ti -1c
+.RI "bool \fBremoveContact\fP (const string &usernameFrom, const string &usernameTo)"
+.br
+.ti -1c
+.RI "bool \fBparse_json_array\fP (std::string body, Json::Value &result)"
+.br
+.ti -1c
+.RI "void \fBfilter_job\fP (Json::Value &result, string job)"
+.br
+.ti -1c
+.RI "void \fBfilter_skill\fP (Json::Value &result, string skill)"
+.br
+.ti -1c
+.RI "void \fBsort_by\fP (Json::Value &result, string sorting)"
+.br
+.ti -1c
+.RI "void \fBtop_k\fP (Json::Value &result, int n)"
+.br
+.ti -1c
+.RI "void \fBsort_by_distance\fP (Json::Value &users, std::string caller_coordenates)"
+.br
+.ti -1c
+.RI "bool \fBget_users_by\fP (string sorting, int nFilter, string job, string skill, Json::Value &result, int nDistance, string caller_coordenates)"
+.br
+.ti -1c
+.RI "void \fBfilter_pos\fP (Json::Value &result, int nDistance, string caller_coordenates)"
+.br
+.ti -1c
+.RI "bool \fBisInRange\fP (string pos1, string pos2, int nDistance)"
+.br
+.ti -1c
+.RI "void \fBgetCoordinates\fP (string coordenates, double *latitud, double *longitud)"
+.br
+.ti -1c
+.RI "double \fBcalcularDistancia\fP (string coord_user, string callerCoordenates)"
+.br
+.ti -1c
+.RI "bool \fBget_user_contacts\fP (string &username, Json::Value &contacts)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+\fBDB\fP that stores all the user information (except the password and session data)\&. A typical user json can be found at the API documentation\&. the json fields are: 'chats' : [], 'city' : 'Rosario', 'contacts' : [], 'dob' : '1993-08-19', 'gender' : 'male', 'name' : 'Alejandro Pablo Levinas', 'nationality' : 'argentino', 'previous_exp' : [one,two,three], 'profile' : 'Soy un estudiante de ingenieria en informatica que se propone\&.\&.\&.\&.\&.\&.\&.\&.\&.\&.\&.\&.blabllbla\&.\&.\&.\&.\&.\&.\&.\&.\&.\&.\&.', 'recomendations' : [], 'skills' : [ 'C', 'C++', 'GoogleTest' ], 'email' : 'alelevinasATgmail\&.com', 'username' : 'alelevinas@gmail\&.com' } 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool UsersDB::add_user (const string & username, Json::Value user)"
+Adds an user to the db 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername\fP 
+.br
+\fIuser\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no db errors 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fI\fBKeyAlreadyExistsException\fP\fP 
+.RE
+.PP
+
+.SS "bool UsersDB::addContact (const string & usernameFrom, const string & usernameTo)"
+Adds an user as a contact\&. Adds username to the 'contacts' field 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusernameFrom\fP 
+.br
+\fIusernameTo\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.SS "bool UsersDB::delete_user (const string & username)"
+Deletes an User from the db 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no db errors 
+.RE
+.PP
+
+.SS "bool UsersDB::deRecommend_user (const string & usernameFrom, const string & usernameTo)"
+De recommends an user\&. Deletes the 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusernameFrom\fP from 'recommended_by' field of the user 
+.br
+\fIusernameTo\fP 
+.br
+\fIusernameFrom\fP The user who derecommends 
+.br
+\fIusernameTo\fP the derecommendated user 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no db errors 
+.RE
+.PP
+
+.SS "bool UsersDB::edit_user (const string & username, Json::Value userEdited)"
+Edits a user on the db 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername\fP 
+.br
+\fIuserEdited\fP the json of the hole user eddited 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no db errors 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fI\fBKeyDoesntExistException\fP\fP 
+.RE
+.PP
+
+.SS "Json::Value UsersDB::get_user (const string & username)"
+Gets a user from the db\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername\fP of the User to return\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a copy of the json user\&. 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fI\fBKeyDoesntExistException\fP\fP 
+.RE
+.PP
+
+.SS "bool UsersDB::get_users (Json::Value & result)"
+Get all users from database 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIresult\fP to store the result data 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no db errors 
+.RE
+.PP
+
+.SS "bool UsersDB::recommend_user (const string & usernameFrom, const string & usernameTo)"
+Recommends an user\&. Adds username to de 'recommended_by' field 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusernameFrom\fP the User who recommends 
+.br
+\fIusernameTo\fP the recommended User 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no db errors 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

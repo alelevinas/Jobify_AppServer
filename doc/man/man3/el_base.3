@@ -1,0 +1,143 @@
+.TH "el::base" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base \- Namespace containing base/internal functionality used by Easylogging++\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBconsts\fP"
+.br
+.RI "\fINamespace containing constants used internally\&. \fP"
+.ti -1c
+.RI " \fBdebug\fP"
+.br
+.RI "\fIContains some internal debugging tools like crash handler and stack tracer\&. \fP"
+.ti -1c
+.RI " \fBtype\fP"
+.br
+.RI "\fIData types used by Easylogging++\&. \fP"
+.ti -1c
+.RI " \fButils\fP"
+.br
+.RI "\fINamespace containing utility functions/static classes used internally\&. \fP"
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBDefaultLogBuilder\fP"
+.br
+.ti -1c
+.RI "class \fBDefaultLogDispatchCallback\fP"
+.br
+.ti -1c
+.RI "class \fBDefaultPerformanceTrackingCallback\fP"
+.br
+.ti -1c
+.RI "class \fBHitCounter\fP"
+.br
+.RI "\fIClass that keeps record of current line hit for occasional logging\&. \fP"
+.ti -1c
+.RI "class \fBLogDispatcher\fP"
+.br
+.RI "\fIDispatches log messages\&. \fP"
+.ti -1c
+.RI "class \fBLogFormat\fP"
+.br
+.RI "\fIRepresents log format containing flags and date format\&. This is used internally to start initial log\&. \fP"
+.ti -1c
+.RI "class \fBMessageBuilder\fP"
+.br
+.ti -1c
+.RI "class \fBMillisecondsWidth\fP"
+.br
+.RI "\fIA milliseconds width class containing actual width and offset for date/time\&. \fP"
+.ti -1c
+.RI "class \fBNoCopy\fP"
+.br
+.RI "\fIInternal helper class that prevent copy constructor for class\&. \fP"
+.ti -1c
+.RI "class \fBNullWriter\fP"
+.br
+.RI "\fIWrites nothing - Used when certain log is disabled\&. \fP"
+.ti -1c
+.RI "class \fBPerformanceTracker\fP"
+.br
+.RI "\fIRepresents performanceTracker block of code that conditionally adds performance status to log either when goes outside the scope of when \fBcheckpoint()\fP is called\&. \fP"
+.ti -1c
+.RI "class \fBPErrorWriter\fP"
+.br
+.ti -1c
+.RI "class \fBRegisteredHitCounters\fP"
+.br
+.RI "\fIRepository for hit counters used across the application\&. \fP"
+.ti -1c
+.RI "class \fBRegisteredLoggers\fP"
+.br
+.RI "\fI\fBLoggers\fP repository\&. \fP"
+.ti -1c
+.RI "class \fBStaticClass\fP"
+.br
+.RI "\fIInternal helper class that makes all default constructors private\&. \fP"
+.ti -1c
+.RI "class \fBStorage\fP"
+.br
+.RI "\fIEasylogging++ management storage\&. \fP"
+.ti -1c
+.RI "class \fBTypedConfigurations\fP"
+.br
+.RI "\fI\fBConfigurations\fP with data types\&. \fP"
+.ti -1c
+.RI "class \fBVRegistry\fP"
+.br
+.RI "\fIRepresents registries for verbose logging\&. \fP"
+.ti -1c
+.RI "class \fBWriter\fP"
+.br
+.RI "\fIMain entry point of each logging\&. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef std::shared_ptr< base::type::fstream_t > \fBFileStreamPtr\fP"
+.br
+.ti -1c
+.RI "typedef std::map< std::string, FileStreamPtr > \fBLogStreamsReferenceMap\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBTimestampUnit\fP : base::type::EnumType { \fBMicrosecond\fP = 0, \fBMillisecond\fP = 1, \fBSecond\fP = 2, \fBMinute\fP = 3, \fBHour\fP = 4, \fBDay\fP = 5 }
+.RI "\fIEnum to represent timestamp unit\&. \fP""
+.br
+.ti -1c
+.RI "enum \fBFormatFlags\fP : base::type::EnumType { \fBDateTime\fP = 1<<1, \fBLoggerId\fP = 1<<2, \fBFile\fP = 1<<3, \fBLine\fP = 1<<4, \fBLocation\fP = 1<<5, \fBFunction\fP = 1<<6, \fBUser\fP = 1<<7, \fBHost\fP = 1<<8, \fBLogMessage\fP = 1<<9, \fBVerboseLevel\fP = 1<<10, \fBAppName\fP = 1<<11, \fBThreadId\fP = 1<<12, \fBLevel\fP = 1<<13, \fBFileBase\fP = 1<<14, \fBLevelShort\fP = 1<<15 }
+.RI "\fIFormat flags used to determine specifiers that are active for performance improvements\&. \fP""
+.br
+.ti -1c
+.RI "enum \fBDispatchAction\fP : base::type::EnumType { \fBNone\fP = 1, \fBNormalLog\fP = 2, \fBSysLog\fP = 4 }
+.RI "\fIAction to be taken for dispatching\&. \fP""
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "ELPP_EXPORT base::type::StoragePointer \fBelStorage\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Namespace containing base/internal functionality used by Easylogging++\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.
