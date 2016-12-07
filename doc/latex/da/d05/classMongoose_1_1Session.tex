@@ -1,0 +1,130 @@
+\hypertarget{classMongoose_1_1Session}{}\section{Mongoose\+:\+:Session Class Reference}
+\label{classMongoose_1_1Session}\index{Mongoose\+::\+Session@{Mongoose\+::\+Session}}
+
+
+Collaboration diagram for Mongoose\+:\+:Session\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{d0/ddb/classMongoose_1_1Session__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classMongoose_1_1Session_a8895fb19ca9754f222f62b0de3795b8b}{set\+Value} (string key, string value)
+\item 
+void \hyperlink{classMongoose_1_1Session_a7094ce378bcfc1cee792cca153ce8194}{unset\+Value} (string key)
+\item 
+bool \hyperlink{classMongoose_1_1Session_ab9d9545167cc932ed2019d16bf0831b8}{has\+Value} (string key)
+\item 
+string \hyperlink{classMongoose_1_1Session_a28817383258d6b0d4118f0cb526dfe9f}{get} (string key, string fallback=\char`\"{}\char`\"{})
+\item 
+void \hyperlink{classMongoose_1_1Session_a2bf93d03779889d302f5d60812ac81ed}{ping} ()
+\item 
+int \hyperlink{classMongoose_1_1Session_ace15427340f011d426f56de270c02b7c}{get\+Age} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ string, string $>$ {\bfseries values}\hypertarget{classMongoose_1_1Session_a60bd16b06d0628abbb49befb221b1890}{}\label{classMongoose_1_1Session_a60bd16b06d0628abbb49befb221b1890}
+
+\item 
+int {\bfseries date}\hypertarget{classMongoose_1_1Session_a05b408d1f07489074e2838681db12023}{}\label{classMongoose_1_1Session_a05b408d1f07489074e2838681db12023}
+
+\item 
+\hyperlink{classMongoose_1_1Mutex}{Mutex} {\bfseries mutex}\hypertarget{classMongoose_1_1Session_aa4553b48b845b031a455b6dc026fe5dc}{}\label{classMongoose_1_1Session_aa4553b48b845b031a455b6dc026fe5dc}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Mongoose\+::\+Session@{Mongoose\+::\+Session}!get@{get}}
+\index{get@{get}!Mongoose\+::\+Session@{Mongoose\+::\+Session}}
+\subsubsection[{\texorpdfstring{get(string key, string fallback="""")}{get(string key, string fallback="")}}]{\setlength{\rightskip}{0pt plus 5cm}string Mongoose\+::\+Session\+::get (
+\begin{DoxyParamCaption}
+\item[{string}]{key, }
+\item[{string}]{fallback = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Session_a28817383258d6b0d4118f0cb526dfe9f}{}\label{classMongoose_1_1Session_a28817383258d6b0d4118f0cb526dfe9f}
+Try to get the value for the given variable
+
+string the name of the variable 
+\begin{DoxyParams}{Parameters}
+{\em string} & the fallback value\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string the value of the variable if it exists, fallback else 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Session@{Mongoose\+::\+Session}!get\+Age@{get\+Age}}
+\index{get\+Age@{get\+Age}!Mongoose\+::\+Session@{Mongoose\+::\+Session}}
+\subsubsection[{\texorpdfstring{get\+Age()}{getAge()}}]{\setlength{\rightskip}{0pt plus 5cm}int Mongoose\+::\+Session\+::get\+Age (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Session_ace15427340f011d426f56de270c02b7c}{}\label{classMongoose_1_1Session_ace15427340f011d426f56de270c02b7c}
+Returns the session age, in seconds
+
+\begin{DoxyReturn}{Returns}
+int the number of sessions since the last activity of the session 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Session@{Mongoose\+::\+Session}!has\+Value@{has\+Value}}
+\index{has\+Value@{has\+Value}!Mongoose\+::\+Session@{Mongoose\+::\+Session}}
+\subsubsection[{\texorpdfstring{has\+Value(string key)}{hasValue(string key)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Mongoose\+::\+Session\+::has\+Value (
+\begin{DoxyParamCaption}
+\item[{string}]{key}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Session_ab9d9545167cc932ed2019d16bf0831b8}{}\label{classMongoose_1_1Session_ab9d9545167cc932ed2019d16bf0831b8}
+Check if the given variable exists
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the name of the variable \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Session@{Mongoose\+::\+Session}!ping@{ping}}
+\index{ping@{ping}!Mongoose\+::\+Session@{Mongoose\+::\+Session}}
+\subsubsection[{\texorpdfstring{ping()}{ping()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Session\+::ping (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Session_a2bf93d03779889d302f5d60812ac81ed}{}\label{classMongoose_1_1Session_a2bf93d03779889d302f5d60812ac81ed}
+Pings the session, this will update the creation date to now and \char`\"{}keeping it alive\char`\"{} \index{Mongoose\+::\+Session@{Mongoose\+::\+Session}!set\+Value@{set\+Value}}
+\index{set\+Value@{set\+Value}!Mongoose\+::\+Session@{Mongoose\+::\+Session}}
+\subsubsection[{\texorpdfstring{set\+Value(string key, string value)}{setValue(string key, string value)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Session\+::set\+Value (
+\begin{DoxyParamCaption}
+\item[{string}]{key, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Session_a8895fb19ca9754f222f62b0de3795b8b}{}\label{classMongoose_1_1Session_a8895fb19ca9754f222f62b0de3795b8b}
+Sets the value of a session variable
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the name of the variable \\
+\hline
+{\em string} & the value of the variable \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Session@{Mongoose\+::\+Session}!unset\+Value@{unset\+Value}}
+\index{unset\+Value@{unset\+Value}!Mongoose\+::\+Session@{Mongoose\+::\+Session}}
+\subsubsection[{\texorpdfstring{unset\+Value(string key)}{unsetValue(string key)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Session\+::unset\+Value (
+\begin{DoxyParamCaption}
+\item[{string}]{key}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Session_a7094ce378bcfc1cee792cca153ce8194}{}\label{classMongoose_1_1Session_a7094ce378bcfc1cee792cca153ce8194}
+Unset a session varaible
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the variable name \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mongoose-\/cpp/Session.\+h\item 
+src/mongoose-\/cpp/Session.\+cpp\end{DoxyCompactItemize}

@@ -6,7 +6,6 @@
 #include <ctime>
 #include <exceptions/KeyDoesntExistException.h>
 #include "ChatsDB.h"
-#include "UsersDB.h"
 
 ChatsDB::ChatsDB(std::string& dbName) : DB(dbName) {
 
@@ -16,10 +15,10 @@ ChatsDB::~ChatsDB() {
 
 }
 
-bool ChatsDB::add_msg(std::string user_from, std::string user_to, std::string message) {
+bool ChatsDB::add_msg(std::string user_from, std::string name_from, std::string user_to, std::string message) {
     Json::Value messageValue;
     messageValue["text"] = message;
-    messageValue["auth"] = user_from;
+    messageValue["auth"] = name_from;
 
     time_t t = time(0);   // get time now
     struct tm * now = localtime(&t);

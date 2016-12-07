@@ -1,0 +1,56 @@
+CI\+: \href{https://travis-ci.org/alelevinas/Jobify_AppServer}{\tt } Coverage\+: \href{https://coveralls.io/github/alelevinas/Jobify_AppServer?branch=master}{\tt }
+
+Application Server para el proyecto de Taller de Programación II
+
+Instalación\+:
+
+Las únicas librería que usamos y no compilamos directamente son leveldb y restclient-\/cpp, por lo que es necesario ejecutar los comandos
+
+\subsection*{6. Instalación}
+
+Hay 3 formas\+:
+\begin{DoxyItemize}
+\item Compilando el código fuente
+\item Instalando el paquete {\ttfamily .deb} en sistemas debian
+\item Utilizando el {\ttfamily Dockerfile}
+\end{DoxyItemize}
+
+\subparagraph*{Chats}
+
+Primero hace falta descargar las librerías necesarias y luego el código fuente. Una vez descargados, hace falta ejecutar {\ttfamily cmake} para luego compilar con {\ttfamily make Jobify\+Appserver} un script {\ttfamily yaml} de ejemplo se ve acontinuación\+: 
+\begin{DoxyCode}
+1 install:
+2   - sudo pip install cpp-coveralls
+3   - sudo apt-get install libsnappy-dev libleveldb-dev
+4   #para jwtcpp
+5   - sudo apt-get install libcrypto++9-dbg libcrypto++-dev
+6   - sudo apt-get install libjansson4 libjansson-dev libjansson-dbg
+7   - sudo apt-get install autoconf libtool
+8   - git clone https://github.com/mrtazz/restclient-cpp.git
+9   - cd restclient-cpp
+10   - ./autogen.sh
+11   - ./configure
+12   - sudo make install
+13   - export LD\_LIBRARY\_PATH=/usr/local/lib:$LD\_LIBRARY\_PATH
+14   - cd ..
+15 
+16 script:
+17   - mkdir build
+18   - cd build
+19   - cmake ..
+20   - make JobifyAppserver
+21   - ./Jobify\_Appserver
+\end{DoxyCode}
+
+
+\subparagraph*{Paquete {\ttfamily .deb}}
+
+Una vez descargado el paquete debe ejecutar el siguiente comando\+: {\ttfamily sudo dpkg -\/i Jobify\+\_\+\+App\+Server-\/0.\+1.\+1-\/\+Linux.\+deb}
+
+El ejecutable se instalará en {\ttfamily /home/usuario/local/bin} por lo que estará en el {\ttfamily P\+A\+TH} y se podrá ejecutar en cualquier terminal. Las bases de datos se almacenarán en {\ttfamily /home/usuario/.Jobify\+\_\+\+App\+Server/bds}
+
+\subparagraph*{Dockerfile}
+
+Simplemente tener descargado Docker \href{https://docs.docker.com/engine/installation/linux/ubuntulinux/}{\tt install} Luego ubicarse en el mismo directorio del {\ttfamily Dockerfile} y ejecutar el comando {\ttfamily docker build .}
+
+Documentación A\+PI\+: \href{http://rebilly.github.io/ReDoc/?url=https://raw.githubusercontent.com/alelevinas/Jobify_AppServer/master/jobify-appserver-serverAPI.yaml}{\tt link} 

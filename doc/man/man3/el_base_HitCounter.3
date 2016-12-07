@@ -1,0 +1,58 @@
+.TH "el::base::HitCounter" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::HitCounter \- Class that keeps record of current line hit for occasional logging\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBPredicate\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBHitCounter\fP (const char *filename, unsigned long int lineNumber)"
+.br
+.ti -1c
+.RI "\fBHitCounter\fP (const \fBHitCounter\fP &hitCounter)"
+.br
+.ti -1c
+.RI "\fBHitCounter\fP & \fBoperator=\fP (const \fBHitCounter\fP &hitCounter)"
+.br
+.ti -1c
+.RI "void \fBresetLocation\fP (const char *filename, unsigned long int lineNumber)"
+.br
+.RI "\fIResets location of current hit counter\&. \fP"
+.ti -1c
+.RI "void \fBvalidateHitCounts\fP (std::size_t n)"
+.br
+.RI "\fIValidates hit counts and resets it if necessary\&. \fP"
+.ti -1c
+.RI "const char * \fBfilename\fP (void) const "
+.br
+.ti -1c
+.RI "unsigned long int \fBlineNumber\fP (void) const "
+.br
+.ti -1c
+.RI "std::size_t \fBhitCounts\fP (void) const "
+.br
+.ti -1c
+.RI "void \fBincrement\fP (void)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class that keeps record of current line hit for occasional logging\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

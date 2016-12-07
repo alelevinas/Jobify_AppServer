@@ -1,0 +1,68 @@
+\hypertarget{classSessionsDB}{}\section{Sessions\+DB Class Reference}
+\label{classSessionsDB}\index{Sessions\+DB@{Sessions\+DB}}
+
+
+{\ttfamily \#include $<$Sessions\+D\+B.\+h$>$}
+
+
+
+Inheritance diagram for Sessions\+DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=177pt]{d3/d76/classSessionsDB__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Sessions\+DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{d7/d85/classSessionsDB__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Sessions\+DB} (const std\+::string \&\hyperlink{classDB_a8c58fbd6650f3d5850adf699d1ee7ada}{db\+\_\+name})\hypertarget{classSessionsDB_a61fb42b17237ae1d9587083d6aea5028}{}\label{classSessionsDB_a61fb42b17237ae1d9587083d6aea5028}
+
+\item 
+bool {\bfseries add\+\_\+session} (const std\+::string \&token, Json\+::\+Value session)\hypertarget{classSessionsDB_aed6d748bd45cb1a778d598d14f9dd1cc}{}\label{classSessionsDB_aed6d748bd45cb1a778d598d14f9dd1cc}
+
+\item 
+Json\+::\+Value {\bfseries get\+\_\+session} (const std\+::string \&token)\hypertarget{classSessionsDB_a158a9a5e1458d759d1b1cc59100c5fd1}{}\label{classSessionsDB_a158a9a5e1458d759d1b1cc59100c5fd1}
+
+\item 
+bool \hyperlink{classSessionsDB_a757ce8689172d2c5a2272366b0ceefe4}{delete\+\_\+session} (const std\+::string \&token)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+For now, this \hyperlink{classDB}{DB} will consist of a generated token and its username. Only the active ones will be on the \hyperlink{classDB}{DB} \{token\+: username\}
+
+T\+O\+DO\+: Add metadata and automatic logout (invalidate token) in a certain period of time 
+
+\subsection{Member Function Documentation}
+\index{Sessions\+DB@{Sessions\+DB}!delete\+\_\+session@{delete\+\_\+session}}
+\index{delete\+\_\+session@{delete\+\_\+session}!Sessions\+DB@{Sessions\+DB}}
+\subsubsection[{\texorpdfstring{delete\+\_\+session(const std\+::string \&token)}{delete_session(const std::string &token)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sessions\+D\+B\+::delete\+\_\+session (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{token}
+\end{DoxyParamCaption}
+)}\hypertarget{classSessionsDB_a757ce8689172d2c5a2272366b0ceefe4}{}\label{classSessionsDB_a757ce8689172d2c5a2272366b0ceefe4}
+Deletes the session from the db. 
+\begin{DoxyParams}{Parameters}
+{\em token} & of the session to delete \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no database errors. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/databases/Sessions\+D\+B.\+h\item 
+src/databases/Sessions\+D\+B.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,70 @@
+.TH "connection" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+connection \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmg_connection\fP \fBmg_conn\fP"
+.br
+.ti -1c
+.RI "struct \fBll\fP \fBlink\fP"
+.br
+.ti -1c
+.RI "struct \fBmg_server\fP * \fBserver\fP"
+.br
+.ti -1c
+.RI "sock_t \fBclient_sock\fP"
+.br
+.ti -1c
+.RI "struct \fBiobuf\fP \fBlocal_iobuf\fP"
+.br
+.ti -1c
+.RI "struct \fBiobuf\fP \fBremote_iobuf\fP"
+.br
+.ti -1c
+.RI "union \fBendpoint\fP \fBendpoint\fP"
+.br
+.ti -1c
+.RI "enum endpoint_type \fBendpoint_type\fP"
+.br
+.ti -1c
+.RI "time_t \fBbirth_time\fP"
+.br
+.ti -1c
+.RI "time_t \fBlast_activity_time\fP"
+.br
+.ti -1c
+.RI "char * \fBpath_info\fP"
+.br
+.ti -1c
+.RI "char * \fBrequest\fP"
+.br
+.ti -1c
+.RI "int64_t \fBnum_bytes_sent\fP"
+.br
+.ti -1c
+.RI "int64_t \fBcl\fP"
+.br
+.ti -1c
+.RI "int \fBrequest_len\fP"
+.br
+.ti -1c
+.RI "int \fBflags\fP"
+.br
+.ti -1c
+.RI "void * \fBssl\fP"
+.br
+.ti -1c
+.RI "mg_handler_t \fBhandler\fP"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

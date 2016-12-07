@@ -1,0 +1,141 @@
+\hypertarget{classMongoose_1_1Response}{}\section{Mongoose\+:\+:Response Class Reference}
+\label{classMongoose_1_1Response}\index{Mongoose\+::\+Response@{Mongoose\+::\+Response}}
+
+
+Inheritance diagram for Mongoose\+:\+:Response\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/dfa/classMongoose_1_1Response__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mongoose\+:\+:Response\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{de/dd8/classMongoose_1_1Response__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{classMongoose_1_1Response_aafa41f6aef9f10be3d02f34706dc35f7}{has\+Header} (string key)
+\item 
+virtual void \hyperlink{classMongoose_1_1Response_a47e5532afd8035c3249dec8969e6940d}{set\+Header} (string key, string value)
+\item 
+virtual string \hyperlink{classMongoose_1_1Response_a68cdd86ac8aae4fb4d19739301dc2a2d}{get\+Data} ()
+\item 
+virtual string \hyperlink{classMongoose_1_1Response_a96eca7d4a81d1b0c3e0bcbfbb8b8665c}{get\+Body} ()=0
+\item 
+virtual void \hyperlink{classMongoose_1_1Response_a505cda6a4455f323dd21de978cfde50f}{set\+Cookie} (string key, string value)
+\item 
+virtual void \hyperlink{classMongoose_1_1Response_a7c815e16c44fc712409be29074003ec2}{set\+Code} (int code)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries code}\hypertarget{classMongoose_1_1Response_af2e81e6a770bbf9b2f612beb73e58d25}{}\label{classMongoose_1_1Response_af2e81e6a770bbf9b2f612beb73e58d25}
+
+\item 
+map$<$ string, string $>$ {\bfseries headers}\hypertarget{classMongoose_1_1Response_ada0a14d2c765a23677f6703543cf9eaa}{}\label{classMongoose_1_1Response_ada0a14d2c765a23677f6703543cf9eaa}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Mongoose\+::\+Response@{Mongoose\+::\+Response}!get\+Body@{get\+Body}}
+\index{get\+Body@{get\+Body}!Mongoose\+::\+Response@{Mongoose\+::\+Response}}
+\subsubsection[{\texorpdfstring{get\+Body()=0}{getBody()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual string Mongoose\+::\+Response\+::get\+Body (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classMongoose_1_1Response_a96eca7d4a81d1b0c3e0bcbfbb8b8665c}{}\label{classMongoose_1_1Response_a96eca7d4a81d1b0c3e0bcbfbb8b8665c}
+Gets the response body
+
+\begin{DoxyReturn}{Returns}
+string the response body 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classMongoose_1_1JsonResponse_a704d15c346212520f162202e11ae61d7}{Mongoose\+::\+Json\+Response}, and \hyperlink{classMongoose_1_1StreamResponse_a66bfcfc651f88d0139f3cf55ea4e21e2}{Mongoose\+::\+Stream\+Response}.
+
+\index{Mongoose\+::\+Response@{Mongoose\+::\+Response}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!Mongoose\+::\+Response@{Mongoose\+::\+Response}}
+\subsubsection[{\texorpdfstring{get\+Data()}{getData()}}]{\setlength{\rightskip}{0pt plus 5cm}string Mongoose\+::\+Response\+::get\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Response_a68cdd86ac8aae4fb4d19739301dc2a2d}{}\label{classMongoose_1_1Response_a68cdd86ac8aae4fb4d19739301dc2a2d}
+Get the data of the response, this will contain headers and body
+
+\begin{DoxyReturn}{Returns}
+string the response data 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Response@{Mongoose\+::\+Response}!has\+Header@{has\+Header}}
+\index{has\+Header@{has\+Header}!Mongoose\+::\+Response@{Mongoose\+::\+Response}}
+\subsubsection[{\texorpdfstring{has\+Header(string key)}{hasHeader(string key)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Mongoose\+::\+Response\+::has\+Header (
+\begin{DoxyParamCaption}
+\item[{string}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Response_aafa41f6aef9f10be3d02f34706dc35f7}{}\label{classMongoose_1_1Response_aafa41f6aef9f10be3d02f34706dc35f7}
+Test if the given header is present
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the header key\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool true if the header is set 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Response@{Mongoose\+::\+Response}!set\+Code@{set\+Code}}
+\index{set\+Code@{set\+Code}!Mongoose\+::\+Response@{Mongoose\+::\+Response}}
+\subsubsection[{\texorpdfstring{set\+Code(int code)}{setCode(int code)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Response\+::set\+Code (
+\begin{DoxyParamCaption}
+\item[{int}]{code}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Response_a7c815e16c44fc712409be29074003ec2}{}\label{classMongoose_1_1Response_a7c815e16c44fc712409be29074003ec2}
+Sets the response code \index{Mongoose\+::\+Response@{Mongoose\+::\+Response}!set\+Cookie@{set\+Cookie}}
+\index{set\+Cookie@{set\+Cookie}!Mongoose\+::\+Response@{Mongoose\+::\+Response}}
+\subsubsection[{\texorpdfstring{set\+Cookie(string key, string value)}{setCookie(string key, string value)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Response\+::set\+Cookie (
+\begin{DoxyParamCaption}
+\item[{string}]{key, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Response_a505cda6a4455f323dd21de978cfde50f}{}\label{classMongoose_1_1Response_a505cda6a4455f323dd21de978cfde50f}
+Sets the cookie, note that you can only define one cookie by request for now
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the key of the cookie \\
+\hline
+{\em string} & value the cookie value \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Response@{Mongoose\+::\+Response}!set\+Header@{set\+Header}}
+\index{set\+Header@{set\+Header}!Mongoose\+::\+Response@{Mongoose\+::\+Response}}
+\subsubsection[{\texorpdfstring{set\+Header(string key, string value)}{setHeader(string key, string value)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Response\+::set\+Header (
+\begin{DoxyParamCaption}
+\item[{string}]{key, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1Response_a47e5532afd8035c3249dec8969e6940d}{}\label{classMongoose_1_1Response_a47e5532afd8035c3249dec8969e6940d}
+Sets the header
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the header key\\
+\hline
+{\em value} & the header value \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mongoose-\/cpp/Response.\+h\item 
+src/mongoose-\/cpp/Response.\+cpp\end{DoxyCompactItemize}

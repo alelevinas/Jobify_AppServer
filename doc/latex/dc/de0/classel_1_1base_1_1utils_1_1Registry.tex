@@ -1,0 +1,95 @@
+\hypertarget{classel_1_1base_1_1utils_1_1Registry}{}\section{el\+:\+:base\+:\+:utils\+:\+:Registry$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$ Class Template Reference}
+\label{classel_1_1base_1_1utils_1_1Registry}\index{el\+::base\+::utils\+::\+Registry$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$@{el\+::base\+::utils\+::\+Registry$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$}}
+
+
+A pointer registry mechanism to manage memory and provide search functionalities. (non-\/predicate version)  
+
+
+
+
+{\ttfamily \#include $<$easylogging++.\+h$>$}
+
+
+
+Inheritance diagram for el\+:\+:base\+:\+:utils\+:\+:Registry$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{da/da8/classel_1_1base_1_1utils_1_1Registry__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for el\+:\+:base\+:\+:utils\+:\+:Registry$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d4/d26/classel_1_1base_1_1utils_1_1Registry__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classel_1_1base_1_1utils_1_1Registry}{Registry}$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$\+::iterator {\bfseries iterator}\hypertarget{classel_1_1base_1_1utils_1_1Registry_a31f3d725285e6b65f1f9e990066f96ed}{}\label{classel_1_1base_1_1utils_1_1Registry_a31f3d725285e6b65f1f9e990066f96ed}
+
+\item 
+typedef \hyperlink{classel_1_1base_1_1utils_1_1Registry}{Registry}$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$\+::const\+\_\+iterator {\bfseries const\+\_\+iterator}\hypertarget{classel_1_1base_1_1utils_1_1Registry_a955e62adc74c60d0205b52a3fc430cef}{}\label{classel_1_1base_1_1utils_1_1Registry_a955e62adc74c60d0205b52a3fc430cef}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classel_1_1base_1_1utils_1_1Registry_adf5e97aa801be3b93e116ad645304759}{Registry} (const \hyperlink{classel_1_1base_1_1utils_1_1Registry}{Registry} \&sr)\hypertarget{classel_1_1base_1_1utils_1_1Registry_adf5e97aa801be3b93e116ad645304759}{}\label{classel_1_1base_1_1utils_1_1Registry_adf5e97aa801be3b93e116ad645304759}
+
+\begin{DoxyCompactList}\small\item\em Copy constructor that is useful for base classes. Try to avoid this constructor, use move constructor. \end{DoxyCompactList}\item 
+\hyperlink{classel_1_1base_1_1utils_1_1Registry}{Registry} \& \hyperlink{classel_1_1base_1_1utils_1_1Registry_a80e0ce12b7d0c24462b385fc7b3149e0}{operator=} (const \hyperlink{classel_1_1base_1_1utils_1_1Registry}{Registry} \&sr)
+\begin{DoxyCompactList}\small\item\em Assignment operator that unregisters all the existing registeries and deeply copies each of repo element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classel_1_1base_1_1utils_1_1Registry_ac40e62ddf5017beb91c28b472c9628c2}{unregister\+All} (void) E\+L\+P\+P\+\_\+\+F\+I\+N\+AL\hypertarget{classel_1_1base_1_1utils_1_1Registry_ac40e62ddf5017beb91c28b472c9628c2}{}\label{classel_1_1base_1_1utils_1_1Registry_ac40e62ddf5017beb91c28b472c9628c2}
+
+\begin{DoxyCompactList}\small\item\em Unregisters all the pointers from current repository. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classel_1_1base_1_1utils_1_1Registry_ab10b3dd25ff0df036e7a015635a15dee}{register\+New} (const T\+\_\+\+Key \&uniq\+Key, T\+\_\+\+Ptr $\ast$ptr) E\+L\+P\+P\+\_\+\+F\+I\+N\+AL\hypertarget{classel_1_1base_1_1utils_1_1Registry_ab10b3dd25ff0df036e7a015635a15dee}{}\label{classel_1_1base_1_1utils_1_1Registry_ab10b3dd25ff0df036e7a015635a15dee}
+
+\begin{DoxyCompactList}\small\item\em Registers new registry to repository. \end{DoxyCompactList}\item 
+void \hyperlink{classel_1_1base_1_1utils_1_1Registry_aab6f0ce3a99feff11add0bd8b869fcb8}{unregister} (const T\+\_\+\+Key \&uniq\+Key)\hypertarget{classel_1_1base_1_1utils_1_1Registry_aab6f0ce3a99feff11add0bd8b869fcb8}{}\label{classel_1_1base_1_1utils_1_1Registry_aab6f0ce3a99feff11add0bd8b869fcb8}
+
+\begin{DoxyCompactList}\small\item\em Unregisters single entry mapped to specified unique key. \end{DoxyCompactList}\item 
+T\+\_\+\+Ptr $\ast$ \hyperlink{classel_1_1base_1_1utils_1_1Registry_a18c332267f2acbe78c97a611dec2e5c2}{get} (const T\+\_\+\+Key \&uniq\+Key)\hypertarget{classel_1_1base_1_1utils_1_1Registry_a18c332267f2acbe78c97a611dec2e5c2}{}\label{classel_1_1base_1_1utils_1_1Registry_a18c332267f2acbe78c97a611dec2e5c2}
+
+\begin{DoxyCompactList}\small\item\em Gets pointer from repository. If none found, nullptr is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T\+\_\+\+Ptr, typename T\+\_\+\+Key = const char$\ast$$>$\\*
+class el\+::base\+::utils\+::\+Registry$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$}
+
+A pointer registry mechanism to manage memory and provide search functionalities. (non-\/predicate version) 
+
+N\+O\+TE\+: This is thread-\/unsafe implementation (although it contains lock function, it does not use these functions) of Abstract\+Registry$<$\+T\+\_\+\+Ptr, Container$>$. Any implementation of this class should be explicitly (by using lock functions) 
+
+\subsection{Member Function Documentation}
+\index{el\+::base\+::utils\+::\+Registry@{el\+::base\+::utils\+::\+Registry}!operator=@{operator=}}
+\index{operator=@{operator=}!el\+::base\+::utils\+::\+Registry@{el\+::base\+::utils\+::\+Registry}}
+\subsubsection[{\texorpdfstring{operator=(const Registry \&sr)}{operator=(const Registry &sr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+\_\+\+Ptr, typename T\+\_\+\+Key = const char$\ast$$>$ {\bf Registry}\& {\bf el\+::base\+::utils\+::\+Registry}$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Registry}$<$ T\+\_\+\+Ptr, T\+\_\+\+Key $>$ \&}]{sr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classel_1_1base_1_1utils_1_1Registry_a80e0ce12b7d0c24462b385fc7b3149e0}{}\label{classel_1_1base_1_1utils_1_1Registry_a80e0ce12b7d0c24462b385fc7b3149e0}
+
+
+Assignment operator that unregisters all the existing registeries and deeply copies each of repo element. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classel_1_1base_1_1utils_1_1Registry_ac40e62ddf5017beb91c28b472c9628c2}{unregister\+All()} 
+
+deep\+Copy(const Abstract\+Registry\&) 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/log/easylogging++.\+h\end{DoxyCompactItemize}

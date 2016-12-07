@@ -1,0 +1,199 @@
+\hypertarget{classMongoose_1_1Request}{}\section{Mongoose\+:\+:Request Class Reference}
+\label{classMongoose_1_1Request}\index{Mongoose\+::\+Request@{Mongoose\+::\+Request}}
+
+
+Collaboration diagram for Mongoose\+:\+:Request\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d6/d45/classMongoose_1_1Request__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Request} (struct \hyperlink{structmg__connection}{mg\+\_\+connection} $\ast$\hyperlink{structconnection}{connection})\hypertarget{classMongoose_1_1Request_af87c796da3723539ff2ec461093314c8}{}\label{classMongoose_1_1Request_af87c796da3723539ff2ec461093314c8}
+
+\item 
+void \hyperlink{classMongoose_1_1Request_aae08d8c042ca9900345e32ea5c09c937}{write\+Response} (\hyperlink{classMongoose_1_1Response}{Response} $\ast$response)
+\item 
+bool \hyperlink{classMongoose_1_1Request_a241238c4dcdea148c7c4469172e1fcac}{has\+Variable} (string key)
+\item 
+map$<$ string, string $>$ \hyperlink{classMongoose_1_1Request_aa63e36f0cd8c4a7a17d32cc92b95d14e}{get\+All\+Variable} ()
+\begin{DoxyCompactList}\small\item\em get\+All\+Variable \end{DoxyCompactList}\item 
+string \hyperlink{classMongoose_1_1Request_a8ec6685c5beceaabd9281e12d58e678a}{get} (string key, string fallback=\char`\"{}\char`\"{})
+\item 
+bool \hyperlink{classMongoose_1_1Request_a54d92ec6954d3ab5d5eedb2edc1e11ad}{has\+Cookie} (string key)
+\item 
+string \hyperlink{classMongoose_1_1Request_acc4953a6996e1fbb81ea08ee37d98f83}{get\+Cookie} (string key, string fallback=\char`\"{}\char`\"{})
+\item 
+string {\bfseries get\+Header\+Key\+Value} (const std\+::string \&header\+\_\+key)\hypertarget{classMongoose_1_1Request_aa2b476448b8eaeabcae18ae90cb85784}{}\label{classMongoose_1_1Request_aa2b476448b8eaeabcae18ae90cb85784}
+
+\item 
+void \hyperlink{classMongoose_1_1Request_a811b74365fe88ce24b255264b4e793ed}{handle\+Uploads} ()
+\item 
+string {\bfseries get\+Url} ()\hypertarget{classMongoose_1_1Request_aafd1c22f5ab010e735ea5282e4b27c0a}{}\label{classMongoose_1_1Request_aafd1c22f5ab010e735ea5282e4b27c0a}
+
+\item 
+string {\bfseries get\+Method} ()\hypertarget{classMongoose_1_1Request_aaca4b474f440dc96b4b50491e3c9dd08}{}\label{classMongoose_1_1Request_aaca4b474f440dc96b4b50491e3c9dd08}
+
+\item 
+string {\bfseries get\+Data} ()\hypertarget{classMongoose_1_1Request_a43603a53f61e412f90ba9a99391c7fca}{}\label{classMongoose_1_1Request_a43603a53f61e412f90ba9a99391c7fca}
+
+\item 
+bool {\bfseries read\+Variable} (const char $\ast$data, string key, string \&output)\hypertarget{classMongoose_1_1Request_a31c3c277344bf81b339480bfa3122d49}{}\label{classMongoose_1_1Request_a31c3c277344bf81b339480bfa3122d49}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \hyperlink{classMongoose_1_1UploadFile}{Upload\+File} $>$ \hyperlink{classMongoose_1_1Request_aad948dbb01a43ea5f6ca1a0e7bba0ab1}{upload\+Files}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string {\bfseries method}\hypertarget{classMongoose_1_1Request_a506a7552c7d3a1dd8ff760f529310cea}{}\label{classMongoose_1_1Request_a506a7552c7d3a1dd8ff760f529310cea}
+
+\item 
+string {\bfseries url}\hypertarget{classMongoose_1_1Request_a2acd31b6ab0483df81464c4194917271}{}\label{classMongoose_1_1Request_a2acd31b6ab0483df81464c4194917271}
+
+\item 
+string {\bfseries data}\hypertarget{classMongoose_1_1Request_a741bc8dad0ebcb790010229a2f73910e}{}\label{classMongoose_1_1Request_a741bc8dad0ebcb790010229a2f73910e}
+
+\item 
+struct \hyperlink{structmg__connection}{mg\+\_\+connection} $\ast$ {\bfseries connection}\hypertarget{classMongoose_1_1Request_ae80e9b502bad19d78af78c62b811549b}{}\label{classMongoose_1_1Request_ae80e9b502bad19d78af78c62b811549b}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Mongoose\+::\+Request@{Mongoose\+::\+Request}!get@{get}}
+\index{get@{get}!Mongoose\+::\+Request@{Mongoose\+::\+Request}}
+\subsubsection[{\texorpdfstring{get(string key, string fallback="""")}{get(string key, string fallback="")}}]{\setlength{\rightskip}{0pt plus 5cm}string Mongoose\+::\+Request\+::get (
+\begin{DoxyParamCaption}
+\item[{string}]{key, }
+\item[{string}]{fallback = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Request_a8ec6685c5beceaabd9281e12d58e678a}{}\label{classMongoose_1_1Request_a8ec6685c5beceaabd9281e12d58e678a}
+Get the value for a certain variable
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the name of the variable \\
+\hline
+{\em string} & the fallback value if the variable doesn\textquotesingle{}t exists\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string the value of the variable if it exists, fallback else 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Request@{Mongoose\+::\+Request}!get\+All\+Variable@{get\+All\+Variable}}
+\index{get\+All\+Variable@{get\+All\+Variable}!Mongoose\+::\+Request@{Mongoose\+::\+Request}}
+\subsubsection[{\texorpdfstring{get\+All\+Variable()}{getAllVariable()}}]{\setlength{\rightskip}{0pt plus 5cm}map$<$ string, string $>$ Mongoose\+::\+Request\+::get\+All\+Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Request_aa63e36f0cd8c4a7a17d32cc92b95d14e}{}\label{classMongoose_1_1Request_aa63e36f0cd8c4a7a17d32cc92b95d14e}
+
+
+get\+All\+Variable 
+
+Get All variable present in G\+ET or P\+O\+ST data
+
+\begin{DoxyReturn}{Returns}
+map$<$string, string$>$ with all variables 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Request@{Mongoose\+::\+Request}!get\+Cookie@{get\+Cookie}}
+\index{get\+Cookie@{get\+Cookie}!Mongoose\+::\+Request@{Mongoose\+::\+Request}}
+\subsubsection[{\texorpdfstring{get\+Cookie(string key, string fallback="""")}{getCookie(string key, string fallback="")}}]{\setlength{\rightskip}{0pt plus 5cm}string Mongoose\+::\+Request\+::get\+Cookie (
+\begin{DoxyParamCaption}
+\item[{string}]{key, }
+\item[{string}]{fallback = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Request_acc4953a6996e1fbb81ea08ee37d98f83}{}\label{classMongoose_1_1Request_acc4953a6996e1fbb81ea08ee37d98f83}
+Try to get the cookie value
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the name of the cookie \\
+\hline
+{\em string} & the fallback value\\
+\hline
+\end{DoxyParams}
+the value of the cookie if it exists, fallback else \index{Mongoose\+::\+Request@{Mongoose\+::\+Request}!handle\+Uploads@{handle\+Uploads}}
+\index{handle\+Uploads@{handle\+Uploads}!Mongoose\+::\+Request@{Mongoose\+::\+Request}}
+\subsubsection[{\texorpdfstring{handle\+Uploads()}{handleUploads()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Request\+::handle\+Uploads (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Request_a811b74365fe88ce24b255264b4e793ed}{}\label{classMongoose_1_1Request_a811b74365fe88ce24b255264b4e793ed}
+Handle uploads to the target directory
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the target directory \\
+\hline
+{\em path} & the posted file path \\
+\hline
+\end{DoxyParams}
+\index{Mongoose\+::\+Request@{Mongoose\+::\+Request}!has\+Cookie@{has\+Cookie}}
+\index{has\+Cookie@{has\+Cookie}!Mongoose\+::\+Request@{Mongoose\+::\+Request}}
+\subsubsection[{\texorpdfstring{has\+Cookie(string key)}{hasCookie(string key)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Mongoose\+::\+Request\+::has\+Cookie (
+\begin{DoxyParamCaption}
+\item[{string}]{key}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Request_a54d92ec6954d3ab5d5eedb2edc1e11ad}{}\label{classMongoose_1_1Request_a54d92ec6954d3ab5d5eedb2edc1e11ad}
+Checks if the given cookie exists
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the name of the cookie\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool true if the given cookie is set 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Request@{Mongoose\+::\+Request}!has\+Variable@{has\+Variable}}
+\index{has\+Variable@{has\+Variable}!Mongoose\+::\+Request@{Mongoose\+::\+Request}}
+\subsubsection[{\texorpdfstring{has\+Variable(string key)}{hasVariable(string key)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Mongoose\+::\+Request\+::has\+Variable (
+\begin{DoxyParamCaption}
+\item[{string}]{key}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Request_a241238c4dcdea148c7c4469172e1fcac}{}\label{classMongoose_1_1Request_a241238c4dcdea148c7c4469172e1fcac}
+Check if the variable given by key is present in G\+ET or P\+O\+ST data
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & the name of the variable\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool true if the param is present, false else 
+\end{DoxyReturn}
+\index{Mongoose\+::\+Request@{Mongoose\+::\+Request}!write\+Response@{write\+Response}}
+\index{write\+Response@{write\+Response}!Mongoose\+::\+Request@{Mongoose\+::\+Request}}
+\subsubsection[{\texorpdfstring{write\+Response(\+Response $\ast$response)}{writeResponse(Response *response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Request\+::write\+Response (
+\begin{DoxyParamCaption}
+\item[{{\bf Response} $\ast$}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1Request_aae08d8c042ca9900345e32ea5c09c937}{}\label{classMongoose_1_1Request_aae08d8c042ca9900345e32ea5c09c937}
+Sends a given response to the client
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Response}{Response}} & a response for this request \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Mongoose\+::\+Request@{Mongoose\+::\+Request}!upload\+Files@{upload\+Files}}
+\index{upload\+Files@{upload\+Files}!Mongoose\+::\+Request@{Mongoose\+::\+Request}}
+\subsubsection[{\texorpdfstring{upload\+Files}{uploadFiles}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Upload\+File}$>$ Mongoose\+::\+Request\+::upload\+Files}\hypertarget{classMongoose_1_1Request_aad948dbb01a43ea5f6ca1a0e7bba0ab1}{}\label{classMongoose_1_1Request_aad948dbb01a43ea5f6ca1a0e7bba0ab1}
+Files uploaded in this request 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mongoose-\/cpp/Request.\+h\item 
+src/mongoose-\/cpp/Request.\+cpp\end{DoxyCompactItemize}

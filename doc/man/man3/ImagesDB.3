@@ -1,0 +1,35 @@
+.TH "ImagesDB" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ImagesDB \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBDB\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBImagesDB\fP (const std::string &\fBdb_name\fP)"
+.br
+.ti -1c
+.RI "bool \fBadd_image\fP (const std::string &username, Json::Value &image)"
+.br
+.ti -1c
+.RI "bool \fBupdate_image\fP (const std::string &username, Json::Value &image)"
+.br
+.ti -1c
+.RI "Json::Value \fBget_image\fP (const std::string &username)"
+.br
+.ti -1c
+.RI "bool \fBdelete_image\fP (const std::string &username)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

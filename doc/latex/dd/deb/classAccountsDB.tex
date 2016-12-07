@@ -1,0 +1,93 @@
+\hypertarget{classAccountsDB}{}\section{Accounts\+DB Class Reference}
+\label{classAccountsDB}\index{Accounts\+DB@{Accounts\+DB}}
+
+
+{\ttfamily \#include $<$Accounts\+D\+B.\+h$>$}
+
+
+
+Inheritance diagram for Accounts\+DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=173pt]{db/dd3/classAccountsDB__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Accounts\+DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{db/d5f/classAccountsDB__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Accounts\+DB} (const std\+::string \&\hyperlink{classDB_a8c58fbd6650f3d5850adf699d1ee7ada}{db\+\_\+name})\hypertarget{classAccountsDB_a9fd585eb1722709c4c4f3a965e28a4f9}{}\label{classAccountsDB_a9fd585eb1722709c4c4f3a965e28a4f9}
+
+\item 
+bool \hyperlink{classAccountsDB_a4dcb9ceac8065e4ded4e8f812fb0fad6}{add\+\_\+account} (std\+::string username, std\+::string password)
+\item 
+bool \hyperlink{classAccountsDB_ad7a862b0e456a90fcc3074934de83d66}{is\+\_\+correct} (std\+::string username, std\+::string password)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classDB}{DB} that saves the username and password (encrypted) data from users. 
+
+\subsection{Member Function Documentation}
+\index{Accounts\+DB@{Accounts\+DB}!add\+\_\+account@{add\+\_\+account}}
+\index{add\+\_\+account@{add\+\_\+account}!Accounts\+DB@{Accounts\+DB}}
+\subsubsection[{\texorpdfstring{add\+\_\+account(std\+::string username, std\+::string password)}{add_account(std::string username, std::string password)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Accounts\+D\+B\+::add\+\_\+account (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{username, }
+\item[{std\+::string}]{password}
+\end{DoxyParamCaption}
+)}\hypertarget{classAccountsDB_a4dcb9ceac8065e4ded4e8f812fb0fad6}{}\label{classAccountsDB_a4dcb9ceac8065e4ded4e8f812fb0fad6}
+Adds a username-\/password entry to the \hyperlink{classDB}{DB} 
+\begin{DoxyParams}{Parameters}
+{\em username} & the users username \\
+\hline
+{\em password} & the users password \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the username doesnt exist 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{classKeyAlreadyExistsException}{Key\+Already\+Exists\+Exception}} & \\
+\hline
+\end{DoxyExceptions}
+\index{Accounts\+DB@{Accounts\+DB}!is\+\_\+correct@{is\+\_\+correct}}
+\index{is\+\_\+correct@{is\+\_\+correct}!Accounts\+DB@{Accounts\+DB}}
+\subsubsection[{\texorpdfstring{is\+\_\+correct(std\+::string username, std\+::string password)}{is_correct(std::string username, std::string password)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Accounts\+D\+B\+::is\+\_\+correct (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{username, }
+\item[{std\+::string}]{password}
+\end{DoxyParamCaption}
+)}\hypertarget{classAccountsDB_ad7a862b0e456a90fcc3074934de83d66}{}\label{classAccountsDB_ad7a862b0e456a90fcc3074934de83d66}
+Checks if the password corresponds to that username 
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+{\em password} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if it is correct 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{classKeyDoesntExistException}{Key\+Doesnt\+Exist\+Exception}} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/databases/Accounts\+D\+B.\+h\item 
+src/databases/Accounts\+D\+B.\+cpp\end{DoxyCompactItemize}

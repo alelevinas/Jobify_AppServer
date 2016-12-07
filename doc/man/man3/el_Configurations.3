@@ -1,0 +1,257 @@
+.TH "el::Configurations" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::Configurations \- Thread-safe \fBConfiguration\fP repository\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::utils::RegistryWithPred< Configuration, Configuration::Predicate >\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBParser\fP"
+.br
+.RI "\fI\fBParser\fP used internally to parse configurations from file or text\&. \fP"
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBConfigurations\fP (void)"
+.br
+.RI "\fIDefault constructor with empty repository\&. \fP"
+.ti -1c
+.RI "\fBConfigurations\fP (const std::string &\fBconfigurationFile\fP, bool useDefaultsForRemaining=true, \fBConfigurations\fP *base=nullptr)"
+.br
+.RI "\fIConstructor used to set configurations using configuration file\&. \fP"
+.ti -1c
+.RI "bool \fBparseFromFile\fP (const std::string &\fBconfigurationFile\fP, \fBConfigurations\fP *base=nullptr)"
+.br
+.RI "\fIParses configuration from file\&. \fP"
+.ti -1c
+.RI "bool \fBparseFromText\fP (const std::string &configurationsString, \fBConfigurations\fP *base=nullptr)"
+.br
+.RI "\fIParse configurations from configuration string\&. \fP"
+.ti -1c
+.RI "void \fBsetFromBase\fP (\fBConfigurations\fP *base)"
+.br
+.RI "\fISets configuration based-off an existing configurations\&. \fP"
+.ti -1c
+.RI "bool \fBhasConfiguration\fP (\fBConfigurationType\fP configurationType)"
+.br
+.RI "\fIDetermines whether or not specified configuration type exists in the repository\&. \fP"
+.ti -1c
+.RI "bool \fBhasConfiguration\fP (\fBLevel\fP level, \fBConfigurationType\fP configurationType)"
+.br
+.RI "\fIDetermines whether or not specified configuration type exists for specified level\&. \fP"
+.ti -1c
+.RI "void \fBset\fP (\fBLevel\fP level, \fBConfigurationType\fP configurationType, const std::string &value)"
+.br
+.RI "\fISets value of configuration for specified level\&. \fP"
+.ti -1c
+.RI "void \fBset\fP (\fBConfiguration\fP *conf)"
+.br
+.RI "\fISets single configuration based on other single configuration\&. \fP"
+.ti -1c
+.RI "\fBConfiguration\fP * \fBget\fP (\fBLevel\fP level, \fBConfigurationType\fP configurationType)"
+.br
+.ti -1c
+.RI "void \fBsetGlobally\fP (\fBConfigurationType\fP configurationType, const std::string &value)"
+.br
+.RI "\fISets configuration for all levels\&. \fP"
+.ti -1c
+.RI "void \fBclear\fP (void)"
+.br
+.RI "\fIClears repository so that all the configurations are unset\&. \fP"
+.ti -1c
+.RI "const std::string & \fBconfigurationFile\fP (void) const "
+.br
+.RI "\fIGets configuration file used in parsing this configurations\&. \fP"
+.ti -1c
+.RI "void \fBsetToDefault\fP (void)"
+.br
+.RI "\fISets configurations to 'factory based' configurations\&. \fP"
+.ti -1c
+.RI "void \fBsetRemainingToDefault\fP (void)"
+.br
+.RI "\fILets you set the remaining configurations to default\&. \fP"
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::Loggers\fP"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Thread-safe \fBConfiguration\fP repository\&. 
+
+This repository represents configurations for all the levels and configuration type mapped to a value\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "el::Configurations::Configurations (const std::string & configurationFile, bool useDefaultsForRemaining = \fCtrue\fP, \fBConfigurations\fP * base = \fCnullptr\fP)\fC [inline]\fP"
+
+.PP
+Constructor used to set configurations using configuration file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconfigurationFile\fP Full path to configuration file 
+.br
+\fIuseDefaultsForRemaining\fP Lets you set the remaining configurations to default\&. 
+.br
+\fIbase\fP If provided, this configuration will be based off existing repository that this argument is pointing to\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBparseFromFile(const std::string&, Configurations* base)\fP 
+.PP
+\fBsetRemainingToDefault()\fP 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const std::string& el::Configurations::configurationFile (void) const\fC [inline]\fP"
+
+.PP
+Gets configuration file used in parsing this configurations\&. If this repository was set manually or by text this returns empty string\&. 
+.SS "bool el::Configurations::hasConfiguration (\fBConfigurationType\fP configurationType)\fC [inline]\fP"
+
+.PP
+Determines whether or not specified configuration type exists in the repository\&. Returns as soon as first level is found\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconfigurationType\fP Type of configuration to check existence for\&. 
+.RE
+.PP
+
+.SS "bool el::Configurations::hasConfiguration (\fBLevel\fP level, \fBConfigurationType\fP configurationType)\fC [inline]\fP"
+
+.PP
+Determines whether or not specified configuration type exists for specified level\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlevel\fP Level to check 
+.br
+\fIconfigurationType\fP Type of configuration to check existence for\&. 
+.RE
+.PP
+
+.SS "bool el::Configurations::parseFromFile (const std::string & configurationFile, \fBConfigurations\fP * base = \fCnullptr\fP)\fC [inline]\fP"
+
+.PP
+Parses configuration from file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconfigurationFile\fP Full path to configuration file 
+.br
+\fIbase\fP \fBConfigurations\fP to base new configuration repository off\&. This value is used when you want to use existing \fBConfigurations\fP to base all the values and then set rest of configuration via configuration file\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+True if successfully parsed, false otherwise\&. You may define 'ELPP_DEBUG_ASSERT_FAILURE' to make sure you do not proceed without successful parse\&. 
+.RE
+.PP
+
+.SS "bool el::Configurations::parseFromText (const std::string & configurationsString, \fBConfigurations\fP * base = \fCnullptr\fP)\fC [inline]\fP"
+
+.PP
+Parse configurations from configuration string\&. This configuration string has same syntax as configuration file contents\&. Make sure all the necessary new line characters are provided\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbase\fP \fBConfigurations\fP to base new configuration repository off\&. This value is used when you want to use existing \fBConfigurations\fP to base all the values and then set rest of configuration via configuration text\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+True if successfully parsed, false otherwise\&. You may define 'ELPP_DEBUG_ASSERT_FAILURE' to make sure you do not proceed without successful parse\&. 
+.RE
+.PP
+
+.SS "void el::Configurations::set (\fBLevel\fP level, \fBConfigurationType\fP configurationType, const std::string & value)\fC [inline]\fP"
+
+.PP
+Sets value of configuration for specified level\&. Any existing configuration for specified level will be replaced\&. Also note that configuration types \fBConfigurationType::MillisecondsWidth\fP and \fBConfigurationType::PerformanceTracking\fP will be ignored if not set for \fBLevel::Global\fP because these configurations are not dependant on level\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlevel\fP Level to set configuration for (\fBel::Level\fP)\&. 
+.br
+\fIconfigurationType\fP Type of configuration (\fBel::ConfigurationType\fP) 
+.br
+\fIvalue\fP A string based value\&. Regardless of what the data type of configuration is, it will always be string from users' point of view\&. This is then parsed later to be used internally\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBConfiguration::setValue(const std::string& value)\fP 
+.PP
+\fBel::Level\fP 
+.PP
+\fBel::ConfigurationType\fP 
+.RE
+.PP
+
+.SS "void el::Configurations::set (\fBConfiguration\fP * conf)\fC [inline]\fP"
+
+.PP
+Sets single configuration based on other single configuration\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBset(Level level, ConfigurationType configurationType, const std::string& value)\fP 
+.RE
+.PP
+
+.SS "void el::Configurations::setFromBase (\fBConfigurations\fP * base)\fC [inline]\fP"
+
+.PP
+Sets configuration based-off an existing configurations\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbase\fP Pointer to existing configurations\&. 
+.RE
+.PP
+
+.SS "void el::Configurations::setGlobally (\fBConfigurationType\fP configurationType, const std::string & value)\fC [inline]\fP"
+
+.PP
+Sets configuration for all levels\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconfigurationType\fP Type of configuration 
+.br
+\fIvalue\fP String based value 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBConfigurations::set(Level level, ConfigurationType configurationType, const std::string& value)\fP 
+.RE
+.PP
+
+.SS "void el::Configurations::setRemainingToDefault (void)\fC [inline]\fP"
+
+.PP
+Lets you set the remaining configurations to default\&. By remaining, it means that the level/type a configuration does not exist for\&. This function is useful when you want to minimize chances of failures, e\&.g, if you have a configuration file that sets configuration for all the configurations except for Enabled or not, we use this so that ENABLED is set to default i\&.e, true\&. If you dont do this explicitley (either by calling this function or by using second param in Constructor and try to access a value, an error is thrown 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

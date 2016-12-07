@@ -1,0 +1,96 @@
+\hypertarget{classSharedServerController}{}\section{Shared\+Server\+Controller Class Reference}
+\label{classSharedServerController}\index{Shared\+Server\+Controller@{Shared\+Server\+Controller}}
+
+
+{\ttfamily \#include $<$Shared\+Server\+Controller.\+h$>$}
+
+
+
+Inheritance diagram for Shared\+Server\+Controller\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{d4/d6f/classSharedServerController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Shared\+Server\+Controller\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{d5/dc7/classSharedServerController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Shared\+Server\+Controller} (\hyperlink{classClientSharedServer}{Client\+Shared\+Server} $\ast$client\+Shared\+Server, \hyperlink{classSessionManager}{Session\+Manager} $\ast$session\+Manager)\hypertarget{classSharedServerController_a355af3c521e77b2a2449831fd71ac20c}{}\label{classSharedServerController_a355af3c521e77b2a2449831fd71ac20c}
+
+\item 
+void {\bfseries setup} ()\hypertarget{classSharedServerController_a683f37c601ffa96ff15e06f437447fc9}{}\label{classSharedServerController_a683f37c601ffa96ff15e06f437447fc9}
+
+\item 
+void \hyperlink{classSharedServerController_aa6a51bed324007f8218cc789e86cf49d}{get\+Job\+Pos\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classSharedServerController_a01df5d05029a370707ff5e0e96a5dd48}{get\+Skills\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classSharedServerController_a980bad97792b7af717560eee14a901a4}{get\+Categories\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Controller that manages the shared Server common data. The connection to the shared server is made through the \hyperlink{classClientSharedServer}{Client\+Shared\+Server}. 
+
+\subsection{Member Function Documentation}
+\index{Shared\+Server\+Controller@{Shared\+Server\+Controller}!get\+Categories\+Request@{get\+Categories\+Request}}
+\index{get\+Categories\+Request@{get\+Categories\+Request}!Shared\+Server\+Controller@{Shared\+Server\+Controller}}
+\subsubsection[{\texorpdfstring{get\+Categories\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getCategoriesRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Shared\+Server\+Controller\+::get\+Categories\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classSharedServerController_a980bad97792b7af717560eee14a901a4}{}\label{classSharedServerController_a980bad97792b7af717560eee14a901a4}
+Gets the categories from the shared server and responds them 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Shared\+Server\+Controller@{Shared\+Server\+Controller}!get\+Job\+Pos\+Request@{get\+Job\+Pos\+Request}}
+\index{get\+Job\+Pos\+Request@{get\+Job\+Pos\+Request}!Shared\+Server\+Controller@{Shared\+Server\+Controller}}
+\subsubsection[{\texorpdfstring{get\+Job\+Pos\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getJobPosRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Shared\+Server\+Controller\+::get\+Job\+Pos\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classSharedServerController_aa6a51bed324007f8218cc789e86cf49d}{}\label{classSharedServerController_aa6a51bed324007f8218cc789e86cf49d}
+Gets the job positions from the shared server and responds them 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Shared\+Server\+Controller@{Shared\+Server\+Controller}!get\+Skills\+Request@{get\+Skills\+Request}}
+\index{get\+Skills\+Request@{get\+Skills\+Request}!Shared\+Server\+Controller@{Shared\+Server\+Controller}}
+\subsubsection[{\texorpdfstring{get\+Skills\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getSkillsRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Shared\+Server\+Controller\+::get\+Skills\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classSharedServerController_a01df5d05029a370707ff5e0e96a5dd48}{}\label{classSharedServerController_a01df5d05029a370707ff5e0e96a5dd48}
+Gets the skills from the shared server and responds them 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Shared\+Server\+Controller.\+h\item 
+src/Shared\+Server\+Controller.\+cpp\end{DoxyCompactItemize}

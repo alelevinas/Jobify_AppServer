@@ -1,0 +1,152 @@
+.TH "ChatsDB" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ChatsDB \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ChatsDB\&.h>\fP
+.PP
+Inherits \fBDB\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBChatsDB\fP (std::string &dbName)"
+.br
+.ti -1c
+.RI "bool \fBadd_msg\fP (std::string username_from, std::string name_from, std::string user_to, std::string message)"
+.br
+.ti -1c
+.RI "bool \fBupdateMessages\fP (std::string, Json::Value)"
+.br
+.ti -1c
+.RI "bool \fBget_conv\fP (std::string username, std::string username2, Json::Value *conversation)"
+.br
+.ti -1c
+.RI "bool \fBget_convs\fP (std::string username, Json::Value *conversations, \fBUsersDB\fP *pDB)"
+.br
+.ti -1c
+.RI "bool \fBdelete_conv\fP (std::string username, std::string username2)"
+.br
+.ti -1c
+.RI "bool \fBdelete_message\fP (std::string username1, std::string username2, std::string idMensaje)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+\fBDB\fP that stores the chat messages data from users conversations\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool ChatsDB::add_msg (std::string username_from, std::string name_from, std::string user_to, std::string message)"
+Stores a message in the \fBDB\fP\&. The keys will be '@param username_from + _ + @param user_to' and '@param user_to + _ + @param username_from' 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername_from\fP The username that sends the message 
+.br
+\fIname_from\fP the name of 
+.br
+\fIusername_from\fP user 
+.br
+\fIuser_to\fP the destination user's username 
+.br
+\fImessage\fP the message body 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no problem 
+.RE
+.PP
+
+.SS "bool ChatsDB::delete_conv (std::string username, std::string username2)"
+Deletes the conversation between username and username2 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername\fP 
+.br
+\fIusername2\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.SS "bool ChatsDB::delete_message (std::string username1, std::string username2, std::string idMensaje)"
+Deletes the message with the 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIidMensaje\fP in the conversation between 
+.br
+\fIusername1\fP and 
+.br
+\fIusername2\fP 
+.br
+\fIusername1\fP 
+.br
+\fIusername2\fP 
+.br
+\fIidMensaje\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+True if the message could be deleted 
+.RE
+.PP
+
+.SS "bool ChatsDB::get_conv (std::string username, std::string username2, Json::Value * conversation)"
+Gets the conversation between username and username2 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername\fP 
+.br
+\fIusername2\fP 
+.br
+\fIconversation\fP to store the result 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no \fBDB\fP errors 
+.RE
+.PP
+
+.SS "bool ChatsDB::get_convs (std::string username, Json::Value * conversations, \fBUsersDB\fP * pDB)"
+Gets every conversation in the \fBDB\fP 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIusername\fP 
+.br
+\fIconversations\fP 
+.br
+\fIpDB\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+.RE
+.PP
+
+.SS "bool ChatsDB::updateMessages (std::string sKey, Json::Value messageValue)"
+Assigns an 'id' to the messages\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+True if no database errors 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

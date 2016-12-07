@@ -1,0 +1,4 @@
+<map id="cgi_env_block" name="cgi_env_block">
+<area shape="rect" id="node2" href="$d2/dad/structmg__connection.html" title="{mg_connection\n|+ request_method\l+ uri\l+ http_version\l+ query_string\l+ remote_ip\l+ remote_port\l+ num_headers\l+ content\l+ content_len\l+ is_websocket\l+ status_code\l+ wsbits\l+ server_param\l+ connection_param\l|}" alt="" coords="27,160,167,428"/>
+<area shape="rect" id="node3" href="$da/d69/structmg__connection_1_1mg__header.html" title="{mg_connection::mg_header\n|+ name\l+ value\l|}" alt="" coords="5,5,188,97"/>
+</map>

@@ -1,0 +1,36 @@
+.TH "el::Loggable" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::Loggable \- Base of Easylogging++ friendly class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherited by \fBel::base::LogFormat\fP, \fBel::base::PerformanceTracker\fP, \fBel::Configuration\fP, and \fBel::Logger\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBlog\fP (el::base::type::ostream_t &) const =0"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "el::base::type::ostream_t & \fBoperator<<\fP (el::base::type::ostream_t &os, const \fBLoggable\fP &loggable)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base of Easylogging++ friendly class\&. 
+
+After inheriting this class publicly, implement pure-virtual function \fCvoid log(std::ostream&) const\fP 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

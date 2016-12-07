@@ -1,0 +1,48 @@
+.TH "el::base::debug::StackTrace::StackTraceEntry" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::debug::StackTrace::StackTraceEntry \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBStackTraceEntry\fP (std::size_t index, const char *loc, const char *demang, const char *hex, const char *addr)"
+.br
+.ti -1c
+.RI "\fBStackTraceEntry\fP (std::size_t index, char *loc)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::size_t \fBm_index\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_location\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_demangled\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_hex\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_addr\fP"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &ss, const \fBStackTraceEntry\fP &si)"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

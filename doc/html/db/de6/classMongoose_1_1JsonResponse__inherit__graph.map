@@ -1,0 +1,4 @@
+<map id="Mongoose::JsonResponse" name="Mongoose::JsonResponse">
+<area shape="rect" id="node2" href="$d1/db8/classJson_1_1Value.html" title="Represents a JSON value. " alt="" coords="5,5,132,391"/>
+<area shape="rect" id="node3" href="$d7/d12/classMongoose_1_1Response.html" title="{Mongoose::Response\n|# code\l# headers\l|+ Response()\l+ ~Response()\l+ hasHeader()\l+ setHeader()\l+ getData()\l+ getBody()\l+ setCookie()\l+ setCode()\l}" alt="" coords="157,101,306,295"/>
+</map>

@@ -1,0 +1,35 @@
+.TH "Mongoose::Mutex" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose::Mutex \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBlock\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBunlock\fP ()"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "pthread_mutex_t \fB_mutex\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "void Mongoose::Mutex::lock (void)\fC [virtual]\fP"
+Locks the mutex 
+.SS "void Mongoose::Mutex::unlock (void)\fC [virtual]\fP"
+Unlock the mutex 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

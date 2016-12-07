@@ -1,0 +1,53 @@
+.TH "el::base::VRegistry" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::VRegistry \- Represents registries for verbose logging\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::NoCopy\fP, and \fBel::base::threading::ThreadSafe\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVRegistry\fP (base::type::VerboseLevel level, base::type::EnumType *pFlags)"
+.br
+.ti -1c
+.RI "void \fBsetLevel\fP (base::type::VerboseLevel level)"
+.br
+.RI "\fISets verbose level\&. Accepted range is 0-9\&. \fP"
+.ti -1c
+.RI "base::type::VerboseLevel \fBlevel\fP (void) const "
+.br
+.ti -1c
+.RI "void \fBclearModules\fP (void)"
+.br
+.ti -1c
+.RI "void \fBsetModules\fP (const char *modules)"
+.br
+.ti -1c
+.RI "bool \fBallowed\fP (base::type::VerboseLevel vlevel, const char *file)"
+.br
+.ti -1c
+.RI "const std::map< std::string, base::type::VerboseLevel > & \fBmodules\fP (void) const "
+.br
+.ti -1c
+.RI "void \fBsetFromArgs\fP (const \fBbase::utils::CommandLineArgs\fP *commandLineArgs)"
+.br
+.ti -1c
+.RI "bool \fBvModulesEnabled\fP (void)"
+.br
+.RI "\fIWhether or not vModules enabled\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents registries for verbose logging\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

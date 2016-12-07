@@ -1,0 +1,33 @@
+.TH "el::LogBuilder" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::LogBuilder \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBel::base::NoCopy\fP\&.
+.PP
+Inherited by \fBel::base::DefaultLogBuilder\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual base::type::string_t \fBbuild\fP (const \fBLogMessage\fP *logMessage, bool appendNewLine) const =0"
+.br
+.ti -1c
+.RI "void \fBconvertToColoredOutput\fP (base::type::string_t *logLine, \fBLevel\fP level)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::base::DefaultLogDispatchCallback\fP"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

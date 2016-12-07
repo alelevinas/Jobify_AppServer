@@ -49,7 +49,7 @@ public:
     bool add_account(string username, string password);
     bool is_correct(std::string username, std::string password);
 
-    bool add_msg(string basic_string, string basicString, string basic_string1);
+    bool add_msg(string basic_string, std::string name_from, string basicString, string basic_string1);
 
     bool get_conv(string username, string username2, Json::Value *conversation);
 

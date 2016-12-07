@@ -1,0 +1,22 @@
+.TH "el::base::StaticClass" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::StaticClass \- Internal helper class that makes all default constructors private\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherited by \fBel::base::utils::DateTime\fP\fC [private]\fP, \fBel::base::utils::File\fP\fC [private]\fP, \fBel::base::utils::OS\fP\fC [private]\fP, \fBel::base::utils::Str\fP\fC [private]\fP, \fBel::Configurations::Parser\fP\fC [private]\fP, \fBel::ConfigurationTypeHelper\fP\fC [private]\fP, \fBel::Helpers\fP\fC [private]\fP, \fBel::LevelHelper\fP\fC [private]\fP, \fBel::Loggers\fP\fC [private]\fP, and \fBel::VersionInfo\fP\fC [private]\fP\&.
+.SH "Detailed Description"
+.PP 
+Internal helper class that makes all default constructors private\&. 
+
+This prevents initializing class making it static unless an explicit constructor is declared\&. When using this class simply inherit it privately 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

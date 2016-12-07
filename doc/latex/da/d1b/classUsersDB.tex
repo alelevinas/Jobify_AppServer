@@ -1,0 +1,252 @@
+\hypertarget{classUsersDB}{}\section{Users\+DB Class Reference}
+\label{classUsersDB}\index{Users\+DB@{Users\+DB}}
+
+
+{\ttfamily \#include $<$Users\+D\+B.\+h$>$}
+
+
+
+Inheritance diagram for Users\+DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{df/d2a/classUsersDB__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Users\+DB\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{d9/d9e/classUsersDB__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Users\+DB} (const string \&\hyperlink{classDB_a8c58fbd6650f3d5850adf699d1ee7ada}{db\+\_\+name})\hypertarget{classUsersDB_abb3ef18cb44cdf2d8ae4dcb7056bb3d6}{}\label{classUsersDB_abb3ef18cb44cdf2d8ae4dcb7056bb3d6}
+
+\item 
+bool \hyperlink{classUsersDB_aacd5108e72af7ebc19c047a55e9278ae}{add\+\_\+user} (const string \&username, Json\+::\+Value user)
+\item 
+Json\+::\+Value \hyperlink{classUsersDB_a8f6e2781a52b9ec07a00fd04bd1a050d}{get\+\_\+user} (const string \&username)
+\item 
+bool \hyperlink{classUsersDB_a76d79ef67fba93d13fa3378795dac8b4}{edit\+\_\+user} (const string \&username, Json\+::\+Value user\+Edited)
+\item 
+bool \hyperlink{classUsersDB_a969275d0174539c6d17051c440a96ddf}{delete\+\_\+user} (const string \&username)
+\item 
+bool \hyperlink{classUsersDB_aaf0cd0bd10d3f756c23ee67d7115ce27}{get\+\_\+users} (Json\+::\+Value \&result)
+\item 
+bool \hyperlink{classUsersDB_a5a3de6551b937b4d79e0fab4fe02cf44}{recommend\+\_\+user} (const string \&username\+From, const string \&username\+To)
+\item 
+bool \hyperlink{classUsersDB_a00d772e805dceebe3883220aebe830ae}{de\+Recommend\+\_\+user} (const string \&username\+From, const string \&username\+To)
+\item 
+bool \hyperlink{classUsersDB_a0e212f3cbf51473b794148a7bd65e8a4}{add\+Contact} (const string \&username\+From, const string \&username\+To)
+\item 
+bool {\bfseries remove\+Contact} (const string \&username\+From, const string \&username\+To)\hypertarget{classUsersDB_a06858ec780df685097994d2283f753b5}{}\label{classUsersDB_a06858ec780df685097994d2283f753b5}
+
+\item 
+bool {\bfseries parse\+\_\+json\+\_\+array} (std\+::string body, Json\+::\+Value \&result)\hypertarget{classUsersDB_a994e4d320d62b0fa0dd5a868bfa88c2f}{}\label{classUsersDB_a994e4d320d62b0fa0dd5a868bfa88c2f}
+
+\item 
+void {\bfseries filter\+\_\+job} (Json\+::\+Value \&result, string job)\hypertarget{classUsersDB_a14f1014b755c78452ec78acd393da0aa}{}\label{classUsersDB_a14f1014b755c78452ec78acd393da0aa}
+
+\item 
+void {\bfseries filter\+\_\+skill} (Json\+::\+Value \&result, string skill)\hypertarget{classUsersDB_a4117cc7e6be9058fd6f5fa97d4ded944}{}\label{classUsersDB_a4117cc7e6be9058fd6f5fa97d4ded944}
+
+\item 
+void {\bfseries sort\+\_\+by} (Json\+::\+Value \&result, string sorting)\hypertarget{classUsersDB_aa384c046e3afe444166b72d3b91abc51}{}\label{classUsersDB_aa384c046e3afe444166b72d3b91abc51}
+
+\item 
+void {\bfseries top\+\_\+k} (Json\+::\+Value \&result, int n)\hypertarget{classUsersDB_af40b6c7cee16f062e8d746b69af4dfcf}{}\label{classUsersDB_af40b6c7cee16f062e8d746b69af4dfcf}
+
+\item 
+void {\bfseries sort\+\_\+by\+\_\+distance} (Json\+::\+Value \&users, std\+::string caller\+\_\+coordenates)\hypertarget{classUsersDB_a6627ef8e0d9df316a3029e6614b078bc}{}\label{classUsersDB_a6627ef8e0d9df316a3029e6614b078bc}
+
+\item 
+bool {\bfseries get\+\_\+users\+\_\+by} (string sorting, int n\+Filter, string job, string skill, Json\+::\+Value \&result, int n\+Distance, string caller\+\_\+coordenates)\hypertarget{classUsersDB_a5f2166f6887461712e493629e5452345}{}\label{classUsersDB_a5f2166f6887461712e493629e5452345}
+
+\item 
+void {\bfseries filter\+\_\+pos} (Json\+::\+Value \&result, int n\+Distance, string caller\+\_\+coordenates)\hypertarget{classUsersDB_ac7fc736d2e6f84318c8607039f330a68}{}\label{classUsersDB_ac7fc736d2e6f84318c8607039f330a68}
+
+\item 
+bool {\bfseries is\+In\+Range} (string pos1, string pos2, int n\+Distance)\hypertarget{classUsersDB_ad28f2d52e067511ded5925f92244d9ee}{}\label{classUsersDB_ad28f2d52e067511ded5925f92244d9ee}
+
+\item 
+void {\bfseries get\+Coordinates} (string coordenates, double $\ast$latitud, double $\ast$longitud)\hypertarget{classUsersDB_aa288dec58dd9d1c641900d912e6d860e}{}\label{classUsersDB_aa288dec58dd9d1c641900d912e6d860e}
+
+\item 
+double {\bfseries calcular\+Distancia} (string coord\+\_\+user, string caller\+Coordenates)\hypertarget{classUsersDB_a06914c45497f9ef6e10e5d688fb64251}{}\label{classUsersDB_a06914c45497f9ef6e10e5d688fb64251}
+
+\item 
+bool {\bfseries get\+\_\+user\+\_\+contacts} (string \&username, Json\+::\+Value \&contacts)\hypertarget{classUsersDB_a292ccc85cf70e7c3f2248cfd76a0e630}{}\label{classUsersDB_a292ccc85cf70e7c3f2248cfd76a0e630}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classDB}{DB} that stores all the user information (except the password and session data). A typical user json can be found at the A\+PI documentation. the json fields are\+: \char`\"{}chats\char`\"{} \+: \mbox{[}\mbox{]}, \char`\"{}city\char`\"{} \+: \char`\"{}\+Rosario\char`\"{}, \char`\"{}contacts\char`\"{} \+: \mbox{[}\mbox{]}, \char`\"{}dob\char`\"{} \+: \char`\"{}1993-\/08-\/19\char`\"{}, \char`\"{}gender\char`\"{} \+: \char`\"{}male\char`\"{}, \char`\"{}name\char`\"{} \+: \char`\"{}\+Alejandro Pablo Levinas\char`\"{}, \char`\"{}nationality\char`\"{} \+: \char`\"{}argentino\char`\"{}, \char`\"{}previous\+\_\+exp\char`\"{} \+: \mbox{[}one,two,three\mbox{]}, \char`\"{}profile\char`\"{} \+: \char`\"{}\+Soy un estudiante de ingenieria en informatica que se propone............\+blabllbla...........\char`\"{}, \char`\"{}recomendations\char`\"{} \+: \mbox{[}\mbox{]}, \char`\"{}skills\char`\"{} \+: \mbox{[} \char`\"{}\+C\char`\"{}, \char`\"{}\+C++\char`\"{}, \char`\"{}\+Google\+Test\char`\"{} \mbox{]}, \char`\"{}email\char`\"{} \+: \char`\"{}alelevinas\+A\+Tgmail.\+com\char`\"{}, \char`\"{}username\char`\"{} \+: \char`\"{}alelevinas@gmail.\+com\char`\"{} \} 
+
+\subsection{Member Function Documentation}
+\index{Users\+DB@{Users\+DB}!add\+\_\+user@{add\+\_\+user}}
+\index{add\+\_\+user@{add\+\_\+user}!Users\+DB@{Users\+DB}}
+\subsubsection[{\texorpdfstring{add\+\_\+user(const string \&username, Json\+::\+Value user)}{add_user(const string &username, Json::Value user)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Users\+D\+B\+::add\+\_\+user (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{username, }
+\item[{Json\+::\+Value}]{user}
+\end{DoxyParamCaption}
+)}\hypertarget{classUsersDB_aacd5108e72af7ebc19c047a55e9278ae}{}\label{classUsersDB_aacd5108e72af7ebc19c047a55e9278ae}
+Adds an user to the db 
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+{\em user} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no db errors 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{classKeyAlreadyExistsException}{Key\+Already\+Exists\+Exception}} & \\
+\hline
+\end{DoxyExceptions}
+\index{Users\+DB@{Users\+DB}!add\+Contact@{add\+Contact}}
+\index{add\+Contact@{add\+Contact}!Users\+DB@{Users\+DB}}
+\subsubsection[{\texorpdfstring{add\+Contact(const string \&username\+From, const string \&username\+To)}{addContact(const string &usernameFrom, const string &usernameTo)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Users\+D\+B\+::add\+Contact (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{username\+From, }
+\item[{const string \&}]{username\+To}
+\end{DoxyParamCaption}
+)}\hypertarget{classUsersDB_a0e212f3cbf51473b794148a7bd65e8a4}{}\label{classUsersDB_a0e212f3cbf51473b794148a7bd65e8a4}
+Adds an user as a contact. Adds username to the \char`\"{}contacts\char`\"{} field 
+\begin{DoxyParams}{Parameters}
+{\em username\+From} & \\
+\hline
+{\em username\+To} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Users\+DB@{Users\+DB}!delete\+\_\+user@{delete\+\_\+user}}
+\index{delete\+\_\+user@{delete\+\_\+user}!Users\+DB@{Users\+DB}}
+\subsubsection[{\texorpdfstring{delete\+\_\+user(const string \&username)}{delete_user(const string &username)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Users\+D\+B\+::delete\+\_\+user (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{username}
+\end{DoxyParamCaption}
+)}\hypertarget{classUsersDB_a969275d0174539c6d17051c440a96ddf}{}\label{classUsersDB_a969275d0174539c6d17051c440a96ddf}
+Deletes an User from the db 
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no db errors 
+\end{DoxyReturn}
+\index{Users\+DB@{Users\+DB}!de\+Recommend\+\_\+user@{de\+Recommend\+\_\+user}}
+\index{de\+Recommend\+\_\+user@{de\+Recommend\+\_\+user}!Users\+DB@{Users\+DB}}
+\subsubsection[{\texorpdfstring{de\+Recommend\+\_\+user(const string \&username\+From, const string \&username\+To)}{deRecommend_user(const string &usernameFrom, const string &usernameTo)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Users\+D\+B\+::de\+Recommend\+\_\+user (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{username\+From, }
+\item[{const string \&}]{username\+To}
+\end{DoxyParamCaption}
+)}\hypertarget{classUsersDB_a00d772e805dceebe3883220aebe830ae}{}\label{classUsersDB_a00d772e805dceebe3883220aebe830ae}
+De recommends an user. Deletes the 
+\begin{DoxyParams}{Parameters}
+{\em username\+From} & from \char`\"{}recommended\+\_\+by\char`\"{} field of the user \\
+\hline
+{\em username\+To} & \\
+\hline
+{\em username\+From} & The user who derecommends \\
+\hline
+{\em username\+To} & the derecommendated user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no db errors 
+\end{DoxyReturn}
+\index{Users\+DB@{Users\+DB}!edit\+\_\+user@{edit\+\_\+user}}
+\index{edit\+\_\+user@{edit\+\_\+user}!Users\+DB@{Users\+DB}}
+\subsubsection[{\texorpdfstring{edit\+\_\+user(const string \&username, Json\+::\+Value user\+Edited)}{edit_user(const string &username, Json::Value userEdited)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Users\+D\+B\+::edit\+\_\+user (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{username, }
+\item[{Json\+::\+Value}]{user\+Edited}
+\end{DoxyParamCaption}
+)}\hypertarget{classUsersDB_a76d79ef67fba93d13fa3378795dac8b4}{}\label{classUsersDB_a76d79ef67fba93d13fa3378795dac8b4}
+Edits a user on the db 
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+{\em user\+Edited} & the json of the hole user eddited \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no db errors 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{classKeyDoesntExistException}{Key\+Doesnt\+Exist\+Exception}} & \\
+\hline
+\end{DoxyExceptions}
+\index{Users\+DB@{Users\+DB}!get\+\_\+user@{get\+\_\+user}}
+\index{get\+\_\+user@{get\+\_\+user}!Users\+DB@{Users\+DB}}
+\subsubsection[{\texorpdfstring{get\+\_\+user(const string \&username)}{get_user(const string &username)}}]{\setlength{\rightskip}{0pt plus 5cm}Json\+::\+Value Users\+D\+B\+::get\+\_\+user (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{username}
+\end{DoxyParamCaption}
+)}\hypertarget{classUsersDB_a8f6e2781a52b9ec07a00fd04bd1a050d}{}\label{classUsersDB_a8f6e2781a52b9ec07a00fd04bd1a050d}
+Gets a user from the db. 
+\begin{DoxyParams}{Parameters}
+{\em username} & of the User to return. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a copy of the json user. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{classKeyDoesntExistException}{Key\+Doesnt\+Exist\+Exception}} & \\
+\hline
+\end{DoxyExceptions}
+\index{Users\+DB@{Users\+DB}!get\+\_\+users@{get\+\_\+users}}
+\index{get\+\_\+users@{get\+\_\+users}!Users\+DB@{Users\+DB}}
+\subsubsection[{\texorpdfstring{get\+\_\+users(\+Json\+::\+Value \&result)}{get_users(Json::Value &result)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Users\+D\+B\+::get\+\_\+users (
+\begin{DoxyParamCaption}
+\item[{Json\+::\+Value \&}]{result}
+\end{DoxyParamCaption}
+)}\hypertarget{classUsersDB_aaf0cd0bd10d3f756c23ee67d7115ce27}{}\label{classUsersDB_aaf0cd0bd10d3f756c23ee67d7115ce27}
+Get all users from database 
+\begin{DoxyParams}{Parameters}
+{\em result} & to store the result data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no db errors 
+\end{DoxyReturn}
+\index{Users\+DB@{Users\+DB}!recommend\+\_\+user@{recommend\+\_\+user}}
+\index{recommend\+\_\+user@{recommend\+\_\+user}!Users\+DB@{Users\+DB}}
+\subsubsection[{\texorpdfstring{recommend\+\_\+user(const string \&username\+From, const string \&username\+To)}{recommend_user(const string &usernameFrom, const string &usernameTo)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Users\+D\+B\+::recommend\+\_\+user (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{username\+From, }
+\item[{const string \&}]{username\+To}
+\end{DoxyParamCaption}
+)}\hypertarget{classUsersDB_a5a3de6551b937b4d79e0fab4fe02cf44}{}\label{classUsersDB_a5a3de6551b937b4d79e0fab4fe02cf44}
+Recommends an user. Adds username to de \char`\"{}recommended\+\_\+by\char`\"{} field 
+\begin{DoxyParams}{Parameters}
+{\em username\+From} & the User who recommends \\
+\hline
+{\em username\+To} & the recommended User \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if no db errors 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/databases/Users\+D\+B.\+h\item 
+src/databases/Users\+D\+B.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$d0/dbd/classMongoose_1_1Controller.html" title="Mongoose::Controller" alt="" coords="5,31,152,57"/>
+<area shape="rect" id="node2" href="$d4/d4f/classMongoose_1_1WebController.html" title="Mongoose::WebController" alt="" coords="200,56,373,83"/>
+<area shape="rect" id="node3" href="$db/d34/classMongoose_1_1JsonController.html" title="Mongoose::JsonController" alt="" coords="421,56,596,83"/>
+<area shape="rect" id="node4" href="$d8/ddc/classChatController.html" title="ChatController" alt="" coords="669,5,776,32"/>
+<area shape="rect" id="node5" href="$dc/de5/classProfileController.html" title="ProfileController" alt="" coords="665,56,780,83"/>
+<area shape="rect" id="node6" href="$d3/d26/classSharedServerController.html" title="SharedServerController" alt="" coords="644,107,801,133"/>
+<area shape="rect" id="node7" href="$df/d90/classMongoose_1_1Utils.html" title="Mongoose::Utils" alt="" coords="20,81,137,108"/>
+</map>

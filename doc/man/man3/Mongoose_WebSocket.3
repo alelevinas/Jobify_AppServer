@@ -1,0 +1,169 @@
+.TH "Mongoose::WebSocket" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose::WebSocket \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBWebSocket\fP (struct \fBmg_connection\fP *connection_)"
+.br
+.ti -1c
+.RI "void \fBsend\fP (string data, int opcode=WEBSOCKET_OPCODE_TEXT)"
+.br
+.ti -1c
+.RI "\fBRequest\fP & \fBgetRequest\fP ()"
+.br
+.ti -1c
+.RI "void \fBclose\fP ()"
+.br
+.ti -1c
+.RI "bool \fBisClosed\fP ()"
+.br
+.ti -1c
+.RI "void \fBappendData\fP (string data)"
+.br
+.ti -1c
+.RI "string \fBflushData\fP ()"
+.br
+.ti -1c
+.RI "struct \fBmg_connection\fP * \fBgetConnection\fP ()"
+.br
+.ti -1c
+.RI "void \fBaddContainer\fP (\fBWebSockets\fP *websockets)"
+.br
+.ti -1c
+.RI "void \fBremoveContainer\fP (\fBWebSockets\fP *websockets)"
+.br
+.ti -1c
+.RI "void \fBnotifyContainers\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetId\fP (int id_)"
+.br
+.ti -1c
+.RI "int \fBgetId\fP ()"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBid\fP"
+.br
+.ti -1c
+.RI "\fBMutex\fP \fBmutex\fP"
+.br
+.ti -1c
+.RI "string \fBdata\fP"
+.br
+.ti -1c
+.RI "\fBRequest\fP \fBrequest\fP"
+.br
+.ti -1c
+.RI "struct \fBmg_connection\fP * \fBconnection\fP"
+.br
+.ti -1c
+.RI "bool \fBclosed\fP"
+.br
+.ti -1c
+.RI "vector< \fBWebSockets\fP * > \fBcontainers\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "void Mongoose::WebSocket::addContainer (\fBWebSockets\fP * websockets)"
+Adding this websocket in a container
+.PP
+\fBParameters:\fP
+.RS 4
+\fIWebSockets*\fP the container 
+.RE
+.PP
+
+.SS "void Mongoose::WebSocket::appendData (string data)"
+Append data to the internal receive buffer
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP data 
+.RE
+.PP
+
+.SS "void Mongoose::WebSocket::close ()"
+Closes the connection 
+.SS "string Mongoose::WebSocket::flushData ()"
+Gets the internal receive buffer and clear it
+.PP
+\fBReturns:\fP
+.RS 4
+string data 
+.RE
+.PP
+
+.SS "struct \fBmg_connection\fP * Mongoose::WebSocket::getConnection ()"
+Gets the internal mg connection
+.PP
+\fBReturns:\fP
+.RS 4
+struct mg_connection* the connection 
+.RE
+.PP
+
+.SS "int Mongoose::WebSocket::getId ()"
+Gets the websocket identifier
+.PP
+\fBReturns:\fP
+.RS 4
+int the identifier of this websocket 
+.RE
+.PP
+
+.SS "\fBRequest\fP & Mongoose::WebSocket::getRequest ()"
+Returns the connection request
+.PP
+\fBReturns:\fP
+.RS 4
+\fBRequest\fP& the request 
+.RE
+.PP
+
+.SS "bool Mongoose::WebSocket::isClosed ()"
+Is the connection closed ?
+.PP
+\fBReturns:\fP
+.RS 4
+bool true if the connection is closed 
+.RE
+.PP
+
+.SS "void Mongoose::WebSocket::notifyContainers ()"
+Notify all the containers that the websocket is now closed and unusable 
+.SS "void Mongoose::WebSocket::removeContainer (\fBWebSockets\fP * websockets)"
+Removing this websocket from a container 
+.SS "void Mongoose::WebSocket::send (string data, int opcode = \fCWEBSOCKET_OPCODE_TEXT\fP)"
+Sends data through the web socket
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the data to send 
+.RE
+.PP
+
+.SS "void Mongoose::WebSocket::setId (int id_)"
+Sets the identifier of this websocket
+.PP
+\fBParameters:\fP
+.RS 4
+\fIint\fP the websocket identifier 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

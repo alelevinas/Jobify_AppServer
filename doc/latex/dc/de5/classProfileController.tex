@@ -1,0 +1,300 @@
+\hypertarget{classProfileController}{}\section{Profile\+Controller Class Reference}
+\label{classProfileController}\index{Profile\+Controller@{Profile\+Controller}}
+
+
+{\ttfamily \#include $<$Profile\+Controller.\+h$>$}
+
+
+
+Inheritance diagram for Profile\+Controller\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{da/de3/classProfileController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Profile\+Controller\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{d5/dff/classProfileController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classProfileController_aa537bb3381c8e2ec6752bebdbffd9b3a}{Profile\+Controller} (\hyperlink{classDatabaseManager}{Database\+Manager} $\ast$db, \hyperlink{classSessionManager}{Session\+Manager} $\ast$session\+Manager)\hypertarget{classProfileController_aa537bb3381c8e2ec6752bebdbffd9b3a}{}\label{classProfileController_aa537bb3381c8e2ec6752bebdbffd9b3a}
+
+\begin{DoxyCompactList}\small\item\em The Session Manager instance that controls active users. \end{DoxyCompactList}\item 
+void {\bfseries setup} ()\hypertarget{classProfileController_a6185e67ac2ef5d321f867b578e3cae4f}{}\label{classProfileController_a6185e67ac2ef5d321f867b578e3cae4f}
+
+\item 
+void \hyperlink{classProfileController_aaafe4ee89ae19f73fd56b61456acbe80}{get\+User\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_af2ef244332d5d22045f8ab31b5830c8c}{post\+User\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_ae89c5329dc926ecc3ecefd9ab636863b}{update\+User\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_a8d272e4cf2e65d55b49a0efb4986255b}{delete\+User\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_a1287630ff84e221d3e8d978d35d58613}{get\+Users\+Request} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_aed795721bdd2b13bd5fc33b0927536fd}{get\+Login} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_ab917338d065d7a3a79e13f7da5ce20d0}{post\+Recommend} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_a9124f7a01dae365a7b4fbdee5049e62b}{delete\+De\+Recommend} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_a9d7756a57238e99fd107ab82dd46a5e4}{get\+User\+Contacts} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_ad7e26392fe25fa7f0b102f66a135f9c2}{post\+Add\+Contact} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_ae6298fa8a5eb65f0e30341cc398a0221}{delete\+Remove\+Contact} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_a7d42c5d2e4deb562e003852c864b0014}{get\+Filtered\+Users} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_affce68fe52a96cfdef96fbf347725f22}{get\+User\+Image} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_a26d4d02998c4564cf364751f295f36ca}{post\+User\+Image} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\item 
+void \hyperlink{classProfileController_a7e3e61e6f8a7357a51a3bd0bb861d13e}{delete\+User\+Image} (Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Controller that manages the user related api endpoints. Every method recieves a Moongose\+::\+Request with the request data and a Mongoose\+::\+Json\+Response to store the response json. 
+
+\subsection{Member Function Documentation}
+\index{Profile\+Controller@{Profile\+Controller}!delete\+De\+Recommend@{delete\+De\+Recommend}}
+\index{delete\+De\+Recommend@{delete\+De\+Recommend}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{delete\+De\+Recommend(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{deleteDeRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::delete\+De\+Recommend (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_a9124f7a01dae365a7b4fbdee5049e62b}{}\label{classProfileController_a9124f7a01dae365a7b4fbdee5049e62b}
+Derecommends the user specified in the body. 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!delete\+Remove\+Contact@{delete\+Remove\+Contact}}
+\index{delete\+Remove\+Contact@{delete\+Remove\+Contact}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{delete\+Remove\+Contact(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{deleteRemoveContact(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::delete\+Remove\+Contact (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_ae6298fa8a5eb65f0e30341cc398a0221}{}\label{classProfileController_ae6298fa8a5eb65f0e30341cc398a0221}
+Deletes the contact specified in the body 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!delete\+User\+Image@{delete\+User\+Image}}
+\index{delete\+User\+Image@{delete\+User\+Image}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{delete\+User\+Image(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{deleteUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::delete\+User\+Image (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_a7e3e61e6f8a7357a51a3bd0bb861d13e}{}\label{classProfileController_a7e3e61e6f8a7357a51a3bd0bb861d13e}
+Deletes the users image 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!delete\+User\+Request@{delete\+User\+Request}}
+\index{delete\+User\+Request@{delete\+User\+Request}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{delete\+User\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{deleteUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::delete\+User\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_a8d272e4cf2e65d55b49a0efb4986255b}{}\label{classProfileController_a8d272e4cf2e65d55b49a0efb4986255b}
+Deletes from de \hyperlink{classDB}{DB} the user specified in the decrypted header Token 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!get\+Filtered\+Users@{get\+Filtered\+Users}}
+\index{get\+Filtered\+Users@{get\+Filtered\+Users}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{get\+Filtered\+Users(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getFilteredUsers(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::get\+Filtered\+Users (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_a7d42c5d2e4deb562e003852c864b0014}{}\label{classProfileController_a7d42c5d2e4deb562e003852c864b0014}
+Gets the users corresponding to the filter queries \char`\"{}sort\char`\"{}, \char`\"{}filter\char`\"{}, \char`\"{}job\+\_\+position\char`\"{}, \char`\"{}skill\char`\"{} and \char`\"{}distance\char`\"{} 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!get\+Login@{get\+Login}}
+\index{get\+Login@{get\+Login}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{get\+Login(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getLogin(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::get\+Login (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_aed795721bdd2b13bd5fc33b0927536fd}{}\label{classProfileController_aed795721bdd2b13bd5fc33b0927536fd}
+Login endpoint. Checks if the username\+:password in b64 matches any on the \hyperlink{classDB}{DB} and grants acces throug a token or declines it 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!get\+User\+Contacts@{get\+User\+Contacts}}
+\index{get\+User\+Contacts@{get\+User\+Contacts}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{get\+User\+Contacts(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getUserContacts(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::get\+User\+Contacts (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_a9d7756a57238e99fd107ab82dd46a5e4}{}\label{classProfileController_a9d7756a57238e99fd107ab82dd46a5e4}
+Gets the user\textquotesingle{}s contacts. 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!get\+User\+Image@{get\+User\+Image}}
+\index{get\+User\+Image@{get\+User\+Image}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{get\+User\+Image(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::get\+User\+Image (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_affce68fe52a96cfdef96fbf347725f22}{}\label{classProfileController_affce68fe52a96cfdef96fbf347725f22}
+Gets the users image 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!get\+User\+Request@{get\+User\+Request}}
+\index{get\+User\+Request@{get\+User\+Request}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{get\+User\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::get\+User\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_aaafe4ee89ae19f73fd56b61456acbe80}{}\label{classProfileController_aaafe4ee89ae19f73fd56b61456acbe80}
+Gets the user specified in the query \char`\"{}username\char`\"{} and sets de response 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!get\+Users\+Request@{get\+Users\+Request}}
+\index{get\+Users\+Request@{get\+Users\+Request}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{get\+Users\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{getUsersRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::get\+Users\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_a1287630ff84e221d3e8d978d35d58613}{}\label{classProfileController_a1287630ff84e221d3e8d978d35d58613}
+Gets all the users. Then it sets de response 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!post\+Add\+Contact@{post\+Add\+Contact}}
+\index{post\+Add\+Contact@{post\+Add\+Contact}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{post\+Add\+Contact(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{postAddContact(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::post\+Add\+Contact (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_ad7e26392fe25fa7f0b102f66a135f9c2}{}\label{classProfileController_ad7e26392fe25fa7f0b102f66a135f9c2}
+Adds the contact specified in the body 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!post\+Recommend@{post\+Recommend}}
+\index{post\+Recommend@{post\+Recommend}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{post\+Recommend(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{postRecommend(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::post\+Recommend (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_ab917338d065d7a3a79e13f7da5ce20d0}{}\label{classProfileController_ab917338d065d7a3a79e13f7da5ce20d0}
+Recommends the user specified in the body. 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!post\+User\+Image@{post\+User\+Image}}
+\index{post\+User\+Image@{post\+User\+Image}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{post\+User\+Image(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{postUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::post\+User\+Image (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_a26d4d02998c4564cf364751f295f36ca}{}\label{classProfileController_a26d4d02998c4564cf364751f295f36ca}
+Posts the users image 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!post\+User\+Request@{post\+User\+Request}}
+\index{post\+User\+Request@{post\+User\+Request}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{post\+User\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{postUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::post\+User\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_af2ef244332d5d22045f8ab31b5830c8c}{}\label{classProfileController_af2ef244332d5d22045f8ab31b5830c8c}
+Gets the user specified in the request body and saves it in the \hyperlink{classDB}{DB}. Then it sets de response 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+\index{Profile\+Controller@{Profile\+Controller}!update\+User\+Request@{update\+User\+Request}}
+\index{update\+User\+Request@{update\+User\+Request}!Profile\+Controller@{Profile\+Controller}}
+\subsubsection[{\texorpdfstring{update\+User\+Request(\+Mongoose\+::\+Request \&request, Mongoose\+::\+Json\+Response \&response)}{updateUserRequest(Mongoose::Request &request, Mongoose::JsonResponse &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Profile\+Controller\+::update\+User\+Request (
+\begin{DoxyParamCaption}
+\item[{Mongoose\+::\+Request \&}]{request, }
+\item[{Mongoose\+::\+Json\+Response \&}]{response}
+\end{DoxyParamCaption}
+)}\hypertarget{classProfileController_ae89c5329dc926ecc3ecefd9ab636863b}{}\label{classProfileController_ae89c5329dc926ecc3ecefd9ab636863b}
+Updates the user specified in the request body and saves it in the \hyperlink{classDB}{DB}. Then it sets de response 
+\begin{DoxyParams}{Parameters}
+{\em request} & The request data \\
+\hline
+{\em response} & The Json\+Response to send \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Profile\+Controller.\+h\item 
+src/Profile\+Controller.\+cpp\end{DoxyCompactItemize}

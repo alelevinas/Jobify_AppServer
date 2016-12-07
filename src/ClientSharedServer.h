@@ -15,18 +15,35 @@
 #define SKILLS "skills"
 #define CATEGORIES "categories"
 
-
+/**
+ * HTTP Client used to get data from the shared server instance.
+ */
 class ClientSharedServer {
 private:
-    std::string url;
+    std::string url; /// url of the shared server
 public:
     ClientSharedServer(std::string url);
+
     std::string getJobPositions();
 
+    /**
+     * Gets the job Position names from the shared server.
+     * @param names Json array to store the result
+     * @return true if got result
+     */
     bool getNamesJobPositions(Json::Value *names);
 
+    /**skills names from the shared server.
+     * @param names Json array to store the result
+     * @return true if got result
+     */
     bool getNamesSkills(Json::Value *names);
 
+    /**
+     * Gets the categories names from the shared server.
+     * @param names Json array to store the result
+     * @return true if got result
+     */
     bool getNamesCategories(Json::Value *names);
 };
 

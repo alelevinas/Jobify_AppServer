@@ -1,0 +1,71 @@
+.TH "el::base::utils::DateTime" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::utils::DateTime \- Contains utilities for cross-platform date/time\&. This class make use of \fBel::base::utils::Str\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::StaticClass\fP\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBgettimeofday\fP (struct timeval *tv)"
+.br
+.RI "\fICross platform gettimeofday for Windows and unix platform\&. This can be used to determine current millisecond\&. \fP"
+.ti -1c
+.RI "static std::string \fBgetDateTime\fP (const char *format, const \fBbase::MillisecondsWidth\fP *msWidth)"
+.br
+.RI "\fIGets current date and time with milliseconds\&. \fP"
+.ti -1c
+.RI "static base::type::string_t \fBformatTime\fP (unsigned long long time, \fBbase::TimestampUnit\fP timestampUnit)"
+.br
+.RI "\fIFormats time to get unit accordingly, units like second if > 1000 or minutes if > 60000 etc\&. \fP"
+.ti -1c
+.RI "static unsigned long long \fBgetTimeDifference\fP (const struct timeval &endTime, const struct timeval &startTime, \fBbase::TimestampUnit\fP timestampUnit)"
+.br
+.RI "\fIGets time difference in milli/micro second depending on timestampUnit\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Contains utilities for cross-platform date/time\&. This class make use of \fBel::base::utils::Str\fP\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static std::string el::base::utils::DateTime::getDateTime (const char * format, const \fBbase::MillisecondsWidth\fP * msWidth)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Gets current date and time with milliseconds\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIformat\fP User provided date/time format 
+.br
+\fImsWidth\fP A pointer to \fBbase::MillisecondsWidth\fP from configuration (non-null) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+string based date time in specified format\&. 
+.RE
+.PP
+
+.SS "static void el::base::utils::DateTime::gettimeofday (struct timeval * tv)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Cross platform gettimeofday for Windows and unix platform\&. This can be used to determine current millisecond\&. For unix system it uses gettimeofday(timeval*, timezone*) and for Windows, a seperate implementation is provided 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItv\fP Pointer that gets updated 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

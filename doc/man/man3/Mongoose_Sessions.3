@@ -1,0 +1,84 @@
+.TH "Mongoose::Sessions" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose::Sessions \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSessions\fP (string key='sessid')"
+.br
+.ti -1c
+.RI "string \fBgetId\fP (\fBRequest\fP &request, \fBResponse\fP &response)"
+.br
+.ti -1c
+.RI "\fBSession\fP & \fBget\fP (\fBRequest\fP &request, \fBResponse\fP &response)"
+.br
+.ti -1c
+.RI "void \fBgarbageCollect\fP (int oldAge=3600)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "map< string, \fBSession\fP * > \fBsessions\fP"
+.br
+.ti -1c
+.RI "string \fBkey\fP"
+.br
+.ti -1c
+.RI "\fBMutex\fP \fBmutex\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "void Mongoose::Sessions::garbageCollect (int oldAge = \fC3600\fP)"
+Remove all the sessions older than age
+.PP
+\fBParameters:\fP
+.RS 4
+\fIint\fP the age of the too old sessions in second 
+.RE
+.PP
+
+.SS "\fBSession\fP & Mongoose::Sessions::get (\fBRequest\fP & request, \fBResponse\fP & response)"
+Gets the session for a certain request
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBRequest\fP\fP the request 
+.br
+\fI\fBResponse\fP\fP the response inwhich the cookie should be write
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+\fBSession\fP the session corresponding 
+.RE
+.PP
+
+.SS "string Mongoose::Sessions::getId (\fBRequest\fP & request, \fBResponse\fP & response)"
+Gets the session ID of a certain request, this will look in the cookies and create it if necessary
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fBRequest\fP\fP the request 
+.br
+\fI\fBResponse\fP\fP the response in which the cookie should be write
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+string the session ID for this request 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

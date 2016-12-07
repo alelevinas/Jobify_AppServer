@@ -1,0 +1,93 @@
+.TH "el::ConfigurationTypeHelper" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::ConfigurationTypeHelper \- Static class that contains helper functions for \fBel::ConfigurationType\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::StaticClass\fP\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static base::type::EnumType \fBcastToInt\fP (\fBConfigurationType\fP configurationType)"
+.br
+.RI "\fICasts configuration type to int, useful for iterating through enum\&. \fP"
+.ti -1c
+.RI "static \fBConfigurationType\fP \fBcastFromInt\fP (base::type::EnumType c)"
+.br
+.RI "\fICasts int(ushort) to configurationt type, useful for iterating through enum\&. \fP"
+.ti -1c
+.RI "static const char * \fBconvertToString\fP (\fBConfigurationType\fP configurationType)"
+.br
+.RI "\fIConverts configuration type to associated const char*\&. \fP"
+.ti -1c
+.RI "static \fBConfigurationType\fP \fBconvertFromString\fP (const char *configStr)"
+.br
+.RI "\fIConverts from configStr to ConfigurationType\&. \fP"
+.ti -1c
+.RI "static void \fBforEachConfigType\fP (base::type::EnumType *startIndex, const std::function< bool(void)> &fn)"
+.br
+.RI "\fIApplies specified function to each configuration type starting from startIndex\&. \fP"
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const base::type::EnumType \fBkMinValid\fP = static_cast<base::type::EnumType>(\fBConfigurationType::Enabled\fP)"
+.br
+.RI "\fIRepresents minimum valid configuration type\&. Useful when iterating through enum\&. \fP"
+.ti -1c
+.RI "static const base::type::EnumType \fBkMaxValid\fP = static_cast<base::type::EnumType>(\fBConfigurationType::MaxLogFileSize\fP)"
+.br
+.RI "\fIRepresents maximum valid configuration type\&. This is used internally and you should not need it\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Static class that contains helper functions for \fBel::ConfigurationType\fP\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static \fBConfigurationType\fP el::ConfigurationTypeHelper::convertFromString (const char * configStr)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Converts from configStr to ConfigurationType\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIconfigStr\fP Upper case string based configuration type\&. Lower case is also valid but providing upper case is recommended\&. 
+.RE
+.PP
+
+.SS "static const char* el::ConfigurationTypeHelper::convertToString (\fBConfigurationType\fP configurationType)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Converts configuration type to associated const char*\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+Upper case string based configuration type\&. 
+.RE
+.PP
+
+.SS "static void el::ConfigurationTypeHelper::forEachConfigType (base::type::EnumType * startIndex, const std::function< bool(void)> & fn)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Applies specified function to each configuration type starting from startIndex\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstartIndex\fP initial value to start the iteration from\&. This is passed by pointer and is left-shifted so this can be used inside function (fn) to represent current configuration type\&. 
+.br
+\fIfn\fP function to apply with each configuration type\&. This bool represent whether or not to stop iterating through configurations\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

@@ -1,0 +1,103 @@
+\hypertarget{classel_1_1base_1_1RegisteredHitCounters}{}\section{el\+:\+:base\+:\+:Registered\+Hit\+Counters Class Reference}
+\label{classel_1_1base_1_1RegisteredHitCounters}\index{el\+::base\+::\+Registered\+Hit\+Counters@{el\+::base\+::\+Registered\+Hit\+Counters}}
+
+
+Repository for hit counters used across the application.  
+
+
+
+
+{\ttfamily \#include $<$easylogging++.\+h$>$}
+
+
+
+Inheritance diagram for el\+:\+:base\+:\+:Registered\+Hit\+Counters\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{da/dc3/classel_1_1base_1_1RegisteredHitCounters__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for el\+:\+:base\+:\+:Registered\+Hit\+Counters\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{da/d48/classel_1_1base_1_1RegisteredHitCounters__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classel_1_1base_1_1RegisteredHitCounters_a18fecedc6be778cfd63e30cc42fb9c82}{validate\+EveryN} (const char $\ast$filename, unsigned long int line\+Number, std\+::size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Validates counter for every N, i.\+e, registers new if does not exist otherwise updates original one. \end{DoxyCompactList}\item 
+bool \hyperlink{classel_1_1base_1_1RegisteredHitCounters_af6fa32ffd76776863d8bd2f0e9b341fc}{validate\+AfterN} (const char $\ast$filename, unsigned long int line\+Number, std\+::size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Validates counter for hits $>$= N, i.\+e, registers new if does not exist otherwise updates original one. \end{DoxyCompactList}\item 
+bool \hyperlink{classel_1_1base_1_1RegisteredHitCounters_aa270c1b9a8cc3a4d12cea45e07560d98}{validate\+N\+Times} (const char $\ast$filename, unsigned long int line\+Number, std\+::size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Validates counter for hits are $<$= n, i.\+e, registers new if does not exist otherwise updates original one. \end{DoxyCompactList}\item 
+const \hyperlink{classel_1_1base_1_1HitCounter}{base\+::\+Hit\+Counter} $\ast$ \hyperlink{classel_1_1base_1_1RegisteredHitCounters_a0ca8cd04da5686048644e8cc1533b561}{get\+Counter} (const char $\ast$filename, unsigned long int line\+Number)\hypertarget{classel_1_1base_1_1RegisteredHitCounters_a0ca8cd04da5686048644e8cc1533b561}{}\label{classel_1_1base_1_1RegisteredHitCounters_a0ca8cd04da5686048644e8cc1533b561}
+
+\begin{DoxyCompactList}\small\item\em Gets hit counter registered at specified position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Repository for hit counters used across the application. 
+
+\subsection{Member Function Documentation}
+\index{el\+::base\+::\+Registered\+Hit\+Counters@{el\+::base\+::\+Registered\+Hit\+Counters}!validate\+AfterN@{validate\+AfterN}}
+\index{validate\+AfterN@{validate\+AfterN}!el\+::base\+::\+Registered\+Hit\+Counters@{el\+::base\+::\+Registered\+Hit\+Counters}}
+\subsubsection[{\texorpdfstring{validate\+After\+N(const char $\ast$filename, unsigned long int line\+Number, std\+::size\+\_\+t n)}{validateAfterN(const char *filename, unsigned long int lineNumber, std::size_t n)}}]{\setlength{\rightskip}{0pt plus 5cm}bool el\+::base\+::\+Registered\+Hit\+Counters\+::validate\+AfterN (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{filename, }
+\item[{unsigned long int}]{line\+Number, }
+\item[{std\+::size\+\_\+t}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classel_1_1base_1_1RegisteredHitCounters_af6fa32ffd76776863d8bd2f0e9b341fc}{}\label{classel_1_1base_1_1RegisteredHitCounters_af6fa32ffd76776863d8bd2f0e9b341fc}
+
+
+Validates counter for hits $>$= N, i.\+e, registers new if does not exist otherwise updates original one. 
+
+\begin{DoxyReturn}{Returns}
+True if validation resulted in triggering hit. Meaning logs should be written everytime true is returned 
+\end{DoxyReturn}
+\index{el\+::base\+::\+Registered\+Hit\+Counters@{el\+::base\+::\+Registered\+Hit\+Counters}!validate\+EveryN@{validate\+EveryN}}
+\index{validate\+EveryN@{validate\+EveryN}!el\+::base\+::\+Registered\+Hit\+Counters@{el\+::base\+::\+Registered\+Hit\+Counters}}
+\subsubsection[{\texorpdfstring{validate\+Every\+N(const char $\ast$filename, unsigned long int line\+Number, std\+::size\+\_\+t n)}{validateEveryN(const char *filename, unsigned long int lineNumber, std::size_t n)}}]{\setlength{\rightskip}{0pt plus 5cm}bool el\+::base\+::\+Registered\+Hit\+Counters\+::validate\+EveryN (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{filename, }
+\item[{unsigned long int}]{line\+Number, }
+\item[{std\+::size\+\_\+t}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classel_1_1base_1_1RegisteredHitCounters_a18fecedc6be778cfd63e30cc42fb9c82}{}\label{classel_1_1base_1_1RegisteredHitCounters_a18fecedc6be778cfd63e30cc42fb9c82}
+
+
+Validates counter for every N, i.\+e, registers new if does not exist otherwise updates original one. 
+
+\begin{DoxyReturn}{Returns}
+True if validation resulted in triggering hit. Meaning logs should be written everytime true is returned 
+\end{DoxyReturn}
+\index{el\+::base\+::\+Registered\+Hit\+Counters@{el\+::base\+::\+Registered\+Hit\+Counters}!validate\+N\+Times@{validate\+N\+Times}}
+\index{validate\+N\+Times@{validate\+N\+Times}!el\+::base\+::\+Registered\+Hit\+Counters@{el\+::base\+::\+Registered\+Hit\+Counters}}
+\subsubsection[{\texorpdfstring{validate\+N\+Times(const char $\ast$filename, unsigned long int line\+Number, std\+::size\+\_\+t n)}{validateNTimes(const char *filename, unsigned long int lineNumber, std::size_t n)}}]{\setlength{\rightskip}{0pt plus 5cm}bool el\+::base\+::\+Registered\+Hit\+Counters\+::validate\+N\+Times (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{filename, }
+\item[{unsigned long int}]{line\+Number, }
+\item[{std\+::size\+\_\+t}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classel_1_1base_1_1RegisteredHitCounters_aa270c1b9a8cc3a4d12cea45e07560d98}{}\label{classel_1_1base_1_1RegisteredHitCounters_aa270c1b9a8cc3a4d12cea45e07560d98}
+
+
+Validates counter for hits are $<$= n, i.\+e, registers new if does not exist otherwise updates original one. 
+
+\begin{DoxyReturn}{Returns}
+True if validation resulted in triggering hit. Meaning logs should be written everytime true is returned 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/log/easylogging++.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,132 @@
+.TH "DB" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DB \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherited by \fBAccountsDB\fP, \fBChatsDB\fP, \fBImagesDB\fP, \fBSessionsDB\fP, and \fBUsersDB\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDB\fP (const std::string &\fBdb_name\fP)"
+.br
+.ti -1c
+.RI "bool \fBopenDB\fP ()"
+.br
+.ti -1c
+.RI "bool \fBupdate\fP (const std::string &key, Json::Value value)"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBadd\fP (const std::string &key, Json::Value value)"
+.br
+.ti -1c
+.RI "Json::Value \fBget\fP (const std::string &key)"
+.br
+.ti -1c
+.RI "bool \fBdelete_key\fP (const std::string &key)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "leveldb::DB * \fBdb\fP"
+.br
+.ti -1c
+.RI "std::string \fBdb_name\fP"
+.br
+.RI "\fIthe actual database \fP"
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "bool DB::add (const std::string & key, Json::Value value)\fC [protected]\fP"
+Adds a new key-value to the db 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP 
+.br
+\fIvalue\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if the value with key was added 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fI\fBKeyAlreadyExistsException\fP\fP 
+.RE
+.PP
+
+.SS "bool DB::delete_key (const std::string & key)\fC [protected]\fP"
+Deletes the key-value from the database 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if no db errors 
+.RE
+.PP
+
+.SS "Json::Value DB::get (const std::string & key)\fC [protected]\fP"
+Gets the value of 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP 
+.br
+\fIkey\fP The key 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A copy of the value\&. 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fI\fBKeyDoesntExistException\fP\fP 
+.RE
+.PP
+
+.SS "bool DB::update (const std::string & key, Json::Value value)"
+Updates a value from the db\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIkey\fP The key 
+.br
+\fIvalue\fP the new value to store 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvalue\fP was added with key 
+.br
+\fIkey\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

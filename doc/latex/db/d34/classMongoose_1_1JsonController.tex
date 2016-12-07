@@ -1,0 +1,70 @@
+\hypertarget{classMongoose_1_1JsonController}{}\section{Mongoose\+:\+:Json\+Controller Class Reference}
+\label{classMongoose_1_1JsonController}\index{Mongoose\+::\+Json\+Controller@{Mongoose\+::\+Json\+Controller}}
+
+
+Inheritance diagram for Mongoose\+:\+:Json\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/d71/classMongoose_1_1JsonController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mongoose\+:\+:Json\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{d4/dfb/classMongoose_1_1JsonController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMongoose_1_1JsonController_a8fbcabba350e55a50d14a4d6da04a48e}{Json\+Controller} (int gc\+Divisor=100)
+\item 
+void \hyperlink{classMongoose_1_1JsonController_abb2ee896c92e8bb885aabc4bbec56be7}{pre\+Process} (\hyperlink{classMongoose_1_1Request}{Request} \&request, \hyperlink{classMongoose_1_1Response}{Response} \&response)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mongoose\+::\+Json\+Controller@{Mongoose\+::\+Json\+Controller}!Json\+Controller@{Json\+Controller}}
+\index{Json\+Controller@{Json\+Controller}!Mongoose\+::\+Json\+Controller@{Mongoose\+::\+Json\+Controller}}
+\subsubsection[{\texorpdfstring{Json\+Controller(int gc\+Divisor=100)}{JsonController(int gcDivisor=100)}}]{\setlength{\rightskip}{0pt plus 5cm}Mongoose\+::\+Json\+Controller\+::\+Json\+Controller (
+\begin{DoxyParamCaption}
+\item[{int}]{gc\+Divisor = {\ttfamily 100}}
+\end{DoxyParamCaption}
+)}\hypertarget{classMongoose_1_1JsonController_a8fbcabba350e55a50d14a4d6da04a48e}{}\label{classMongoose_1_1JsonController_a8fbcabba350e55a50d14a4d6da04a48e}
+Creates a json controller, each gc\+Divisor request, the sessions will be garbage collected 
+
+\subsection{Member Function Documentation}
+\index{Mongoose\+::\+Json\+Controller@{Mongoose\+::\+Json\+Controller}!pre\+Process@{pre\+Process}}
+\index{pre\+Process@{pre\+Process}!Mongoose\+::\+Json\+Controller@{Mongoose\+::\+Json\+Controller}}
+\subsubsection[{\texorpdfstring{pre\+Process(\+Request \&request, Response \&response)}{preProcess(Request &request, Response &response)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mongoose\+::\+Json\+Controller\+::pre\+Process (
+\begin{DoxyParamCaption}
+\item[{{\bf Request} \&}]{request, }
+\item[{{\bf Response} \&}]{response}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMongoose_1_1JsonController_abb2ee896c92e8bb885aabc4bbec56be7}{}\label{classMongoose_1_1JsonController_abb2ee896c92e8bb885aabc4bbec56be7}
+Pre process the request, this will set the content type to text/html and ping the user session
+
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classMongoose_1_1Request}{Request}} & the request \\
+\hline
+{\em \hyperlink{classMongoose_1_1Response}{Response}} & the response \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classMongoose_1_1Controller_a3eff704e4a3b4dc5a63fbfaa50a934ff}{Mongoose\+::\+Controller}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mongoose-\/cpp/Json\+Controller.\+h\item 
+src/mongoose-\/cpp/Json\+Controller.\+cpp\end{DoxyCompactItemize}

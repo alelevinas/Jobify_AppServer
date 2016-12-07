@@ -1,0 +1,77 @@
+.TH "Json::StreamWriter" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::StreamWriter \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <json\&.h>\fP
+.PP
+Inherited by \fBJson::BuiltStyledStreamWriter\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBFactory\fP"
+.br
+.RI "\fIA simple abstract factory\&. \fP"
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual int \fBwrite\fP (\fBValue\fP const &root, JSONCPP_OSTREAM *sout)=0"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "JSONCPP_OSTREAM * \fBsout_\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Usage: 
+.PP
+.nf
+using namespace Json;
+void writeToStdout(StreamWriter::Factory const& factory, Value const& value) {
+  std::unique_ptr<StreamWriter> const writer(
+    factory\&.newStreamWriter());
+  writer->write(value, &std::cout);
+  std::cout << std::endl;  // add lf and flush
+}
+
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual int Json::StreamWriter::write (\fBValue\fP const & root, JSONCPP_OSTREAM * sout)\fC [pure virtual]\fP"
+Write \fBValue\fP into document as configured in sub-class\&. Do not take ownership of sout, but maintain a reference during function\&. 
+.PP
+\fBPrecondition:\fP
+.RS 4
+sout != NULL 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+zero on success (For now, we always return zero, so check the stream instead\&.) 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIstd::exception\fP possibly, depending on configuration 
+.RE
+.PP
+
+.PP
+Implemented in \fBJson::BuiltStyledStreamWriter\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

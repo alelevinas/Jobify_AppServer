@@ -1,0 +1,59 @@
+.TH "el::base::RegisteredLoggers" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::RegisteredLoggers \- \fBLoggers\fP repository\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::utils::Registry< Logger, std::string >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRegisteredLoggers\fP (const LogBuilderPtr &defaultLogBuilder)"
+.br
+.ti -1c
+.RI "void \fBsetDefaultConfigurations\fP (const \fBConfigurations\fP &configurations)"
+.br
+.ti -1c
+.RI "\fBConfigurations\fP * \fBdefaultConfigurations\fP (void)"
+.br
+.ti -1c
+.RI "\fBLogger\fP * \fBget\fP (const std::string &id, bool forceCreation=true)"
+.br
+.ti -1c
+.RI "bool \fBremove\fP (const std::string &id)"
+.br
+.ti -1c
+.RI "bool \fBhas\fP (const std::string &id)"
+.br
+.ti -1c
+.RI "void \fBunregister\fP (\fBLogger\fP *&logger)"
+.br
+.ti -1c
+.RI "base::LogStreamsReferenceMap * \fBlogStreamsReference\fP (void)"
+.br
+.ti -1c
+.RI "void \fBflushAll\fP (void)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::base::Storage\fP"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+\fBLoggers\fP repository\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

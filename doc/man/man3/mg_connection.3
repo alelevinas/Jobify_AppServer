@@ -1,0 +1,68 @@
+.TH "mg_connection" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mg_connection \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmg_header\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBrequest_method\fP"
+.br
+.ti -1c
+.RI "const char * \fBuri\fP"
+.br
+.ti -1c
+.RI "const char * \fBhttp_version\fP"
+.br
+.ti -1c
+.RI "const char * \fBquery_string\fP"
+.br
+.ti -1c
+.RI "char \fBremote_ip\fP [48]"
+.br
+.ti -1c
+.RI "int \fBremote_port\fP"
+.br
+.ti -1c
+.RI "int \fBnum_headers\fP"
+.br
+.ti -1c
+.RI "struct \fBmg_connection::mg_header\fP \fBhttp_headers\fP [30]"
+.br
+.ti -1c
+.RI "char * \fBcontent\fP"
+.br
+.ti -1c
+.RI "int \fBcontent_len\fP"
+.br
+.ti -1c
+.RI "int \fBis_websocket\fP"
+.br
+.ti -1c
+.RI "int \fBstatus_code\fP"
+.br
+.ti -1c
+.RI "unsigned char \fBwsbits\fP"
+.br
+.ti -1c
+.RI "void * \fBserver_param\fP"
+.br
+.ti -1c
+.RI "void * \fBconnection_param\fP"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

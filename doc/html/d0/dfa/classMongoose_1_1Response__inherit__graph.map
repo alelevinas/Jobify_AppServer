@@ -1,0 +1,4 @@
+<map id="Mongoose::Response" name="Mongoose::Response">
+<area shape="rect" id="node2" href="$dd/d72/classMongoose_1_1JsonResponse.html" title="{Mongoose::JsonResponse\n|# humanReadable\l|+ JsonResponse()\l+ getBody()\l+ setHuman()\l+ setStatusSucces()\l+ setStatusError()\l}" alt="" coords="5,248,183,384"/>
+<area shape="rect" id="node3" href="$d0/d53/classMongoose_1_1StreamResponse.html" title="{Mongoose::StreamResponse\n||+ getBody()\l}" alt="" coords="207,277,397,355"/>
+</map>

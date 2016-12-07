@@ -1,0 +1,31 @@
+.TH "el::base::MessageBuilder" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::MessageBuilder \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinitialize\fP (\fBLogger\fP *logger)"
+.br
+.ti -1c
+.RI "\fBMessageBuilder\fP & \fBoperator<<\fP (const std::string &msg)"
+.br
+.ti -1c
+.RI "\fBMessageBuilder\fP & \fBoperator<<\fP (const std::wstring &msg)"
+.br
+.ti -1c
+.RI "\fBMessageBuilder\fP & \fBoperator<<\fP (const wchar_t *msg)"
+.br
+.ti -1c
+.RI "\fBMessageBuilder\fP & \fBoperator<<\fP (std::ostream &(*OStreamMani)(std::ostream &))"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

@@ -1,0 +1,8 @@
+<map id="el::base::PErrorWriter" name="el::base::PErrorWriter">
+<area shape="rect" id="node2" href="$d8/dea/classel_1_1base_1_1Writer.html" title="Main entry point of each logging. " alt="" coords="169,507,307,804"/>
+<area shape="rect" id="node3" href="$db/d41/classel_1_1base_1_1NoCopy.html" title="Internal helper class that prevent copy constructor for class. " alt="" coords="5,286,129,363"/>
+<area shape="rect" id="node4" href="$df/d67/classel_1_1base_1_1MessageBuilder.html" title="{el::base::MessageBuilder\n||+ MessageBuilder()\l+ initialize()\l+ operator\&lt;\&lt;()\l+ operator\&lt;\&lt;()\l+ operator\&lt;\&lt;()\l+ operator\&lt;\&lt;()\l}" alt="" coords="153,249,323,400"/>
+<area shape="rect" id="node5" href="$d3/d2c/classel_1_1Logger.html" title="Represents a logger holding ID and configurations we need to write logs. " alt="" coords="347,205,524,444"/>
+<area shape="rect" id="node6" href="$d9/d2e/classel_1_1base_1_1threading_1_1ThreadSafe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="300,5,429,156"/>
+<area shape="rect" id="node7" href="$d4/de4/classel_1_1Loggable.html" title="Base of Easylogging++ friendly class. " alt="" coords="453,35,556,127"/>
+</map>

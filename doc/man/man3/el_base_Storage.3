@@ -1,0 +1,130 @@
+.TH "el::base::Storage" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::Storage \- Easylogging++ management storage\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::NoCopy\fP, and \fBel::base::threading::ThreadSafe\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBStorage\fP (const LogBuilderPtr &defaultLogBuilder)"
+.br
+.ti -1c
+.RI "bool \fBvalidateEveryNCounter\fP (const char *filename, unsigned long int lineNumber, std::size_t occasion)"
+.br
+.ti -1c
+.RI "bool \fBvalidateAfterNCounter\fP (const char *filename, unsigned long int lineNumber, std::size_t n)"
+.br
+.ti -1c
+.RI "bool \fBvalidateNTimesCounter\fP (const char *filename, unsigned long int lineNumber, std::size_t n)"
+.br
+.ti -1c
+.RI "\fBbase::RegisteredHitCounters\fP * \fBhitCounters\fP (void) const "
+.br
+.ti -1c
+.RI "\fBbase::RegisteredLoggers\fP * \fBregisteredLoggers\fP (void) const "
+.br
+.ti -1c
+.RI "\fBbase::VRegistry\fP * \fBvRegistry\fP (void) const "
+.br
+.ti -1c
+.RI "const \fBbase::utils::CommandLineArgs\fP * \fBcommandLineArgs\fP (void) const "
+.br
+.ti -1c
+.RI "void \fBaddFlag\fP (\fBLoggingFlag\fP flag)"
+.br
+.ti -1c
+.RI "void \fBremoveFlag\fP (\fBLoggingFlag\fP flag)"
+.br
+.ti -1c
+.RI "bool \fBhasFlag\fP (\fBLoggingFlag\fP flag) const "
+.br
+.ti -1c
+.RI "base::type::EnumType \fBflags\fP (void) const "
+.br
+.ti -1c
+.RI "void \fBsetFlags\fP (base::type::EnumType flags)"
+.br
+.ti -1c
+.RI "void \fBsetPreRollOutCallback\fP (const PreRollOutCallback &callback)"
+.br
+.ti -1c
+.RI "void \fBunsetPreRollOutCallback\fP (void)"
+.br
+.ti -1c
+.RI "PreRollOutCallback & \fBpreRollOutCallback\fP (void)"
+.br
+.ti -1c
+.RI "bool \fBhasCustomFormatSpecifier\fP (const char *formatSpecifier)"
+.br
+.ti -1c
+.RI "void \fBinstallCustomFormatSpecifier\fP (const \fBCustomFormatSpecifier\fP &customFormatSpecifier)"
+.br
+.ti -1c
+.RI "bool \fBuninstallCustomFormatSpecifier\fP (const char *formatSpecifier)"
+.br
+.ti -1c
+.RI "const std::vector< \fBCustomFormatSpecifier\fP > * \fBcustomFormatSpecifiers\fP (void) const "
+.br
+.ti -1c
+.RI "void \fBsetLoggingLevel\fP (\fBLevel\fP level)"
+.br
+.ti -1c
+.RI "template<typename T > bool \fBinstallLogDispatchCallback\fP (const std::string &id)"
+.br
+.ti -1c
+.RI "template<typename T > void \fBuninstallLogDispatchCallback\fP (const std::string &id)"
+.br
+.ti -1c
+.RI "template<typename T > T * \fBlogDispatchCallback\fP (const std::string &id)"
+.br
+.ti -1c
+.RI "template<typename T > bool \fBinstallPerformanceTrackingCallback\fP (const std::string &id)"
+.br
+.ti -1c
+.RI "template<typename T > void \fBuninstallPerformanceTrackingCallback\fP (const std::string &id)"
+.br
+.ti -1c
+.RI "template<typename T > T * \fBperformanceTrackingCallback\fP (const std::string &id)"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "class \fBel::Helpers\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::DefaultLogDispatchCallback\fP"
+.br
+.ti -1c
+.RI "class \fBel::LogBuilder\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::MessageBuilder\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::Writer\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::PerformanceTracker\fP"
+.br
+.ti -1c
+.RI "class \fBel::base::LogDispatcher\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Easylogging++ management storage\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

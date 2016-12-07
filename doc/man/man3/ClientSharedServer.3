@@ -1,0 +1,81 @@
+.TH "ClientSharedServer" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ClientSharedServer \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ClientSharedServer\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBClientSharedServer\fP (std::string url)"
+.br
+.RI "\fIurl of the shared server \fP"
+.ti -1c
+.RI "std::string \fBgetJobPositions\fP ()"
+.br
+.ti -1c
+.RI "bool \fBgetNamesJobPositions\fP (Json::Value *names)"
+.br
+.ti -1c
+.RI "bool \fBgetNamesSkills\fP (Json::Value *names)"
+.br
+.ti -1c
+.RI "bool \fBgetNamesCategories\fP (Json::Value *names)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+HTTP Client used to get data from the shared server instance\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool ClientSharedServer::getNamesCategories (Json::Value * names)"
+Gets the categories names from the shared server\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInames\fP Json array to store the result 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if got result 
+.RE
+.PP
+
+.SS "bool ClientSharedServer::getNamesJobPositions (Json::Value * names)"
+Gets the job Position names from the shared server\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInames\fP Json array to store the result 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if got result 
+.RE
+.PP
+
+.SS "bool ClientSharedServer::getNamesSkills (Json::Value * names)"
+skills names from the shared server\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInames\fP Json array to store the result 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+true if got result 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

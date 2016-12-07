@@ -1,0 +1,19 @@
+CI\+: \href{https://travis-ci.org/alelevinas/Jobify_AppServer}{\tt } Coverage\+: \href{https://coveralls.io/github/alelevinas/Jobify_AppServer?branch=master}{\tt }
+
+Application Server para el proyecto de Taller de Programación II
+
+Instalación\+:
+
+Las únicas librería que usamos y no compilamos directamente son leveldb y restclient-\/cpp, por lo que es necesario ejecutar los comandos
+
+sudo apt-\/get install libsnappy-\/dev libleveldb1 libleveldb-\/dev sudo apt-\/get install autoconf libtool git git clone \href{https://github.com/mrtazz/restclient-cpp.git}{\tt https\+://github.\+com/mrtazz/restclient-\/cpp.\+git} cd restclient-\/cpp ./autogen.sh ./configure sudo make install export L\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+P\+A\+TH=/usr/local/lib\+:\$\+L\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+P\+A\+TH cd ..
+
+luego a compilar...
+
+mkdir build cd build cmake .. make
+
+y para ejecutar
+
+cd build ./\+Jobify\+\_\+\+App\+Server
+
+Documentación A\+PI\+: \href{http://rebilly.github.io/ReDoc/?url=https://raw.githubusercontent.com/alelevinas/Jobify_AppServer/master/jobify-appserver-serverAPI.yaml}{\tt link} 

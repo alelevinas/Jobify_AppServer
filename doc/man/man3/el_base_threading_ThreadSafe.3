@@ -1,0 +1,33 @@
+.TH "el::base::threading::ThreadSafe" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::threading::ThreadSafe \- Base of thread safe class, this class is inheritable-only\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherited by \fBel::base::utils::AbstractRegistry< base::HitCounter, std::vector< base::HitCounter * > >\fP, \fBel::base::utils::AbstractRegistry< Configuration, std::vector< Configuration * > >\fP, \fBel::base::utils::AbstractRegistry< Logger, std::map< std::string, Logger * > >\fP, \fBel::base::utils::AbstractRegistry< T_Ptr, std::map< T_Key, T_Ptr * > >\fP, \fBel::base::utils::AbstractRegistry< T_Ptr, std::vector< T_Ptr * > >\fP, \fBel::Callback< LogDispatchData >\fP\fC [protected]\fP, \fBel::Callback< PerformanceTrackingData >\fP\fC [protected]\fP, \fBel::base::PerformanceTracker\fP, \fBel::base::Storage\fP, \fBel::base::TypedConfigurations\fP, \fBel::base::utils::AbstractRegistry< T_Ptr, Container >\fP, \fBel::base::VRegistry\fP, \fBel::Callback< T >\fP\fC [protected]\fP, and \fBel::Logger\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBacquireLock\fP (void) ELPP_FINAL"
+.br
+.ti -1c
+.RI "virtual void \fBreleaseLock\fP (void) ELPP_FINAL"
+.br
+.ti -1c
+.RI "virtual \fBbase::threading::Mutex\fP & \fBlock\fP (void) ELPP_FINAL"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Base of thread safe class, this class is inheritable-only\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

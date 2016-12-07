@@ -1,0 +1,86 @@
+.TH "el::Configuration" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::Configuration \- Represents single configuration that has representing level, configuration type and a string based value\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::Loggable\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBPredicate\fP"
+.br
+.RI "\fIUsed to find configuration from configuration (pointers) repository\&. Avoid using it\&. \fP"
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBConfiguration\fP (const \fBConfiguration\fP &c)"
+.br
+.ti -1c
+.RI "\fBConfiguration\fP & \fBoperator=\fP (const \fBConfiguration\fP &c)"
+.br
+.ti -1c
+.RI "\fBConfiguration\fP (\fBLevel\fP \fBlevel\fP, \fBConfigurationType\fP \fBconfigurationType\fP, const std::string &\fBvalue\fP)"
+.br
+.RI "\fIFull constructor used to sets value of configuration\&. \fP"
+.ti -1c
+.RI "\fBLevel\fP \fBlevel\fP (void) const "
+.br
+.RI "\fIGets level of current configuration\&. \fP"
+.ti -1c
+.RI "\fBConfigurationType\fP \fBconfigurationType\fP (void) const "
+.br
+.RI "\fIGets configuration type of current configuration\&. \fP"
+.ti -1c
+.RI "const std::string & \fBvalue\fP (void) const "
+.br
+.RI "\fIGets string based configuration value\&. \fP"
+.ti -1c
+.RI "void \fBsetValue\fP (const std::string &\fBvalue\fP)"
+.br
+.RI "\fISet string based configuration value\&. \fP"
+.ti -1c
+.RI "virtual void \fBlog\fP (el::base::type::ostream_t &os) const "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents single configuration that has representing level, configuration type and a string based value\&. 
+
+String based value means any value either its boolean, integer or string itself, it will be embedded inside quotes and will be parsed later\&.
+.PP
+Consider some examples below:
+.IP "\(bu" 2
+\fBel::Configuration\fP confEnabledInfo(\fBel::Level::Info\fP, \fBel::ConfigurationType::Enabled\fP, 'true');
+.IP "\(bu" 2
+\fBel::Configuration\fP confMaxLogFileSizeInfo(\fBel::Level::Info\fP, \fBel::ConfigurationType::MaxLogFileSize\fP, '2048');
+.IP "\(bu" 2
+\fBel::Configuration\fP confFilenameInfo(\fBel::Level::Info\fP, \fBel::ConfigurationType::Filename\fP, '/var/log/my\&.log'); 
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void el::Configuration::setValue (const std::string & value)\fC [inline]\fP"
+
+.PP
+Set string based configuration value\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvalue\fP Value to set\&. Values have to be std::string; For boolean values use 'true', 'false', for any integral values use them in quotes\&. They will be parsed when configuring 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

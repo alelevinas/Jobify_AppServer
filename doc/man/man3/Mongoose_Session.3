@@ -1,0 +1,105 @@
+.TH "Mongoose::Session" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Mongoose::Session \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetValue\fP (string key, string value)"
+.br
+.ti -1c
+.RI "void \fBunsetValue\fP (string key)"
+.br
+.ti -1c
+.RI "bool \fBhasValue\fP (string key)"
+.br
+.ti -1c
+.RI "string \fBget\fP (string key, string fallback='')"
+.br
+.ti -1c
+.RI "void \fBping\fP ()"
+.br
+.ti -1c
+.RI "int \fBgetAge\fP ()"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "map< string, string > \fBvalues\fP"
+.br
+.ti -1c
+.RI "int \fBdate\fP"
+.br
+.ti -1c
+.RI "\fBMutex\fP \fBmutex\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "string Mongoose::Session::get (string key, string fallback = \fC''\fP)"
+Try to get the value for the given variable
+.PP
+string the name of the variable 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the fallback value
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+string the value of the variable if it exists, fallback else 
+.RE
+.PP
+
+.SS "int Mongoose::Session::getAge ()"
+Returns the session age, in seconds
+.PP
+\fBReturns:\fP
+.RS 4
+int the number of sessions since the last activity of the session 
+.RE
+.PP
+
+.SS "bool Mongoose::Session::hasValue (string key)"
+Check if the given variable exists
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the name of the variable 
+.RE
+.PP
+
+.SS "void Mongoose::Session::ping ()"
+Pings the session, this will update the creation date to now and 'keeping it alive' 
+.SS "void Mongoose::Session::setValue (string key, string value)"
+Sets the value of a session variable
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the name of the variable 
+.br
+\fIstring\fP the value of the variable 
+.RE
+.PP
+
+.SS "void Mongoose::Session::unsetValue (string key)"
+Unset a session varaible
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstring\fP the variable name 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

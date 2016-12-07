@@ -1,0 +1,45 @@
+.TH "el::base::debug::StackTrace" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::debug::StackTrace \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBel::base::NoCopy\fP\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBStackTraceEntry\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "std::vector< \fBStackTraceEntry\fP > & \fBgetLatestStack\fP (void)"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const std::size_t \fBkMaxStack\fP = 64"
+.br
+.ti -1c
+.RI "static const std::size_t \fBkStackStart\fP = 2"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &os, const \fBStackTrace\fP &st)"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

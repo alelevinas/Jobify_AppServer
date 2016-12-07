@@ -1,0 +1,48 @@
+.TH "Json::BuiltStyledStreamWriter" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::BuiltStyledStreamWriter \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBJson::StreamWriter\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBuiltStyledStreamWriter\fP (JSONCPP_STRING const &indentation, \fBCommentStyle::Enum\fP cs, JSONCPP_STRING const &colonSymbol, JSONCPP_STRING const &nullSymbol, JSONCPP_STRING const &endingLineFeedSymbol, bool useSpecialFloats, unsigned int precision)"
+.br
+.ti -1c
+.RI "int \fBwrite\fP (\fBValue\fP const &root, JSONCPP_OSTREAM *sout) JSONCPP_OVERRIDE"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Member Function Documentation"
+.PP 
+.SS "int Json::BuiltStyledStreamWriter::write (\fBValue\fP const & root, JSONCPP_OSTREAM * sout)\fC [virtual]\fP"
+Write \fBValue\fP into document as configured in sub-class\&. Do not take ownership of sout, but maintain a reference during function\&. 
+.PP
+\fBPrecondition:\fP
+.RS 4
+sout != NULL 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+zero on success (For now, we always return zero, so check the stream instead\&.) 
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIstd::exception\fP possibly, depending on configuration 
+.RE
+.PP
+
+.PP
+Implements \fBJson::StreamWriter\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

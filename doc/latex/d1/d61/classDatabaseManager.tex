@@ -1,0 +1,104 @@
+\hypertarget{classDatabaseManager}{}\section{Database\+Manager Class Reference}
+\label{classDatabaseManager}\index{Database\+Manager@{Database\+Manager}}
+
+
+Collaboration diagram for Database\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{db/d36/classDatabaseManager__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Database\+Manager} (std\+::string users\+Db\+Name, std\+::string sessions\+Db\+Name, std\+::string chats\+Db\+Name, std\+::string accounts\+Db\+Name, std\+::string images\+Db\+Name)\hypertarget{classDatabaseManager_a00cc2fc74ad1e3c84d3947dbf1e71655}{}\label{classDatabaseManager_a00cc2fc74ad1e3c84d3947dbf1e71655}
+
+\item 
+bool {\bfseries open\+D\+Bs} ()\hypertarget{classDatabaseManager_afc0cbe21c6f41f9272f63768f7109390}{}\label{classDatabaseManager_afc0cbe21c6f41f9272f63768f7109390}
+
+\item 
+bool {\bfseries add\+\_\+user} (const string \&username, Json\+::\+Value user)\hypertarget{classDatabaseManager_ad35907af8667e72c8342b32084ee9b0e}{}\label{classDatabaseManager_ad35907af8667e72c8342b32084ee9b0e}
+
+\item 
+Json\+::\+Value {\bfseries get\+\_\+user} (const string \&username)\hypertarget{classDatabaseManager_a855c704a9dc45e43275e11b539c210db}{}\label{classDatabaseManager_a855c704a9dc45e43275e11b539c210db}
+
+\item 
+bool {\bfseries edit\+\_\+user} (const string \&username, Json\+::\+Value user\+Edited)\hypertarget{classDatabaseManager_a70cd1cf1744913ef018b93a0524390ec}{}\label{classDatabaseManager_a70cd1cf1744913ef018b93a0524390ec}
+
+\item 
+bool {\bfseries delete\+\_\+user} (const string \&username)\hypertarget{classDatabaseManager_a70178ca9f4e05bdef4909ae71874f983}{}\label{classDatabaseManager_a70178ca9f4e05bdef4909ae71874f983}
+
+\item 
+bool {\bfseries get\+\_\+users} (Json\+::\+Value \&result)\hypertarget{classDatabaseManager_a23bdd4b0f7dd70d478ea298c715768c1}{}\label{classDatabaseManager_a23bdd4b0f7dd70d478ea298c715768c1}
+
+\item 
+bool {\bfseries recommend\+\_\+user} (const string \&username\+From, const string \&username\+To)\hypertarget{classDatabaseManager_a977dad3acba2da5446d4e7ab3c84e5b7}{}\label{classDatabaseManager_a977dad3acba2da5446d4e7ab3c84e5b7}
+
+\item 
+bool {\bfseries de\+Recommend\+\_\+user} (const string \&username\+From, const string \&username\+To)\hypertarget{classDatabaseManager_a6af7e972c3225628312e1288a0b04463}{}\label{classDatabaseManager_a6af7e972c3225628312e1288a0b04463}
+
+\item 
+bool {\bfseries add\+Contact} (const string \&username\+From, const string \&username\+To)\hypertarget{classDatabaseManager_adf27e94b33f8912981ae943771c8033d}{}\label{classDatabaseManager_adf27e94b33f8912981ae943771c8033d}
+
+\item 
+bool {\bfseries remove\+Contact} (const string \&username\+From, const string \&username\+To)\hypertarget{classDatabaseManager_a0d3df238519a861c2343e06379c9534b}{}\label{classDatabaseManager_a0d3df238519a861c2343e06379c9534b}
+
+\item 
+bool {\bfseries add\+\_\+session} (const std\+::string \&token, Json\+::\+Value session)\hypertarget{classDatabaseManager_a5c4766c72d5587926f3a22b58259bcdd}{}\label{classDatabaseManager_a5c4766c72d5587926f3a22b58259bcdd}
+
+\item 
+Json\+::\+Value {\bfseries get\+\_\+session} (const std\+::string \&token)\hypertarget{classDatabaseManager_aa7fcb03206b019911294051c0756d1bc}{}\label{classDatabaseManager_aa7fcb03206b019911294051c0756d1bc}
+
+\item 
+bool {\bfseries delete\+\_\+session} (const std\+::string \&token)\hypertarget{classDatabaseManager_a4b312f1c16215eb8e80ace9610d72ef8}{}\label{classDatabaseManager_a4b312f1c16215eb8e80ace9610d72ef8}
+
+\item 
+bool {\bfseries add\+\_\+account} (string username, string password)\hypertarget{classDatabaseManager_a51cb3e26730430e7d4a280b75f6adadb}{}\label{classDatabaseManager_a51cb3e26730430e7d4a280b75f6adadb}
+
+\item 
+bool {\bfseries is\+\_\+correct} (std\+::string username, std\+::string password)\hypertarget{classDatabaseManager_a9cf967f3174b9f131cde202c6b9dcc19}{}\label{classDatabaseManager_a9cf967f3174b9f131cde202c6b9dcc19}
+
+\item 
+bool {\bfseries add\+\_\+msg} (string basic\+\_\+string, std\+::string name\+\_\+from, string basic\+String, string basic\+\_\+string1)\hypertarget{classDatabaseManager_a3ba11cfd351a7788be31ff7f6e46d4fc}{}\label{classDatabaseManager_a3ba11cfd351a7788be31ff7f6e46d4fc}
+
+\item 
+bool {\bfseries get\+\_\+conv} (string username, string username2, Json\+::\+Value $\ast$conversation)\hypertarget{classDatabaseManager_a2925fea0e08b809c7181601b6dc61aec}{}\label{classDatabaseManager_a2925fea0e08b809c7181601b6dc61aec}
+
+\item 
+bool {\bfseries get\+\_\+convs} (string username, Json\+::\+Value $\ast$conversations)\hypertarget{classDatabaseManager_a763d89de16988de11f9b54d3e52e2b8e}{}\label{classDatabaseManager_a763d89de16988de11f9b54d3e52e2b8e}
+
+\item 
+bool {\bfseries delete\+\_\+conv} (string username, string username2)\hypertarget{classDatabaseManager_add30766200f80b377d1fe656379de808}{}\label{classDatabaseManager_add30766200f80b377d1fe656379de808}
+
+\item 
+bool {\bfseries delete\+\_\+msg} (string username1, string username2, string id\+Mensaje)\hypertarget{classDatabaseManager_a3e5169ad61f02a549f78f946d378099c}{}\label{classDatabaseManager_a3e5169ad61f02a549f78f946d378099c}
+
+\item 
+bool {\bfseries get\+\_\+users\+\_\+by} (string sort\+\_\+by, int n\+Filter, string job, string skill, Json\+::\+Value \&result, int i, string basic\+\_\+string)\hypertarget{classDatabaseManager_ae2aac313f4cdcbb86ec0fc971b28d7b5}{}\label{classDatabaseManager_ae2aac313f4cdcbb86ec0fc971b28d7b5}
+
+\item 
+Json\+::\+Value {\bfseries get\+\_\+image} (string username)\hypertarget{classDatabaseManager_a899a59ca67b49b7b16e0716608725e2b}{}\label{classDatabaseManager_a899a59ca67b49b7b16e0716608725e2b}
+
+\item 
+bool {\bfseries add\+\_\+image} (const std\+::string \&username, Json\+::\+Value \&image)\hypertarget{classDatabaseManager_a469ebd4e1d3db9bd9f62905ec944b341}{}\label{classDatabaseManager_a469ebd4e1d3db9bd9f62905ec944b341}
+
+\item 
+bool {\bfseries delete\+\_\+image} (const std\+::string \&username)\hypertarget{classDatabaseManager_a3828bd25f7a2ec616ece213de0397d96}{}\label{classDatabaseManager_a3828bd25f7a2ec616ece213de0397d96}
+
+\item 
+void {\bfseries filter\+\_\+pos} (Json\+::\+Value \&result, int n\+Distance, string coordenates)\hypertarget{classDatabaseManager_a7e4882c2ad76fa7b7a0976226f3a4ba9}{}\label{classDatabaseManager_a7e4882c2ad76fa7b7a0976226f3a4ba9}
+
+\item 
+void {\bfseries sort\+\_\+by\+\_\+distance} (Json\+::\+Value \&result, string coordenates)\hypertarget{classDatabaseManager_a16d509be4d787898163cb58f45902277}{}\label{classDatabaseManager_a16d509be4d787898163cb58f45902277}
+
+\item 
+bool {\bfseries get\+\_\+user\+\_\+contacts} (string \&username, Json\+::\+Value \&contacts)\hypertarget{classDatabaseManager_ad417d693e57f386a55cd170e35897454}{}\label{classDatabaseManager_ad417d693e57f386a55cd170e35897454}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Database\+Manager.\+h\item 
+src/Database\+Manager.\+cpp\end{DoxyCompactItemize}

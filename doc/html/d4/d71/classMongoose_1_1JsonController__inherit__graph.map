@@ -1,0 +1,8 @@
+<map id="Mongoose::JsonController" name="Mongoose::JsonController">
+<area shape="rect" id="node5" href="$d8/ddc/classChatController.html" title="{ChatController\n||+ ChatController()\l+ setup()\l+ postUserChatRequest()\l+ getUserChatsRequest()\l+ deleteConversationRequest()\l+ deleteMessageRequest()\l}" alt="" coords="5,682,208,833"/>
+<area shape="rect" id="node6" href="$dc/de5/classProfileController.html" title="{ProfileController\n||+ ProfileController()\l+ setup()\l+ getUserRequest()\l+ postUserRequest()\l+ updateUserRequest()\l+ deleteUserRequest()\l+ getUsersRequest()\l+ getLogin()\l+ postRecommend()\l+ deleteDeRecommend()\land 8 more...\l}" alt="" coords="232,645,400,869"/>
+<area shape="rect" id="node7" href="$d3/d26/classSharedServerController.html" title="{SharedServerController\n||+ SharedServerController()\l+ setup()\l+ getJobPosRequest()\l+ getSkillsRequest()\l+ getCategoriesRequest()\l}" alt="" coords="425,689,602,825"/>
+<area shape="rect" id="node2" href="$d4/d4f/classMongoose_1_1WebController.html" title="{Mongoose::WebController\n|# mutex\l# gcDivisor\l# counter\l|+ WebController()\l+ preProcess()\l}" alt="" coords="229,336,403,457"/>
+<area shape="rect" id="node3" href="$d0/dbd/classMongoose_1_1Controller.html" title="{Mongoose::Controller\n|# sessions\l# server\l# prefix\l# routes\l# urls\l|+ Controller()\l+ ~Controller()\l+ setServer()\l+ preProcess()\l+ process()\l+ postProcess()\l+ handleRequest()\l+ setPrefix()\l+ webSocketReady()\l+ webSocketData()\land 8 more...\l}" alt="" coords="165,5,312,288"/>
+<area shape="rect" id="node4" href="$df/d90/classMongoose_1_1Utils.html" title="{Mongoose::Utils\n||+ htmlEntities()\l+ sleep()\l}" alt="" coords="336,101,453,193"/>
+</map>

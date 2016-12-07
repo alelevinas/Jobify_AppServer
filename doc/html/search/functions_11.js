@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['reader',['Reader',['../d1/d62/classJson_1_1Reader.html#a0b3c4e24c8393354bab57a6ba3ffc27f',1,'Json::Reader::Reader()'],['../d1/d62/classJson_1_1Reader.html#a45f17831118337309180313e93ac33f8',1,'Json::Reader::Reader(const Features &amp;features)']]],
+  ['reconfigure',['reconfigure',['../d3/d2c/classel_1_1Logger.html#adfd57ab27fb398cc980a3edfab92927e',1,'el::Logger']]],
+  ['reconfigureallloggers',['reconfigureAllLoggers',['../d7/d00/classel_1_1Loggers.html#ac834df0f5e9e3dab18e70321a2543af7',1,'el::Loggers::reconfigureAllLoggers(const Configurations &amp;configurations)'],['../d7/d00/classel_1_1Loggers.html#a1ebd33bc0208b430f41508e34509c7c9',1,'el::Loggers::reconfigureAllLoggers(ConfigurationType configurationType, const std::string &amp;value)'],['../d7/d00/classel_1_1Loggers.html#ab24b99e5bb3c907d1418ee3266f15397',1,'el::Loggers::reconfigureAllLoggers(Level level, ConfigurationType configurationType, const std::string &amp;value)']]],
+  ['reconfigurelogger',['reconfigureLogger',['../d7/d00/classel_1_1Loggers.html#a888aca5bdccccc322da2eed430909d04',1,'el::Loggers::reconfigureLogger(Logger *logger, const Configurations &amp;configurations)'],['../d7/d00/classel_1_1Loggers.html#a105f776fe19cb7fa2fccd2993d9f7a7c',1,'el::Loggers::reconfigureLogger(const std::string &amp;identity, const Configurations &amp;configurations)'],['../d7/d00/classel_1_1Loggers.html#aef49fdae329cefcc1c01428568dced4b',1,'el::Loggers::reconfigureLogger(const std::string &amp;identity, ConfigurationType configurationType, const std::string &amp;value)']]],
+  ['registercontroller',['registerController',['../d2/db6/classMongoose_1_1Server.html#a9efd2ef8c0d8432ad0f65173dd818bf0',1,'Mongoose::Server']]],
+  ['registernew',['registerNew',['../dc/de0/classel_1_1base_1_1utils_1_1Registry.html#ab10b3dd25ff0df036e7a015635a15dee',1,'el::base::utils::Registry']]],
+  ['registerroute',['registerRoute',['../d0/dbd/classMongoose_1_1Controller.html#aed1073c26ca8930754d7f6269ae6fd01',1,'Mongoose::Controller']]],
+  ['registry',['Registry',['../dc/de0/classel_1_1base_1_1utils_1_1Registry.html#adf5e97aa801be3b93e116ad645304759',1,'el::base::utils::Registry']]],
+  ['registrywithpred',['RegistryWithPred',['../d7/d3a/classel_1_1base_1_1utils_1_1RegistryWithPred.html#a0e75c7daaa5fbf824b29180c7a5fd155',1,'el::base::utils::RegistryWithPred']]],
+  ['releasedate',['releaseDate',['../db/d60/classel_1_1VersionInfo.html#ab23c2545115898f4071fa4e125204946',1,'el::VersionInfo']]],
+  ['remove',['remove',['../da/d1d/classMongoose_1_1WebSockets.html#a41ef753fb1aa658ef3cc53f5ccac6a19',1,'Mongoose::WebSockets']]],
+  ['removecontainer',['removeContainer',['../d6/d10/classMongoose_1_1WebSocket.html#a79ae70fca13db0624be9885e875d4ce0',1,'Mongoose::WebSocket']]],
+  ['removeflag',['removeFlag',['../d7/d00/classel_1_1Loggers.html#a23fcb4b492f70a34285c45c0b5e2e515',1,'el::Loggers']]],
+  ['removeindex',['removeIndex',['../d1/db8/classJson_1_1Value.html#ae9e67e08a85a2f3be3396ec0f4c47f65',1,'Json::Value']]],
+  ['removemember',['removeMember',['../d1/db8/classJson_1_1Value.html#aa52f7873b95d29627d6e83ba96f69aaa',1,'Json::Value::removeMember(const char *key)'],['../d1/db8/classJson_1_1Value.html#a1dfd5d30fbc53fcd9c4955b8b3e7885c',1,'Json::Value::removeMember(const JSONCPP_STRING &amp;key)'],['../d1/db8/classJson_1_1Value.html#a708e599489adf30d65bf85a8ee16e6fb',1,'Json::Value::removeMember(const char *key, Value *removed)'],['../d1/db8/classJson_1_1Value.html#ae385ecef98427970df525ee876e9f54a',1,'Json::Value::removeMember(JSONCPP_STRING const &amp;key, Value *removed)'],['../d1/db8/classJson_1_1Value.html#a49c91af727d6b4eb0af02a81bb2def87',1,'Json::Value::removeMember(const char *begin, const char *end, Value *removed)']]],
+  ['replaceall',['replaceAll',['../da/df8/classel_1_1base_1_1utils_1_1Str.html#aa07bfda259ed194120b371401734ae86',1,'el::base::utils::Str::replaceAll(std::string &amp;str, char replaceWhat, char replaceWith)'],['../da/df8/classel_1_1base_1_1utils_1_1Str.html#a8e823aa60b160451ca0b8732c3c75568',1,'el::base::utils::Str::replaceAll(std::string &amp;str, const std::string &amp;replaceWhat, const std::string &amp;replaceWith)']]],
+  ['resetlocation',['resetLocation',['../dd/dbd/classel_1_1base_1_1HitCounter.html#af58479cb66b71a76a3f8fd26193bfde1',1,'el::base::HitCounter']]],
+  ['resize',['resize',['../d1/db8/classJson_1_1Value.html#aa284353271ada427dbfa04a42f2be407',1,'Json::Value']]],
+  ['rtrim',['rtrim',['../da/df8/classel_1_1base_1_1utils_1_1Str.html#a9202797763e10861c4fa84ffd40198bb',1,'el::base::utils::Str']]]
+];

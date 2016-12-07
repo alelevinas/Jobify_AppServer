@@ -1,0 +1,54 @@
+.TH "Json::OurReader" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::OurReader \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBStructuredError\fP"
+.br
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef char \fBChar\fP"
+.br
+.ti -1c
+.RI "typedef const Char * \fBLocation\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBOurReader\fP (\fBOurFeatures\fP const &features)"
+.br
+.ti -1c
+.RI "bool \fBparse\fP (const char *beginDoc, const char *endDoc, \fBValue\fP &root, bool collectComments=true)"
+.br
+.ti -1c
+.RI "JSONCPP_STRING \fBgetFormattedErrorMessages\fP () const "
+.br
+.ti -1c
+.RI "std::vector< \fBStructuredError\fP > \fBgetStructuredErrors\fP () const "
+.br
+.ti -1c
+.RI "bool \fBpushError\fP (const \fBValue\fP &value, const JSONCPP_STRING &message)"
+.br
+.ti -1c
+.RI "bool \fBpushError\fP (const \fBValue\fP &value, const JSONCPP_STRING &message, const \fBValue\fP &extra)"
+.br
+.ti -1c
+.RI "bool \fBgood\fP () const "
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

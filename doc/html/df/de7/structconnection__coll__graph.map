@@ -1,0 +1,10 @@
+<map id="connection" name="connection">
+<area shape="rect" id="node2" href="$de/d35/unionendpoint.html" title="{endpoint\n|+ fd\l+ cgi_sock\l+ ssl\l|}" alt="" coords="101,719,188,825"/>
+<area shape="rect" id="node3" href="$d5/d59/structuri__handler.html" title="{uri_handler\n|+ uri\l|}" alt="" coords="46,535,131,612"/>
+<area shape="rect" id="node4" href="$df/d3f/structll.html" title="{ll\n||}" alt="" coords="5,255,44,333"/>
+<area shape="rect" id="node8" href="$d0/d9e/structmg__server.html" title="{mg_server\n|+ listening_sock\l+ config_options\l+ server_data\l+ ssl_ctx\l+ ctl\l|}" alt="" coords="384,505,503,641"/>
+<area shape="rect" id="node5" href="$d2/dad/structmg__connection.html" title="{mg_connection\n|+ request_method\l+ uri\l+ http_version\l+ query_string\l+ remote_ip\l+ remote_port\l+ num_headers\l+ content\l+ content_len\l+ is_websocket\l+ status_code\l+ wsbits\l+ server_param\l+ connection_param\l|}" alt="" coords="249,160,389,428"/>
+<area shape="rect" id="node6" href="$da/d69/structmg__connection_1_1mg__header.html" title="{mg_connection::mg_header\n|+ name\l+ value\l|}" alt="" coords="228,5,411,97"/>
+<area shape="rect" id="node7" href="$d5/dc6/structiobuf.html" title="{iobuf\n|+ buf\l+ size\l+ len\l|}" alt="" coords="357,719,415,825"/>
+<area shape="rect" id="node9" href="$db/d77/unionsocket__address.html" title="{socket_address\n|+ sa\l+ sin\l|}" alt="" coords="425,248,539,340"/>
+</map>

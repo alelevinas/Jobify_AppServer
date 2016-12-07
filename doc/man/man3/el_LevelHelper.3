@@ -1,0 +1,93 @@
+.TH "el::LevelHelper" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::LevelHelper \- Static class that contains helper functions for \fBel::Level\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::StaticClass\fP\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static base::type::EnumType \fBcastToInt\fP (\fBLevel\fP level)"
+.br
+.RI "\fICasts level to int, useful for iterating through enum\&. \fP"
+.ti -1c
+.RI "static \fBLevel\fP \fBcastFromInt\fP (base::type::EnumType l)"
+.br
+.RI "\fICasts int(ushort) to level, useful for iterating through enum\&. \fP"
+.ti -1c
+.RI "static const char * \fBconvertToString\fP (\fBLevel\fP level)"
+.br
+.RI "\fIConverts level to associated const char*\&. \fP"
+.ti -1c
+.RI "static \fBLevel\fP \fBconvertFromString\fP (const char *levelStr)"
+.br
+.RI "\fIConverts from levelStr to Level\&. \fP"
+.ti -1c
+.RI "static void \fBforEachLevel\fP (base::type::EnumType *startIndex, const std::function< bool(void)> &fn)"
+.br
+.RI "\fIApplies specified function to each level starting from startIndex\&. \fP"
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const base::type::EnumType \fBkMinValid\fP = static_cast<base::type::EnumType>(\fBLevel::Trace\fP)"
+.br
+.RI "\fIRepresents minimum valid level\&. Useful when iterating through enum\&. \fP"
+.ti -1c
+.RI "static const base::type::EnumType \fBkMaxValid\fP = static_cast<base::type::EnumType>(\fBLevel::Info\fP)"
+.br
+.RI "\fIRepresents maximum valid level\&. This is used internally and you should not need it\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+Static class that contains helper functions for \fBel::Level\fP\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "static \fBLevel\fP el::LevelHelper::convertFromString (const char * levelStr)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Converts from levelStr to Level\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlevelStr\fP Upper case string based level\&. Lower case is also valid but providing upper case is recommended\&. 
+.RE
+.PP
+
+.SS "static const char* el::LevelHelper::convertToString (\fBLevel\fP level)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Converts level to associated const char*\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+Upper case string based level\&. 
+.RE
+.PP
+
+.SS "static void el::LevelHelper::forEachLevel (base::type::EnumType * startIndex, const std::function< bool(void)> & fn)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Applies specified function to each level starting from startIndex\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstartIndex\fP initial value to start the iteration from\&. This is passed as pointer and is left-shifted so this can be used inside function (fn) to represent current level\&. 
+.br
+\fIfn\fP function to apply with each level\&. This bool represent whether or not to stop iterating through levels\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

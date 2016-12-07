@@ -1,0 +1,76 @@
+.TH "el::base::RegisteredHitCounters" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+el::base::RegisteredHitCounters \- Repository for hit counters used across the application\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <easylogging++\&.h>\fP
+.PP
+Inherits \fBel::base::utils::RegistryWithPred< base::HitCounter, base::HitCounter::Predicate >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBvalidateEveryN\fP (const char *filename, unsigned long int lineNumber, std::size_t n)"
+.br
+.RI "\fIValidates counter for every N, i\&.e, registers new if does not exist otherwise updates original one\&. \fP"
+.ti -1c
+.RI "bool \fBvalidateAfterN\fP (const char *filename, unsigned long int lineNumber, std::size_t n)"
+.br
+.RI "\fIValidates counter for hits >= N, i\&.e, registers new if does not exist otherwise updates original one\&. \fP"
+.ti -1c
+.RI "bool \fBvalidateNTimes\fP (const char *filename, unsigned long int lineNumber, std::size_t n)"
+.br
+.RI "\fIValidates counter for hits are <= n, i\&.e, registers new if does not exist otherwise updates original one\&. \fP"
+.ti -1c
+.RI "const \fBbase::HitCounter\fP * \fBgetCounter\fP (const char *filename, unsigned long int lineNumber)"
+.br
+.RI "\fIGets hit counter registered at specified position\&. \fP"
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Repository for hit counters used across the application\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool el::base::RegisteredHitCounters::validateAfterN (const char * filename, unsigned long int lineNumber, std::size_t n)\fC [inline]\fP"
+
+.PP
+Validates counter for hits >= N, i\&.e, registers new if does not exist otherwise updates original one\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+True if validation resulted in triggering hit\&. Meaning logs should be written everytime true is returned 
+.RE
+.PP
+
+.SS "bool el::base::RegisteredHitCounters::validateEveryN (const char * filename, unsigned long int lineNumber, std::size_t n)\fC [inline]\fP"
+
+.PP
+Validates counter for every N, i\&.e, registers new if does not exist otherwise updates original one\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+True if validation resulted in triggering hit\&. Meaning logs should be written everytime true is returned 
+.RE
+.PP
+
+.SS "bool el::base::RegisteredHitCounters::validateNTimes (const char * filename, unsigned long int lineNumber, std::size_t n)\fC [inline]\fP"
+
+.PP
+Validates counter for hits are <= n, i\&.e, registers new if does not exist otherwise updates original one\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+True if validation resulted in triggering hit\&. Meaning logs should be written everytime true is returned 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.

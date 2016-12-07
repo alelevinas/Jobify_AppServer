@@ -1,0 +1,209 @@
+.TH "Json::CharReaderBuilder" 3 "Wed Dec 7 2016" "Version 1.0.0" "Jobify" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Json::CharReaderBuilder \- Build a \fBCharReader\fP implementation\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <json\&.h>\fP
+.PP
+Inherits \fBJson::CharReader::Factory\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCharReader\fP * \fBnewCharReader\fP () const JSONCPP_OVERRIDE"
+.br
+.RI "\fIAllocate a \fBCharReader\fP via operator new()\&. \fP"
+.ti -1c
+.RI "bool \fBvalidate\fP (\fBJson::Value\fP *invalid) const "
+.br
+.ti -1c
+.RI "\fBValue\fP & \fBoperator[]\fP (JSONCPP_STRING key)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBsetDefaults\fP (\fBJson::Value\fP *settings)"
+.br
+.ti -1c
+.RI "static void \fBstrictMode\fP (\fBJson::Value\fP *settings)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBJson::Value\fP \fBsettings_\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Build a \fBCharReader\fP implementation\&. 
+
+Usage: 
+.PP
+.nf
+using namespace Json;
+CharReaderBuilder builder;
+builder["collectComments"] = false;
+Value value;
+JSONCPP_STRING errs;
+bool ok = parseFromStream(builder, std::cin, &value, &errs);
+
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBCharReader\fP * Json::CharReaderBuilder::newCharReader () const\fC [virtual]\fP"
+
+.PP
+Allocate a \fBCharReader\fP via operator new()\&. 
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIstd::exception\fP if something goes wrong (e\&.g\&. invalid settings) 
+.RE
+.PP
+
+.PP
+Implements \fBJson::CharReader::Factory\fP\&.
+.SS "\fBValue\fP & Json::CharReaderBuilder::operator[] (JSONCPP_STRING key)"
+A simple way to update a specific setting\&. 
+.SS "void Json::CharReaderBuilder::setDefaults (\fBJson::Value\fP * settings)\fC [static]\fP"
+Called by ctor, but you can use this to reset settings_\&. 
+.PP
+\fBPrecondition:\fP
+.RS 4
+'settings' != NULL (but Json::null is fine) 
+.RE
+.PP
+\fBRemarks:\fP
+.RS 4
+Defaults: 
+.PP
+.nf
+
+.fi
+.PP
+.RE
+.PP
+[CharReaderBuilderDefaults]
+.PP
+[CharReaderBuilderDefaults] 
+.SS "void Json::CharReaderBuilder::strictMode (\fBJson::Value\fP * settings)\fC [static]\fP"
+Same as old \fBFeatures::strictMode()\fP\&. 
+.PP
+\fBPrecondition:\fP
+.RS 4
+'settings' != NULL (but Json::null is fine) 
+.RE
+.PP
+\fBRemarks:\fP
+.RS 4
+Defaults: 
+.PP
+.nf
+
+.fi
+.PP
+.RE
+.PP
+[CharReaderBuilderStrictMode]
+.PP
+[CharReaderBuilderStrictMode] 
+.SS "bool Json::CharReaderBuilder::validate (\fBJson::Value\fP * invalid) const"
+
+.PP
+\fBReturns:\fP
+.RS 4
+true if 'settings' are legal and consistent; otherwise, indicate bad settings via 'invalid'\&. 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBJson::Value\fP Json::CharReaderBuilder::settings_"
+Configuration of this builder\&. These are case-sensitive\&. Available settings (case-sensitive):
+.IP "\(bu" 2
+\fC'collectComments': false or true\fP
+.IP "  \(bu" 4
+true to collect comment and allow writing them back during serialization, false to discard comments\&. This parameter is ignored if allowComments is false\&.
+.PP
+
+.IP "\(bu" 2
+\fC'allowComments': false or true\fP
+.IP "  \(bu" 4
+true if comments are allowed\&.
+.PP
+
+.IP "\(bu" 2
+\fC'strictRoot': false or true\fP
+.IP "  \(bu" 4
+true if root must be either an array or an object value
+.PP
+
+.IP "\(bu" 2
+\fC'allowDroppedNullPlaceholders': false or true\fP
+.IP "  \(bu" 4
+true if dropped null placeholders are allowed\&. (See \fBStreamWriterBuilder\fP\&.)
+.PP
+
+.IP "\(bu" 2
+\fC'allowNumericKeys': false or true\fP
+.IP "  \(bu" 4
+true if numeric object keys are allowed\&.
+.PP
+
+.IP "\(bu" 2
+\fC'allowSingleQuotes': false or true\fP
+.IP "  \(bu" 4
+true if '' are allowed for strings (both keys and values)
+.PP
+
+.IP "\(bu" 2
+\fC'stackLimit': integer\fP
+.IP "  \(bu" 4
+Exceeding stackLimit (recursive depth of \fCreadValue()\fP) will cause an exception\&.
+.IP "  \(bu" 4
+This is a security issue (seg-faults caused by deeply nested JSON), so the default is low\&.
+.PP
+
+.IP "\(bu" 2
+\fC'failIfExtra': false or true\fP
+.IP "  \(bu" 4
+If true, \fCparse()\fP returns false when extra non-whitespace trails the JSON value in the input string\&.
+.PP
+
+.IP "\(bu" 2
+\fC'rejectDupKeys': false or true\fP
+.IP "  \(bu" 4
+If true, \fCparse()\fP returns false when a key is duplicated within an object\&.
+.PP
+
+.IP "\(bu" 2
+\fC'allowSpecialFloats': false or true\fP
+.IP "  \(bu" 4
+If true, special float values (NaNs and infinities) are allowed and their values are lossfree restorable\&.
+.PP
+
+.PP
+.PP
+You can examine 'settings_` yourself to see the defaults\&. You can also write and read them just like any JSON \fBValue\fP\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBsetDefaults()\fP 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Jobify from the source code\&.
