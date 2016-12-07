@@ -93,8 +93,8 @@ void DatabaseManager::sort_by_distance(Json::Value &result, std::string coordena
     users->sort_by_distance(result, coordenates);
 }
 
-bool DatabaseManager::add_msg(string user_from, string user_to, string message) {
-    return chats->add_msg(user_from, user_to, message);
+bool DatabaseManager::add_msg(string user_from, std::string name_from, string user_to, string message) {
+    return chats->add_msg(user_from, name_from, user_to, message);
 }
 
 bool DatabaseManager::get_conv(string username, string username2, Json::Value *conversation) {

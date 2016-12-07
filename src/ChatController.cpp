@@ -108,7 +108,7 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
         if ((user["username"] != username) || (user2["username"] != msgTo)){
             ApiError::setError(response,500,"Internal server error");
         } else {
-            if (!db->add_msg(username, msgTo, message)) {
+            if (!db->add_msg(username,user["name"].asString(), msgTo, message)) {
                 ApiError::setError(response,500,"Internal server error");
             } else {
                 response[STATUS] = SUCCES;

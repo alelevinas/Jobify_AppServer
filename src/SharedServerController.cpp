@@ -43,7 +43,7 @@ void SharedServerController::getJobPosRequest(Mongoose::Request &request, Mongoo
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"Token invalido");
     }
-    LOG(INFO) << "JOBPOSITIONs GET REQUEST:\n"
+    LOG(INFO) << "JOBPOSITIONs GET RESPONSE:\n"
   //            << "\t\tUser: " << username << "\n"
               << "\t\tResponse: " << response
               << std::endl;
@@ -71,7 +71,7 @@ void SharedServerController::getSkillsRequest(Mongoose::Request &request, Mongoo
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"Token invalido");
     }
-    LOG(INFO) << "SKILLs GET REQUEST:\n"
+    LOG(INFO) << "SKILLs GET RESPONSE:\n"
 //              << "\t\tUser: " << username << "\n"
               << "\t\tResponse: " << response
               << std::endl;
@@ -99,7 +99,7 @@ void SharedServerController::getCategoriesRequest(Mongoose::Request &request, Mo
     } catch (TokenInvalidException &e) {
         ApiError::setError(response,501,"Token invalido");
     }
-    LOG(INFO) << "CATEGORIAs GET REQUEST:\n"
+    LOG(INFO) << "CATEGORIAs GET RESPONSE:\n"
 //              << "\t\tUser: " << username << "\n"
               << "\t\tResponse: " << response
               << std::endl;

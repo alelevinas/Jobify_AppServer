@@ -67,7 +67,7 @@ Json::Value DB::get(const std::string &key) {
     bool parsingSuccessful = reader.parse( value, json_value);
     if (!parsingSuccessful) {
         std::cerr << reader.getFormattedErrorMessages();
-        return false; //levantar excepcion??
+        return false;
     }
     return json_value;
 }

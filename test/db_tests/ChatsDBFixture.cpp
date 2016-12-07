@@ -40,9 +40,9 @@ TEST_F(ChatsDBFixture, test_open_bd_is_ok){
 TEST_F(ChatsDBFixture, test_delete_new_msgs) {
     EXPECT_TRUE(db->openDBs());
 
-    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario2@correo2.com", "nuevo mensaje"));
-    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario2@correo2.com", "nuevo mensaje"));
-    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario2@correo2.com", "nuevo mensaje"));
+    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario1", "usuario2@correo2.com", "nuevo mensaje"));
+    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario1", "usuario2@correo2.com", "nuevo mensaje"));
+    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario1", "usuario2@correo2.com", "nuevo mensaje"));
 
     EXPECT_TRUE(db->delete_msg("usuario1@correo1.com", "usuario2@correo2.com", "1"));
     EXPECT_TRUE(db->delete_msg("usuario1@correo1.com", "usuario2@correo2.com", "1"));
@@ -53,7 +53,7 @@ TEST_F(ChatsDBFixture, test_delete_new_msgs) {
 TEST_F(ChatsDBFixture, test_delete_convs) {
     EXPECT_TRUE(db->openDBs());
 
-    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario2@correo2.com", "nuevo mensaje"));
+    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario1", "usuario2@correo2.com", "nuevo mensaje"));
 
     EXPECT_TRUE(db->delete_conv("usuario1@correo1.com", "usuario2@correo2.com"));
 }
@@ -62,7 +62,7 @@ TEST_F(ChatsDBFixture, test_get_msgs) {
     EXPECT_TRUE(db->openDBs());
 
     Json::Value conversation;
-    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario2@correo2.com", "nuevo mensaje"));
+    EXPECT_TRUE(db->add_msg("usuario1@correo1.com", "usuario1", "usuario2@correo2.com", "nuevo mensaje"));
     EXPECT_TRUE(db->get_conv("usuario1@correo1.com", "usuario2@correo2.com", &conversation));
 
     Json::Value userNotReal;

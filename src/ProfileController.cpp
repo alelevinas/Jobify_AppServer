@@ -14,12 +14,6 @@
 using Json::Value;
 using namespace Mongoose;
 
-// #define STATUS "status"
-// #define SUCCES "succes"
-// #define ERROR "error"
-// #define DATA "data"
-
-
 ProfileController::ProfileController(DatabaseManager *db, SessionManager *sessionManager)
         : db(db), sessionManager(sessionManager) {}
 

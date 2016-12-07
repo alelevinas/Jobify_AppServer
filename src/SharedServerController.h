@@ -10,6 +10,10 @@
 #include <SessionManager.h>
 #include <JsonController.h>
 
+/**
+ * Controller that manages the shared Server common data. The connection to the shared server is made
+ * through the ClientSharedServer.
+ */
 class SharedServerController : public Mongoose::JsonController {
 private:
     ClientSharedServer* client;
@@ -19,10 +23,25 @@ public:
 
     void setup();
 
+    /**
+     * Gets the job positions from the shared server and responds them
+     * @param request The request data
+     * @param response The JsonResponse to send
+     */
     void getJobPosRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
+    /**
+     * Gets the skills from the shared server and responds them
+     * @param request The request data
+     * @param response The JsonResponse to send
+     */
     void getSkillsRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
+    /**
+     * Gets the categories from the shared server and responds them
+     * @param request The request data
+     * @param response The JsonResponse to send
+     */
     void getCategoriesRequest(Mongoose::Request &request, Mongoose::JsonResponse &response);
 };
 
