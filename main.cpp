@@ -13,53 +13,60 @@
 INITIALIZE_EASYLOGGINGPP
 #define ELPP_THREAD_SAFE
 
+#define MSG_USAGE "<port> [-d -t]"
+#define MSG_HELP_USAGE "<port>  ----> port number \n-d \t----> log debug \n-t \t----> testing empty db"
+
 
 Json::Value generate_user(string &username);
 
+std::string set_db_locations(string &db_accounts, string &db_users, string &db_sessions,
+                      string &db_chats, string &db_images, bool &testing);
+
+void parse_argv(int argc, char **pString, int &port, bool &debug, bool &testing);
+
 volatile static bool running = true;
 
-void handle_signal(int sig)
-{
+void handle_signal(int sig) {
     if (running) {
         cerr << "Exiting..." << endl;
         running = false;
     }
 }
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-
-    const char *homedir;
-
-    if ((homedir = getenv("HOME")) == NULL) {
-        homedir = getpwuid(getuid())->pw_dir;
+int main(int argc, char *argv[]) {
+    int port = 8000;
+    bool debug = false;
+    bool testing = false;
+    if (argc == 2 && strcmp(argv[1], "-h") == 0) {
+        std::cout << "Usage: " << argv[0] << MSG_USAGE << "\n"
+                               << MSG_HELP_USAGE << std::endl;
+        return 1;
+    } else {
+        parse_argv(argc, argv, port, debug, testing);
     }
 
-    std::string db_dir(homedir);
-    db_dir+="/.Jobify_Appserver/dbs";
+    LOG(INFO) << " Port: " << port
+              << "\n\t\t\t\t\t\t\t\tDebug: " << std::to_string(debug)
+              << "\n\t\t\t\t\t\t\t\tTesting: " << std::to_string(testing);
 
-    std::string db_command = "mkdir -p ";
-    db_command+=db_dir;
+    string db_accounts;
+    string db_users;
+    string db_sessions;
+    string db_chats;
+    string db_images;
+    string db_dir = set_db_locations(db_accounts, db_users, db_sessions, db_chats,
+                     db_images, testing);
 
-    LOG(INFO) << "DATABASES LOCATION ----> " << db_dir;
 
-    system(db_command.c_str());
-
-
-    signal(SIGTERM, handle_signal);
-    signal(SIGINT, handle_signal);
-
-    std::string db_accounts = db_dir+"/accounts";
-    std::string db_users = db_dir+"/users";
-    std::string db_sessions = db_dir+"/sessions";
-    std::string db_chats = db_dir+"/chats";
-    std::string db_images = db_dir+"/images";
-
-    DatabaseManager db(db_accounts,db_users, db_sessions, db_chats, db_images);
+    DatabaseManager db(db_accounts, db_users, db_sessions, db_chats, db_images);
     if (!db.openDBs())
         return -1;
 
-    SessionManager sessionManager(&db,ONE_HOUR);  //5 mins
+    signal(SIGTERM, handle_signal);
+    signal(SIGINT, handle_signal);
+    signal(SIGKILL, handle_signal);
+
+    SessionManager sessionManager(&db, ONE_HOUR);  //5 mins
 
     ProfileController pf(&db, &sessionManager);
     ChatController ch(&db, &sessionManager, "AIzaSyD91cge26COB1UtGA8IDsa4Jg7ZIHUEJME");
@@ -74,7 +81,7 @@ int main() {
     server.registerController(&ssc);
 
     server.start();
-    LOG(INFO) << "Iniciando Servidor";
+    LOG(INFO) << "Server Initiated";
 
     cout << "Server started, routes:" << endl;
     pf.dumpRoutes();
@@ -86,7 +93,53 @@ int main() {
     }
 
     server.stop();
+    if (testing) {
+        std::string delete_cmd ="rm -r "+db_dir;
+        system(delete_cmd.c_str());
+        LOG(INFO) << "Deleting DBs" << endl;
+    }
     return 0;
+}
+
+void parse_argv(int argc, char **argv, int &port, bool &debug, bool &testing) {
+    for (int i = 1; i < argc; i++) {
+        if (isdigit(argv[i][0]) != 0)
+            port = atoi(argv[i]);
+        if (strcmp(argv[i], "-d") == 0)
+            debug = true;
+        if (strcmp(argv[i], "-t") == 0)
+            testing = true;
+    }
+}
+
+std::string set_db_locations(string &db_accounts, string &db_users, string &db_sessions,
+                 string &db_chats, string &db_images, bool &testing) {
+    const char *homedir;
+
+    if ((homedir = getenv("HOME")) == NULL) {
+        homedir = getpwuid(getuid())->pw_dir;
+    }
+
+    string db_dir(homedir);
+    if(testing)
+        db_dir += "/.Jobify_Appserver/testing/dbs";
+    else
+        db_dir += "/.Jobify_Appserver/dbs";
+
+    string db_command = "mkdir -p ";
+    db_command += db_dir;
+
+    LOG(INFO) << "DATABASES LOCATION ----> " << db_dir;
+
+    system(db_command.c_str());
+
+    db_accounts = db_dir + "/accounts";
+    db_users = db_dir + "/users";
+    db_sessions = db_dir + "/sessions";
+    db_chats = db_dir + "/chats";
+    db_images = db_dir + "/images";
+
+    return db_dir;
 }
 
 Json::Value generate_user(string &username) {

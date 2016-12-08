@@ -6,7 +6,7 @@ set(SOURCE_FILES
         db_tests/SessionsDBFixture.cpp
         db_tests/SessionManagerFixture.cpp
         db_tests/ChatsDBFixture.cpp
-        ClientSharedServerFixture.cpp)
+        shared_server_tests/ClientSharedServerFixture.cpp)
 
 
 add_executable(run_tests main.cpp ${SOURCE_FILES} )

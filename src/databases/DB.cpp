@@ -23,6 +23,7 @@ bool DB::openDB() {
 
     if (! status.ok()) {
         std::cerr << "Unable to open/create database " << db_name << std::endl;
+        LOG(INFO) << "Unable to open/create database " << db_name << std::endl;
         std::cerr << status.ToString() << std::endl;
         return false;
     }
