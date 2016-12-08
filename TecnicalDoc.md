@@ -84,7 +84,7 @@ Hay 3 formas:
 * Instalando el paquete ```.deb``` en sistemas debian
 * Utilizando el ```Dockerfile```
 
-#####Chats
+#####Compilando
 Primero hace falta descargar las librerías necesarias y luego el código fuente. Una vez descargados, hace falta ejecutar ```cmake``` para luego compilar con ```make JobifyAppserver```
 un script ```yaml``` de ejemplo se ve acontinuación:
 ```yaml

@@ -33,7 +33,7 @@ void NotificationSender::send_notification(std::string from, std::string dest_re
     RestClient::init();
 
 // get a connection object
-    RestClient::Connection* conn = new RestClient::Connection("https://android.googleapis.com/gcm/send");
+    RestClient::Connection* conn = new RestClient::Connection("https://fcm.googleapis.com/fcm/send");
     // set headers
     RestClient::HeaderFields headers;
     headers["Authorization"] = "key="+server_key;
@@ -42,14 +42,22 @@ void NotificationSender::send_notification(std::string from, std::string dest_re
 
 
     LOG(INFO) << "Envio a Firebase: " << notification; //r.body r.code etc
-    RestClient::Response r = conn->post("/post", notification.asString());
+
+    std::stringstream ss;
+    ss << notification;
+
+    LOG(DEBUG) << "Stringstremeado " << ss.str();
+
+    RestClient::Response r = conn->post("", ss.str());
+
+    LOG(INFO) << "Respuesta de Firebase: " << r.body; //r.body r.code etc
 
     // deinit RestClient. After calling this you have to call RestClient::init()
 // again before you can use it
     RestClient::disable();
 
 
-    LOG(INFO) << "Respuesta de Firebase: " << r.body; //r.body r.code etc
+
 }
 
 

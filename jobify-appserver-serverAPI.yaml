@@ -511,6 +511,69 @@ paths:
               error:
                 code: 500
                 message: Internal server error
+  /users/search:
+      get:
+        summary: Get filtered users
+        description: The */users/search* GET endopoint gets users depending on the filters that are passed as query parameters
+        parameters:
+          - name: Token
+            in: header
+            description: token received in login or signup
+            required: true
+            type: string
+
+          - name: username
+            description: User to recommend
+            in: query
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+        tags:
+          - Filter
+        responses:
+          200:
+             description: Profile information for every user
+             schema:
+               type: object
+               properties:
+                 status:
+                   type: string
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/definitions/User'
+          501:
+            description: Invalid Token
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                error:
+                  $ref: '#/definitions/Error'
+            examples:
+              application/json:
+                status: error
+                error:
+                  code: 501
+                  message: Invalid Token
+          500:
+            description: "Internal server error"
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                error:
+                  $ref: '#/definitions/Error'
+            examples:
+              application/json:
+                status: error
+                error:
+                  code: 500
+                  message: Internal server error
   /chats:
     get:
       summary: GET de conversaciones
