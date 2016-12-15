@@ -282,6 +282,7 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
             // actualizo el token de notificaciones
             Json::Value user = db->get_user(usr);
             user["firebase_token"] = firebase_reg_token;
+            db->edit_user(usr,user);
 
             std::string token = sessionManager->add_session(usr, pass);
             if (token == "") {
@@ -577,6 +578,41 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
 }
 
 
+void ProfileController::deleteAllBDs(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
+    if (usr_pass_b64.empty()) {
+        ApiError::setError(response, 401, "Invalid password or user");
+        LOG(INFO) << "DELETE BDs: \t\t No se recibio header Authorization";
+        return;
+    }
+
+    std::string usr, pass;
+    this->decodeAuth(usr_pass_b64, usr, pass);
+
+    LOG(INFO) << "DELETE BDs REQUEST:\n"
+              << "\t\tHeader Authorization: " << usr_pass_b64 << "\n"
+              << "\t\tUser: " << usr << " Password: " << pass << std::endl;
+
+    try {
+        if (usr == "admin" and pass == "admin") {  // si matchea la contrasena
+            if (!db->deleteDBs()) {
+                ApiError::setError(response, 500, "Internal server error");
+            } else {
+                response[STATUS] = SUCCES;
+                response[DATA] = "ok";
+            }
+        } else {
+            ApiError::setError(response, 401, "Invalid password or user");
+        }
+    } catch (KeyDoesntExistException &e) {
+        ApiError::setError(response, 401, "Invalid password or user");
+    }
+    LOG(INFO) << "DELETE BDs RESPONSE:\n"
+              << "\t\t" << this->logResponse(response)
+              << std::endl;
+}
+
+
 void ProfileController::getUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     try {
         std::string token = request.getHeaderKeyValue("Token");
@@ -655,6 +691,8 @@ void ProfileController::postUserImage(Mongoose::Request &request, Mongoose::Json
               << std::endl;
 }
 
+
+
 void ProfileController::deleteUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response) {
     std::string token = request.getHeaderKeyValue("Token");
 //    cerr << "\ntoken recibido " << token;
@@ -687,17 +725,18 @@ void ProfileController::deleteUserImage(Mongoose::Request &request, Mongoose::Js
               << std::endl;
 }
 
-Json::Value ProfileController::logResponse(Json::Value &response) {
-    if (response["data"] == "")
-        return response;
+Json::Value ProfileController::logResponse(Mongoose::JsonResponse &response) {
     Json::Value copy = response;
-    if (copy["data"].isArray()) {
-        for (Json::Value &user : copy["data"]) {
-            user["picture"] = "";
+    Json::Value &data = copy["data"];
+    if (data.isArray()) {
+        for (Json::Value &user : data) {
+            if (user.isMember("picture"))
+                user["picture"] = "";
         }
-    } else if (copy["data"]["picture"] != "") {
-        Json::Value &user = copy["data"];
-        user["picture"] = "";
+    } else if (data.isObject() and data.isMember("picture")) {
+        data["picture"] = "";
+    } else {
+        return response;
     }
 
     return copy;
@@ -732,4 +771,6 @@ void ProfileController::setup() {
     addRouteResponse("POST", "/users/image", ProfileController, postUserImage, JsonResponse);
     addRouteResponse("DELETE", "/users/image", ProfileController, deleteUserImage, JsonResponse);
 //    addRouteResponse("PATCH", "/users/image", ProfileController, updateUserImage, JsonResponse);
+
+    addRouteResponse("DELETE", "/bds/delete", ProfileController, deleteAllBDs, JsonResponse);
 }

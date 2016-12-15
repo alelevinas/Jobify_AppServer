@@ -25,6 +25,10 @@ bool DatabaseManager::openDBs() {
     return accounts->openDB() and users->openDB() and sessions->openDB() and chats->openDB() and images->openDB();
 }
 
+bool DatabaseManager::deleteDBs() {
+    return accounts->deleteDB() and users->deleteDB() and sessions->deleteDB() and chats->deleteDB() and images->deleteDB();
+}
+
 Json::Value DatabaseManager::get_user(const string &username) {
     return users->get_user(username);
 }

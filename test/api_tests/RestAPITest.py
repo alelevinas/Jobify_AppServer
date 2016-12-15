@@ -1,28 +1,109 @@
 import json
+import requests
 import unittest
 
-import requests
+DEL_USERS_CONTACTS = "/users/contacts"
+DEL_USERS_ME = "/users/me"
+DEL_USERS_RECOMMEND = "/users/recommend"
+GET_LOGIN = "/login"
+GET_USERS = "/users"
+GET_USERS_CONTACTS = "/users/contacts"
+GET_USERS_ME = "/users/me"
+GET_USERS_SEARCH = "/users/search"
+POST_SIGNUP = "/signup"
+POST_USERS_CONTACTS = "/users/contacts"
+POST_USERS_ME = "/users/me"
+POST_USERS_RECOMMEND = "/users/recommend"
+DEL_CHATS = "/chats"
+DEL_MESSAGES = "/messages"
+GET_CHATS = "/chats"
+POST_CHATS = "/chats"
+GET_CATEGORIES = "/categories"
+GET_JOB_POSITIONS = "/job_positions"
+GET_SKILLS = "/skills"
+DELETE_ALLBDS = "/bds/delete"
+
+
+
+
 
 # ~ import responses
 URL = 'http://localhost:8000'
+
+class Client():
+    def get_standard(self, endpoint, token = ""):
+        response = requests.get(URL + endpoint, headers={'Token': token})
+        return response.status_code, json.loads(response.text)
+
+    def get_login(self, usr, psw):
+        response = requests.get(URL + GET_LOGIN, auth=(usr, psw))
+        return response.status_code, json.loads(response.text)
+
+    def post_signup(self, usr, psw, payload):
+        r = requests.post(URL + POST_SIGNUP, auth=(usr, psw), data=json.dumps(payload))
+        return r.status_code, json.loads(r.text)
+
+
+
 
 
 class TestCase(unittest.TestCase):
     # @responses.activate
     def setUp(self):
-        response = requests.get(URL + '/test')
-        self.assertEqual(json.dumps([]), response.text)
-        self.assertEqual(201, response.status_code)
+        self.client = Client()
         self.checkEmptyBD()
+
+    def tearDown(self):
+        #eliminar la base de datos. /bds/delete admin:admin
+        response = requests.delete(URL + DELETE_ALLBDS, auth=("admin", "admin"))
+        self.assertEqual(200, response.status_code)
+        self.assertEqual((json.loads(response.text))["status"], "succes")
 
     def checkEmptyBD(self):
         # Chequear que este vacio
-        response = self.getCategories()
-        espected = {"categories": [], "metadata": {"count": 0}}
+        code, body = self.client.get_standard(GET_USERS)
+        expected = {
+            "data": [],
+            "status": "succes"
+        }
+        self.assertEqual(expected, body)
+        self.assertEqual(200, code)
 
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
-        self.assertEqual(201, response.status_code)
+    def add_user(self, user):
+        code, body = self.client.post_signup(user["email"],"1234",user)
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], "succes")
+        self.assertIsNotNone(body["data"]["token"])
+        self.token = body["data"]["token"]
+        return code, body
 
+    def test_add_user_ale(self):
+
+        expected = {
+            "data": {
+                "token" : "1111111111111111111111"
+            },
+            "status": "succes"
+        }
+
+        default_user = generate_user("ale");
+        code, body = self.client.post_signup("ale","1234",default_user)
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertIsNotNone(body["data"]["token"])
+        self.token = body["data"]["token"]
+
+    def test_get_user_gabi(self):
+        user = generate_user("gabi");
+        self.add_user(user);
+        code, body = self.client.get_standard(GET_USERS_ME, self.token)
+        self.assertEqual(code,200)
+        body_user = body["data"]
+        for key, value in user.items():
+            self.assertEqual(value,body_user[key])
+
+
+'''
     def CategoryRequestInsert(self, name, description):
         payload = {'category': {'name': name, 'description': description}}
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
@@ -207,6 +288,40 @@ class TestCase(unittest.TestCase):
 
         self.checkEmptyBD()
 
+'''
 
+def generate_user(username):
+    return {
+        "city" : "Rosario",
+        "contacts" : [],
+        "dob" : "1993-08-19",
+        "gender" : "male",
+        "name" : "Alejandro Pablo Levinas",
+        "nationality" : "argentino",
+        "previous_exp" :
+            [
+                {
+                    "company" : "NASA",
+                    "description" : "Desarrollador en lenguaje R para analizar......",
+                    "position" : "Desarrollador",
+                    "years" : "2006-2009"
+                },
+                {
+                    "company" : "UBA",
+                    "description" : "Docente de la materia Taller 2",
+                    "position" : "Docente",
+                    "years" : "2010-actualidad"
+                }
+            ],
+        "profile" : "Soy un estudiante de ingenieria en informatica que se propone............blabllbla...........",
+        "recomendations" : [],
+        "skills" :
+            [
+                "C",
+                "C++",
+                "GoogleTest"
+            ],
+        "email" : username
+    }
 if __name__ == '__main__':
     unittest.main()

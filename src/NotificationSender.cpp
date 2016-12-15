@@ -20,14 +20,15 @@ NotificationSender::~NotificationSender() {
 /*
  * ENVIAR ESTO
  * curl --header "Authorization: key=<Server Key>" --header "Content-Type: application/json"\
- *              https://android.googleapis.com/gcm/send\
+ *              https://fcm.googleapis.com/fcm/send\
  *              -d '{"notification":{"title":"Hi","body":"Hello from the Cloud"},"data":{"score":"lots"},"to":"<Registration Token>"}'
  *
  */
-void NotificationSender::send_notification(std::string from, std::string dest_reg_token, std::string message) {
+void NotificationSender::send_notification(std::string from_username, std::string dest_reg_token, std::string message,
+                                           std::string from_name) {
     Json::Value notification;
 
-    create_notification(notification,from,dest_reg_token,message);
+    create_notification(notification, from_username, dest_reg_token, message, from_name);
 
     // initialize RestClient
     RestClient::init();
@@ -64,11 +65,19 @@ void NotificationSender::send_notification(std::string from, std::string dest_re
 /*
  * '{"notification":{"title":"Hi","body":"Hello from the Cloud"},"to":"<Registration Token>"
  */
-void NotificationSender::create_notification(Json::Value &notification, std::string &from, std::string &dest_reg_token,
-                                             std::string &message) {
+void NotificationSender::create_notification(Json::Value &notification, std::string &from_username,
+                                             std::string &dest_reg_token, std::string &message, std::string &from_name) {
     Json::Value user_viewable;
-    user_viewable["title"] = "New message from "+from;
+    user_viewable["title"] = from_name;
     user_viewable["body"] = message;
+    user_viewable["click_action"] = "OPEN_ACTIVITY_1";
+    user_viewable["color"] = "#3b5998";
+    user_viewable["icon"] = "ic_discuss";
     notification["notification"] = user_viewable;
+    Json::Value data;
+    data["username"] = from_username;
+    data["message"] = message;
+    data["name"] = "ALEPOX";
+    notification["data"] = data;
     notification["to"] = dest_reg_token;
 }

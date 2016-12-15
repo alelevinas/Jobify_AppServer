@@ -29,6 +29,7 @@ public:
     virtual ~DatabaseManager();
 
     bool openDBs();
+    bool deleteDBs();
 
     //UsersDB
     bool add_user(const string &username, Json::Value user);

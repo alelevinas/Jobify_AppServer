@@ -49,6 +49,7 @@ public:
     DB(const std::string &db_name);
 
     bool openDB();
+    bool deleteDB(); //erase all data
 
     /**
      * Updates a value from the db.

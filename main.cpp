@@ -69,12 +69,12 @@ int main(int argc, char *argv[]) {
     SessionManager sessionManager(&db, ONE_HOUR);  //5 mins
 
     ProfileController pf(&db, &sessionManager);
-    ChatController ch(&db, &sessionManager, "AIzaSyD91cge26COB1UtGA8IDsa4Jg7ZIHUEJME");
+    ChatController ch(&db, &sessionManager, FIREBASE_SERVER_KEY);
 
     ClientSharedServer ssClient(URLHEROKU);
     SharedServerController ssc(&ssClient, &sessionManager);
 
-    JobifyServer server(8000);
+    JobifyServer server(port);
 
     server.registerController(&pf);
     server.registerController(&ch);

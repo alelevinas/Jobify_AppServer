@@ -22,10 +22,27 @@ bool DB::openDB() {
     leveldb::Status status = leveldb::DB::Open(options, db_name, &db);
 
     if (! status.ok()) {
-        std::cerr << "Unable to open/create database " << db_name << std::endl;
         LOG(INFO) << "Unable to open/create database " << db_name << std::endl;
         std::cerr << status.ToString() << std::endl;
         return false;
+    }
+    return true;
+}
+
+bool DB::deleteDB() {
+    std::vector<std::string> keys(10);
+    leveldb::Iterator* it = db->NewIterator(leveldb::ReadOptions());
+    for (it->SeekToFirst(); it->Valid(); it->Next()) {
+        keys.push_back(it->key().ToString());
+    }
+    if(!it->status().ok())
+        return false;  // Check for any errors found during the scan
+    delete it;
+
+    for (std::string key : keys) {
+        leveldb::Status s = db->Delete(leveldb::WriteOptions(), key);
+        if (!s.ok())
+            return false;
     }
     return true;
 }
