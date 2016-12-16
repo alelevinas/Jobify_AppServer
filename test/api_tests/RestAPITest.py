@@ -63,7 +63,7 @@ class TestCase(unittest.TestCase):
     def setUpClass(cls):
         print "Inicio Servidor"
         # p = subprocess.Popen(["./../../build/Jobify_AppServer", "8000", "-d", "-t"])
-        p = subprocess.Popen(["./Jobify_AppServer", "8000", "-d", "-t"], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["./Jobify_AppServer", "8000", "-d", "-t"])
         print p.pid
         cls.server_pid = p.pid
         sleep(3) # time to open the server before tests begin
