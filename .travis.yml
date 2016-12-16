@@ -2,16 +2,17 @@
 sudo: required
 dist: trusty
 
-language:
-  - cpp
+language: cpp
+python:
+  - "2.7"
 
 compiler:
   - gcc
 
 install:
-  - sudo pip install cpp-coveralls
+  - sudo pip install cpp-coveralls requests
+  - sudo apt-get install python-requests
   - sudo apt-get install libsnappy-dev libleveldb-dev
-  #para jwtcpp
   - sudo apt-get install libcrypto++9-dbg libcrypto++-dev
   - sudo apt-get install libjansson4 libjansson-dev libjansson-dbg
   - sudo apt-get install autoconf libtool
@@ -29,9 +30,10 @@ script:
   - cmake ..
   - make
   - ./test/run_tests
+  - /usr/bin/python ../test/api_tests/RestAPITest.py
 
 after_success:
-  - coveralls --root .. -i src -E ".*CMakeFiles.*" -E ".*test/*/.*.cpp.*" --exclude src/jsoncpp --exclude src/log/* --exclude test
+  - coveralls --root .. -i src -E ".*CMakeFiles.*" -E ".*test/*/.*.cpp.*" -E ".*src/mongoose-cpp/.*"   -E ".*src/jsoncpp/.*" -E ".*src/log/.*" --exclude test
 
 notifications:
   slack: 7552-tallerii:TduWD2Mt2Vjsf9Or2hwCqYmK

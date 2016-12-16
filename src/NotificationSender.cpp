@@ -20,20 +20,21 @@ NotificationSender::~NotificationSender() {
 /*
  * ENVIAR ESTO
  * curl --header "Authorization: key=<Server Key>" --header "Content-Type: application/json"\
- *              https://android.googleapis.com/gcm/send\
+ *              https://fcm.googleapis.com/fcm/send\
  *              -d '{"notification":{"title":"Hi","body":"Hello from the Cloud"},"data":{"score":"lots"},"to":"<Registration Token>"}'
  *
  */
-void NotificationSender::send_notification(std::string from, std::string dest_reg_token, std::string message) {
+void NotificationSender::send_notification(std::string from_username, std::string dest_reg_token, std::string message,
+                                           std::string from_name) {
     Json::Value notification;
 
-    create_notification(notification,from,dest_reg_token,message);
+    create_notification(notification, from_username, dest_reg_token, message, from_name);
 
     // initialize RestClient
     RestClient::init();
 
 // get a connection object
-    RestClient::Connection* conn = new RestClient::Connection("https://android.googleapis.com/gcm/send");
+    RestClient::Connection* conn = new RestClient::Connection("https://fcm.googleapis.com/fcm/send");
     // set headers
     RestClient::HeaderFields headers;
     headers["Authorization"] = "key="+server_key;
@@ -42,25 +43,41 @@ void NotificationSender::send_notification(std::string from, std::string dest_re
 
 
     LOG(INFO) << "Envio a Firebase: " << notification; //r.body r.code etc
-    RestClient::Response r = conn->post("/post", notification.asString());
+
+    std::stringstream ss;
+    ss << notification;
+
+    LOG(DEBUG) << "Stringstremeado " << ss.str();
+
+    RestClient::Response r = conn->post("", ss.str());
+
+    LOG(INFO) << "Respuesta de Firebase: " << r.body; //r.body r.code etc
 
     // deinit RestClient. After calling this you have to call RestClient::init()
 // again before you can use it
     RestClient::disable();
 
 
-    LOG(INFO) << "Respuesta de Firebase: " << r.body; //r.body r.code etc
+
 }
 
 
 /*
  * '{"notification":{"title":"Hi","body":"Hello from the Cloud"},"to":"<Registration Token>"
  */
-void NotificationSender::create_notification(Json::Value &notification, std::string &from, std::string &dest_reg_token,
-                                             std::string &message) {
+void NotificationSender::create_notification(Json::Value &notification, std::string &from_username,
+                                             std::string &dest_reg_token, std::string &message, std::string &from_name) {
     Json::Value user_viewable;
-    user_viewable["title"] = "New message from "+from;
+    user_viewable["title"] = from_name;
     user_viewable["body"] = message;
+    user_viewable["click_action"] = "OPEN_ACTIVITY_1";
+    user_viewable["color"] = "#3b5998";
+    user_viewable["icon"] = "ic_discuss";
     notification["notification"] = user_viewable;
+    Json::Value data;
+    data["username"] = from_username;
+    data["message"] = message;
+    data["name"] = "ALEPOX";
+    notification["data"] = data;
     notification["to"] = dest_reg_token;
 }

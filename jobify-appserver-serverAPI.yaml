@@ -292,11 +292,8 @@ paths:
               status:
                 type: string
               data:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    description: ok
+                type: string
+                description: ok
         501:
           description: Invalid Token
           schema:
@@ -347,11 +344,8 @@ paths:
               status:
                 type: string
               data:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    description: ok
+                type: string
+                description: ok
         500:
           description: "Internal server error"
           schema:
@@ -412,11 +406,8 @@ paths:
               status:
                 type: string
               data:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    description: ok
+                type: string
+                description: ok
         501:
           description: Invalid Token
           schema:
@@ -476,11 +467,8 @@ paths:
               status:
                 type: string
               data:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    description: ok
+                type: string
+                description: ok
         501:
           description: Invalid Token
           schema:
@@ -511,6 +499,261 @@ paths:
               error:
                 code: 500
                 message: Internal server error
+  /users/contacts:
+    get:
+      summary: Get User contacts Profiles
+      description: The *user/contacts* Profile endpoint returns information about the users with who are contacts with the one querying.
+      parameters:
+        - name: Token
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
+      tags:
+        - Contacts
+      responses:
+        200:
+          description: Profile information for everyone of his contacts
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+    post:
+      summary: Add user as contact
+      description: The */users/contacts* POST endopoint makes both users apear in the contacts list
+      parameters:
+        - name: Token
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
+
+        - name: username
+          description: User to add as contact
+          in: body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+      tags:
+        - Contacts
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+                description: ok
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+    delete:
+      summary: Stop from beeing contacts with user
+      description: The */users/contacts*  DELETE endopoint makes the user who hits this endopint stop beeing a contact with the user in the body.
+      parameters:
+        - name: Token
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
+
+        - name: username
+          description: User to not be a contact anymore
+          in: body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+      tags:
+        - Contacts
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+                description: ok
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+  /users/search:
+    get:
+      summary: User Profile
+      description: The *user/me* Profile endpoint returns information about the user with authorization in the application.
+      parameters:
+        - name: Token
+          in: header
+          description: token received in login or signup
+          required: true
+          type: string
+        - name: sort
+          in: query
+          description: sort by ammount of contacts or recommendations
+          required: false
+          type: string
+        - name: filter
+          in: query
+          description: ammount of users to respond
+          required: false
+          type: string
+        - name: job_position
+          in: query
+          description: only users with @job_position
+          required: false
+          type: string
+        - name: skill
+          in: query
+          description: only users with @skill
+          required: false
+          type: string
+        - name: distance
+          in: query
+          description: only users closer than @distance kilometers
+          required: false
+          type: string
+      tags:
+        - Search
+      responses:
+        200:
+          description: Profile information for every user
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+        500:
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 500
+                message: Internal server error
+        501:
+          description: Invalid Token
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              error:
+                $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              status: error
+              error:
+                code: 501
+                message: Invalid Token
   /chats:
     get:
       summary: GET de conversaciones
@@ -532,16 +775,12 @@ paths:
               status:
                 type: string
               data:
-                schema:
                 type: object
                 properties:
                   chats:
-                    schema:
                     type: array
                     items:
-                      properties:
-                        username:
-                          $ref: '#/definitions/User'
+                      $ref: '#/definitions/User'
         501:
           description: Invalid Token
           schema:
@@ -594,7 +833,6 @@ paths:
                 type: string
                 description: "success"
               data:
-                schema:
                 type: object
                 properties:
                   chats:
@@ -606,16 +844,7 @@ paths:
                         mensajes:
                           type: array
                           items:
-                            properties:
-                            id:
-                              type: int
-                              description: Identifier
-                            text:
-                              description: Text
-                              type: string
-                            author:
-                              description: Author of message
-                              type: string
+                            $ref: '#/definitions/Chat'
 
         501:
           description: Invalid Token
@@ -669,13 +898,15 @@ paths:
         - Chats
       responses:
         200:
-          description: OK
+          description: chat submitted
           schema:
             type: object
             properties:
               status:
                 type: string
-                description: "success"
+              data:
+                type: string
+                description: ok
         501:
           description: Invalid Token
           schema:
@@ -725,7 +956,9 @@ paths:
             properties:
               status:
                 type: string
-                description: "success"
+              data:
+                type: string
+                description: ok
         500:
           description: "Internal server error"
           schema:
@@ -784,7 +1017,9 @@ paths:
             properties:
               status:
                 type: string
-                description: "success"
+              data:
+                type: string
+                description: ok
         501:
           description: Invalid Token
           schema:
@@ -872,6 +1107,21 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Job'
+  Chat:
+    type: object
+    properties:
+      text:
+        type: string
+        description: Text
+      auth:
+        type: string
+        description: Author
+      time:
+        type: string
+        description: Time
+      id:
+        type: string
+        description: Id
   Job:
     type: object
     properties:
@@ -919,7 +1169,6 @@ definitions:
       description:
         description: Descripción
         type: string
-
   Error:
     type: object
     properties:

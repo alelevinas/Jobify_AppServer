@@ -113,25 +113,12 @@ public:
     void getFilteredUsers(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
     /**
-     * Gets the users image
+     * Deletes all BDs. Mainly for testing purposes. It demands Basic Authorization with
+     * a special password
      * @param request The request data
      * @param response The JsonResponse to send
      */
-    void getUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response);
-
-    /**
-     * Posts the users image
-     * @param request The request data
-     * @param response The JsonResponse to send
-     */
-    void postUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response);
-
-    /**
-     * Deletes the users image
-     * @param request The request data
-     * @param response The JsonResponse to send
-     */
-    void deleteUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response);
+    void deleteAllBDs(Mongoose::Request &request, Mongoose::JsonResponse &response);
 
 private:
 
@@ -148,7 +135,7 @@ private:
      * @param response the response to filter
      * @return a copy of the filtered response
      */
-    Json::Value logResponse(Json::Value& response);
+    Json::Value logResponse(Mongoose::JsonResponse& response);
 };
 
 

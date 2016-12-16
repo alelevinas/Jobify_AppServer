@@ -7,6 +7,8 @@
 
 #include <string>
 
+#define FIREBASE_SERVER_KEY "AIzaSyD91cge26COB1UtGA8IDsa4Jg7ZIHUEJME"
+
 /**
  * Class made for sending notifications throug Google Firebase tokens
  */
@@ -20,11 +22,12 @@ public:
 
     /**
      * Send an HTTP post to firebase endpoint with the notification data.
-     * @param from The sender of the message
+     * @param from_username The sender of the message
      * @param dest_reg_token The firebase token of the destinatary devise
      * @param message The body of the message
      */
-    void send_notification(std::string from, std::string dest_reg_token, std::string message);
+    void send_notification(std::string from_username, std::string dest_reg_token, std::string message,
+                           std::string from_name);
 
     virtual ~NotificationSender();
 
@@ -32,11 +35,12 @@ private:
     /**
      * Creates the body of the HTTP post for notification
      * @param notification reference to store the result
-     * @param from The sender of the message
+     * @param from_username The sender of the message
      * @param dest_reg_token The firebase token of the destinatary devise
      * @param message The body of the message
      */
-    void create_notification(Json::Value &notification, std::string &from, std::string &dest_reg_token, std::string &message);
+    void create_notification(Json::Value &notification, std::string &from_username,
+                             std::string &dest_reg_token, std::string &message, std::string &from_name);
 };
 
 

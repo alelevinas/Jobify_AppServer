@@ -5,12 +5,11 @@
 #include "DatabaseManager.h"
 
 DatabaseManager::DatabaseManager(std::string accountsDbName, std::string usersDbName, std::string sessionsDBname,
-                                 std::string chatsDbName, std::string imagesDbName) {
+                                 std::string chatsDbName) {
     accounts = new AccountsDB(accountsDbName);
     users = new UsersDB(usersDbName);
     sessions = new SessionsDB(sessionsDBname);
     chats = new ChatsDB(chatsDbName);
-    images = new ImagesDB(imagesDbName);
 }
 
 DatabaseManager::~DatabaseManager() {
@@ -18,11 +17,14 @@ DatabaseManager::~DatabaseManager() {
     delete users;
     delete sessions;
     delete chats;
-    delete images;
 }
 
 bool DatabaseManager::openDBs() {
-    return accounts->openDB() and users->openDB() and sessions->openDB() and chats->openDB() and images->openDB();
+    return accounts->openDB() and users->openDB() and sessions->openDB() and chats->openDB();
+}
+
+bool DatabaseManager::deleteDBs() {
+    return accounts->deleteDB() and users->deleteDB() and sessions->deleteDB() and chats->deleteDB();
 }
 
 Json::Value DatabaseManager::get_user(const string &username) {
@@ -111,18 +113,6 @@ bool DatabaseManager::delete_conv(string username, string username2) {
 
 bool DatabaseManager::delete_msg(string username1, string username2, string idMensaje) {
     return chats->delete_message(username1, username2, idMensaje);
-}
-
-Json::Value DatabaseManager::get_image(string username) {
-    return images->get_image(username);
-}
-
-bool DatabaseManager::add_image(const std::string &username, Json::Value &image) {
-    return images->add_image(username,image);
-}
-
-bool DatabaseManager::delete_image(const std::string &username) {
-    return images->delete_image(username);
 }
 
 bool DatabaseManager::get_user_contacts(string &username, Json::Value &contacts) {

@@ -114,7 +114,8 @@ void ChatController::postUserChatRequest(Mongoose::Request &request, Mongoose::J
                 response[STATUS] = SUCCES;
                 response[DATA] = OKK;
                 //enviar notificacion
-                notSender->send_notification(username, user2["firebase_token"].asString(), message);
+                notSender->send_notification(username, user2["firebase_token"].asString(), message,
+                                             user["name"].asString());
             }
         }
     } catch (TokenInvalidException &e) {
@@ -182,7 +183,7 @@ void ChatController::deleteMessageRequest(Mongoose::Request &request, Mongoose::
             ApiError::setError(response,410,"Wrong JSON");
         }
         std::string username2 = request.get("user","");
-        std::string idMessage = content.get("id","").asString();
+        std::string idMessage = content.get("id",Json::Value("")).asString();
 
         LOG(INFO) << "USER MESSAGE DELETE REQUEST:\n"
                   << "\t\tHeader Token: " << token << "\n"

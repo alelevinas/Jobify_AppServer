@@ -282,6 +282,7 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
             // actualizo el token de notificaciones
             Json::Value user = db->get_user(usr);
             user["firebase_token"] = firebase_reg_token;
+            db->edit_user(usr,user);
 
             std::string token = sessionManager->add_session(usr, pass);
             if (token == "") {
@@ -295,6 +296,8 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
         }
     } catch (KeyDoesntExistException &e) {
         ApiError::setError(response, 401, "Invalid password or user");
+    } catch (std::exception &e) {
+        LOG(DEBUG) << e.what();
     }
     LOG(INFO) << "LOGIN RESPONSE:\n"
               << "\t\t" << this->logResponse(response)
@@ -550,7 +553,7 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
          *
          * url: /users/search?sort=qSort&filter=qFilter&job_position=qJob&skill=qSkill
          *
-         * example: /users/search?sort=recommended&filter=10&job_position=developer&skill=java
+         * example: /users/search?sort=recommended&filter=10&job_position=developer&skill=java&distance=100
          *
          */
         Json::Value user = db->get_user(username);
@@ -577,127 +580,53 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
 }
 
 
-void ProfileController::getUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    try {
-        std::string token = request.getHeaderKeyValue("Token");
-
-        //cerr << " es del usuario: " << username;
-
-        std::string username = sessionManager->get_username(token);
-
-        LOG(INFO) << "USER IMAGE GET REQUEST:\n"
-                  << "\t\tHeader Token: " << token << "\n"
-                  << "\t\tUser: " << username
-                  << std::endl;
-
-        response[STATUS] = SUCCES;
-
-        Json::Value image = db->get_image(username);
-
-        if (image.empty())
-            ApiError::setError(response, 500, "Internal server error");
-        else
-            response[DATA] = image;
-
-
-    } catch (TokenInvalidException &e) {
-        ApiError::setError(response, 501, "token invalido");
+void ProfileController::deleteAllBDs(Mongoose::Request &request, Mongoose::JsonResponse &response) {
+    std::string usr_pass_b64 = request.getHeaderKeyValue("Authorization");
+    if (usr_pass_b64.empty()) {
+        ApiError::setError(response, 401, "Invalid password or user");
+        LOG(INFO) << "DELETE BDs: \t\t No se recibio header Authorization";
+        return;
     }
-    LOG(INFO) << "GET USER IMAGE RESPONSE:\n"
-              << "\t\tResponse: " << this->logResponse(response)
-              << std::endl;
-}
 
-void ProfileController::postUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    std::string token = request.getHeaderKeyValue("Token");
-//    cerr << "\ntoken recibido " << token;
+    std::string usr, pass;
+    this->decodeAuth(usr_pass_b64, usr, pass);
+
+    LOG(INFO) << "DELETE BDs REQUEST:\n"
+              << "\t\tHeader Authorization: " << usr_pass_b64 << "\n"
+              << "\t\tUser: " << usr << " Password: " << pass << std::endl;
 
     try {
-        std::string username = sessionManager->get_username(token);
-
-//        cerr << " es del usuario: " << username;
-
-        std::string b64_image = request.getData(); //el body
-
-        LOG(INFO) << "POST USER IMAGE REQUEST:\n"
-                  << "\t\tHeader Token: " << token << "\n"
-                  << "\t\tUser: " << username << "\n"
-                  << "\t\tData: b64 image"
-                  << std::endl;
-
-        db->get_user(username); //solo para ver si salta la exception
-
-        Json::Reader reader;
-        Json::Value image;
-        bool parsingSuccessful = reader.parse(b64_image, image);
-        if (!parsingSuccessful) {
-            ApiError::setError(response, 410, "Wrong JSON");  // TODO agregar a la API documentation
-            LOG(INFO) << "POST IMAGE USER RESPONSE:\n"
-                      << "\t\tResponse: " << this->logResponse(response)
-                      << std::endl;
-            return;
-        }
-
-
-        if (db->add_image(username, image)) {
-            response[STATUS] = SUCCES;
-            response[DATA] = "ok";
+        if (usr == "admin" and pass == "admin") {  // si matchea la contrasena
+            if (!db->deleteDBs()) {
+                ApiError::setError(response, 500, "Internal server error");
+            } else {
+                response[STATUS] = SUCCES;
+                response[DATA] = "ok";
+            }
         } else {
-            ApiError::setError(response, 500, "Internal server error");
+            ApiError::setError(response, 401, "Invalid password or user");
         }
     } catch (KeyDoesntExistException &e) {
-        ApiError::setError(response, 500, "Internal server error");
-    } catch (TokenInvalidException &e) {
-        ApiError::setError(response, 501, "invalid token");
+        ApiError::setError(response, 401, "Invalid password or user");
     }
-    LOG(INFO) << "POST IMAGE USER RESPONSE:\n"
-              << "\t\tResponse: " << this->logResponse(response)
+    LOG(INFO) << "DELETE BDs RESPONSE:\n"
+              << "\t\t" << this->logResponse(response)
               << std::endl;
 }
 
-void ProfileController::deleteUserImage(Mongoose::Request &request, Mongoose::JsonResponse &response) {
-    std::string token = request.getHeaderKeyValue("Token");
-//    cerr << "\ntoken recibido " << token;
 
-    try {
-        std::string username = sessionManager->get_username(token);
-
-//        cerr << " es del usuario: " << username;
-
-        LOG(INFO) << "REMOVE IMAGE USER REQUEST:\n"
-                  << "\t\tHeader Token: " << token << "\n"
-                  << "\t\tUser: " << username << "\n"
-                  << std::endl;
-
-        db->get_user(username); //solo para ver si salta la exception
-
-        if (db->delete_image(username)) {
-            response[STATUS] = SUCCES;
-            response[DATA] = "ok";
-        } else {
-            ApiError::setError(response, 500, "Internal server error");
-        }
-    } catch (KeyDoesntExistException &e) {
-        ApiError::setError(response, 500, "Internal server error");
-    } catch (TokenInvalidException &e) {
-        ApiError::setError(response, 501, "invalid token");
-    }
-    LOG(INFO) << "REMOVE IMAGE USER RESPONSE:\n"
-              << "\t\tResponse: " << this->logResponse(response)
-              << std::endl;
-}
-
-Json::Value ProfileController::logResponse(Json::Value &response) {
-    if (response["data"] == "")
-        return response;
+Json::Value ProfileController::logResponse(Mongoose::JsonResponse &response) {
     Json::Value copy = response;
-    if (copy["data"].isArray()) {
-        for (Json::Value &user : copy["data"]) {
-            user["picture"] = "";
+    Json::Value &data = copy["data"];
+    if (data.isArray()) {
+        for (Json::Value &user : data) {
+            if (user.isMember("picture"))
+                user["picture"] = "";
         }
-    } else if (copy["data"]["picture"] != "") {
-        Json::Value &user = copy["data"];
-        user["picture"] = "";
+    } else if (data.isObject() and data.isMember("picture")) {
+        data["picture"] = "";
+    } else {
+        return response;
     }
 
     return copy;
@@ -728,8 +657,5 @@ void ProfileController::setup() {
 
     addRouteResponse("GET", "/users/search", ProfileController, getFilteredUsers, JsonResponse);
 
-    addRouteResponse("GET", "/users/image", ProfileController, getUserImage, JsonResponse);
-    addRouteResponse("POST", "/users/image", ProfileController, postUserImage, JsonResponse);
-    addRouteResponse("DELETE", "/users/image", ProfileController, deleteUserImage, JsonResponse);
-//    addRouteResponse("PATCH", "/users/image", ProfileController, updateUserImage, JsonResponse);
+    addRouteResponse("DELETE", "/bds/delete", ProfileController, deleteAllBDs, JsonResponse);
 }

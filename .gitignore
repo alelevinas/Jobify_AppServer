@@ -53,7 +53,7 @@ test/lib/googletest/cmake_install.cmake
 test/lib/googletest/libgtest.a
 test/lib/googletest/libgtest_main.a
 
-RestAPITest.py
+test/api_tests/RestAPITest.py
 RestAPITest.py~
 build/
 cmake-build-debug/

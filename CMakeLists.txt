@@ -58,7 +58,7 @@ set(SOURCE_FILES
         src/databases/AccountsDB.cpp src/databases/AccountsDB.h
         src/exceptions/InvalidUsernamePasswordException.h
         src/log/easylogging++.h
-        src/ApiError.h src/databases/ImagesDB.cpp src/databases/ImagesDB.h
+        src/ApiError.h
         src/ClientSharedServer.cpp
         src/NotificationSender.cpp src/NotificationSender.h
         src/ChatController.cpp src/ChatController.h
