@@ -33,17 +33,26 @@ DELETE_ALLBDS = "/bds/delete"
 URL = 'http://localhost:8000'
 
 class Client():
-    def get_standard(self, endpoint, token = ""):
-        response = requests.get(URL + endpoint, headers={'Token': token})
+    def get_standard(self, endpoint, token = "", params = {}):
+        response = requests.get(URL + endpoint, headers={'Token': token}, params=params)
         return response.status_code, json.loads(response.text)
 
     def get_login(self, usr, psw):
         response = requests.get(URL + GET_LOGIN, auth=(usr, psw))
         return response.status_code, json.loads(response.text)
 
+    def post_standard(self, endpoint, token = "", payload = {}):
+        r = requests.post(URL + endpoint, headers={'Token': token}, data=json.dumps(payload))
+        return r.status_code, json.loads(r.text)
+
     def post_signup(self, usr, psw, payload):
         r = requests.post(URL + POST_SIGNUP, auth=(usr, psw), data=json.dumps(payload))
         return r.status_code, json.loads(r.text)
+
+    def delete_standard(self, endpoint, token = "",payload = {}):
+        r = requests.delete(URL + endpoint, headers={'Token': token}, data=json.dumps(payload))
+        return r.status_code, json.loads(r.text)
+
 
 
 
@@ -52,18 +61,22 @@ class Client():
 class TestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        print "Inicio Servidor"
+        #p = subprocess.Popen(["./../../build/Jobify_AppServer", "8000", "-d", "-t"], stdout=subprocess.PIPE)
         p = subprocess.Popen(["./Jobify_AppServer", "8000", "-d", "-t"], stdout=subprocess.PIPE)
         print p.pid
         cls.server_pid = p.pid
-        sleep(3) # time to open the server
+        sleep(3) # time to open the server before tests begin
 
     @classmethod
     def tearDownClass(cls):
+        print "Termino Servidor"
         subprocess.call(["kill", "-2", str(cls.server_pid)])
 
     #@responses.activate
     def setUp(self):
         self.client = Client()
+        self.tearDown()
         self.checkEmptyBD()
 
     def tearDown(self):
@@ -91,15 +104,14 @@ class TestCase(unittest.TestCase):
         return code, body
 
     def test_add_user_ale(self):
-
         expected = {
             "data": {
-                "token" : "1111111111111111111111"
+                "token" : ""
             },
             "status": "succes"
         }
 
-        default_user = generate_user("ale");
+        default_user = generate_user("ale")
         code, body = self.client.post_signup("ale","1234",default_user)
         self.assertEqual(code,200)
         self.assertEqual(body["status"], expected["status"])
@@ -107,207 +119,321 @@ class TestCase(unittest.TestCase):
         self.token = body["data"]["token"]
 
     def test_get_user_gabi(self):
-        user = generate_user("gabi");
-        self.add_user(user);
+        user = generate_user("gabi")
+        self.add_user(user)
         code, body = self.client.get_standard(GET_USERS_ME, self.token)
         self.assertEqual(code,200)
         body_user = body["data"]
         for key, value in user.items():
             self.assertEqual(value,body_user[key])
 
+    def test_login_wrong_password(self):
+        expected = {
+            "data": "",
+            "error": {
+                "code": 401,
+                "message": "Invalid password or user"
+            },
+            "status": "error"
+        }
+        code, body = self.client.get_login("ale","4321")
+        self.assertEqual(code,expected["error"]["code"])
+        self.assertEqual(body["error"], expected["error"])
 
-'''
-    def CategoryRequestInsert(self, name, description):
-        payload = {'category': {'name': name, 'description': description}}
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-        return requests.post(URL + '/categories', data=json.dumps(payload), headers=headers), payload
+    def test_login_ale(self):
+        user = generate_user("ale")
+        self.add_user(user)
+        expected = {
+            "data": {
+                "token" : ""
+            },
+            "status": "succes"
+        }
+        sleep(1)
+        code, body = self.client.get_login("ale","1234")
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertIsNotNone(body["data"]["token"])
+        self.token = body["data"]["token"]
 
-    def CategoryInsertSimple(self, name, description):
-        response, payload = self.CategoryRequestInsert(name, description)
-        self.assertEqual(json.dumps(payload), json.dumps(json.loads(response.text)))
-        self.assertEqual(201, response.status_code)
+    def test_get_contacts(self):
+        ale = generate_user("ale")
+        gabi = generate_user("gabi")
+        juan = generate_user("juan")
+        gabi["contacts"].append("ale")
+        gabi["contacts"].append("juan")
+        self.add_user(ale)
+        self.add_user(juan)
+        self.add_user(gabi) #me quedo con el token de gabi
 
-    def CategoryInsertSimpleExpectedError(self, name, description):
-        response, payload = self.CategoryRequestInsert(name, description)
-        self.assertEqual(500, response.status_code)
+        code, body = self.client.get_standard(GET_USERS_CONTACTS, self.token)
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], "succes")
+        # print body["data"]
+        # self.assertItemsEqual([ale,juan], body["data"])
 
-    def CategoryDeleteSimple(self, name):
-        response = requests.delete(URL + '/categories/' + name)
-        self.assertEqual(204, response.status_code)
+        for user in body["data"]:
+            self.assertTrue(user["username"] in ["ale","juan"])
 
-    def getCategories(self):
-        return requests.get(URL + '/categories')
+    #DEL_USERS_ME = "/users/me"
+    def test_delete_user(self):
+        ale = generate_user("ale")
+        gabi = generate_user("gabi")
+        juan = generate_user("juan")
 
-    def updateCategory(self, oldName, newName, newDescription):
-        payload = {'category': {'name': newName, 'description': newDescription}}
-        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-        response = requests.post(URL + '/categories/' + oldName, data=json.dumps(payload), headers=headers)
-        self.assertEqual(json.dumps(payload), json.dumps(json.loads(response.text)))
-        self.assertEqual(201, response.status_code)
+        self.add_user(ale)
+        self.add_user(juan)
+        self.add_user(gabi) #me quedo con el token de gabi
 
-    def testCategoryInsertAndDelete(self):
-        self.checkEmptyBD()
+        code, body = self.client.get_standard(GET_USERS)
+        expected = {
+            "data": [ale,gabi,juan],
+            "status": "succes"
+        }
+        self.assertEqual(200, code)
+        self.assertEqual(body["status"], expected["status"])
+        for user in body["data"]:
+            self.assertTrue(user in expected["data"])
 
-        # Agregar categoria 1
-        self.CategoryInsertSimple('sport', 'sport activities')
+        code, body = self.client.delete_standard(DEL_USERS_ME,self.token)
+        self.assertEqual(200, code)
+        self.assertEqual(body["status"], expected["status"])
 
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'sport', "description": 'sport activities'}], "metadata": {"count": 1}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
+        code, body = self.client.get_standard(GET_USERS)
+        expected = {
+            "data": [ale,juan],
+            "status": "succes"
+        }
+        self.assertEqual(200, code)
+        self.assertEqual(body["status"], expected["status"])
+        for user in body["data"]:
+            self.assertTrue(user in expected["data"])
+        self.assertEqual(len(body["data"]),2)
 
-        # Eliminamos categoria 1
-        self.CategoryDeleteSimple('sport')
 
-        self.checkEmptyBD()
 
-    def testCategoryIntertTwoDeleteTwo(self):
-        self.checkEmptyBD()
+    def test_get_users_search_ordered_by_recommendations(self):
+        ale = generate_user("ale")
+        gabi = generate_user("gabi")
+        juan = generate_user("juan")
 
-        # Agregar categoria 1
-        self.CategoryInsertSimple('software', 'software activities')
+        ale["recommended_by"].append("ale");
+        ale["recommended_by"].append("ale");
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'software', "description": 'software activities'}],
-                    "metadata": {"count": 1}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
+        gabi["recommended_by"].append("pepe");
+        gabi["recommended_by"].append("ale");
+        gabi["recommended_by"].append("gabi");
+        gabi["recommended_by"].append("ale");
 
-        # Agregar categoria 2
-        self.CategoryInsertSimple('administration', 'administration activities')
+        juan["recommended_by"].append("ale");
+        juan["recommended_by"].append("ale");
+        juan["recommended_by"].append("ale");
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'software', "description": 'software activities'},
-                                   {"name": 'administration', "description": 'administration activities'}],
-                    "metadata": {"count": 2}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
+        self.add_user(ale)
+        self.add_user(juan)
+        self.add_user(gabi) #me quedo con el token de gabi
 
-        # Eliminamos categoria 2
-        self.CategoryDeleteSimple('administration')
+        #sort=recommended&filter=10&job_position=developer&skill=java&distance=100
+        params = {'sort':'recommended_by','filter':'10','job_position':'Desarrollador','skill':'C','distance':'100'}
+        code, body = self.client.get_standard(GET_USERS_SEARCH, self.token, params)
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], "succes")
+        self.assertEqual(body["data"][0]["username"], "gabi")
+        self.assertEqual(body["data"][1]["username"], "juan")
+        self.assertEqual(body["data"][2]["username"], "ale")
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'software', "description": 'software activities'}],
-                    "metadata": {"count": 1}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
+    #POST_USERS_CONTACTS
+    def test_post_contact(self):
+        ale = generate_user("ale")
+        gabi = generate_user("gabi")
+        self.add_user(gabi)
+        self.add_user(ale)
+        expected = {
+            "data": "ok",
+            "status": "succes"
+        }
+        payload = {'username':'gabi'}
+        code, body = self.client.post_standard(POST_USERS_CONTACTS,self.token,payload)
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertEqual(body["data"], "ok")
 
-        # Eliminamos categoria 1
-        self.CategoryDeleteSimple('software')
+        code, body = self.client.get_standard(GET_USERS_ME, self.token)
+        self.assertEqual(code,200)
+        body_user = body["data"]
+        self.assertEqual(body["data"]["contacts"], ["gabi"])
 
-        self.checkEmptyBD()
+    def test_post_contact_inexistent(self):
+        ale = generate_user("ale")
+        self.add_user(ale)
+        expected = {
+            "data" : "",
+            "error" :
+                {
+                    "code" : 500,
+                    "message" : "Internal server error"
+                },
+            "status" : "error"
+        }
+        payload = {'username':'gabi'}
+        code, body = self.client.post_standard(POST_USERS_CONTACTS,self.token,payload)
+        self.assertEqual(code,expected["error"]["code"])
+        self.assertEqual(body["status"], expected["status"])
+        self.assertEqual(body["data"], expected["data"])
 
-    def testInsertTwiceGetError(self):
-        self.checkEmptyBD()
+    # DEL_USERS_CONTACTS = "/users/contacts"
+    def test_del_contact(self):
+        self.test_post_contact()
+        expected = {
+            "data": "ok",
+            "status": "succes"
+        }
+        payload = {'username':'gabi'}
+        code, body = self.client.delete_standard(DEL_USERS_CONTACTS, self.token, payload)
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertEqual(body["data"], "ok")
 
-        # Agregar categoria 1
-        self.CategoryInsertSimple('software', 'software activities')
+        code, body = self.client.get_standard(GET_USERS_ME, self.token)
+        self.assertEqual(code,200)
+        body_user = body["data"]
+        self.assertEqual(body["data"]["contacts"], [])
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'software', "description": 'software activities'}],
-                    "metadata": {"count": 1}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
 
-        # Agregar categoria 1
-        self.CategoryInsertSimpleExpectedError('software', 'software activities')
 
-    def testUpdateCategory(self):
-        self.checkEmptyBD()
 
-        # Agregar categoria 1
-        self.CategoryInsertSimple('sport', 'sport activities')
+    #POST_USERS_ME
+    def test_edit_user_me(self):
+        ale = generate_user("ale")
+        self.add_user(ale)
+        expected = {
+            "data": "ok",
+            "status": "succes"
+        }
+        code, body = self.client.get_standard(GET_USERS_ME, self.token)
+        self.assertEqual(code,200)
+        self.assertEqual(body["data"]["city"], "Rosario")
+        body_user = body["data"]
+        body_user["city"] = "Buenos Aires"
+        payload = body_user
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'sport', "description": 'sport activities'}], "metadata": {"count": 1}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
+        code, body = self.client.post_standard(POST_USERS_ME,self.token,payload)
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertEqual(body["data"], "ok")
 
-        # Actualizar categoria 1
-        self.updateCategory('sport', 'outdoor activies', 'all kind of outdoor activities')
+        code, body = self.client.get_standard(GET_USERS_ME, self.token)
+        self.assertEqual(code,200)
+        body_user = body["data"]
+        self.assertEqual(body["data"]["city"], "Buenos Aires")
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'outdoor activies', "description": 'all kind of outdoor activities'}],
-                    "metadata": {"count": 1}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
+    #POST_USERS_RECOMMEND
+    def test_post_recommend_user(self):
+        ale = generate_user("ale")
+        gabi = generate_user("gabi")
+        self.add_user(gabi)
+        self.add_user(ale)
+        expected = {
+            "data": "ok",
+            "status": "succes"
+        }
+        payload = {'username':'gabi'}
+        code, body = self.client.post_standard(POST_USERS_RECOMMEND,self.token,payload)
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertEqual(body["data"], "ok")
 
-        # Eliminar categoria 1
-        self.CategoryDeleteSimple('outdoor activies')
+        #me logue con gabi
+        sleep(1)
+        code, body = self.client.get_login("gabi","1234")
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertIsNotNone(body["data"]["token"])
+        self.token = body["data"]["token"]
 
-        self.checkEmptyBD()
+        code, body = self.client.get_standard(GET_USERS_ME, self.token)
+        self.assertEqual(code,200)
+        self.assertEqual(body["data"]["contacts"], [])
+        self.assertEqual(body["data"]["recommended_by"], ["ale"]) #gabi esta recomendado por ale
 
-    def testInsertDeleteUpdateMixed(self):
-        self.checkEmptyBD()
+    def test_del_recommend_user(self):
+        self.test_post_recommend_user()
+        expected = {
+            "data": "ok",
+            "status": "succes"
+        }
 
-        # Agregar categoria 1
-        self.CategoryInsertSimple('software', 'software activities')
+        #me logueo con ale
+        sleep(1)
+        code, body = self.client.get_login("ale","1234")
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertIsNotNone(body["data"]["token"])
+        self.token = body["data"]["token"]
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'software', "description": 'software activities'}],
-                    "metadata": {"count": 1}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
 
-        # Agregar categoria 2
-        self.CategoryInsertSimple('administration', 'administration activities')
+        payload = {'username':'gabi'}
+        code, body = self.client.delete_standard(DEL_USERS_RECOMMEND, self.token, payload)
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertEqual(body["data"], "ok")
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'software', "description": 'software activities'},
-                                   {"name": 'administration', "description": 'administration activities'}],
-                    "metadata": {"count": 2}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
+        #me logue con gabi
+        sleep(1)
+        code, body = self.client.get_login("gabi","1234")
+        self.assertEqual(code,200)
+        self.assertEqual(body["status"], expected["status"])
+        self.assertIsNotNone(body["data"]["token"])
+        self.token = body["data"]["token"]
 
-        # Agregar categoria 3
-        self.CategoryInsertSimple('music', 'all kind of music')
+        code, body = self.client.get_standard(GET_USERS_ME, self.token)
+        self.assertEqual(code,200)
+        body_user = body["data"]
+        self.assertEqual(body["data"]["recommended_by"], [])
+    #GET_CATEGORIES = "/categories"
+    # GET_JOB_POSITIONS = "/job_positions"
+    # GET_SKILLS = "/skills"
+    def test_get_shared_categories(self):
+        code, body = self.client.get_standard(GET_CATEGORIES)
+        expected = {
+            "data": ["stufffff"],
+            "status": "succes"
+        }
+        self.assertEqual(expected["status"], body["status"])
+        self.assertEqual(200, code)
+        self.assertIsNotNone(body["data"])
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'software', "description": 'software activities'},
-                                   {"name": 'administration', "description": 'administration activities'},
-                                   {"name": 'music', "description": 'all kind of music'}], "metadata": {"count": 3}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
+    def test_get_shared_categories(self):
+        code, body = self.client.get_standard(GET_JOB_POSITIONS)
+        expected = {
+            "data": ["stufffff"],
+            "status": "succes"
+        }
+        self.assertEqual(expected["status"], body["status"])
+        self.assertEqual(200, code)
+        self.assertIsNotNone(body["data"])
 
-        # Eliminamos categoria 2
-        self.CategoryDeleteSimple('administration')
+    def test_get_shared_categories(self):
+        code, body = self.client.get_standard(GET_SKILLS)
+        expected = {
+            "data": ["stufffff"],
+            "status": "succes"
+        }
+        self.assertEqual(expected["status"], body["status"])
+        self.assertEqual(200, code)
+        self.assertIsNotNone(body["data"])
 
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'software', "description": 'software activities'},
-                                   {"name": 'music', "description": 'all kind of music'}], "metadata": {"count": 2}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
 
-        # Actualizar categoria 3
-        self.updateCategory('music', 'classic music', 'only classic music')
-
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'software', "description": 'software activities'},
-                                   {"name": 'classic music', "description": 'only classic music'}],
-                    "metadata": {"count": 2}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
-
-        # Eliminamos categoria 1
-        self.CategoryDeleteSimple('software')
-
-        # Chequeo de categorias
-        response = self.getCategories()
-        espected = {"categories": [{"name": 'classic music', "description": 'only classic music'}],
-                    "metadata": {"count": 1}}
-        self.assertEqual(json.dumps(espected), json.dumps(json.loads(response.text)))
-
-        # Eliminamos categoria 3
-        self.CategoryDeleteSimple('classic music')
-
-        self.checkEmptyBD()
-
-'''
 
 def generate_user(username):
     return {
+        "chats" : [],
         "city" : "Rosario",
         "contacts" : [],
+        "coordenates" : "",
         "dob" : "1993-08-19",
+        "email" : username,
+        "firebase_token" : "",
         "gender" : "male",
         "name" : "Alejandro Pablo Levinas",
         "nationality" : "argentino",
@@ -327,15 +453,16 @@ def generate_user(username):
                 }
             ],
         "profile" : "Soy un estudiante de ingenieria en informatica que se propone............blabllbla...........",
-        "recomendations" : [],
+        "recommended_by" : [],
         "skills" :
             [
                 "C",
                 "C++",
                 "GoogleTest"
             ],
-        "email" : username
+        "username" : username
     }
+
 if __name__ == '__main__':
     unittest.main()
 

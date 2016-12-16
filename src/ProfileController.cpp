@@ -296,6 +296,8 @@ void ProfileController::getLogin(Mongoose::Request &request, Mongoose::JsonRespo
         }
     } catch (KeyDoesntExistException &e) {
         ApiError::setError(response, 401, "Invalid password or user");
+    } catch (std::exception &e) {
+        LOG(DEBUG) << e.what();
     }
     LOG(INFO) << "LOGIN RESPONSE:\n"
               << "\t\t" << this->logResponse(response)
@@ -551,7 +553,7 @@ void ProfileController::getFilteredUsers(Mongoose::Request &request, Mongoose::J
          *
          * url: /users/search?sort=qSort&filter=qFilter&job_position=qJob&skill=qSkill
          *
-         * example: /users/search?sort=recommended&filter=10&job_position=developer&skill=java
+         * example: /users/search?sort=recommended&filter=10&job_position=developer&skill=java&distance=100
          *
          */
         Json::Value user = db->get_user(username);

@@ -513,7 +513,6 @@ TEST_F(UsersDBFixture, test_get_users_ordered_by_recommendations) {
 TEST_F(UsersDBFixture, test_get_top_ten_users_ordered_by_recommendations) {
     EXPECT_TRUE(db->openDBs());
 
-
     string username1 = "alepox";
     Json::Value user1 = generate_user(username1);
     user1["recommended_by"].append("ale");
@@ -553,7 +552,6 @@ TEST_F(UsersDBFixture, test_get_top_ten_users_ordered_by_recommendations) {
     }
 
     EXPECT_EQ(23, users.size());
-
 
     Json::Value users_ordered_by_rec;
     db->get_users_by("recommended_by", 10, "", "", users_ordered_by_rec, 100,"0:0");

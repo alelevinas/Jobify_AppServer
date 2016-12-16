@@ -30,7 +30,6 @@ script:
   - cmake ..
   - make
   - ./test/run_tests
-  - python --version
   - /usr/bin/python ../test/api_tests/RestAPITest.py
 
 after_success:
