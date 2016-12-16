@@ -1,6 +1,8 @@
 import json
 import requests
+import subprocess
 import unittest
+from time import sleep
 
 DEL_USERS_CONTACTS = "/users/contacts"
 DEL_USERS_ME = "/users/me"
@@ -48,7 +50,18 @@ class Client():
 
 
 class TestCase(unittest.TestCase):
-    # @responses.activate
+    @classmethod
+    def setUpClass(cls):
+        p = subprocess.Popen(["./Jobify_AppServer", "8000", "-d", "-t"], stdout=subprocess.PIPE)
+        print p.pid
+        cls.server_pid = p.pid
+        sleep(3) # time to open the server
+
+    @classmethod
+    def tearDownClass(cls):
+        subprocess.call(["kill", "-2", str(cls.server_pid)])
+
+    #@responses.activate
     def setUp(self):
         self.client = Client()
         self.checkEmptyBD()
@@ -325,3 +338,4 @@ def generate_user(username):
     }
 if __name__ == '__main__':
     unittest.main()
+

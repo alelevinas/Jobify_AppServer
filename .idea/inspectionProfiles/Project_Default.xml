@@ -7,6 +7,9 @@
           <option value="json" />
           <option value="requests" />
           <option value="unittest" />
+          <option value="sys" />
+          <option value="test.api_tests.RestAPITest.*" />
+          <option value="subprocess" />
         </list>
       </option>
     </inspection_tool>
