@@ -18,7 +18,7 @@ protected:
     }
 
     virtual void SetUp() {
-        databaseManager = new DatabaseManager("testing_accounts","testing_users","testing_sessions","testing_chats", "testing_images");
+        databaseManager = new DatabaseManager("testing_accounts","testing_users","testing_sessions","testing_chats");
         sessions_manager = new SessionManager(databaseManager,ONE_HOUR);
     }
 
@@ -32,7 +32,6 @@ public:
         system("rm -r testing_sessions");
         system("rm -r testing_chats");
         system("rm -r testing_accounts");
-        system("rm -r testing_images");
     }
 
     DatabaseManager* databaseManager;

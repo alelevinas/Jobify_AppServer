@@ -62,7 +62,7 @@ class TestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print "Inicio Servidor"
-        #p = subprocess.Popen(["./../../build/Jobify_AppServer", "8000", "-d", "-t"], stdout=subprocess.PIPE)
+        # p = subprocess.Popen(["./../../build/Jobify_AppServer", "8000", "-d", "-t"], stdout=subprocess.PIPE)
         p = subprocess.Popen(["./Jobify_AppServer", "8000", "-d", "-t"], stdout=subprocess.PIPE)
         print p.pid
         cls.server_pid = p.pid
@@ -403,7 +403,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(200, code)
         self.assertIsNotNone(body["data"])
 
-    def test_get_shared_categories(self):
+    def test_get_shared_job_positions(self):
         code, body = self.client.get_standard(GET_JOB_POSITIONS)
         expected = {
             "data": ["stufffff"],
@@ -413,7 +413,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(200, code)
         self.assertIsNotNone(body["data"])
 
-    def test_get_shared_categories(self):
+    def test_get_shared_skills(self):
         code, body = self.client.get_standard(GET_SKILLS)
         expected = {
             "data": ["stufffff"],
