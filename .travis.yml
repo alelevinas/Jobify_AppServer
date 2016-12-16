@@ -29,7 +29,6 @@ script:
   - cmake ..
   - make
   - ./test/run_tests
-  - ./Jobify_AppServer 8000 -d -t
   - python ../test/api_tests/RestAPITest.py
 
 after_success:
