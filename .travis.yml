@@ -11,6 +11,7 @@ compiler:
 
 install:
   - sudo pip install cpp-coveralls requests
+  - sudo apt-get install python-requests
   - sudo apt-get install libsnappy-dev libleveldb-dev
   - sudo apt-get install libcrypto++9-dbg libcrypto++-dev
   - sudo apt-get install libjansson4 libjansson-dev libjansson-dbg
@@ -29,7 +30,8 @@ script:
   - cmake ..
   - make
   - ./test/run_tests
-  - python ../test/api_tests/RestAPITest.py
+  - python --version
+  - /usr/bin/python ../test/api_tests/RestAPITest.py
 
 after_success:
   - coveralls --root .. -i src -E ".*CMakeFiles.*" -E ".*test/*/.*.cpp.*" --exclude src/jsoncpp --exclude src/log/* --exclude test
