@@ -614,6 +614,7 @@ void ProfileController::deleteAllBDs(Mongoose::Request &request, Mongoose::JsonR
               << std::endl;
 }
 
+
 Json::Value ProfileController::logResponse(Mongoose::JsonResponse &response) {
     Json::Value copy = response;
     Json::Value &data = copy["data"];
